@@ -56,9 +56,9 @@ date_default_timezone_set('Asia/Kolkata');
 $hour = date('H');
 // echo $hour;
 if ($hour < 12) {
-	$greeting =  '<b>Good morning,<\/b>';
+	$greeting = '<b>Good morning,<\/b>';
 } elseif ($hour < 17) {
-	$greeting = '<b>Good afternoon,<\/b> ';
+	$greeting = '<b>Good afternoon sooraj,<\/b> ';
 } else {
 	$greeting = '<b>Good evening,<\/b> ';
 }
@@ -147,39 +147,39 @@ $completion_rate = ($kpi_conducted_count / $total_kpis) * 100;
 <?php
 
 $table2 = [
-    'bf_feedback_xray_wait_time',
-    'bf_feedback_vap_prevention',
-    'bf_feedback_usg_wait_time',
-    'bf_feedback_urinary_catheter',
-    'bf_feedback_toilet_cleaning',
-    'bf_feedback_tat_blood',
-    'bf_feedback_surgical_safety',
-    'bf_feedback_ssi_bundle',
-    'bf_feedback_safety_inspection',
-    'bf_feedback_room_cleaning',
-    'bf_feedback_return_to_icu',
-    'bf_feedback_return_to_i',
-    'bf_feedback_return_to_emr',
-    'bf_feedback_return_to_ed',
-    'bf_feedback_prescriptions',
-    'bf_feedback_ppe_audit',
-    'bf_feedback_other_area_cleaning',
-    'bf_feedback_nurse_patients_ratio_ward',
-    'bf_feedback_nurse_patients_ratio',
-    'bf_feedback_mrd_audit',
-    'bf_feedback_mock_drill',
-    'bf_feedback_medicine_dispense',
-    'bf_feedback_medication_administration',
-    'bf_feedback_lab_wait_time',
-    'bf_feedback_hand_hygiene',
-    'bf_feedback_handover',
-    'bf_feedback_ctscan_time',
-    'bf_feedback_consultation_time',
-    'bf_feedback_code_originals',
-    'bf_feedback_central_maintenance',
-    'bf_feedback_central_line_insert',
-    'bf_feedback_catheter_insert',
-    'bf_feedback_canteen_audit',
+	'bf_feedback_xray_wait_time',
+	'bf_feedback_vap_prevention',
+	'bf_feedback_usg_wait_time',
+	'bf_feedback_urinary_catheter',
+	'bf_feedback_toilet_cleaning',
+	'bf_feedback_tat_blood',
+	'bf_feedback_surgical_safety',
+	'bf_feedback_ssi_bundle',
+	'bf_feedback_safety_inspection',
+	'bf_feedback_room_cleaning',
+	'bf_feedback_return_to_icu',
+	'bf_feedback_return_to_i',
+	'bf_feedback_return_to_emr',
+	'bf_feedback_return_to_ed',
+	'bf_feedback_prescriptions',
+	'bf_feedback_ppe_audit',
+	'bf_feedback_other_area_cleaning',
+	'bf_feedback_nurse_patients_ratio_ward',
+	'bf_feedback_nurse_patients_ratio',
+	'bf_feedback_mrd_audit',
+	'bf_feedback_mock_drill',
+	'bf_feedback_medicine_dispense',
+	'bf_feedback_medication_administration',
+	'bf_feedback_lab_wait_time',
+	'bf_feedback_hand_hygiene',
+	'bf_feedback_handover',
+	'bf_feedback_ctscan_time',
+	'bf_feedback_consultation_time',
+	'bf_feedback_code_originals',
+	'bf_feedback_central_maintenance',
+	'bf_feedback_central_line_insert',
+	'bf_feedback_catheter_insert',
+	'bf_feedback_canteen_audit',
 ];
 
 $audit_conducted_count = 0;
@@ -213,7 +213,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<div style="margin-bottom: 15px; margin-top: 10px; ">
 			<marquee behavior="scroll" direction="left">
 				<div style="text-align:center; color:orange;">
-					<?php include 'display_remaining_days_message.php';  ?>
+					<?php include 'display_remaining_days_message.php'; ?>
 				</div>
 			</marquee>
 			<h4 style="font-size:18px;font-weight:normal; margin-top: 0px;">
@@ -234,15 +234,19 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Inpatient admission feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>admissionfeedback/feedback_dashboard">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Inpatient admission feedbacks"
+								style="color: inherit;" href="<?php echo base_url(); ?>admissionfeedback/feedback_dashboard">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_adf_feedbacks'); ?> </h3>
-									<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-FEEDBACKS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>admissionfeedback/feedback_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-FEEDBACKS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>admissionfeedback/feedback_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-FEEDBACK-REPORTS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-FEEDBACK-REPORTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
@@ -251,20 +255,23 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<?php echo count($adf_feedbacks_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-comments-o"></i>
 												</div>
-												<a href="<?php echo $adf_link_feedback_report; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_feedback_report; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-PSAT') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-PSAT') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $adf_psat_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $adf_psat_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -275,17 +282,19 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-star-half-o"></i>
 												</div>
-												<a href="<?php echo $adf_link_psat_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_psat_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-NPS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-NPS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $adf_nps_tool; ?>">
+										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top"
+											data-toggle="tooltip" title="<?php echo $adf_nps_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -296,26 +305,30 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-tachometer"></i>
 												</div>
-												<a href="<?php echo $adf_link_nps_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_nps_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $adf_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $adf_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($adf_tickets_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $adf_link_ticket_dashboard; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_ticket_dashboard; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -339,10 +352,14 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Inpatient discharge feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>ipd/feedback_dashboard">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Inpatient discharge feedbacks"
+								style="color: inherit;" href="<?php echo base_url(); ?>ipd/feedback_dashboard">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_ip_discharge_feedback'); ?> </h3>
-									<?php if (ismodule_active('IP') === true && isfeature_active('IP-FEEDBACKS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>ipd/feedback_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('IP') === true && isfeature_active('IP-FEEDBACKS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>ipd/feedback_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
@@ -357,11 +374,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<?php echo count($ip_feedbacks_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-comments-o"></i>
 												</div>
-												<a href="<?php echo $ip_link_feedback_report; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_feedback_report; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
@@ -371,7 +390,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('IP') === true && isfeature_active('IP-PSAT') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $ip_psat_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $ip_psat_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -382,7 +402,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-star-half-o"></i>
 												</div>
-												<a href="<?php echo $ip_link_psat_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_psat_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -392,7 +413,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('IP') === true && isfeature_active('IP-NPS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $ip_nps_tool; ?>">
+										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top"
+											data-toggle="tooltip" title="<?php echo $ip_nps_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -403,26 +425,30 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-tachometer"></i>
 												</div>
-												<a href="<?php echo $ip_link_nps_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_nps_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $ip_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $ip_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($ip_tickets_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $ip_link_ticket_dashboard; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_ticket_dashboard; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -446,48 +472,58 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a href="<?php echo base_url(); ?>pc/ticket_dashboard" data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of patient complaints and requests" style="color: inherit;" href="<?php echo base_url(); ?>dashboard/swithc?type=2">
+							<a href="<?php echo base_url(); ?>pc/ticket_dashboard" data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of patient complaints and requests"
+								style="color: inherit;" href="<?php echo base_url(); ?>dashboard/swithc?type=2">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_ip_complaints'); ?></h3>
-									<?php if (ismodule_active('PCF') === true && isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>pc/ticket_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('PCF') === true && isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>pc/ticket_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('TOTAL-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('TOTAL-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $interim_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $interim_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($int_tickets_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $int_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('OPEN-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('OPEN-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $interim_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $interim_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $int_allopenticket_count; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_complaints'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_open_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $int_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -495,40 +531,46 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 							<?php } ?>
 
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('ADDRESSED-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('ADDRESSED-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $interim_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $interim_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($int_addressed_tickets); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
+												<div class="small">
+													<?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $int_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('CLOSED-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('CLOSED-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $interim_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $interim_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($int_closed_tickets); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $int_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -550,10 +592,14 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Inpatient discharge feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>post/feedback_dashboard">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Inpatient discharge feedbacks"
+								style="color: inherit;" href="<?php echo base_url(); ?>post/feedback_dashboard">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_pdf_discharge_feedback'); ?> </h3>
-									<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-FEEDBACKS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>post/feedback_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-FEEDBACKS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>post/feedback_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
@@ -568,11 +614,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<?php echo count($pdf_feedbacks_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-comments-o"></i>
 												</div>
-												<a href="<?php echo $pdf_link_feedback_report; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_feedback_report; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
@@ -582,7 +630,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-PSAT') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $pdf_psat_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $pdf_psat_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -593,7 +642,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-star-half-o"></i>
 												</div>
-												<a href="<?php echo $pdf_link_psat_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_psat_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -603,7 +653,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-NPS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $pdf_nps_tool; ?>">
+										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top"
+											data-toggle="tooltip" title="<?php echo $pdf_nps_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -614,26 +665,30 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-tachometer"></i>
 												</div>
-												<a href="<?php echo $pdf_link_nps_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_nps_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $pdf_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $pdf_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($pdf_tickets_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $pdf_link_ticket_dashboard; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_ticket_dashboard; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -657,15 +712,19 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Outpatient feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>opf/feedback_dashboard">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Outpatient feedbacks" style="color: inherit;"
+								href="<?php echo base_url(); ?>opf/feedback_dashboard">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_op_feedback'); ?> </h3>
-									<?php if (ismodule_active('OP') === true && isfeature_active('OP-FEEDBACKS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>opf/feedback_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('OP') === true && isfeature_active('OP-FEEDBACKS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>opf/feedback_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-FEEDBACK-REPORTS') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-FEEDBACK-REPORTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
@@ -674,20 +733,23 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<?php echo count($op_feedbacks_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-comments-o"></i>
 												</div>
-												<a href="<?php echo $op_link_feedback_report; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_feedback_report; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-PSAT') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-PSAT') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $op_psat_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $op_psat_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $op_psat['psat_score']; ?>
@@ -697,16 +759,18 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-star-half-o"></i>
 												</div>
-												<a href="<?php echo $op_link_psat_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_psat_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-NPS') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-NPS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $op_nps_tool; ?>">
+										<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top"
+											data-toggle="tooltip" title="<?php echo $op_nps_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $op_nps['nps_score']; ?>
@@ -716,27 +780,31 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-tachometer"></i>
 												</div>
-												<a href="<?php echo $op_link_nps_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_nps_page; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $op_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $op_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($op_tickets_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $op_link_ticket_dashboard; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_ticket_dashboard; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
@@ -758,18 +826,21 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of internal service requests" style="color: inherit;" href="<?php echo base_url(); ?>isr/ticket_dashboard">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of internal service requests" style="color: inherit;"
+								href="<?php echo base_url(); ?>isr/ticket_dashboard">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_isr'); ?></h3>
 									<?php if (ismodule_active('ISR') === true && (isfeature_active('ISR-REQUESTS-DASHBOARD') === true || isfeature_active('REQUESTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
-											<a class="btn btn-success btn-sm" target="_blank" style="margin-right: 10px; background: #62c52d; border:none; border-radius: 4px; font-size: 13px;" data-placement="bottom" data-toggle="tooltip"
-												title="Raise requests"
-												href=""
+											<a class="btn btn-success btn-sm" target="_blank"
+												style="margin-right: 10px; background: #62c52d; border:none; border-radius: 4px; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Raise requests" href=""
 												style="margin-right: 10px;">
 												Raise requests
 											</a>
-											<a href="<?php echo base_url(); ?>isr/ticket_dashboard" class="btn btn-primary btn-sm" style="font-size:13px; float: right; margin-right: 4px; margin-top: 1px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a>
+											<a href="<?php echo base_url(); ?>isr/ticket_dashboard" class="btn btn-primary btn-sm"
+												style="font-size:13px; float: right; margin-right: 4px; margin-top: 1px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a>
 										</div>
 
 									<?php } ?>
@@ -778,80 +849,92 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('TOTAL-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('TOTAL-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $esr_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $esr_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $esr_department['alltickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $esr_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('OPEN-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('OPEN-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $esr_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $esr_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $esr_department['opentickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_requests'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_open_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $esr_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('ADDRESSED-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('ADDRESSED-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $esr_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $esr_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $esr_department['addressedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $esr_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('CLOSED-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('CLOSED-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $esr_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $esr_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $esr_department['closedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $esr_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -873,27 +956,32 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of incidents" style="color: inherit;" href="<?php echo base_url(); ?>incident/ticket_dashboard">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of incidents" style="color: inherit;"
+								href="<?php echo base_url(); ?>incident/ticket_dashboard">
 								<span>
 									<h3>INCIDENTS</h3>
 									<?php if (ismodule_active('INCIDENT') === true && (isfeature_active('INC-INCIDENTS-DASHBOARD') === true || isfeature_active('INCIDENTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
-											<a class="btn btn-success btn-sm" target="_blank" style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;" data-placement="bottom" data-toggle="tooltip"
-												title="Report incidents"
-												href=""
+											<a class="btn btn-success btn-sm" target="_blank"
+												style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Report incidents" href=""
 												style="margin-right: 10px;">
 												Report incidents
 											</a>
-											<a href="<?php echo base_url(); ?>incident/ticket_dashboard" class="btn btn-primary btn-sm" style="font-size:13px; float: right; margin-right: 4px; margin-top: 1px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a>
+											<a href="<?php echo base_url(); ?>incident/ticket_dashboard"
+												class="btn btn-primary btn-sm"
+												style="font-size:13px; float: right; margin-right: 4px; margin-top: 1px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a>
 										</div>
 									<?php } ?>
 								</span>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -904,16 +992,18 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $incident_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('OPEN-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('OPEN-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $incident_department['opentickets']; ?>
@@ -923,7 +1013,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $incident_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -931,30 +1022,34 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 							<?php } ?>
 
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('ADDRESSED-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('ADDRESSED-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($incident_addressed_tickets); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $incident_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($incident_closed_tickets); ?>
@@ -964,7 +1059,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $incident_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -988,88 +1084,104 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of staff grievance" style="color: inherit;" href="<?php echo base_url(); ?>grievance/ticket_dashboard">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of staff grievance" style="color: inherit;"
+								href="<?php echo base_url(); ?>grievance/ticket_dashboard">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_sg'); ?> </h3>
-									<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('SG-STAFF-GRIEVANCES-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>grievance/ticket_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('SG-STAFF-GRIEVANCES-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>grievance/ticket_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('TOTAL-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('TOTAL-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($grievance_tickets_count); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $grievance_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('OPEN-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('OPEN-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['opentickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $grievance_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('ADDRESSED-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('ADDRESSED-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($grievance_addressed_tickets); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
+												<div class="small">
+													<?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $grievance_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('CLOSED-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('CLOSED-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo count($grievance_closed_tickets); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $grievance_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -1091,10 +1203,14 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed Quality Indicator Analysis" style="color: inherit;" href="<?php echo base_url(); ?>quality/quality_welcome_page">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed Quality Indicator Analysis" style="color: inherit;"
+								href="<?php echo base_url(); ?>quality/quality_welcome_page">
 								<span>
 									<h3>QUALITY INDICATOR MANAGER</h3>
-									<?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>quality/quality_welcome_page" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>quality/quality_welcome_page"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
@@ -1103,7 +1219,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-toggle="tooltip" title="The total number of Key Performance Indicators(KPIs) present.">
+										<div class="panel-body" style="height: 100px;" data-toggle="tooltip"
+											title="The total number of Key Performance Indicators(KPIs) present.">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $total_kpis; ?>
@@ -1113,7 +1230,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-tachometer"></i>
 												</div>
-												<a href="<?php echo base_url(); ?>quality/quality_welcome_page" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo base_url(); ?>quality/quality_welcome_page"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
@@ -1123,7 +1241,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="The total number of KPIs recorded or performed during the month">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="The total number of KPIs recorded or performed during the month">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -1145,7 +1264,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="The number of KPIs yet to be recorded or performed.">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="The number of KPIs yet to be recorded or performed.">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -1164,10 +1284,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 							<?php } ?>
 
-							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="The percentage of KPIs recorded out of the total KPIs.">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="The percentage of KPIs recorded out of the total KPIs.">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $completion_rate; ?>
@@ -1200,10 +1321,14 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed Quality Audit Analysis" style="color: inherit;" href="<?php echo base_url(); ?>audit/audit_welcome_page">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed Quality Audit Analysis" style="color: inherit;"
+								href="<?php echo base_url(); ?>audit/audit_welcome_page">
 								<span>
 									<h3>QUALITY AUDIT MANAGER</h3>
-									<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>audit/audit_welcome_page" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>audit/audit_welcome_page"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
@@ -1212,7 +1337,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-toggle="tooltip" title="The total number of audits present">
+										<div class="panel-body" style="height: 100px;" data-toggle="tooltip"
+											title="The total number of audits present">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $total_audits; ?>
@@ -1222,7 +1348,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-list-alt"></i>
 												</div>
-												<a href="<?php echo base_url(); ?>audit/audit_welcome_page" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo base_url(); ?>audit/audit_welcome_page"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
@@ -1232,7 +1359,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="The total number of audits that have been initiated or conducted during the month.">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="The total number of audits that have been initiated or conducted during the month.">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -1254,7 +1382,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="The number of audits yet to be initiated or conducted.">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="The number of audits yet to be initiated or conducted.">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -1276,7 +1405,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="The percentage of audits initiated out of the total audits.">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="The percentage of audits initiated out of the total audits.">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -1320,22 +1450,27 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 					$this->db->where('locationsite', $_SESSION['ward']);
 				}
 				$query = $this->db->get();
-				$ASSETSresults  = $query->result();
+				$ASSETSresults = $query->result();
 
 				?>
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a href="<?php echo base_url(); ?>asset/ticket_dashboard" data-toggle="tooltip" data-placement="bottom" title="This section provides an overview of asset management. Click the Explore button" style="color: inherit;" href="<?php echo base_url(); ?>dashboard/swithc?type=2">
+							<a href="<?php echo base_url(); ?>asset/ticket_dashboard" data-toggle="tooltip"
+								data-placement="bottom"
+								title="This section provides an overview of asset management. Click the Explore button"
+								style="color: inherit;" href="<?php echo base_url(); ?>dashboard/swithc?type=2">
 								<span>
 									<h3>ASSET MANAGER</h3>
-									<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>asset/ticket_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>asset/ticket_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
@@ -1353,7 +1488,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-hospital-o"></i>
 												</div>
-												<a href="<?php echo base_url(); ?>asset/alltickets" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo base_url(); ?>asset/alltickets"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
@@ -1412,11 +1548,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 							?>
 
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
-											<div class="statistic-box" title="<?php echo 'Maintenance Scheduled: ' . $scheduleCount . ', Due this Month: ' . $dueThisMonthCount . ', Due in 45 Days: ' . $dueIn45DaysCount . ', Maintenance Overdue: ' . $overdueCount . ', Overdue by 30+ Days: ' . $overDue30DaysCount; ?>">
+											<div class="statistic-box"
+												title="<?php echo 'Maintenance Scheduled: ' . $scheduleCount . ', Due this Month: ' . $dueThisMonthCount . ', Due in 45 Days: ' . $dueIn45DaysCount . ', Maintenance Overdue: ' . $overdueCount . ', Overdue by 30+ Days: ' . $overDue30DaysCount; ?>">
 												<h2><span class="count-number">
 														<?php echo $applicableCount; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
@@ -1460,8 +1597,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 										} else {
 											$warrantyEndDateObj = new DateTime($warrantyEndDate);
 											$interval = $currentDate->diff($warrantyEndDateObj);
-											$daysRemaining = (int)$interval->format('%r%a'); // signed days
-
+											$daysRemaining = (int) $interval->format('%r%a'); // signed days
+					
 											if ($daysRemaining < -30) {
 												$totalExpired30Days++;
 											} elseif ($daysRemaining < 0) {
@@ -1487,11 +1624,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							?>
 
 
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
-											<div class="statistic-box" title="<?php echo 'Warranty Active: ' . $totalWarrantyActive . ', Expiring this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Warranty Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
+											<div class="statistic-box"
+												title="<?php echo 'Warranty Active: ' . $totalWarrantyActive . ', Expiring this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Warranty Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
 												<h2><span class="count-number">
 														<?php echo $applicableWarrantyCount; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
@@ -1538,8 +1676,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 										} else {
 											$contractEndDateObj = new DateTime($contractEndDate);
 											$interval = $currentDate->diff($contractEndDateObj);
-											$daysRemaining = (int)$interval->format('%r%a'); // Negative if expired
-
+											$daysRemaining = (int) $interval->format('%r%a'); // Negative if expired
+					
 											if ($daysRemaining < -30) {
 												$totalExpired30Days++;
 											} elseif ($daysRemaining < 0) {
@@ -1562,11 +1700,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							$applicableContractCount = $totalContractActive + $totalExpired + $totalExpired30Days + $totalExpiresThisMonth + $totalExpiringSoon;
 
 							?>
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
-											<div class="statistic-box" title="<?php echo "Contract Active: " . $totalContractActive . ', Expires this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Contract Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
+											<div class="statistic-box"
+												title="<?php echo "Contract Active: " . $totalContractActive . ', Expires this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Contract Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
 												<h2><span class="count-number">
 														<?php echo $applicableContractCount; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
@@ -1605,35 +1744,43 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 	<!-- FOR DEPT HEAD -->
 
-	<?php if (ismodule_active('GLOBAL') === true && isfeature_active('DEPARTMENT-HEAD-OVERALL-PAGE') === true && ($this->session->userdata['user_role'] == 4)) {  ?>
+	<?php if (ismodule_active('GLOBAL') === true && isfeature_active('DEPARTMENT-HEAD-OVERALL-PAGE') === true && ($this->session->userdata['user_role'] == 4)) { ?>
 
 		<!-- if dephead has access to admission feedback tickets -->
-		<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of patient complaints and requests" style="color: inherit;" href="<?php echo base_url(); ?>admissionfeedback/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of patient complaints and requests"
+								style="color: inherit;" href="<?php echo base_url(); ?>admissionfeedback/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_adf_tickets'); ?> </h3>
-									<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>admissionfeedback/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>admissionfeedback/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $adf_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $adf_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $adf_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/alltickets'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -1641,51 +1788,65 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-OPEN-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $adf_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $adf_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $adf_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-ADDRESSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-ADDRESSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $adf_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $adf_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $adf_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-CLOSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $adf_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $adf_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $adf_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -1704,93 +1865,114 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to ipfeedback tickets -->
-		<?php if (ismodule_active('IP') === true  && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('IP') === true && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?>
 
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Inpatient discharge feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>ipd/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Inpatient discharge feedbacks"
+								style="color: inherit;" href="<?php echo base_url(); ?>ipd/department_tickets">
 
 								<span>
 									<h3><?php echo lang_loader('global', 'global_ip_tickets'); ?></h3>
-									<?php if (ismodule_active('IP') === true  && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>ipd/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('IP') === true && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>ipd/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $ip_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $ip_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $ip_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-OPEN-TICKETS') === true) { ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $ip_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $ip_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $ip_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-ADDRESSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-ADDRESSED-TICKETS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $ip_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $ip_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $ip_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 
-							<?php }  ?>
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-CLOSED-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $ip_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $ip_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $ip_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/ticket_close'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
+							<?php } ?>
 
 							<!-- Close Metric Boxes-->
 						</div>
@@ -1801,31 +1983,39 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to patient complaints -->
-		<?php if (ismodule_active('PCF') === true  && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('PCF') === true && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of patient complaints and requests" style="color: inherit;" href="<?php echo base_url(); ?>pc/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of patient complaints and requests"
+								style="color: inherit;" href="<?php echo base_url(); ?>pc/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_patient_complaints'); ?> </h3>
-									<?php if (ismodule_active('PCF') === true  && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>pc/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('PCF') === true && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>pc/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('TOTAL-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('TOTAL-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $int_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?> </div>
+												<h2><span class="count-number"><?php echo $int_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $int_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/alltickets'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -1833,18 +2023,23 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('OPEN-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('OPEN-COMPLAINTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $int_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $int_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $int_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -1852,35 +2047,45 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('ADDRESSED-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('ADDRESSED-COMPLAINTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $int_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $int_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small">
+													<?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $int_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('CLOSED-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('CLOSED-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $int_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $int_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $int_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -1899,92 +2104,114 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to pdf tickets -->
-		<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?>
 
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Inpatient discharge feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>post/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Inpatient discharge feedbacks"
+								style="color: inherit;" href="<?php echo base_url(); ?>post/department_tickets">
 
 								<span>
 									<h3><?php echo lang_loader('global', 'global_pdf_tickets'); ?></h3>
-									<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>post/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>post/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $pdf_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $pdf_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $pdf_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-OPEN-TICKETS') === true) { ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $pdf_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $pdf_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $pdf_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-ADDRESSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-ADDRESSED-TICKETS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $pdf_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $pdf_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $pdf_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 
-							<?php }  ?>
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-CLOSED-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $pdf_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $pdf_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $pdf_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
+							<?php } ?>
 
 							<!-- Close Metric Boxes-->
 						</div>
@@ -1995,66 +2222,83 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to outpatient feedback tickets -->
-		<?php if (ismodule_active('OP') === true  && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('OP') === true && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Outpatient feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>opf/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Outpatient feedbacks" style="color: inherit;"
+								href="<?php echo base_url(); ?>opf/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_op_tickets'); ?></h3>
-									<?php if (ismodule_active('OP') === true  && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>opf/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('OP') === true && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>opf/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $op_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $op_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $op_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-OPEN-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $op_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $op_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $op_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-ADDRESSED-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-ADDRESSED-TICKETS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $op_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $op_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $op_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/ticket_close'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -2063,17 +2307,21 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 							<?php } ?>
 
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-CLOSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $op_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $op_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $op_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2090,41 +2338,49 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to internal service requests -->
-		<?php if (ismodule_active('ISR') === true  && isfeature_active('REQUESTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('ISR') === true && isfeature_active('REQUESTS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of employee requests" style="color: inherit;" href="<?php echo base_url(); ?>isr/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of employee requests" style="color: inherit;"
+								href="<?php echo base_url(); ?>isr/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_isr'); ?></h3>
 									<?php if (ismodule_active('ISR') === true && (isfeature_active('ISR-REQUESTS-DASHBOARD') === true || isfeature_active('REQUESTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
-											<a class="btn btn-success btn-sm" target="_blank" style="margin-right: 10px; background: #62c52d; border:none; border-radius: 4px; font-size: 13px;" data-placement="bottom" data-toggle="tooltip"
-												title="Raise requests"
-												href=""
+											<a class="btn btn-success btn-sm" target="_blank"
+												style="margin-right: 10px; background: #62c52d; border:none; border-radius: 4px; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Raise requests" href=""
 												style="margin-right: 10px;">
 												Raise requests
 											</a>
-											<?php if (ismodule_active('ISR') === true  && isfeature_active('REQUESTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>isr/department_tickets" style="float: right;margin-top: 0px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+											<?php if (ismodule_active('ISR') === true && isfeature_active('REQUESTS-DASHBOARD') === true) { ?><a
+													href="<?php echo base_url(); ?>isr/department_tickets"
+													style="float: right;margin-top: 0px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 										</div>
 									<?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('TOTAL-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('TOTAL-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $esr_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?> </div>
+												<h2><span class="count-number"><?php echo $esr_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $esr_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2132,35 +2388,45 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('OPEN-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('OPEN-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $esr_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_requests'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $esr_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $esr_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('ADDRESSED-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('ADDRESSED-REQUESTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $esr_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $esr_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $esr_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/ticket_close'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -2169,18 +2435,23 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('CLOSED-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('CLOSED-REQUESTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $esr_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $esr_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $esr_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2197,35 +2468,40 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- START INCIDENT OVERVIEW -->
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of incidents" style="color: inherit;" href="<?php echo base_url(); ?>incident/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of incidents" style="color: inherit;"
+								href="<?php echo base_url(); ?>incident/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_inc'); ?></h3>
 									<?php if (ismodule_active('INCIDENT') === true && (isfeature_active('INC-INCIDENTS-DASHBOARD') === true || isfeature_active('INCIDENTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
-											<a class="btn btn-success btn-sm" target="_blank" style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;" data-placement="bottom" data-toggle="tooltip"
-												title="Report incidents"
-												href=""
+											<a class="btn btn-success btn-sm" target="_blank"
+												style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Report incidents" href=""
 												style="margin-right: 10px;">
 												Report incidents
 											</a>
-											<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>incident/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+											<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?><a
+													href="<?php echo base_url(); ?>incident/department_tickets"
+													style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 										</div>
 									<?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $esr_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $esr_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -2236,16 +2512,18 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $incident_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('OPEN-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('OPEN-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $incident_department['opentickets']; ?>
@@ -2255,7 +2533,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $incident_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2264,31 +2543,35 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 							<?php } ?>
 
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('ADDRESSED-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('ADDRESSED-INCIDENTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $incident_department['addressedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $incident_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $incident_department['closedtickets']; ?>
@@ -2298,7 +2581,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $incident_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2315,55 +2599,65 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<!-- END INCIDENT OVERVIEW -->
 
 		<!-- START grievance_page OVERVIEW -->
-		<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of staff grievance" style="color: inherit;" href="<?php echo base_url(); ?>grievance/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of staff grievance" style="color: inherit;"
+								href="<?php echo base_url(); ?>grievance/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_sg'); ?> </h3>
-									<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>grievance/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>grievance/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('TOTAL-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('TOTAL-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['alltickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $grievance_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('OPEN-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('OPEN-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['opentickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $grievance_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2371,41 +2665,47 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('ADDRESSED-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('ADDRESSED-GRIEVANCES') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['addressedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
+												<div class="small">
+													<?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $grievance_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('CLOSED-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('CLOSED-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['closedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $grievance_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2435,22 +2735,27 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 					$this->db->where('locationsite', $_SESSION['ward']);
 				}
 				$query = $this->db->get();
-				$ASSETSresults  = $query->result();
+				$ASSETSresults = $query->result();
 
 				?>
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a href="<?php echo base_url(); ?>asset/ticket_dashboard" data-toggle="tooltip" data-placement="bottom" title="This section provides an overview of asset management. Click the Explore button" style="color: inherit;" href="<?php echo base_url(); ?>dashboard/swithc?type=2">
+							<a href="<?php echo base_url(); ?>asset/ticket_dashboard" data-toggle="tooltip"
+								data-placement="bottom"
+								title="This section provides an overview of asset management. Click the Explore button"
+								style="color: inherit;" href="<?php echo base_url(); ?>dashboard/swithc?type=2">
 								<span>
 									<h3>ASSET MANAGER</h3>
-									<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>asset/ticket_dashboard" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>asset/ticket_dashboard"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
@@ -2468,7 +2773,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-hospital-o"></i>
 												</div>
-												<a href="<?php echo base_url(); ?>asset/alltickets" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo base_url(); ?>asset/alltickets"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
@@ -2525,11 +2831,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 							?>
 
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
-											<div class="statistic-box" title="<?php echo 'Maintenance Scheduled: ' . $scheduleCount . ', Due this Month: ' . $dueThisMonthCount . ', Due in 45 Days: ' . $dueIn45DaysCount . ', Maintenance Overdue: ' . $overdueCount . ', Overdue by 30+ Days: ' . $overDue30DaysCount; ?>">
+											<div class="statistic-box"
+												title="<?php echo 'Maintenance Scheduled: ' . $scheduleCount . ', Due this Month: ' . $dueThisMonthCount . ', Due in 45 Days: ' . $dueIn45DaysCount . ', Maintenance Overdue: ' . $overdueCount . ', Overdue by 30+ Days: ' . $overDue30DaysCount; ?>">
 												<h2><span class="count-number">
 														<?php echo $applicableCount; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
@@ -2574,8 +2881,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									} else {
 										$warrantyEndDateObj = new DateTime($warrantyEndDate);
 										$interval = $currentDate->diff($warrantyEndDateObj);
-										$daysRemaining = (int)$interval->format('%r%a'); // Negative if expired, positive if active
-
+										$daysRemaining = (int) $interval->format('%r%a'); // Negative if expired, positive if active
+					
 										if ($daysRemaining < -30) {
 											$totalExpired30Days++;
 										} elseif ($daysRemaining < 0) {
@@ -2597,11 +2904,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							?>
 
 
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
-											<div class="statistic-box" title="<?php echo 'Warranty Active: ' . $totalWarrantyActive . ', Expiring this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Warranty Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
+											<div class="statistic-box"
+												title="<?php echo 'Warranty Active: ' . $totalWarrantyActive . ', Expiring this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Warranty Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
 												<h2><span class="count-number">
 														<?php echo $applicableWarrantyCount; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
@@ -2649,8 +2957,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									} else {
 										$contractEndDateObj = new DateTime($contractEndDate);
 										$interval = $currentDate->diff($contractEndDateObj);
-										$daysRemaining = (int)$interval->format('%r%a'); // Negative if expired
-
+										$daysRemaining = (int) $interval->format('%r%a'); // Negative if expired
+					
 										if ($daysRemaining < -30) {
 											$totalExpired30Days++;
 										} elseif ($daysRemaining < 0) {
@@ -2669,11 +2977,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 							$applicableContractCount = $totalContractActive + $totalExpired + $totalExpired30Days + $totalExpiresThisMonth + $totalExpiringSoon;
 
 							?>
-							<?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+							<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip">
-											<div class="statistic-box" title="<?php echo "Contract Active: " . $totalContractActive . ', Expires this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Contract Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
+											<div class="statistic-box"
+												title="<?php echo "Contract Active: " . $totalContractActive . ', Expires this Month: ' . $totalExpiresThisMonth . ', Expiring within 90 days: ' . $totalExpiringSoon . ', Contract Expired: ' . $totalExpired . ', Expired 30+ Days: ' . $totalExpired30Days; ?>">
 												<h2><span class="count-number">
 														<?php echo $applicableContractCount; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
@@ -2707,32 +3016,40 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 	<?php if ($this->session->userdata['user_role'] == 7) { ?>
 		<!-- if dephead has access to admission feedback tickets -->
-		<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of patient complaints and requests" style="color: inherit;" href="<?php echo base_url(); ?>admissionfeedback/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of patient complaints and requests"
+								style="color: inherit;" href="<?php echo base_url(); ?>admissionfeedback/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_adf_tickets'); ?> </h3>
-									<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>admissionfeedback/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>admissionfeedback/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $adf_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $adf_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $adf_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/alltickets'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -2740,51 +3057,65 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-OPEN-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $adf_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $adf_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $adf_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-ADDRESSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-ADDRESSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $adf_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $adf_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $adf_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-CLOSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('ADF') === true && isfeature_active('ADF-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $adf_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $adf_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $adf_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $adf_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2803,93 +3134,114 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to ipfeedback tickets -->
-		<?php if (ismodule_active('IP') === true  && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('IP') === true && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?>
 
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Inpatient discharge feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>ipd/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Inpatient discharge feedbacks"
+								style="color: inherit;" href="<?php echo base_url(); ?>ipd/department_tickets">
 
 								<span>
 									<h3><?php echo lang_loader('global', 'global_ip_tickets'); ?></h3>
-									<?php if (ismodule_active('IP') === true  && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>ipd/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('IP') === true && isfeature_active('IP-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>ipd/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $ip_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $ip_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $ip_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-OPEN-TICKETS') === true) { ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $ip_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $ip_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $ip_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-ADDRESSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-ADDRESSED-TICKETS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $ip_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $ip_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $ip_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 
-							<?php }  ?>
-							<?php if (ismodule_active('IP') === true  && isfeature_active('IP-CLOSED-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('IP') === true && isfeature_active('IP-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $ip_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $ip_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $ip_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $ip_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/ticket_close'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
+							<?php } ?>
 
 							<!-- Close Metric Boxes-->
 						</div>
@@ -2900,31 +3252,39 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to patient complaints -->
-		<?php if (ismodule_active('PCF') === true  && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('PCF') === true && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of patient complaints and requests" style="color: inherit;" href="<?php echo base_url(); ?>pc/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of patient complaints and requests"
+								style="color: inherit;" href="<?php echo base_url(); ?>pc/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_patient_complaints'); ?> </h3>
-									<?php if (ismodule_active('PCF') === true  && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>pc/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('PCF') === true && isfeature_active('COMPLAINTS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>pc/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('TOTAL-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('TOTAL-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $int_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?> </div>
+												<h2><span class="count-number"><?php echo $int_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $int_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/alltickets'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -2932,18 +3292,23 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('OPEN-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('OPEN-COMPLAINTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $int_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $int_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $int_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2951,35 +3316,45 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('ADDRESSED-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('ADDRESSED-COMPLAINTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $int_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $int_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small">
+													<?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $int_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PCF') === true  && isfeature_active('CLOSED-COMPLAINTS') === true) { ?>
+							<?php if (ismodule_active('PCF') === true && isfeature_active('CLOSED-COMPLAINTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $int_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $int_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $int_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $int_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -2998,92 +3373,114 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to pdf tickets -->
-		<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?>
 
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Inpatient discharge feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>post/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Inpatient discharge feedbacks"
+								style="color: inherit;" href="<?php echo base_url(); ?>post/department_tickets">
 
 								<span>
 									<h3><?php echo lang_loader('global', 'global_pdf_tickets'); ?></h3>
-									<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>post/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>post/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $pdf_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $pdf_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $pdf_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-OPEN-TICKETS') === true) { ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $pdf_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $pdf_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $pdf_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-ADDRESSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-ADDRESSED-TICKETS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $pdf_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $pdf_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $pdf_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 
-							<?php }  ?>
-							<?php if (ismodule_active('PDF') === true  && isfeature_active('PDF-CLOSED-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('PDF') === true && isfeature_active('PDF-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $pdf_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $pdf_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $pdf_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $pdf_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
+							<?php } ?>
 
 							<!-- Close Metric Boxes-->
 						</div>
@@ -3094,66 +3491,83 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to outpatient feedback tickets -->
-		<?php if (ismodule_active('OP') === true  && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('OP') === true && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of Outpatient feedbacks" style="color: inherit;" href="<?php echo base_url(); ?>opf/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of Outpatient feedbacks" style="color: inherit;"
+								href="<?php echo base_url(); ?>opf/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_op_tickets'); ?></h3>
-									<?php if (ismodule_active('OP') === true  && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>opf/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('OP') === true && isfeature_active('OP-TICKETS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>opf/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-TOTAL-TICKETS') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-TOTAL-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $op_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $op_department['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $op_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-OPEN-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-OPEN-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $op_department['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?> </div>
+												<h2><span class="count-number"><?php echo $op_department['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $op_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php }  ?>
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-ADDRESSED-TICKETS') === true) { ?>
+							<?php } ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-ADDRESSED-TICKETS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $op_department['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $op_department['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $op_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/ticket_close'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -3162,17 +3576,21 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 							<?php } ?>
 
-							<?php if (ismodule_active('OP') === true  && isfeature_active('OP-CLOSED-TICKETS') === true) { ?>
+							<?php if (ismodule_active('OP') === true && isfeature_active('OP-CLOSED-TICKETS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $op_department['closedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $op_department['closedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $op_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $op_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -3189,33 +3607,42 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<?php } ?>
 
 		<!-- if dephead has access to internal service requests -->
-		<?php if (ismodule_active('ISR') === true  && isfeature_active('REQUESTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('ISR') === true && isfeature_active('REQUESTS-DASHBOARD') === true) { ?>
 
-			<?php include 'overallpage_department_user_count.php';  ?>
+			<?php include 'overallpage_department_user_count.php'; ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of employee requests" style="color: inherit;" href="<?php echo base_url(); ?>isr/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of employee requests" style="color: inherit;"
+								href="<?php echo base_url(); ?>isr/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_isr'); ?></h3>
-									<?php if (ismodule_active('ISR') === true  && isfeature_active('REQUESTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>isr/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('ISR') === true && isfeature_active('REQUESTS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>isr/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:135px; max-height:150px;">
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('TOTAL-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('TOTAL-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $isr_department_head_user_count['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $isr_department_head_user_count['alltickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $esr_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -3223,35 +3650,44 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('OPEN-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('OPEN-REQUESTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo  $isr_department_head_user_count['opentickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+												<h2><span
+														class="count-number"><?php echo $isr_department_head_user_count['opentickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
 												<div class="small">Assigned Requests </div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $esr_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('ADDRESSED-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('ADDRESSED-REQUESTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $isr_department_head_user_count['addressedtickets'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $isr_department_head_user_count['addressedtickets']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $esr_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 												<!-- <a href="<?php echo base_url('tickets/ticket_close'); ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
 											</div>
@@ -3260,18 +3696,23 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('ISR') === true  && isfeature_active('CLOSED-REQUESTS') === true) { ?>
+							<?php if (ismodule_active('ISR') === true && isfeature_active('CLOSED-REQUESTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span class="count-number"><?php echo $isr_department_head_user_count['closedticket'];  ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?> </div>
+												<h2><span
+														class="count-number"><?php echo $isr_department_head_user_count['closedticket']; ?></span>
+													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+														</i></span></h2>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $esr_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $esr_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -3297,25 +3738,30 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 
 		<!-- START INCIDENT OVERVIEW -->
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of incidents" style="color: inherit;" href="<?php echo base_url(); ?>incident/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of incidents" style="color: inherit;"
+								href="<?php echo base_url(); ?>incident/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_inc'); ?></h3>
-									<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>incident/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>incident/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $esr_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $esr_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
@@ -3326,16 +3772,18 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $incident_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('OPEN-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('OPEN-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $incident_department['opentickets']; ?>
@@ -3345,7 +3793,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $incident_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -3354,31 +3803,35 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 
 							<?php } ?>
 
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('ADDRESSED-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('ADDRESSED-INCIDENTS') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $incident_department['addressedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $incident_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $incident_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $incident_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $incident_department['closedtickets']; ?>
@@ -3388,7 +3841,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $incident_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $incident_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -3405,55 +3859,65 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 		<!-- END INCIDENT OVERVIEW -->
 
 		<!-- START grievance_page OVERVIEW -->
-		<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?>
 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
 
-							<a data-toggle="tooltip" data-placement="bottom" title="Click here for detailed analysis of staff grievance" style="color: inherit;" href="<?php echo base_url(); ?>grievance/department_tickets">
+							<a data-toggle="tooltip" data-placement="bottom"
+								title="Click here for detailed analysis of staff grievance" style="color: inherit;"
+								href="<?php echo base_url(); ?>grievance/department_tickets">
 								<span>
 									<h3><?php echo lang_loader('global', 'global_sg'); ?> </h3>
-									<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>grievance/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+									<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?><a
+											href="<?php echo base_url(); ?>grievance/department_tickets"
+											style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 								</span>
 							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('TOTAL-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('TOTAL-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['alltickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?></div>
+												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-ticket"></i>
 												</div>
-												<a href="<?php echo $grievance_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_alltickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('OPEN-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('OPEN-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['opentickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-plus"></i>
 												</div>
-												<a href="<?php echo $grievance_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_opentickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -3461,41 +3925,47 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('ADDRESSED-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('ADDRESSED-GRIEVANCES') === true) { ?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['addressedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
+												<div class="small">
+													<?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
 												</div>
-												<a href="<?php echo $grievance_link_addressedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_addressedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
 									</div>
 								</div>
 							<?php } ?>
-							<?php if (ismodule_active('GRIEVANCE') === true  && isfeature_active('CLOSED-GRIEVANCES') === true) { ?>
+							<?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('CLOSED-GRIEVANCES') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
-										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip" title="<?php echo $grievance_tickets_tool; ?>">
+										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
+											title="<?php echo $grievance_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
 														<?php echo $grievance_department['closedtickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?> </div>
+												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?>
+												</div>
 												<div class="icon">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
-												<a href="<?php echo $grievance_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
+												<a href="<?php echo $grievance_link_closedtickets; ?>"
+													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
 
 											</div>
 										</div>
@@ -3516,7 +3986,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 </div>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener('DOMContentLoaded', function () {
 		var typed = new Typed(".typing-text", {
 			strings: ["<?php echo $welcometext; ?>"],
 			// delay: 10,
