@@ -1,0 +1,68 @@
+{
+
+
+   
+   "patient_info":"VAP PREVENTION CHECKLIST",
+   
+   "patientname":"Patient Name",
+   "patient_name":"Enter Name",
+
+   "patientid":"Patient UHID",
+   "patient_name_placeholder":"Enter UHID",
+
+   "age": "Age",
+   "test_name_placeholder":"Enter age",
+   "department":"Designation",
+   "data_analysis":"Additional comments:",
+
+
+   "staffname":"Name of the assigned Nurse",
+   "staff_name_placeholder":"Enter name",
+
+   "audited_by":"Audited by",
+   "audited_by_placeholder":"Enter the name",
+
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of surgery",   
+   
+
+   "identification_details": "Is hand washing done before and after touching the patient/surrounding/ventilator?",
+   "vital_signs": "Are subglottic tubes used?",
+   "surgery": "Is cuff pressure maintained between 20-30 mcH20?",
+   "complaints_communicated": "Is cuff pressure monitored every 4-6 hours?",
+   "intake":"Is the patient nursed in a semi-recumbent position (between 30-45 degrees)?",
+   "output":"Are ventilator tubings visibly clean?",
+   "allergies":"Are suction tubings visibly clean?",
+   "medication":"Is stress ulcer prophylaxis given judiciously and only to patients at high risk of upper gastrointestinal bleeding?",
+   "diagnostic":"Is oral care provided using Chlorhexidine Gluconate?",
+   "lab_results":"Are oral suction tubes sterile?",
+   "pending_investigation":"Are bedsore preventive measures followed?",
+   "medicine_order":"Is a sedation vacation and readiness to wean assessed?",
+   "facility_communicated":"Is daily sedation hold performed (unless contraindicated)?",
+   "health_education":"Is patient temperature monitored and maintained below 99°F?",
+   "risk_assessment":"Is deep vein thrombosis prophylaxis initiated?"
+   
+
+
+
+
+
+
+   
+
+
+   
+}

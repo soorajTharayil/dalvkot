@@ -1,0 +1,150 @@
+Key,Value
+pcf_complaint_dashboard,PC- COMPLAINTS DASHBOARD
+pcf_all_complaint,PC - ALL COMPLAINTS
+pcf_open_complaint,PC- OPEN COMPLAINTS
+pcf_adrressed_complaint,PC- ADDRESSED COMPLAINTS
+pcf_closed_complaint,PC- CLOSED COMPLAINTS
+pcf_capa_report,PC- CAPA REPORT
+pcf_complaint_resolution_rate,Complaint Resolution Rate
+pcf_complaint_resolution_time,PC- COMPLAINT RESOLUTION TIME
+pcf_total_complaints,Total complaints
+pcf_total_complaints_tooltip,Total complaints/ requests received from patients during the selected period.
+pcf_open_complaints,Open complaints
+pcf_open_complaints_tooltip,Number of complaints yet to be addressed or closed.
+pcf_addressed_complaints,Addressed complaints
+pcf_addressed_complaints_tooltip,Number of complaints addressed with the first response.
+pcf_closed_complaints,Closed complaints
+pcf_closed_complaints_tooltip,Number of complaints resolved.
+pcf_complaint_resolution_rate_tooltip,Metric used to measure the efficiency and effectiveness of the team to close the patient complaints and requests.
+pcf_average_resolution_time,Average Resolution Time
+pcf_average_resolution_time_tooltip,The average amount of time taken by the team to close the patient complaints and requests.
+pcf_key_takeaways,Key Takeaways
+pcf_key_takeaways_tooltip,This section will give you a complete understanding of the performance of every parameter and department over the selected period of time.
+pcf_complaints_recived_by_department,Complaints Received By Department
+pcf_complaints_recived_by_department_tooltip,This Pie chart shows how the complaints are divided into various categories and what percentage of each department's complaints contributes to the total.
+pcf_recent_complaints,Recent Complaints
+pcf_recent_complaints_tooltip,List of recent complaints received during the selected period
+pcf_select_department,Select Department
+pcf_slno,Sl. No
+pcf_complaint_id,Complaint ID
+pcf_patient_details,Patient details
+pcf_concern,Concern
+pcf_department,Department
+pcf_created_on,Created on
+pcf_modified_on,Modified on
+pcf_action,Action
+pcf_addressal_comment,Addressal comment
+pcf_rca,RCA
+pcf_capa,CAPA
+pcf_tat,Turn around time(TAT)
+pcf_resolution_rate,Resolution rate
+pcf_avg_resolution_time,Avg. resolution time
+pcf_complaint_deatails,Complaint details
+pcf_complaint_status,Complaint Status
+pcf_last_updated_on,Last updated on
+pcf_you_have_received_most_complaints_in,You have received the most patient complaints in
+pcf_you_have_received_least_complaints_in,You have received the least complaints in
+pcf_no_record_found,No Records Found!
+pcf_download_capa_report_tooltip,Download CAPA report
+pcf_discharge_feedback_id_tooltip,OUTPATIENT FEEDBACK- <Feedback ID>
+pcf_admission_feedback_id_tooltip,ADMISSION FEEDBACK- <Feedback ID>
+pcf_negative_events_analysis,Negative Events Analysis 
+pcf_negative_analysis_tooltip,This pie chart gives you detailed metrics on no. of ticketsop received by each department.
+pcf_average,Average
+pcf_speciality,Speciality
+pcf_email_id,Email ID
+pcf_admission_date,Admission Date
+pcf_score,score
+pcf_source,Source
+pcf_reasons,Reasons
+pcf_tat,time(TAT)
+pcf_turn_around, Turn around
+pcf_ticket_thread,Ticket Thread
+pcf_ticket_history,Ticket History
+pcf_downloads,Downloads:
+pcf_download_comments,Download all patient complaints
+pcf_complaint_id,Complaint ID
+pcf_download_addressed_complaint_report_tooltip,Download addressed complaints report
+pcf_download_all_complaint_report,Download all complaints report
+pcf_parameter,Parameter
+pcf_tat_l2_escalation,Admin Level Escalation (L2)
+pcf_tat_l3_escalation,Admin Level Escalation (L3)
+dept_level_escalation,Department Level Escalation (L1)
+pcf_issue,Issue
+pcf_tat_set,TAT set
+pcf_total_compliants,Total Complaints
+pcf_open_complaints,Open Complaints
+pcf_addressed_complaints,Addressed Complaints
+pcf_closed_complaints,Closed Complaints
+pcf_open_complaints_t,Open complaints
+pcf_total_compliants_t,Total complaints
+pcf_addressed_complaints_t,Addressed complaints
+pcf_closed_complaints_t,Closed complaints
+pcf_compliants_analysis,Complaints Analysis 
+pcf_compliants_analysis_tooltip,This pie chart gives you details on complaints/ requests received for your department.
+pcf_other_comment,Other Comments
+pcf_download_open_complaints_tooltip,Download open tickets report
+pcf_complaint_raised_by,Complaint raised by
+pcf_contact_details,Contact details
+pcf_complaint_details,Complaint details
+pcf_reported_on,Reported on
+pcf_description,Description
+pcf_complaint_raised_in,Complaint raised in
+pcf_find_by_patient,Find By Patient ID:
+pcf_patient_complaint_id_tooltip,PATIENT COMPLAINT- <COMPLAINT ID>
+pcf_title,Title
+pcf_questions,Question
+pcf_shortkey,Shortkey
+pcf_title_2l,Title 2L
+pcf_title_3l,Title 3L
+pcf_ques_2l,Ques 2L
+pcf_lang_3l,Lang 3L
+pcf_add_question,Add Question
+pcf_no_comment,No Comments
+pcf_complaint_history,Complaint History
+pcf_ticket_is_open,Ticket is open
+pcf_complaint_received_by_department,Complaints Received By Department
+pcf_tat_status,TAT Status
+pcf_complaint_status,Complaint Status
+pcf_closed,Closed
+pcf_inprogress,Inprogress
+pcf_assigned,Assigned
+pcf_request_resolved_department,Your request has been resolved by the respective department
+pcf_request_resolved_by_respective_department,Your request has been resolved by the respective department
+pcf_you_request_assigned, Your request/concern has been assigned. One of our executives will get in touch with you shortly.
+pcf_escalate_this_issue,Escalate this issue?
+pcf_complaint_summary,Complaint Summary
+pcf_status,Status
+pcf_closed_on,Closed on
+pcf_time_taken,Time Taken
+pcf_rate_this,Rate this
+pcf_site,Site
+pcf_updated_on,Updated on
+pcf_department_info,Department Information
+pcf_phone,Phone
+pcf_patient_info,Patient Information
+pcf_name,Name
+pcf_id,ID
+pcf_contact,Contact
+pcf_view_list,View List
+pcf_view_all,View All
+pcf_address_this_complaint,Address this complaint
+pcf_submit,Submit
+pcf_comment,Comment
+pcf_address,Address
+pcf_transfer,Transfer
+pcf_close,Close
+pcf_reopen,Reopen
+pcf_reopen_this_complaint,Reopen this complaint
+pcf_assigned_to,Assigned to
+pcf_transfering_complaint_department,Transfer complaint to other department
+pcf_capa_close_complaint,Please submit an RCA and CAPA to close this complaint
+pcf_root_cause,RCA
+pcf_note,Note
+pcf_addresal_comment,Addressal comment
+pcf_patient_name,Patient name
+pcf_patient_id,Patient ID
+pcf_compliants_analysis,Complaints Analysis 
+pcf_compliants_analysis_tooltip,This pie chart gives you details on complaints/ requests received for your department.
+pcf_complaints_analysis,Negative Events Analysis
+pcf_complaints_analysis_tooltip,This pie chart gives you detailed metrics on no. of complaints received by each department.

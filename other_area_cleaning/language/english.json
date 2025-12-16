@@ -1,0 +1,76 @@
+{
+
+
+   
+   "patient_info":"OTHER AREA CLEANING CHECKLIST",
+   
+   "patientname":"Patient Name",
+   "patient_name":"Enter Name",
+
+   "area":"Room/ Area",
+   "area_tool":"Enter room/ area",
+
+
+
+   "patientid":"Patient UHID",
+   "patient_name_placeholder":"Enter UHID",
+
+   "age": "Age",
+   "test_name_placeholder":"Enter age",
+   "department":"Designation",
+   "data_analysis":"Additional comments:",
+
+
+   "staffname":"Name of the assigned Nurse",
+   "staff_name_placeholder":"Enter name",
+
+   "audited_by":"Audited by",
+   "audited_by_placeholder":"Enter the name",
+
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of surgery",   
+   
+
+   "identification_details": "Is trash removed and properly disposed of?",
+   "vital_signs": "Are high-touch surfaces disinfected regularly?",
+   "surgery": "Are tables wiped down thoroughly?",
+   "complaints_communicated": "Are remote accessories and switches cleaned?",
+   "intake":"Are windows and curtains cleaned properly?",
+   "output":"Is the floor mopped regularly?",
+   "allergies":"Are furniture and fixtures dusted?",
+   "medication":"Is the fan cleaned properly?",
+   "diagnostic":"Are all spills cleaned and disinfected immediately?",
+   "lab_results":"Are items labeled properly?",
+   "pending_investigation":"Is the three-step Water-Disinfectant-Plain water cleaning method used?",
+   "medicine_order":"Is the room/area maintained with a fresh smell?",
+   "facility_communicated":"Are toilets and washbasins cleaned thoroughly?",
+   "health_education":"Are floor mats clean and properly placed?",
+   "risk_assessment":"Are housekeeping equipment arranged in their designated spaces?",
+   "mats":"Is the cleaning checklist properly filled out and signed?"
+   
+
+   
+
+
+
+
+
+
+   
+
+
+   
+}

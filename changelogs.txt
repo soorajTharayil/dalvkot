@@ -1,0 +1,23 @@
+1.	General comment issues in all login
+2.	Develop ADF report
+3.	Brought separate report for all ticket pages in all modules 
+4.	Service request/incident/grievance and description issues in individual page for employee module
+5.	Feedback is submitted with out selecting reason/parameter 
+6.	Transfer issues/ transfer ticket is not reflected on department login
+7.	Count issues upon transfer the ticket.
+8.	Concern is not displayed on all ticket pages upon taking action on transfer ticket
+9.	Ticketing download for all 3-employee module (ISR, Incident and Grievance)
+10.	Top notification content/word changes for employee module
+11.	Word correction in IP/OP/PCF module
+12.	Issues while delete any user 
+13.	Few feedback is not submitted in dashboard due to bed number charset set to 10 in database.
+14.	Updating PIN issues in employee list
+15.	NPS, PSAT and feedback response chart issues 
+16.	Fix Consolidated report  
+17.	Create separate page for ticket resolution rate and average resolution time
+18.	Helper logic is implemented across all pages 
+19.	Count issues in admit patient and admitted patient list
+20.	Add an option/popup to discharge the patient without sending an SMS
+21.	Resend and regenerate PIN for employee module input form
+22.	Customized and word changes in all module report 
+23.	Added priority, incident type, patient details in incident report.

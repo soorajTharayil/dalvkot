@@ -1,0 +1,82 @@
+EMPLOYEE NAME ,EMPLOYEE ID,MOBILE,DESIGNATION,EMAIL,PASSWORD,user_role
+BOPD,1,8042888519,,opd@sagarhospitals.in,Incharge@123,10
+B TREATMENT,2,8042888556,,,Incharge@123,10
+BASEMENT INSURANCE,3,8042888521,,insurance.sagar@sagarhospitals.in,Incharge@123,10
+EMERGENCY,4,8042888108,,emergency.jnr@sagarhospitals.in,Incharge@123,10
+ADMISSION,5,8042888542,,inssagar@gmail.com,Incharge@123,10
+PRO,6,8042888572,,projnr@sagarhospitals.in,Incharge@123,10
+IP BILLING ,7,8042888526,,billingmgr@sagarhospitals.in,Incharge@123,10
+MDSEC,8,8042888550,,mdsec.jnr@sagarhospitals.in,Incharge@123,10
+MHC,9,8042888544,,phc.jnr@sagarhospitals.in,Incharge@123,10
+AMA,10,8042888019,,ama.jnr@sagarhospitals.in,Incharge@123,10
+ORTHO,11,8042888532,,ortho@sagarhospitals.in,Incharge@123,10
+TELEPHONE BOARDS,12,8042888001,,boardsjnr@sagarhospitals.in,Incharge@123,10
+UROLOGY,13,8042888601,,nephro.uro@sagarhospitals.in,Incharge@123,10
+OP PHARMARCY,14,8042888534,,op.jnr@sagarhospitals.in,Incharge@123,10
+DIAGNOSTIC RECEPTION,15,8042888873,,radiojnr@sagarhospitals.in,Incharge@123,10
+RADIOLOGY,16,8042888575,,jnrradio@sagarhospitals.in,Incharge@123,10
+SAMPLE COLLECTION,17,8042888573,,labreports@sagarhospitals.in,Incharge@123,10
+CANTEEN,18,8042888581,,fandb.jnr@sagarhospitals.in,Incharge@123,10
+MAIN RECEPTION,19,8042888555,,reception.jnr@sagarhospitals.in,Incharge@123,10
+MAINTAINANCE,20,8042888546,,maintenance_engr@sagarhospitals.in,Incharge@123,10
+HOUSEKEEPING ,21,8042888327,,housekeeping@sagarhospitals.in,Incharge@123,10
+SECURITY,22,8042888700,,security.jnr@sagarhospitals.in,Incharge@123,10
+NURSING 1,23,8042888140,,nursing_dept@sagarhospitals.in,Incharge@123,10
+DISCHARGE 1,24,8042888,,patientcoordinator.jnr@sagarhospitals.in,Incharge@123,10
+NURSING OFFICE,25,8042888180,,nursing_dept@sagarhospitals.in,Incharge@123,10
+ENDOSCOPY,26,8042888,,endoscopy@sagarhospitals.in,Incharge@123,10
+TMT,27,8042888,,jnr_cardiology@sagarhospitals.in,Incharge@123,10
+MALE WARD,28,8042888156,,mgw@sagarhospitals.in,Incharge@123,10
+HDU,29,8042888,,nursing_dept@sagarhospitals.in,Incharge@123,10
+LABOUR WARD,30,8042888153,,nursing_dept@sagarhospitals.in,Incharge@123,10
+FEMALE WARD,31,8042888154,,fgw@sagarhospitals.in,Incharge@123,10
+NOPD,32,8042888135,,neuro@sagarhospitals.in,Incharge@123,10
+GASTROLOGY,33,8042888,,gastro.jnr@sagarhospitals.in,Incharge@123,10
+NURSING 2,34,8042888240,,nursing_dept@sagarhospitals.in,Incharge@123,10
+DISCHARGE 2,35,8042888,,patientcoordinator.jnr@sagarhospitals.in,Incharge@123,10
+DIETERY,36,8042888251,,gastro.jnr@sagarhospitals.in,Incharge@123,10
+PICU,37,8042888222,,pedicu@sagarhospitals.in,Incharge@123,10
+COPD,38,8042888223,,jnr_cardiology@sagarhospitals.in,Incharge@123,10
+CATH LAB,39,8042888273,,cathlab@sagarhospitals.in,Incharge@123,10
+ECHO,40,8042888272,,jnr_cardiology@sagarhospitals.in,Incharge@123,10
+PSICU,41,8042888227,,psicu@sagarhospitals.in,Incharge@123,10
+OT,42,8042888221,,ot@sagarhospitals.in,Incharge@123,10
+OT PHARMACY,43,8042888250,,op.jnr@sagarhospitals.in,Incharge@123,10
+NURSING 3,44,8042888340,,nursing_dept@sagarhospitals.in,Incharge@123,10
+DISCHARGE 3,45,8042888,,patientcoordinator.jnr@sagarhospitals.in,Incharge@123,10
+DMS,46,8042888344,,dms.jnr@sagarhospitals.in,Incharge@123,10
+MICU,47,8042888356,,micu@sagarhospitals.in,Incharge@123,10
+NICU,48,8042888353,,nicu@sagarhospitals.in,Incharge@123,10
+CICU,49,8042888354,,ctsicu@sagarhospitals.in,Incharge@123,10
+ICU CO-ORDINATOR,50,,,icucoordinator.jnr@sagarhospitals.in,Incharge@123,10
+LAB RECEPTION,51,8042888349,,labreports@sagarhospitals.in,Incharge@123,10
+BLOOD BANK,52,8042888351,,BLOODBANK.JNR@SAGARHOSPITALS.IN,Incharge@123,10
+LAB,53,8042888,,labreports@sagarhospitals.in,Incharge@123,10
+MRD,54,8042888580,,mrd.jnr@sagarhospitals.in,Incharge@123,10
+BIOMEDICAL,55,8042888275,,biomedical.jnr@sagarhospitals.in,Incharge@123,10
+Physiotherapy,56,8042888416,,physio@sagarhospitals.in,Incharge@123,10
+CENTRAL PHARMARCY,57,8042888419,,cp.jnr@sagarhospitals.in,Incharge@123,10
+PHARMARCY STORE,58,8042888420,,ip.jnr@sagarhospitals.in,Incharge@123,10
+PCR LAB,59,8042888,,pcrlab.jnr@sagarhospitals.in,Incharge@123,10
+CSSD,60,8042888418,,cssd@sagarhospitals.in,Incharge@123,10
+DIALYSIS,61,8042888417,,dialysis@sagarhospitals.in,Incharge@123,10
+GMO,62,8042888359,,operations.jnr@sagarhospital.in,Incharge@123,10
+CORPORATE OFFICE,63,8042888405,,corporateoffice@sagarhospitals.in,Incharge@123,10
+CONFERENCE HALL,64,8042888456,,CONFERENCEHALL.JNR@SAGARHOSPITALS.IN,Incharge@123,10
+ACCOUNTS ,65,8042888410,,accounts_groups@sagarhospitals.in,Incharge@123,10
+HR,66,8042888413,,hr@sagarhospitals.in,Incharge@123,10
+TPA CORP,67,8042888,,healthins@sagarhospitals.in,Incharge@123,10
+PURCHASE,68,8042888,,purchase@sagarhospitals.in,Incharge@123,10
+MAIN STORES,69,8042888417,,stores@sagarhospitals.in,Incharge@123,10
+IT,70,8042888500,,TEAMIT-JNR@SAGARHOSPITALS.IN,Incharge@123,10
+NNICU,71,8042888551,,nursing_dept@sagarhospitals.in,Incharge@123,10
+NURSING EDUCATOR,72,8042888200,,nursingeducator@sagarhospitals.in,Incharge@123,10
+ACADEMICS,73,8042888594,,academics@sagarhospitals.in,Incharge@123,10
+DIABETIC PHARMACY,74,8042888,,oppharma@sagarhospitals.in,Incharge@123,10
+DIABETIC OPD,75,8042888529,,sagardiabeticcentre@sagarhospitals.in,Incharge@123,10
+DIABETIC TREATEMENT,76,8888888888,,sagardiabeticcentre@sagarhospitals.in,Incharge@123,10
+POPD,77,8042888530,,pediatriccentre@sagarhospitals.in,Incharge@123,10
+ACCOUNTS PHARMACY,78,8042888421,,accounts1_pharmacy@sagarhospitals.in,Incharge@123,10
+MARKETING,79,8042888591,,,Incharge@123,10
+HOMECARE,80,8042888777,,reportssagar@gmail.com,Incharge@123,10
+FLOOR COORDINAROR,81,9999999999,,patientcoordinator.jnr@sagarhospitals.in,Incharge@123,10

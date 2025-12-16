@@ -1,0 +1,56 @@
+{
+
+
+   "reg_mobile":"Registered Mobile Number",
+   "reg_mobile_message":"Please provide your 10 digit registered Mobile number to proceed",
+   "reg_mobile_message_placeholder":"Enter your Mobile Number",
+
+   "patient_info":"PATIENT INFORMATION",
+   "patientname":"Patient Name",
+   "patient_name_placeholder":"Enter Your Name ",
+   "patientid":"Patient UHID",
+   "enter_placeholder":"Enter UHID",
+   "wardtitle": "Select Floor/ Ward",
+   "mobileno":"Mobile No",
+   "mobile_placeholder":"Enter Your 10 digit mobile number",
+   "bedno": "Room / Bed Number",
+   
+   "pagetitle":"",
+   "gustname":"Dear ",
+   "gustmessage":"We trust your health is well. To gain insight into your current health status, we kindly request your participation in answering the following questionnaires. For each question, kindly choose the option that most accurately reflects your health. Your input is highly valuable to us, and we appreciate your time in providing it.",
+   "excellent":"Excellent",
+   "verygood":"Good",
+   "good":"Average",
+   "average":"Poor",
+   "poor":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Previous",
+   "next":"Next",
+   "optional":"Please describe in detail:",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "recommendationmessage":"Please rate your current health on a scale of 0 to 100, with 100 indicating the best possible health and 0 representing the worst imaginable health. Kindly select the corresponding value.",
+   "yourreason":"Your reason for selecting our hospital",
+   "location":"Location / Proximity",
+   "specificservices":"Specific Services offered",
+   "referredbydoc":"Referred by doctor",
+   "friendfamily":"Friend/ Family recommendation",
+   "previousexp":"Previous Experience",
+   "yourdoctor":"Insurance facilities",
+   "companyreco":"Company Recommendation",
+   "other":"Print/ Online Media",
+   "stafrecognition":"Staff Recognition:",
+   "recognizeateam":"Please help us recognize a staff member of our hospital who may have performed services beyond your expectations.",
+   "staffname":"Staff name",
+   "feedbacksuggestion": "Any other inputs?",
+   "booking": "Click here to book appointment",
+
+   "submit":"Submit",
+   "passive": "We acknowledge that you may be experiencing health concerns. We kindly urge you to consider scheduling an online consultation or arranging a visit to your doctor. To book your appointments, please use the link provided below.",
+   "thankyou":"Thank you for taking your time out to provide your valuable inputs.",
+   "happythankyoumessage":"Acknowledging the positive advancement in your health, we kindly urge you to adhere to the guidance provided by your doctor upon your discharge.",
+   "unhappythankyoumessage":"Recognizing that you are currently dealing with health concerns, we sincerely urge you to make an early appointment to see your doctor. To schedule your appointments, kindly click the link provided below."
+   
+   
+}

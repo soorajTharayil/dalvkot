@@ -1,0 +1,54 @@
+{
+
+
+   "reg_mobile":"Registered Mobile Number",
+   "reg_mobile_message":"Please provide your 10 digit registered Mobile number to proceed",
+   "reg_mobile_message_placeholder":"Enter your Mobile Number",
+
+   "patient_info":"PATIENT INFORMATION",
+   "patientname":"Patient Name",
+   "patient_name_placeholder":"Enter Your Name ",
+   "patientid":"Patient UHID",
+   "enter_placeholder":"Enter UHID",
+   "wardtitle": "Select Floor/ Ward",
+   "mobileno":"Mobile No",
+   "mobile_placeholder":"Enter Your 10 digit mobile number",
+   "bedno": "Room / Bed Number",
+   
+   "pagetitle":"ADMISSION FEEDBACK FORM",
+   "gustname":"Dear ",
+   "gustmessage":"Thank you for choosing our hospital for your healthcare needs. In our effort to consistently meet and exceed your expectations, we kindly request you to take just two minutes to provide feedback on the experiences you had during the first day of your hospital stay.",
+   "excellent":"Excellent",
+   "good":"Good",
+   "average":"Average",
+   "poor":"Poor",
+   "worst":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "recommendationmessage":"On a scale from 0-10, how likely are you to recommend this hospital to your friends or family members?",
+   "yourreason":"Your reason for selecting our hospital",
+   "location":"Location / Proximity",
+   "specificservices":"Specific Services offered",
+   "referredbydoc":"Referred by doctor",
+   "friendfamily":"Friend/ Family recommendation",
+   "previousexp":"Previous Experience",
+   "yourdoctor":"Insurance facilities",
+   "companyreco":"Company Recommendation",
+   "other":"Print/ Online Media",
+   "stafrecognition":"Staff Recognition:",
+   "recognizeateam":"Please help us recognize a staff member of our hospital who may have performed services beyond your expectations.",
+   "staffname":"Staff name",
+   "feedbacksuggestion": "Other feedbacks/ suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you for taking time out to provide the feedback.",
+   "happythankyoumessage":"Kindly rate us on our Google review page by clicking on the below link.",
+   "unhappythankyoumessage":"We sincerely apologize for not meeting your expectations. We would like to regain your trust. Our executive will get in touch with you."
+   
+   
+}

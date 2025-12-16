@@ -1,0 +1,53 @@
+{
+
+
+   
+   "patient_info":"RETURN TO ICU WITHIN 48 HOURS- DATA VERIFICATION",
+   
+   "patientid":"Patient UHID",
+   "patient_name_placeholder":"Enter UHID",
+
+   "test_name": "Name of the surgery",
+   "test_name_placeholder":"Enter the surgery name",
+
+   "audited_by":"Audited by",
+   "audited_by_placeholder":"Enter the name",
+
+   "pagetitle":"IP DISCHARGE FEEDBACK FORM",
+   "gustname":"Dear ",
+   "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
+   "excellent":"Excellent",
+   "good":"Good",
+   "average":"Average",
+   "poor":"Poor",
+   "worst":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of initial admission",   
+   
+
+   "gloves": "Was the patient re-admitted within 24 hours after being discharged?",
+   "mask": "Was the patient re-admitted within 48 hours after being discharged?",
+   "cap": "Was the SSI bundle care format followed?",
+   "apron": "Was an appropriate time-out performed?",
+   "lead_apron":"Is the staff wearing lead apron?",
+   "use_xray_barrior":"Was there any unplanned return to the OT?",
+   "data_analysis":"Additional comments:"
+   
+
+
+   
+}

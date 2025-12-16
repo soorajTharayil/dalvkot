@@ -1,0 +1,6 @@
+"SL NO.","ASSET CODE","ASSET NAME","ASSET AREA","ASSET SITE","ASSET GROUP","PURCHASE DATE","EXPIRE DATE",QUANTITY,"UNIT PRICE","TOTAL PRICE",COMMENTS,"SUPPLIER INFO",STATUS
+1,"ASSET- dfgdfg",fgdfg,"Ground Floor",Parking,"Supplies and Consumables","12:00 am, 30-10-24","12:00 am, 29-10-24",45,54,2430,,fgdf,"Preventive Maintenance"
+2,"ASSET- BPM3111","Blood Pressure monitor","First Floor"," Pharmacy","Medical Equipment","12:00 am, 30-10-24","12:00 am, 30-10-24",10,2500,25000,,omron,"Asset Repair"
+3,"ASSET- 867",CPU,"First Floor"," HR","IT and Information Systems","12:00 am, 20-10-24","12:00 am, 20-10-24",5,4730,23650,,"Comp Solution","Asset Repair"
+4,"ASSET- 545",Gloves,"Second Floor","General wards","Supplies and Consumables","12:00 am, 20-10-24","12:00 am, 20-10-24",50,12,600,,ssff,"Asset Broken"
+5,"ASSET- CT-28900","CT Scan Machine","First Floor"," OPD","Emergency Response Equipment","12:00 am, 09-01-23","12:00 am, 09-01-23",1,600000,600000,"CT Scan Machine","Nsk trades","Asset in Use"

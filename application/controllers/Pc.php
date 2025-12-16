@@ -1,0 +1,1782 @@
+<?php
+
+defined('BASEPATH') or exit('No direct script access allowed');
+
+
+
+class Pc extends CI_Controller
+{
+
+    private $module;
+
+
+
+    public function __construct()
+    {
+
+        parent::__construct();
+
+        $this->load->library('session');
+
+        if ($this->session->userdata('isLogIn') === false && $this->uri->segment(2) != 'track')
+        redirect('login');
+
+        $this->load->model(
+
+            array(
+
+                'dashboard_model',
+
+                'efeedor_model',
+
+                'ticketsint_model',
+
+                'pc_model',
+
+                'setting_model',
+
+                'departmenthead_model',
+
+            )
+
+        );
+
+        // $dates = get_from_to_date();
+
+        if (isset($_SESSION['from_date']) && isset($_SESSION['to_date'])) {
+
+
+
+            $fdate = $_SESSION['from_date'];
+
+            $tdate = $_SESSION['to_date'];
+        } else {
+
+            $fdate = date('Y-m-d', time());
+
+            $tdate = date('Y-m-d', strtotime('-365 days'));
+
+            $_SESSION['from_date'] = $fdate;
+
+            $_SESSION['to_date'] = $tdate;
+        }
+
+        $this->module = 'complaint_modules';
+
+
+
+        $this->session->set_userdata([
+
+            'active_menu' => array('int_dashboard', 'int_ticket', 'int_reports', 'int_patients', 'int_settings'),
+
+        ]);
+
+
+
+        // if (ismodule_active('PCF') === false  && $this->uri->segment(2) != 'track')
+
+        //     redirect('dashboard/noaccess');
+    }
+
+
+
+    // RESERVED FOR DEVELOPER OR COMPANY ACCESS
+
+    public function index()
+    {
+
+
+        print_r($this->session->userdata('permissions'));
+        // if (ismodule_active('PCF') === true ) {
+
+
+
+        //         $data['title'] = 'PC MODULE CONFIGURATION';
+
+        //         $data['content'] = $this->load->view('complaintsmodules/developer', $data, true);
+
+        //         $this->load->view('layout/main_wrapper', $data);
+
+        // } else {
+
+        //     redirect('dashboard/noaccess');
+        // }
+    }
+
+
+
+    // SUPER ADMIN AND ADMIN LOGIN
+
+    public function ticket_dashboard()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+
+
+            $data['title'] = 'PC- COMPLAINTS DASHBOARD';
+
+            #------------------------------#
+
+            $data['content'] = $this->load->view('complaintsmodules/ticket_dashboard', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+
+    // END SUPER ADMIN AND ADMIN LOGIN
+
+
+
+
+
+    // DEPARTMENT HEAD LOGIN
+
+    public function department_tickets()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+
+
+        if (ismodule_active('PCF') === true   && isfeature_active('DEPARTMENT-HEAD-OVERALL-PAGE') === true) {
+
+
+
+
+
+            $data['title'] = 'PC- COMPLAINTS DASHBOARD';
+
+            #------------------------------#
+
+            $data['content'] = $this->load->view('complaintsmodules/department_tickets', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+
+            //used for department head login
+
+
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    // END DEPARTMENT HEAD LOGIN
+
+
+
+    //START COMPLAINTSS 
+
+    public function alltickets()
+    {
+
+
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+            $data['title'] = 'PC- ALL COMPLAINTS';
+            $dates = get_from_to_date();
+            #-------------------------------#
+
+            $data['departments'] = $this->ticketsint_model->alltickets();
+
+            if (isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('complaintsmodules/alltickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('complaintsmodules/dephead/alltickets', $data, true);
+            }
+
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function alltickets_login_apk()
+    {
+
+        $userName = $this->session->userdata['fullname'];
+
+
+            $data['title'] = 'PCF complaints captured by ' . $userName .'';
+            $dates = get_from_to_date();
+            #-------------------------------#
+
+            $data['departments'] = $this->pc_model->get_feedback_rows();
+
+            
+                $data['content'] = $this->load->view('complaintsmodules/pcf_alltickets_login_apk', $data, true);
+            
+
+            $this->load->view('layout/main_wrapper', $data);
+       
+    }
+
+
+    //addressed ticket
+
+    public function addressedtickets()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+            $data['title'] = 'PC- ADDRESSED COMPLAINTS';
+            $dates = get_from_to_date();
+            $data['departments'] = $this->ticketsint_model->addressedtickets();
+
+            if (isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('complaintsmodules/addressedtickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('complaintsmodules/dephead/addressedtickets', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+
+            // redirect('tickets/alltickets');
+
+
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    // ticket tracking
+
+    public function track()
+    {
+
+        if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+
+            $this->session->set_userdata('referred_from', current_url());
+        } else {
+
+            $this->session->set_userdata('referred_from', NULL);
+        }
+
+
+
+        $data['title'] = 'PC- COMPLAINT DETAILS';
+
+        $data['departments'] = $this->ticketsint_model->read_by_id($this->uri->segment(3));
+
+        if (isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('complaintsmodules/ticket_track', $data, true);
+        } else {
+            $data['content'] = $this->load->view('complaintsmodules/dephead/ticket_track', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+
+
+
+    // open tickets
+
+    public function opentickets()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+
+
+            $data['title'] = 'PC- OPEN COMPLAINTS';
+
+            #-------------------------------#
+            $dates = get_from_to_date();
+            $data['departments'] = $this->ticketsint_model->read();
+
+            if (isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('complaintsmodules/opentickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('complaintsmodules/dephead/opentickets', $data, true);
+            }
+
+            $this->load->view('layout/main_wrapper', $data);
+
+            $this->session->set_userdata('referred_from', NULL);
+
+            // redirect('tickets/');
+
+
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+    // closed tickets
+
+
+
+    public function closedtickets()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+
+
+
+
+            $data['title'] = 'PC- CLOSED COMPLAINTS';
+            $dates = get_from_to_date();
+            $data['departments'] = $this->ticketsint_model->read_close();
+
+            if (isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('complaintsmodules/closedtickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('complaintsmodules/dephead/closedtickets', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+
+            // redirect('tickets/ticket_close');
+
+
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    //END COMPLAINTSS 
+
+
+
+    //  REPORTS
+
+
+
+    public function capa_report()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+            $data['title'] = 'PC- CAPA REPORT';
+            $dates = get_from_to_date();
+            $data['departments'] = $this->ticketsint_model->read_close();
+
+            $data['content'] = $this->load->view('complaintsmodules/capa_report', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+
+
+
+    public function complaints()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+
+
+            $data['title'] = 'PC- PATIENT' . "'" . 'S COMMENTS';
+
+            $data['content'] = $this->load->view('complaintsmodules/recent_comments', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+
+            // redirect('report/int_recent_comments');
+
+
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+
+    public function patient_complaint()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+            $data['title'] = 'PC- PATIENT' . "'" . 'S COMPLAINT';
+
+            #------------------------------#
+            if (isfeature_active('PC-COMPLAINTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('complaintsmodules/patient_complaint', $data, true);
+            } else {
+                $data['content'] = $this->load->view('complaintsmodules/dephead/patient_complaint', $data, true);
+            }
+
+
+
+            $this->load->view('layout/main_wrapper', $data);
+
+            // redirect('report/int_patient_feedback');
+
+
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+
+    public function dep_tat()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+
+
+        $data['title'] = 'Manage Turn Around Time';
+
+        #------------------------------#
+
+        $data['content'] = $this->load->view('complaintsmodules/dep_tat', $data, true);
+
+        $this->load->view('layout/main_wrapper', $data);
+
+        // redirect('report/int_patient_feedback');
+
+
+
+    }
+
+    public function dep_tat_edit()
+    {
+
+        if (ismodule_active('PCF') === true) {
+
+            if ($_POST) {
+                $close_time = $this->input->post('tat');
+                $close_time_l1 = $close_time['close_time_l1'];
+                $close_time_l2 = $close_time['close_time_l2'];
+                $dept_level_escalation = $close_time['dept_level_escalation'];
+
+                foreach ($close_time_l1 as $key => $row) {
+                    $data = array('close_time' => $close_time_l1[$key], 'close_time_l2' => $close_time_l2[$key], 'dept_level_escalation' => $dept_level_escalation[$key]);
+                    $this->db->where('dprt_id', $key);
+                    $this->db->update('department', $data);
+                }
+            }
+
+
+            $data['title'] = 'PC-Manage Turn Around Time';
+
+            #------------------------------#
+
+            $data['content'] = $this->load->view('complaintsmodules/dep_tat_edit', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        }
+    }
+
+    public function notifications()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+            $data['title'] = 'PC- COMPLAINT NOTIFICATIONS';
+
+            $data['content'] = $this->load->view('complaintsmodules/recent_comments', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+    //END REPORTS
+
+
+
+
+
+
+
+    public function downloadcomments()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+
+            $table_feedback = 'bf_feedback_int';
+
+            $table_patients = 'bf_patients';
+
+            $desc = 'desc';
+
+            $setup = 'setup_int';
+
+
+
+            $feedbacktaken = $this->pc_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+            $sresult = $this->pc_model->setup_result($setup);
+
+            $setarray = array();
+
+            $question = array();
+
+            foreach ($sresult as $r) {
+
+                $setarray[$r->type] = $r->title;
+
+                $setarray[$r->shortkey] = $r->shortname;
+            }
+
+            foreach ($sresult as $r) {
+
+                $question[$r->shortkey] = $r->shortname;
+
+                $question[$r->type] = $r->title;
+            }
+
+
+
+
+
+
+
+            $header[0] = 'Date';
+
+            $header[1] = 'Patient Name';
+
+            $header[2] = 'Patient ID';
+
+            $header[3] = 'Floor/Ward';
+
+            $header[4] = 'Room/Bed';
+
+            $header[5] = 'Mobile Number';
+
+            $header[6] = 'Department';
+
+            $header[7] = 'Concern';
+
+            $header[8] = 'Comment';
+
+            // $j = 9;
+
+            // foreach ($setarray as $r) {
+
+            //     $header[$j] = $r;
+
+
+
+            //     $j++;
+
+            // }
+
+            $dataexport = array();
+
+            $i = 0;
+
+            foreach ($feedbacktaken as $row) {
+
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['date'] = date('d-m-Y', strtotime($row->datetime));
+
+                $dataexport[$i]['name'] = $data['name'];
+
+                $dataexport[$i]['patient_id'] = $data['patientid'];
+
+                $dataexport[$i]['ward'] = $data['ward'];
+
+                $dataexport[$i]['bedno'] = $data['bedno'];
+
+                $dataexport[$i]['mobile'] = $data['contactnumber'];
+
+                foreach ($data['comment'] as $key => $value) {
+
+                    $dataexport[$i]['Department'] = $setarray[$key];
+                }
+
+                foreach ($data['reason'] as $key => $value) {
+
+                    if ($value) {
+
+                        $dataexport[$i]['ticket'] = $question[$key];
+                    }
+                }
+
+                foreach ($data['comment'] as $key => $value) {
+
+                    if ($value) {
+
+                        $dataexport[$i]['comment'] = $value;
+                    }
+                }
+
+                $i++;
+            }
+
+            $newdataset = $dataexport;
+
+            // echo '<pre>';
+
+            // print_r($dataexport);
+
+            // exit;
+
+            ob_end_clean();
+
+            $fdate = $_SESSION['from_date'];
+
+            $tdate = $_SESSION['to_date'];
+
+
+
+            $fileName = 'EF- PC COMPLAINTS - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+                //print_r($header);
+
+                fputcsv($fp, $header, ',');
+
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+
+
+
+    public function overall_department_excel()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+            $dataexport = array();
+
+            $i = 0;
+
+            $table_feedback = 'bf_feedback_int';
+
+            $table_patients = 'bf_patients';
+
+            $sorttime = 'asc';
+
+            $setup = 'setup_int';
+
+            $asc = 'asc';
+
+            $desc = 'desc';
+
+            $table_tickets = 'tickets_int';
+
+            $open = 'Open';
+
+            $closed = 'Closed';
+
+            $addressed = 'Addressed';
+
+            $type = 'interim';
+
+
+
+            $int_feedbacks_count = $this->pc_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+
+            $ticket_resolution_rate = $this->pc_model->ticket_resolution_rate($table_tickets, $closed, $table_feedback);
+
+
+            $int_tickets_count = $this->ticketsint_model->alltickets();
+            $int_open_tickets = $this->ticketsint_model->read();
+            $int_closed_tickets = $this->ticketsint_model->read_close();
+            $int_addressed_tickets = $this->ticketsint_model->addressedtickets();
+
+            $header = 'PC DEPARTMENT WISE COMPLAINTS REPORT';
+
+            $fdate = $_SESSION['from_date'];
+
+            $tdate = $_SESSION['to_date'];
+
+
+
+            $dataexport[$i]['row1'] = 'COMPLAINTS REPORT';
+
+            $dataexport[$i]['row2'] = '';
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+
+
+            $dataexport[$i]['row1'] = 'FROM DATE';
+
+            $dataexport[$i]['row2'] = $tdate;
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+            $dataexport[$i]['row1'] = 'TO DATE';
+
+            $dataexport[$i]['row2'] = $fdate;
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+            // $dataexport[$i]['row1'] = 'TOTAL FEEDBACKS SUBMITTED';
+
+            // $dataexport[$i]['row2'] = count($int_feedbacks_count);
+
+            //    $dataexport[$i]['row3'] = '';
+
+            //  $dataexport[$i]['row4'] = '';
+
+            //  $i++;
+
+
+
+            $dataexport[$i]['row1'] = '';
+
+            $dataexport[$i]['row2'] = '';
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+
+
+            $dataexport[$i]['row1'] = 'TOTAL COMPLAINTS';
+
+            $dataexport[$i]['row2'] = count($int_tickets_count);
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+            $dataexport[$i]['row1'] = 'COMPLAINT RESOLUTION RATE';
+
+            $dataexport[$i]['row2'] = $ticket_resolution_rate . '%';
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+            $dataexport[$i]['row1'] = 'OPEN COMPLAINTS';
+
+            $dataexport[$i]['row2'] = count($int_open_tickets);
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+            if (ticket_addressal('pc_addressal') === true) {
+
+                $dataexport[$i]['row1'] = 'ADDRESSED COMPLAINTS';
+
+                $dataexport[$i]['row2'] = count($int_addressed_tickets);
+
+                $dataexport[$i]['row3'] = '';
+
+                $dataexport[$i]['row4'] = '';
+
+                $i++;
+            }
+
+
+            $dataexport[$i]['row1'] = 'CLOSED COMPLAINTS';
+
+            $dataexport[$i]['row2'] = count($int_closed_tickets);
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+            $dataexport[$i]['row1'] = '';
+
+            $dataexport[$i]['row2'] = '';
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+
+
+            $dataexport[$i]['row1'] = 'COMPLAINTS RECEIVED BY DEPARTMENT';
+
+            $dataexport[$i]['row2'] = 'PERCENTAGE';
+
+            $dataexport[$i]['row3'] = 'COUNT';
+
+            $dataexport[$i]['row4'] = 'OPEN';
+            if (ticket_addressal('pc_addressal') === true) {
+
+                $dataexport[$i]['row5'] = 'ADDRESSED';
+            }
+            $dataexport[$i]['row6'] = 'CLOSED';
+
+            $dataexport[$i]['row7'] = 'RESOLUTION RATE';
+
+            $dataexport[$i]['row8'] = 'RESOLUTION TIME';
+            $dataexport[$i]['row9'] = '';
+
+            $i++;
+
+
+
+            $ticket = $this->pc_model->tickets_recived_by_department_interim($type, $table_feedback, $table_tickets);
+
+
+
+            foreach ($ticket as $ps) {
+                // print_r($ticket);
+                $time = secondsToTimeforreport($ps['res_time']);
+                $dataexport[$i]['row1'] = $ps['department'];
+
+                $dataexport[$i]['row2'] = $ps['percentage'] . '%';
+
+                $dataexport[$i]['row3'] = $ps['total_count'];
+
+                $dataexport[$i]['row4'] = $ps['open_tickets'];
+                if (ticket_addressal('pc_addressal') === true) {
+
+                    $dataexport[$i]['row5'] = $ps['addressed_tickets'];
+                }
+                $dataexport[$i]['row6'] = $ps['closed_tickets'];
+
+                $dataexport[$i]['row7'] = $ps['tr_rate'] . '%';
+
+                $dataexport[$i]['row8'] = $time;
+
+                $i++;
+            }
+
+            $dataexport[$i]['row1'] = '';
+
+            $dataexport[$i]['row2'] = '';
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+            $dataexport[$i]['row1'] = '';
+
+            $dataexport[$i]['row2'] = '';
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+            $dataexport[$i]['row1'] = '';
+
+            $dataexport[$i]['row2'] = '';
+
+            $dataexport[$i]['row3'] = '';
+
+            $dataexport[$i]['row4'] = '';
+
+            $i++;
+
+
+
+
+
+            ob_end_clean();
+
+            $fileName = 'EF- PC DEPARTMENT WISE COMPLAINTS REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+                //print_r($header);
+
+                fputcsv($fp, $header, ',');
+
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+    public function overall_pdf_report()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('PCF') === true) {
+
+
+            $fdate = $_SESSION['from_date'];
+
+            $tdate = $_SESSION['to_date'];
+
+            redirect('pdfreport/pc_pdf_report?fdate=' . $tdate . '&tdate=' . $fdate);
+
+            // redirect('report/ip_capa_report');
+
+
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+
+    public function download_capa_report()
+    {
+        if (ismodule_active('PCF') === true) {
+
+            $users = $this->db->select('user.*')
+            ->get('user')
+            ->result();
+
+        $department_users = array();
+        foreach ($users as $user) {
+            $parameter = json_decode($user->department);
+
+
+            foreach ($parameter as $key => $rows) {
+                foreach ($rows as $k => $row) {
+
+                    $slugs = explode(',', $row);
+
+                    foreach ($slugs as $r) {
+                        $department_users[$key][$k][$r][] = $user->firstname;
+                    }
+                }
+            }
+        }
+
+
+            $fdate = $_SESSION['from_date'];
+
+            $tdate = $_SESSION['to_date'];
+
+            $this->db->select("*");
+
+            $this->db->from('setup_int');
+
+            //$this->db->where('parent', 0);
+
+            $query = $this->db->get();
+
+            $reasons = $query->result();
+
+            foreach ($reasons as $row) {
+
+                $keys[$row->shortkey] = $row->shortkey;
+
+                $res[$row->shortkey] = $row->shortname;
+
+                $titles[$row->shortkey] = $row->title;
+            }
+
+
+
+            $dataexport = array();
+
+            $i = 0;
+
+            $departments = $this->ticketsint_model->read_close();
+
+
+
+            $dataexport[$i]['row1'] = 'SL No.';
+
+            $dataexport[$i]['row2'] = 'COMPLAINT ID';
+
+            $dataexport[$i]['row3'] = 'CREATED ON';
+
+            $dataexport[$i]['row4'] = 'PATIENT DETAILS';
+
+            $dataexport[$i]['row5'] = 'CONCERN';
+
+            $dataexport[$i]['row6'] = 'DEPARTMENT';
+
+            $dataexport[$i]['row7'] = 'COMMENT';
+
+            $dataexport[$i]['row8'] = 'DEPARTMENT TAT';
+
+            $dataexport[$i]['row9'] = 'ASSIGNEE';
+
+            $dataexport[$i]['row10'] = 'ADDRESSAL COMMENT';
+
+            $dataexport[$i]['row11'] = 'RCA';
+
+            $dataexport[$i]['row12'] = 'CAPA';
+
+            $dataexport[$i]['row13'] = 'RESOLVED ON';
+
+            $dataexport[$i]['row14'] = 'TIME TAKEN';
+
+            $dataexport[$i]['row15'] = 'TAT STATUS';
+
+            $i++;
+
+
+
+            if (!empty($departments)) {
+
+                $sl = 1;
+
+                foreach ($departments as $department) {
+
+                    if ($department->status == 'Closed') {
+
+                        $rep = '';
+                        $root = '';
+                        $corrective = '';
+                        $issue = '';
+
+                        $this->db->where('ticketid', $department->id)->where('ticket_status', 'Closed');
+
+                        $query = $this->db->get('ticket_int_message');
+
+                        $ticket = $query->result();
+
+                        $rowmessage = $ticket[0]->message . ' Closed this ticket';
+
+                        $createdOn1 = strtotime($department->created_on);
+
+                        $lastModified1 = strtotime($department->last_modified);
+
+                        $closeddiff = $lastModified1 - $createdOn1;
+
+                        if ($department->department->close_time <= $closeddiff) {
+
+                            $close = 'Exceeded TAT';
+                        } else {
+
+                            $close = 'Within TAT';
+                        }
+
+                        if (strlen($rowmessage) > 60) {
+
+                            $rowmessage = substr($rowmessage, 0, 60) . '  ' . ' ... click status to view';
+                        }
+
+                        foreach ($department->feed->reason as $key => $value) {
+
+                            if ($titles[$key] == $department->department->description) {
+
+                                if (in_array($key, $keys)) {
+
+                                    $issue = $res[$key];
+                                }
+                            }
+                        }
+
+                        foreach ($department->replymessage as $r) {
+
+                            if ($r->rootcause != NULL) {
+
+                                $root = $r->rootcause;
+                            }
+                        }
+
+                        foreach ($department->replymessage as $r) {
+
+                            if ($r->corrective != NULL) {
+
+                                $corrective = $r->corrective;
+                            }
+                        }
+
+                        foreach ($department->replymessage as $r) {
+
+                            if ($r->ticket_status == 'Addressed' && $r->reply != NULL) {
+                                $rep = $r->reply;
+                            }
+                        }
+
+
+
+                        $value2 = $this->pc_model->convertSecondsToTime($department->department->close_time);
+
+                        $dep_tat = '';
+
+                        if ($value2['days'] != 0) {
+
+                            $dep_tat .= $value2['days'] . ' days, ';
+                        }
+
+                        if ($value2['hours'] != 0) {
+
+                            $dep_tat .= $value2['hours'] . ' hrs, ';
+                        }
+
+                        if ($value2['minutes'] != 0) {
+
+                            $dep_tat .= $value2['minutes'] . ' mins.';
+                        }
+
+
+
+                        $createdOn = strtotime($department->created_on);
+
+                        $lastModified = strtotime($department->last_modified);
+
+                        $timeDifferenceInSeconds = $lastModified - $createdOn;
+
+                        $value = $this->pc_model->convertSecondsToTime($timeDifferenceInSeconds);
+
+                        $timetaken = '';
+
+                        if ($value['days'] != 0) {
+
+                            $timetaken .= $value['days'] . ' days, ';
+                        }
+
+                        if ($value['hours'] != 0) {
+
+                            $timetaken .= $value['hours'] . ' hrs, ';
+                        }
+
+                        if ($value['minutes'] != 0) {
+
+                            $timetaken .= $value['minutes'] . ' mins.';
+                        }
+
+                        if ($timeDifferenceInSeconds <= 60) {
+
+                            $timetaken .= 'less than a minute';
+                        }
+
+
+
+                        $dataexport[$i]['row1'] = $sl;
+
+                        $dataexport[$i]['row2'] = 'PCT- ' . $department->id;
+
+                        $dataexport[$i]['row3'] = date('g:i a, d-m-y', strtotime($department->created_on));
+
+                        $dataexport[$i]['row4'] = $department->feed->name . '(' . $department->feed->patientid . ')';
+
+                        $dataexport[$i]['row5'] = $issue;
+
+                        $dataexport[$i]['row6'] = $department->department->description;
+                        if ($department->feed->other) {
+                            $dataexport[$i]['row7'] = $department->feed->other;
+                        } else {
+                            $dataexport[$i]['row7'] =  'NA';
+                        }
+
+                        $dataexport[$i]['row8'] = $dep_tat;
+
+                        if (!empty($department_users[$department->department->type][$department->department->setkey][$department->department->slug])) { 
+                            $dataexport[$i]['row9'] = implode(',', $department_users[$department->department->type][$department->department->setkey][$department->department->slug]);
+                        } else {
+                            $dataexport[$i]['row9'] = 'NA';
+                        }
+                        $dataexport[$i]['row10'] = $rep;
+
+                        $dataexport[$i]['row11'] = $root;
+
+                        $dataexport[$i]['row12'] = $corrective;
+
+                        $dataexport[$i]['row13'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+
+                        $dataexport[$i]['row14'] = $timetaken;
+
+                        $dataexport[$i]['row15'] = $close;
+
+                        $i++;
+
+                        $sl++;
+                    }
+                }
+            }
+
+
+
+            ob_end_clean();
+
+            $fileName = 'EF- PC CAPA REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+                //print_r($header);
+
+                fputcsv($fp, $header, ',');
+
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function download_alltickets()
+    {
+        if (ismodule_active('PCF') === true) {
+
+
+            $users = $this->db->select('user.*')
+            ->get('user')
+            ->result();
+
+        $department_users = array();
+        foreach ($users as $user) {
+            $parameter = json_decode($user->department);
+
+
+            foreach ($parameter as $key => $rows) {
+                foreach ($rows as $k => $row) {
+
+                    $slugs = explode(',', $row);
+
+                    foreach ($slugs as $r) {
+                        $department_users[$key][$k][$r][] = $user->firstname;
+                    }
+                }
+            }
+        }
+
+
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            $this->db->select("*");
+            $this->db->from('setup_int');
+            $query = $this->db->get();
+            $reasons = $query->result();
+            foreach ($reasons as $row) {
+                $keys[$row->shortkey] = $row->shortkey;
+                $res[$row->shortkey] = $row->shortname;
+                $titles[$row->shortkey] = $row->title;
+            }
+            $dataexport = array();
+            $i = 0;
+            $departments = $this->ticketsint_model->alltickets();
+            $dataexport[$i]['row1'] = 'SL No.';
+            $dataexport[$i]['row2'] = 'COMPLAINT ID';
+            $dataexport[$i]['row3'] = 'CREATED ON';
+            $dataexport[$i]['row4'] = 'PATIENT NAME';
+            $dataexport[$i]['row5'] = 'PATIENT ID';
+            $dataexport[$i]['row6'] = 'PHONE NUMBER';
+            $dataexport[$i]['row7'] = 'FLOOR/WARD';
+            $dataexport[$i]['row8'] = 'BED NUMBER';
+            $dataexport[$i]['row9'] = 'CONCERN';
+            $dataexport[$i]['row10'] = 'DEPARTMENT';
+            $dataexport[$i]['row11'] = 'COMMENTS';
+            $dataexport[$i]['row12'] = 'ASSIGNEE';
+            $dataexport[$i]['row13'] = 'STATUS';
+            $dataexport[$i]['row14'] = 'TRANSFERRED TO';
+            $dataexport[$i]['row15'] = 'LAST MODIFIED';
+            $i++;
+            if (!empty($departments)) {
+                $sl = 1;
+                foreach ($departments as $department) {
+
+                    foreach ($department->feed->reason as $key => $value) {
+                        if ($titles[$key] == $department->department->description) {
+                            if (in_array($key, $keys)) {
+                                $issue = $res[$key];
+                            }
+                        }
+
+
+                        if ($department->departmentid_trasfered !== NULL && $department->departmentid_trasfered !== '') {
+                            $this->db->select("*");
+                            $this->db->from('department');
+                            $this->db->where('dprt_id', $department->departmentid_trasfered);
+                            $query = $this->db->get();
+                            $moved_to_arr = $query->result();
+                        }
+                        $transfer_dep_desc = $moved_to_arr[0]->description;
+                        if (!empty($department)) {
+                            $dataexport[$i]['row1'] = $sl;
+                            $dataexport[$i]['row2'] = 'PC- ' . $department->id;
+                            $dataexport[$i]['row3'] = date('g:i a, d-m-y', strtotime($department->created_on));
+                            $dataexport[$i]['row4'] = $department->feed->name;
+                            $dataexport[$i]['row5'] = $department->feed->patientid;
+                            $dataexport[$i]['row6'] = $department->feed->contactnumber;
+                            $dataexport[$i]['row7'] = $department->feed->ward;
+                            $dataexport[$i]['row8'] = $department->feed->bedno;
+                            $dataexport[$i]['row9'] = $issue;
+                            $dataexport[$i]['row10'] = $department->department->description;
+
+                            if ($department->feed->other) {
+                                $dataexport[$i]['row11'] = $department->feed->other;
+                            } else {
+                                $dataexport[$i]['row11'] =  'NA';
+                            }
+
+                            if (!empty($department_users[$department->department->type][$department->department->setkey][$department->department->slug])) { 
+                                $dataexport[$i]['row12'] = implode(',', $department_users[$department->department->type][$department->department->setkey][$department->department->slug]);
+                            } else {
+                                $dataexport[$i]['row12'] = 'NA';
+                            }
+                            $dataexport[$i]['row13'] =  $department->status;
+                            if ($transfer_dep_desc) {
+
+                                $dataexport[$i]['row14'] =  $transfer_dep_desc;
+                            } else {
+                                $dataexport[$i]['row14'] =  'NA';
+                            }
+                            $dataexport[$i]['row15'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+                        }
+                    }
+                    $i++;
+                    $sl++;
+                }
+            }
+
+
+
+            ob_end_clean();
+
+            $fileName = 'EF- PC ALL COMPLAINTS REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+                //print_r($header);
+
+                fputcsv($fp, $header, ',');
+
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+    public function download_opentickets()
+    {
+        if (ismodule_active('PCF') === true) {
+
+            $users = $this->db->select('user.*')
+            ->get('user')
+            ->result();
+
+        $department_users = array();
+        foreach ($users as $user) {
+            $parameter = json_decode($user->department);
+
+
+            foreach ($parameter as $key => $rows) {
+                foreach ($rows as $k => $row) {
+
+                    $slugs = explode(',', $row);
+
+                    foreach ($slugs as $r) {
+                        $department_users[$key][$k][$r][] = $user->firstname;
+                    }
+                }
+            }
+        }
+
+
+            $departments = $this->ticketsint_model->alltickets();
+            if (!empty($departments)) {
+
+                $fdate = $_SESSION['from_date'];
+                $tdate = $_SESSION['to_date'];
+                $this->db->select("*");
+                $this->db->from('setup_int');
+                $query = $this->db->get();
+                $reasons = $query->result();
+                foreach ($reasons as $row) {
+                    $keys[$row->shortkey] = $row->shortkey;
+                    $res[$row->shortkey] = $row->shortname;
+                    $titles[$row->shortkey] = $row->title;
+                }
+                $dataexport = array();
+                $i = 0;
+
+                $dataexport[$i]['row1'] = 'SL No.';
+                $dataexport[$i]['row2'] = 'COMPLAINT ID';
+                $dataexport[$i]['row3'] = 'CREATED ON';
+                $dataexport[$i]['row4'] = 'PATIENT NAME';
+                $dataexport[$i]['row5'] = 'PATIENT ID';
+                $dataexport[$i]['row6'] = 'PHONE NUMBER';
+                $dataexport[$i]['row7'] = 'FLOOR/WARD';
+                $dataexport[$i]['row8'] = 'BED NUMBER';
+                $dataexport[$i]['row9'] = 'CONCERN';
+                $dataexport[$i]['row10'] = 'DEPARTMENT';
+                $dataexport[$i]['row11'] = 'COMMENTS';
+                $dataexport[$i]['row12'] = 'ASSIGNEE';
+                $dataexport[$i]['row13'] = 'STATUS';
+                $dataexport[$i]['row14'] = 'TRANSFERRED TO';
+                $dataexport[$i]['row15'] = 'LAST MODIFIED';
+                $i++;
+            }
+            if (!empty($departments)) {
+                $sl = 1;
+                foreach ($departments as $department) {
+                    if ($department->status != 'Closed') {
+                        foreach ($department->feed->reason as $key => $value) {
+                            if ($titles[$key] == $department->department->description) {
+                                if (in_array($key, $keys)) {
+                                    $issue = $res[$key];
+                                }
+                            }
+
+
+                            if ($department->departmentid_trasfered !== NULL && $department->departmentid_trasfered !== '') {
+                                $this->db->select("*");
+                                $this->db->from('department');
+                                $this->db->where('dprt_id', $department->departmentid_trasfered);
+                                $query = $this->db->get();
+                                $moved_to_arr = $query->result();
+                            }
+                            $transfer_dep_desc = $moved_to_arr[0]->description;
+                            if (!empty($department)) {
+                                $dataexport[$i]['row1'] = $sl;
+                                $dataexport[$i]['row2'] = 'PC- ' . $department->id;
+                                $dataexport[$i]['row3'] = date('g:i a, d-m-y', strtotime($department->created_on));
+                                $dataexport[$i]['row4'] = $department->feed->name;
+                                $dataexport[$i]['row5'] = $department->feed->patientid;
+                                $dataexport[$i]['row6'] = $department->feed->contactnumber;
+                                $dataexport[$i]['row7'] = $department->feed->ward;
+                                $dataexport[$i]['row8'] = $department->feed->bedno;
+                                $dataexport[$i]['row9'] = $issue;
+                                $dataexport[$i]['row10'] = $department->department->description;
+
+                                if ($department->feed->other) {
+                                    $dataexport[$i]['row11'] = $department->feed->other;
+                                } else {
+                                    $dataexport[$i]['row11'] =  'NA';
+                                }
+
+
+                                if (!empty($department_users[$department->department->type][$department->department->setkey][$department->department->slug])) { 
+                                    $dataexport[$i]['row12'] = implode(',', $department_users[$department->department->type][$department->department->setkey][$department->department->slug]);
+                                } else {
+                                    $dataexport[$i]['row12'] = 'NA';
+                                }
+                                $dataexport[$i]['row13'] =  $department->status;
+                                if ($transfer_dep_desc) {
+
+                                    $dataexport[$i]['row14'] =  $transfer_dep_desc;
+                                } else {
+                                    $dataexport[$i]['row14'] =  'NA';
+                                }
+                                $dataexport[$i]['row15'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+                            }
+                        }
+                        $i++;
+                        $sl++;
+                    }
+                }
+            }
+
+
+
+            ob_end_clean();
+
+            $fileName = 'EF- PC OPEN COMPLAINTS REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+                //print_r($header);
+
+                fputcsv($fp, $header, ',');
+
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function ticket_resolution_rate()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('PCF') === true) {
+
+            $data['title'] = 'PC- COMPLAINT RESOLUTION RATE';
+            #------------------------------#
+            $data['content'] = $this->load->view('complaintsmodules/ticket_analisys_page', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+    public function average_resolution_time()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('PCF') === true) {
+
+            $data['title'] = 'PC- AVERAGE RESOLUTION TIME';
+            #------------------------------#
+            $data['content'] = $this->load->view('complaintsmodules/ticket_analisys_page', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+}

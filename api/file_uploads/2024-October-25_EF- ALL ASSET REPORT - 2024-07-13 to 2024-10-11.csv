@@ -1,0 +1,4 @@
+"SL NO.","ASSET CODE","ASSET NAME","ASSET AREA","ASSET SITE","ASSET GROUP","PURCHASE DATE","EXPIRE DATE",QUANTITY,"UNIT PRICE","TOTAL PRICE",COMMENTS,"SUPPLIER INFO",STATUS
+1,"ASSET- 101",Vaccine,"Ground Floor","Select Site","Supplies and Consumables","12:00 am, 10-10-24","12:00 am, 10-10-28",1000,132,132000,jhdsjdskjjdjskjds,"ASDK pvt ltd","Asset Assign"
+2,"ASSET- 144","Patient Bed","Second Floor","Select Site","Furniture and Fixtures","12:00 am, 10-10-24","12:00 am, 10-10-29",50,1240,62000,jhhjjhjhjhjh,"ASD pvt ltd","Asset in Use"
+3,"ASSET- 7886",sphygmomanometer,"Ground Floor","Select Site","Human Resources","12:00 am, 02-09-24","12:00 am, 12-10-26",1,2000,2000,"check the asset its working fine",mainkind,"Asset in Use"

@@ -1,0 +1,130 @@
+Key,Value
+isr_requests_dashboard,ISR- REQUESTS DASHBOARD
+isr_all_requests,ISR - ALL REQUESTS
+isr_open_request,Open Requests
+isr_adrressed_requests,ISR- ADDRESSED REQUESTS
+isr_closed_requests,Closed Requests
+isr_capa_report,ISR- CAPA REPORT
+isr_requests_resolution_rate,Request Resolution Rate
+isr_requests_resolution_time,ISR- REQUEST RESOLUTION TIME
+isr_total_requests,Total Requests
+isr_total_requests_tooltip,Total internal service requests received from staffs during the selected period.
+isr_open_request_tooltip,Number of internal service requests yet to be addressed or closed.
+isr_addressed_requests,Addressed Requests
+isr_addressed_requests_tooltip,Number of service requests addressed with the first response.
+isr_closed_requests_tooltip,Number of service requests resolved.
+isr_requests_resolution_rate_tooltip,Metric used to measure the efficiency and effectiveness of the team to close the internal service requests.
+isr_average_resolution_time,Average Resolution Time
+isr_average_resolution_time_tooltip,The average amount of time taken by the respective team to close the internal service requests.
+isr_key_takeaways,Key Takeaways
+isr_key_takeaways_tooltip,This section will give you a complete understanding of the performance of every parameter and department over the selected period of time.
+isr_requests_recived_by_category,Requests Received By Category
+isr_requests_recived_by_category_tooltip,This Pie chart shows how the service requests are divided into various categories and what percentage of each department requests contributes to the total
+isr_recent_requests,Recent Requests
+isr_recent_requests_tooltip,List of recent requests received during the selected period
+isr_select_category,Select Category
+isr_slno,Sl. No
+isr_requests_id,Request ID
+isr_request_reported_by,Request reported by
+isr_service_request,Service request
+isr_category,Category
+isr_reported_on,Reported on
+isr_modified_on,Modified on
+isr_action,Action
+isr_addressal_comment,Addressal comment
+isr_rca,RCA
+isr_capa,CAPA
+isr_tat,time(TAT)
+isr_turn_around, Turn around
+isr_department,Department
+isr_open_requests,Open Requests
+isr_resolution_rate,Resolution rate
+isr_avg_resolution_rate,Avg. Resolution time
+isr_service_request_details,Service request details
+isr_priority,Priority
+isr_request_reported_in,Request reported in
+isr_requests_status,Requests Status
+isr_last_updated_on,Last updated on
+isr_you_have_received_most_requests_in,You have received the most internal service requests in
+isr_you_have_received_least_requests_in,You have received the least internal service requests in
+isr_no_record_found,No Records Found!
+isr_isr,ISR-
+isr_download_addressed_request_report_tooltip,Download addressed requests report
+isr_select_service_request,Select service request
+isr_download_all_request_report,Download all requests report
+isr_request_reported_by,Request reported by 
+isr_tat_l1_escalation,Admin Level Escalation (L2)
+isr_tat_l2_escalation,Admin Level Escalation (L3)
+dept_level_escalation,Department Level Escalation (L1)
+isr_issue,Issue
+isr_tat_set,TAT set
+isr_view_list,View List
+isr_view_all,View All
+isr_total_request,Total Requests 
+isr_open_requets,Open Requests 
+isr_addressed_requests,Addressed Requests
+isr_closed_requests,Closed Requests
+isr_you_have_received_least_complaints_in,You have received the least complaints in 
+isr_you_have_received_most_complaints_in,You have received the most patient complaints in 
+isr_requests_analysis,Requests Analysis
+isr_requests_analysis_tooltip,This pie chart gives you details on requests received for your department.
+isr_recent_requests,Recent Requests 
+isr_description,Description
+isr_employee_name,Employee name
+isr_employee_id,Employee ID
+isr_employee_role,Employee role
+isr_contact_details,Contact details
+isr_service_request_details,Service request details
+isr_priority,Priority
+isr_attached_image,Attached image
+isr_requests_reported_in,Request reported in
+isr_find_by_employee_idFind By Employee ID:
+isr_source,Source
+isr_other_comment,Other Comments
+isr_download_open_requests_report_tooltip,Download open requests report
+isr_add_question,Add Question
+isr_title,Title
+isr_questions,Question
+isr_shortkey,Shortkey
+isr_title_2l,Title 2L
+isr_title_3l,Title 3L
+isr_ques_2l,Ques 2L
+isr_lang_3l,Lang 3L
+isr_action,Action
+isr_no_comment,No Comments
+isr_requests_resolution_rate,Request Resolution Rate 
+isr_avg_resolution_time,Average Resolution Time 
+isr_request_history,Request History
+isr_root_cause,RCA
+isr_ticket_is_open,Ticket is open
+isr_downloads,Downloads:
+isr_you_have_received_most_requests_in,You have received the most internal service requests in 
+isr_you_have_received_least_requests_in,You have received the least internal service requests in
+isr_request_received_by_category,Requests Received By Category
+isr_category,Category
+isr_request_status,Request status
+isr_address,Address
+isr_close,Close
+isr_transfer,Transfer 
+isr_reopen,Reopen
+isr_turn_around_time,Turn around time
+isr_reopen_this_request,Reopen this request
+isr_address_this_request,Address this request 
+isr_capa_close_request,Please submit an RCA and CAPA to close this request
+isr_transfering_request_to_category,Transfer request to other category
+isr_comment,Comment
+isr_submit,Submit
+isr_parameter,Parameter
+isr_find_by_employee_id,Find By Employee ID:
+isr_inprogress,Inprogress
+isr_request_details,Request details
+isr_site,Site
+isr_issue_concerns,Concern
+isr_created_on,Created on
+isr_updated_on,Updated on
+isr_employee_info,Employee Information
+isr_download_capa_report_tooltip,Download CAPA Report
+isr_s_total_requests,Total requests
+isr_s_open_requests,Open requests
+isr_s_addressed_requests,Addressed requests
+isr_s_closed_requests,Closed requests

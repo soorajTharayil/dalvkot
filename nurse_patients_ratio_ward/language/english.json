@@ -1,0 +1,80 @@
+{
+
+
+   
+   "patient_info":"NURSE-PATIENT RATIO FOR WARD",
+   
+   "op_number":"Number of nurses",
+   "patient_name_placeholder":"Your inputs here",
+
+   "test_name": "Ward",
+   "test_name_placeholder":"Enter the ward",
+
+   "department":"Select Patient Status",
+   "site":"Select Site",
+   "ward":"Select Ward",
+   "icu":"Select ICU",
+   "data_analysis":"Additional comments:",
+
+
+   "staffname":"Number of Occupied Beds",
+   "staff_name_placeholder":"Your inputs here",
+
+   "audited_by":"Doctor's name with signature",
+   "audited_by_placeholder":"Enter the name",
+
+   "pagetitle":"IP DISCHARGE FEEDBACK FORM",
+   "gustname":"Dear ",
+   "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
+   "excellent":"Excellent",
+   "good":"Good",
+   "average":"Average",
+   "poor":"Poor",
+   "worst":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of surgery",   
+   
+
+   "identification_details": "Is the prescription written in capital letters?",
+   "vital_signs": "Is the route of administration mentioned?",
+   "surgery": "Is the dose mentioned?",
+   "complaints_communicated": "Is the frequency mentioned?",
+   "intake":"Is the patient identification present?",
+   "output":"Does the prescription use any non-standard abbreviations?",
+   
+   "allergies":"Were any allergies communicated?",
+   "medication":"Was the medication administered communicated?",
+   "diagnostic":"Were any significant diagnostic results communicated?",
+   "lab_results":"Were any pending lab results communicated?",
+   "pending_investigation":"Were any pending investigations communicated?",
+   "medicine_order":"Were any new medicine orders communicated?",
+   "facility_communicated":"Was the transfer of the patient to/from another department/facility communicated?",
+   "health_education":"Was health education given and communicated?",
+   "risk_assessment":"Was a risk assessment communicated?",
+   "relevant_details":"Were any other relevant details communicated?"
+
+
+
+
+
+
+
+   
+
+
+   
+}

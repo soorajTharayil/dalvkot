@@ -1,0 +1,58 @@
+{
+   
+   "patient_info":"CONSULTANT INFORMATION",
+   "patientname":"Doctor's Name",
+   "patient_name_placeholder":"Enter your name ",
+   "patientid":"Employee ID",
+   "enter_placeholder":"Enter ID",
+   "department": "Department",
+   "mobileno":"Mobile No",
+   "mobile_placeholder":"Enter your 10 digit mobile number",
+
+   "asistant_surgeon": "Asisstant Surgeon",
+   "scrub_nurse": "Scrub Nurse",
+   "surgery_name": "Surgery Name",
+   "ot_num": "OT Room No",
+   "surgery_sdate": "Surgery Start Date & Time",
+   "surgery_edate": "Surgery End Date & Time",
+
+
+
+   "consultant": "Primary Consultant",
+   "speciality": "Speciality",
+   
+   "pagetitle":"OPD- DOCTOR'S FEEDBACK FORM",
+   "guestname":"Dear ",
+   "guestmessage":"Thank you for taking the time to share your valuable insights. Your feedback plays a crucial role in helping us improve the quality of care we provide to our patients and support you in your practice. This survey is designed to gather your experience, suggestions, and concerns regarding various hospital service related to OP. We appreciate your dedication and partnership in helping us provide the best possible care to our patients.",
+   "excellent":"Excellent",
+   "good":"Good",
+   "average":"Average",
+   "poor":"Poor",
+   "worst":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "recommendationmessage":"On a scale of 0-10, how likely are you to recommend this hospital to other doctors, friends, or family members?",
+   "yourreason":"Which of the following do you consider strengths of the hospital?",
+   "location":"Quality patient care",
+   "specificservices":"Advanced technology",
+   "referredbydoc":"Efficient support staff",
+   "friendfamily":"Collaborative environment",
+   "previousexp":"Well-maintained facilities",
+   "yourdoctor":"Strong leadership",
+   "companyreco":"Professional development",
+   "other":"Good communication",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you for taking the time to share your valuable feedback. We’re pleased to have met your expectations and look forward to continuing to serve you to the best of our abilities.",
+   "happythankyoumessage":"Kindly rate us on our Google review page by clicking on the below link.",
+   "unhappythankyoumessage":"Thank you for taking the time to provide your valuable feedback. We are committed to continuously improving and striving to meet your expectations."
+   
+   
+}

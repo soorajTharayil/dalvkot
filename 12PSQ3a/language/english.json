@@ -1,0 +1,76 @@
+{
+
+
+   "reg_mobile":"Registered Mobile Number",
+   "reg_mobile_message":"Please provide your 10 digit registered mobile number to proceed",
+   "reg_mobile_message_placeholder":"Enter your mobile number",
+
+   "patient_info":"PATIENT INFORMATION",
+   "patientname":"Patient Name",
+   "patient_name_placeholder":"Enter your name ",
+   "patientid":"Patient UHID",
+   "enter_placeholder":"Enter UHID",
+   "wardtitle": "Select Floor/Ward",
+   "mobileno":"Mobile No",
+   "email":"Email ID",
+   "emailid":"Enter Email ID",
+   "mobile_placeholder":"Enter your 10 digit mobile number",
+   "bedno": "Room/Bed number",
+   "consultant": "Primary Consultant",
+   "speciality": "Speciality",
+   
+   "pagetitle":"IP DISCHARGE FEEDBACK FORM",
+   "gustname":"Dear ",
+   "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
+   "excellent":"Excellent",
+   "good":"Good",
+   "average":"Average",
+   "poor":"Poor",
+   "worst":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "recommendationmessage":"On a scale from 0-10, how likely are you to recommend this hospital to your friends or family members?",
+   "yourreason":"Your reason for selecting our hospital",
+   "location":"Location/Proximity",
+   "specificservices":"Specific services offered",
+   "referredbydoc":"Referred by doctor",
+   "friendfamily":"Friend/Family recommendation",
+   "previousexp":"Previous experience",
+   "yourdoctor":"Insurance facilities",
+   "companyreco":"Company recommendation",
+   "other":"Print/Online media",
+   "stafrecognition":"Staff recognition:",
+   "recognizeateam":"Please help us recognize a staff member of our hospital who may have performed services beyond your expectations.",
+   "staffname":"Staff name",
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   
+   
+   "kpi_info": "12. PSQ3a - Incidence of hospital associated pressure ulcers after admission (Bed sore per 1000 patient days) for the month of",
+   "definition": "Definition:",
+   "kpi_def": "A pressure ulcer is localized injury to the skin and/or underlying tissue usually over a bony prominence, as a result of pressure, or pressure in combination with shear and/or friction.",
+   "formula_para1": "Number of patients who develop new / worsening of pressure ulcer",   
+   "formula_para1_placeholder": "Your input",
+   "hr_placeholder":"Hr",
+   "min_placeholder": "Min",
+   "sec_placeholder": "Sec",
+   "formula_para2": "Total no. of patient days",
+   "formula_para2_placeholder": "Your input",
+   "data_analysis": "Data analysis",
+   "corrective_action": "Corrective action",
+   "preventive_action": "Preventive action"
+
+
+
+
+   
+}

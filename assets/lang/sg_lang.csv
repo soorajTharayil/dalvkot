@@ -1,0 +1,131 @@
+Key,Value
+sg_staff_grievances_dashboard,SG- STAFF GRIEVANCES DASHBOARD
+sg_downloads,Downlaods:
+sg_all_grievances,SG - STAFF ALL GRIEVANCES
+sg_staff_open_grievances,SG- STAFF OPEN GRIEVANCES
+sg_adrressed_grievances,SG- STAFF ADDRESSED GRIEVANCES
+sg_staff_closed_grievances,SG- STAFF CLOSED GRIEVANCES
+sg_capa_report,SG- STAFF CAPA REPORT
+sg_grievances_resolution_rate,Grievance Resolution Rate
+sg_grievances_resolution_time,SG- GRIEVANCE RESOLUTION TIME
+sg_total_grievances,Total Grievances,
+sg_total_grievances_tooltip,Total grievances received from staffs during the selected period.,
+sg_open_grievances,Open Grievances,
+sg_open_grievances_tooltip,Number of staff grievances yet to be addressed or closed.,
+sg_addressed_grievances,Addressed Grievances,
+sg_addressed_grievances_tooltip,Number of grievances addressed with the first response.,
+sg_closed_grievances,Closed Grievances,
+sg_closed_grievances_tooltip,Number of grievances resolved/ closed.
+sg_grievances_resolution_rate_tooltip,Metric used to measure the efficiency and effectiveness of the team in addressing and resolving employee grievances.
+sg_average_resolution_time,Average Resolution Time
+sg_average_resolution_time_tooltip,The average amount of time taken by the respective team to resolve employee grievances.
+sg_grievances_recived_by_category,Grievances Received By category
+sg_grievances_recived_by_category_tooltip,This pie chart illustrates how employee grievances are distributed among various categories and the percentage each department's grievances contribute to the total.
+sg_recent_grievances,Recent Grievances
+sg_recent_grievances_tooltip,List of recent employee grievances received during the selected period.
+sg_select_category,Select Category
+sg_slno,Sl. No
+sg_grievances_id,Grievance ID
+sg_grievance_reported_by,Grievance reported by
+sg_grievance,Grievance
+sg_category,Category
+sg_reported_on,Reported on
+sg_modified_on,Modified on
+sg_action,Action
+sg_addressal_comment,Addressal comment
+sg_rca,RCA
+sg_capa,CAPA
+sg_tat,time(TAT)
+sg_turn_around, Turn around
+sg_department,Department
+sg_resolution_rate,Resolution rate
+sg_avg_resolution_rate,Avg.resolution time
+sg_grievances_deatails,Grievances details
+sg_grievance_reported_in,Grievance reported in
+sg_grievances_status,Grievances Status
+sg_last_updated_on,Last updated on
+sg_grievance_history,Grievance History
+
+sg_select_grievance,Select grievance
+sg_download_addressed_grievance_report_tooltip,Download addressed grievances report
+sg_download_all_grievance_report,Download all grievances report
+sg_sg,SG-
+sg_request_id,Request ID
+sg_tat_l1_escalation,TAT for L1 Escalation
+sg_tat_l2_escalation,TAT for L2 Escalation
+sg_total_grievance,Total Grievances,
+sg_addressed_grievance,Addressed Grievances,
+sg_open_grievance,Open Grievances,
+sg_closed_grievance,Closed Grievances,
+sg_key_takeaways,Key Takeaways,
+sg_key_takeaways_tooltip,This section will give you a complete understanding of the performance of every parameters and department over the selected period of time
+sg_you_have_received_least_complaints_in,You have received the least complaints in
+sg_you_have_received_most_complaints_in,You have received the most patient complaints in
+sg_grievance_analysis,Grievances Analysis 
+sg_grievance_analysis_tooltip,This pie chart gives you details on requests received for your department.
+ sg_recent_grievances,Recent Grievances
+sg_description,Description
+sg_employee_name,Employee name
+sg_employee_id,Employee ID
+sg_employee_role,Employee role
+sg_contact_details,Contact details
+sg_grievance_detail,Grievance details
+sg_attached_image,Attached image
+sg_grievance_reported_in,Grievance reported in
+sg_find_by_employee_id,Find By Employee ID:
+sg_download_open_grievance_tooltip,Download open grievance 
+sg_title,Title
+sg_questions,Question
+sg_shortkey,Shortkey
+sg_title_2l,Title 2L
+sg_title_3l,Title 3L
+sg_ques_2l,Ques 2L
+sg_lang_3l,Lang 3L
+sg_action,Action
+sg_add_question,Add Question 
+sg_grievance_resolution_time,Grievances Resolution Rate
+sg_grievance_history,Grievance History
+sg_root_cause,RCA
+sg_ticket_is_open,Ticket is open
+sg_you_have_received_most_requests_in,You have received the most grievances in 
+sg_you_have_received_least_requests_in,You have received the least grievances in 
+sg_grievance_received_by_category,Grievances Received By Category 
+sg_priority,Priority
+sg_grievance_assigned_to,Grievance assigned to
+sg_address,Address
+sg_close,Close
+sg_transfer,Transfer 
+sg_reopen,Reopen
+sg_turn_around_time,Turn around time
+sg_reopen_this_grievance,Reopen this grievance
+sg_address_this_request,Address this request 
+sg_capa_close_grievance,Please submit an RCA and CAPA to close this grievance
+sg_transfering_grievance_to_category,Transfer grievance to other category
+sg_resolved,Resolved
+sg_concern_resolved,Your concern has been successfully resolved by one of our executives.
+sg_concern_assigned,Your concern has been assigned to one of our executives, and they are actively working on resolving it.
+sg_concern_registered,Your concern has been registered, and it has been assigned to one of our executives.
+sg_inprogress,Inprogress
+sg_issue_concerns,Issue/Concerns
+sg_created_on,Created on
+sg_request_details,Request Details
+sg_site,Site
+sg_updated_on,Updated on
+sg_department_info,Department Information
+sg_department_name,Department Name
+sg_did_you_know,Did you know?
+sg_employee_info,Employee Information
+sg_view_list,View List
+sg_view_all,View All
+sg_avg_resolution_time,Avg. resolution time
+sg_submit,Submit
+sg_address_this_grievance,Address this grievance
+sg_comment,Comment
+sg_no_record_found,No Records Found!
+sg_source,Source
+sg_download_capa_report_tooltip,Download CAPA Report
+sg_created_on,Created on
+sg_s_total_grievances,Total grievances
+sg_s_open_grievances,Open grievances
+sg_s_addressed_grievances,Addressed grievances
+sg_s_closed_grievances,Closed grievances

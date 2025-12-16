@@ -1,0 +1,156 @@
+Key,Value
+adf_admission_all_feedbacks_dashboard,ADMISSION- FEEDBACKS DASHBOARD
+adf_admission_all_feedbacks_report,ADMISSION- ALL FEEDBACKS REPORT
+adf_admission_satisfied_patient_list,ADMISSION- SATISFIED PATIENTS LIST
+adf_admission_unsatisfied_patient_list,ADMISSION- UNSATISFIED PATIENTS LIST
+adf_admission_psat_analysis,ADMISSION- PSAT ANALYSIS
+adf_admission_nps_analysis,ADMISSION- NPS ANALYSIS
+adf_admission_nps_promoter_list,ADMISSION- NPS PROMOTERS LIST
+adf_admission_nps_detractors_list,ADMISSION- NPS DETRACTORS LIST
+adf_nps_passives,ADMISSION- NPS PASSIVES LIST
+adf_admission_ticket_dashboard,ADMISSION- TICKETS DASHBOARD
+adf_admission_all_tickets,ADMISSION- ALL TICKETS
+adf_admission_open_tickets,ADMISSION- OPEN TICKETS
+adf_admission_adrressed_tickets,ADMISSION- ADDRESSED TICKETS
+adf_admission_closed_tickets,ADMISSION- CLOSED TICKETS
+adf_admission_capa_report,ADMISSION- CAPA REPORT
+adf_admission_ticket_resolution_rate,ADMISSION- TICKET RESOLUTION RATE
+adf_admission_avg_resolution_time,ADMISSION- AVERAGE RESOLUTION TIME
+adf_total_feedbacks,Total Feedbacks
+adf_total_feedbacks_tooltip,Total feedback response received from admitted patients for the selected period.
+adf_psat_satisfied,Satisfied Patients
+adf_psat_satisfied_tooltip,No. of patients who had a better admission experience.
+adf_psat_unsatisfied,Unsatisfied Patients
+adf_psat_unsatisfied_tooltip,Patient who rated below average and have one or more negative experiences on admission.
+adf_total_tickets,Total Tickets
+adf_total_tickets_tooltip,Total no. of negative ratings for admission experience.
+adf_psat,PSAT
+adf_psat_tooltip,The PSAT is a metric that indicates how satisfied patients are with the admission experience.
+adf_nps,NPS
+adf_nps_tooltip,NPS is a metric used to measure patient loyalty and also to understand how much your patients like your services and whether they are willing to recommend them to others based on their admission experience.
+adf_ticket_resolution_rate,Ticket Resolution Rate
+adf_ticket_resolution_rate_tooltip,Metric used to measure the efficiency and effectiveness of the team to close the negative feedbacks received on admission.
+adf_average_resolution_time,Average Resolution Time
+adf_average_resolution_time_tooltip,The average amount of time taken by the team to close the admission experience tickets.
+adf_open_tickets,Open Tickets
+adf_open_tickets_tooltip,Number of tickets yet to be addressed or closed.
+adf_addressed_tickets,Addressed Tickets
+adf_addressed_tickets_tooltip,Number of tickets addressed with the first response.
+adf_closed_tickets,Closed Tickets
+adf_closed_tickets_tooltip,Number of tickets resolved.
+adf_satisfied_patients,Satisfied Patients
+adf_unsatisfied_patients,Unsatisfied Patients
+adf_promoters,Promoters
+adf_detractors,Detractors
+adf_passives,Passives
+adf_key_takeaways,Key Takeaways
+adf_key_takeaways_tooltip,This section will give you a complete understanding of the performance of every parameter and department over the selected period of time.
+adf_patient_feedbacks_analysis,Patient Feedbacks Analysis
+adf_patient_feedbacks_analysis_tooltip,Bar chart representing rating performance of each touchpoint on the patient's first day.
+adf_patient_satisfaction_analysis,Patient Satisfaction Analysis
+adf_patient_satisfaction_analysis_tooltip,Graph showcasing fluctuations or improvements in the Admitted Patient's Satisfaction Score(PSAT) over continuous time intervals.
+adf_net_promoter_analysis,Net Promoter Analysis
+adf_net_promoter_analysis_tooltip,Graph showcasing variations in the Admission experience NPS score over continuous time intervals.
+adf_tickets_received_by_department,Tickets Received By Department
+adf_tickets_received_by_department_tooltip,This Pie chart shows how the tickets are divided into various categories and what percentage of each department tickets contributes to the total admission feedback tickets.
+adf_recent_patient_feedbacks,Recent Patient Feedbacks
+adf_recent_patient_feedbacks_tooltip,List of recent admitted patient feedbacks during the selected period
+adf_hospital_selection_analysis,Hospital Selection Analysis
+adf_hospital_selection_analysis_tooltip,Chart to analyze patients coming to the hospital through various sources.
+adf_recent_patient_comments,Recent Patient Comments
+adf_recent_patient_comments_tooltip,List of recent patient comments during the selected period.
+adf_tickets_recived_by_department,Tickets Received By Department
+adf_tickets_recived_by_department_tooltip,This Pie chart shows how the tickets are divided into various categories and what percentage of each department tickets contributes to the total admission feedback tickets
+adf_recent_tickets,Recent Tickets
+adf_recent_tickets_tooltip,List of recent tickets for the selected period
+adf_patient_name,Patient Name
+adf_patient_id,Patient ID
+adf_floor_ward,Floor/Ward
+adf_room_bedno,Room/Bed No.
+adf_contact_number,Contact Number
+adf_date_time,Date Time
+adf_source,Source
+adf_slno,Sl. No
+adf_date,Date
+adf_feedback_id,Feedback ID
+adf_patient_details,Patient details
+adf_average_rating,Average rating
+adf_comment,Comment
+adf_nps_comment,NPS comment
+adf_nps_score,NPS score
+adf_departments,Departments
+adf_concern,Concern
+adf_nps_score_9_10,NPS score (9-10)
+adf_nps_score_0_6,NPS score (0-6)
+adf_nps_score_7_8,NPS score (7-8)
+adf_select_department,Select Department
+adf_ticket_id,Ticket ID
+adf_rating,Rating
+adf_department,Department
+adf_created_on,Created on
+adf_modified_on,Modified on
+adf_action,Action
+adf_ticketid,Ticket ID
+adf_addressal_comment,Addressal comment
+adf_rca,RCA
+adf_capa,CAPA
+adf_resolution_rate,Resolution rate
+adf_avg_resolution_time,Average Resolution Time
+adf_ticket_deatails,Ticket details
+adf_assigned_to,Assigned to
+adf_ticket_status,Ticket Status
+adf_last_updated_on,Last updated on
+adf_your,Your
+adf_received_the_highest_satisfaction_rating,received the highest satisfaction rating for the selected period.
+adf_has_to_be_improved,has to be improved as it received the lowest rating for the selected period.
+adf_unhappy_feedback_submitted_by,"Unhappy feedback submitted by,"
+adf_happy_feedback_submitted_by,"Happy feedback submitted by,"
+adf_you_have_received_most_complaints_in,You have received the most patient complaints in
+adf_you_have_received_least_complaints_in,You have received the least complaints in
+adf_no_record_found,No Records Found!
+adf_view_list,View List
+adf_view_all,View All
+adf_netpromoter_analysis,Net Promoter Analysis
+adf_choose_hospital,Choose Hospital
+adf_previous_experience,Previous Experience
+adf_feedback_suggestion,Feedback Suggestion
+adf_adrressed_tickets,Addressed Tickets
+adf_adft,ADFT-
+adf_rated,Rated 
+adf_address,Address
+adf_close,Close
+adf_transfering_ticket_department,Transfer ticket to other department
+adf_capa_close_ticket,Please submit an RCA and CAPA to close this ticket
+adf_submit,Submit
+adf_download_all_report,Download all reports
+adf_download_capa_report_tooltip,Download CAPA report
+adf_download_addressed_report_tooltip,Download addressed report
+adf_location_proximity,Location / Proximity
+adf_specific_service,Specific Services offered
+adf_ff_rocommendation,Friend/Family recommendation
+adf_referred_by_doctors,Referred by doctors
+adf_previous_experience,Previous experience
+adf_insurance_facilities,Insurance facilities
+adf_company_recommendation,Company Recommendation
+adf_print_online,Print or Online Media
+adf_recognized_staff,Recognized Staff:
+adf_staff_name,Staff Name
+adf_feedback_suggestions,Feedback/ Suggestions
+adf_promoters_tooltip,On a scale from 0-10
+adf_promoters_tooltip_r,how likely are you to recommend this hospital to your friends or family members?
+adf_close_hospital,Reason to choose hospital
+adf_adm,ADF-
+adf_discharge_feedback_id_tooltip,ADMISSSION FEEDBACK-<Feedback ID>
+adf_download_total_feedback_tooltip,Download detailed patient wise feedback report for admission.
+adf_downloads,Downloads: 
+adf_download_comments,Download Comments
+adf_ticket_history,Ticket History
+adf_root_cause,RCA
+adf_negative_events_analysis,Negative Events Analysis
+adf_tat,time(TAT)
+adf_turn_around,Turn around
+adf_s_total_tickets,Total tickets
+adf_s_open_tickets,Open tickets
+adf_s_addressed_tickets,Addressed tickets
+adf_s_closed_tickets,Closed tickets
+adf_avg_resolution_time,Avg. resolution time

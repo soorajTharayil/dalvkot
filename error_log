@@ -1,0 +1,2 @@
+[19-Aug-2025 10:24:08 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/efeedor/public_html/dalvkot/first_code/html/index.php on line 5
+[19-Aug-2025 10:28:46 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/efeedor/public_html/dalvkot/first_code/html/index.php on line 5

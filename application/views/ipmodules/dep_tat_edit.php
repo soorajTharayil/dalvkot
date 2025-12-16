@@ -1,0 +1,528 @@
+<!-- This page shows the list of departments -->
+<div class="content">
+    <?php
+    $welcometext1 = "This page lets you configure escalation turnaround times (TAT) for IP Discharge feedback tickets. The first level is for department heads, while the second and third levels are for Admins (mid-level management) and Senior Admins (senior management), respectively. You can apply a common TAT for each level or set specific TATs for individual parameters. Additionally, users can be assigned to each escalation level in the Assign Escalation Users section.";
+
+    $email = $this
+        ->session
+        ->userdata["email"];
+    // $this->db->where('department.type', 'inpatient');
+    // $this->db->group_by('type,description');
+    $this->db->select("*");
+    $this->db->from("department");
+    $this->db->join("setup", "setup.shortkey = department.slug");
+    $this->db->where("department.type", "inpatient");
+    $this->db->where("setup.parent", 1);
+    $query = $this->db->get();
+    $departments = $query->result();
+    ?>
+    <div class="row" >
+        <div style="margin-bottom: 20px;margin-top: 7px; margin-left:15px;">
+
+            <h4 style="font-size:17px;font-weight:normal;">
+                <span style="font-size: 18px; "><?php echo $welcometext1; ?></span>
+            </h4>
+         
+        </div>
+
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-success" href="<?php echo base_url("settings/escalationip") ?>"> <i class="fa fa-gear" style="padding-right: 5px;"></i> Assign Escalation Users</a>
+            </div>
+
+        </div>
+        <br>
+        <!--  table area start-->
+        <div class="col-lg-12">
+            <div class="panel panel-default thumbnail">
+
+
+                <div class="panel-body">
+
+                    <?php echo form_open(); ?>
+                    <tr>
+                        <td colspan="6">
+                            <div class="global-time-setter">
+                                <label for="global-day-dept"  style="font-size:16px;">Set Level 1 - Dept. Escalation TAT</label>
+                                <select id="global-day-dept" onchange="setGlobalTimedep('day-dept')" style="margin-left: 32px;">
+                                    <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <select id="global-hour-dept" onchange="setGlobalTimedep('hour-dept')">
+                                    <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <select id="global-minute-dept" onchange="setGlobalTimedep('minute-dept')">
+                                    <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <button type="button" onclick="applyGlobalTimedep()">Apply to All</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <div class="global-time-setter">
+                                <label for="global-day-dept" style="font-size:16px;">Set Level 2 - Admin Escalation TAT</label>
+                                <select id="global-l1-day" onchange="setGlobalTime('l1', 'day')" style="margin-left: 24px;">
+                                    <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <select id="global-l1-hour" onchange="setGlobalTime('l1', 'hour')">
+                                    <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <select id="global-l1-minute" onchange="setGlobalTime('l1', 'minute')">
+                                    <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <button type="button" onclick="applyGlobalTime('l1')">Apply to All</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <div class="global-time-setter">
+                                <label for="global-day-dept" style="font-size:16px;">Set Level 3 - Sr. Admin Escalation TAT</label>
+                                <select id="global-l2-day" onchange="setGlobalTime('l2', 'day')">
+                                    <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <select id="global-l2-hour" onchange="setGlobalTime('l2', 'hour')">
+                                    <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <select id="global-l2-minute" onchange="setGlobalTime('l2', 'minute')">
+                                    <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                    <?php } ?>
+                                </select>
+                                <button type="button" onclick="applyGlobalTime('l2')">Apply to All</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <br>
+                    </tr>
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <table class=" table table-striped table-bordered" cellspacing="0" width="100%">
+
+                            <!-- table head start -->
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <?php echo display("serial"); ?>
+                                    </th>
+                                    <th><?php echo lang_loader('inc', 'inc_department'); ?></th>
+                                    <th><?php echo lang_loader('inc', 'inc_parameter'); ?></th>
+                                    <th>Level 1 - Dept. Escalation TAT</th>
+                                    <th>Level 2 - Admin Escalation TAT</th>
+                                    <th>Level 3 - Sr. Admin Escalation TAT</th>
+                                </tr>
+                            </thead>
+                            <!-- table head end -->
+                            <!-- Add a global time setter -->
+
+
+
+                            <!-- table body start -->
+                            <tbody>
+                                <?php if (!empty($departments)) { ?>
+                                    <?php
+                                    $sl = 1;
+                                    $i = 0;
+                                    ?>
+                                    <?php foreach ($departments as $department) { ?>
+
+                                        <?php
+
+                                        $seconds_total = $department->dept_level_escalation;
+                                        $days_dept_level = floor($seconds_total / 86400); // 86400 seconds in a day
+                                        $hours_days_dept_level = floor(($seconds_total % 86400) / 3600); // 3600 seconds in an hour
+                                        $minutes_days_dept_level = floor(($seconds_total % 3600) / 60);
+
+                                        $seconds_total = $department->close_time;
+                                        $days_l1 = floor($seconds_total / 86400); // 86400 seconds in a day
+                                        $hours_l1 = floor(($seconds_total % 86400) / 3600); // 3600 seconds in an hour
+                                        $minutes_l1 = floor(($seconds_total % 3600) / 60);
+
+
+                                        $seconds_total_l2 = $department->close_time_l2;
+                                        $days_l2 = floor($seconds_total_l2 / 86400); // 86400 seconds in a day
+                                        $hours_l2 = floor(($seconds_total_l2 % 86400) / 3600); // 3600 seconds in an hour
+                                        $minutes_l2 = floor(($seconds_total_l2 % 3600) / 60);
+                                        ?>
+                                        <tr class="<?php echo $sl & 1 ? "odd gradeX" : "even gradeC"; ?>" id="dep_row<?php echo $department->dprt_id; ?>">
+                                            <td>
+                                                <?php echo $sl; ?>
+                                            </td>
+
+                                            <td>
+                                                <?php echo $department->description; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $department->name; ?>
+                                            </td>
+                                            <!-- dept level escalation -->
+                                            <td>
+                                                <div class="dhm-picker">
+                                                    <input type="hidden" value="<?php echo $department->dept_level_escalation; ?>" id="dept_level<?php echo $department->dprt_id; ?>" name="tat[dept_level_escalation][<?php echo $department->dprt_id; ?>]">
+                                                    <select id="daydept_level<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
+
+                                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($days_dept_level == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo $i; ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+
+                                                    </select>
+                                                    <span class="separator">Day</span>
+
+                                                    <select id="hourdept_level<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
+                                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($hours_days_dept_level == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo $i; ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+
+                                                    </select>
+                                                    <span class="separator">Hour</span>
+                                                    <select id="minutedept_level<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
+
+
+                                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($minutes_days_dept_level == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+                                                    </select>
+                                                    <span class="separator">Min</span>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="dhm-picker">
+                                                    <input type="hidden" value="<?php echo $department->close_time; ?>" id="l1<?php echo $department->dprt_id; ?>" name="tat[close_time_l1][<?php echo $department->dprt_id; ?>]">
+                                                    <select id="dayl1<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
+
+                                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($days_l1 == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo $i; ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+
+                                                    </select>
+                                                    <span class="separator">Day</span>
+
+                                                    <select id="hourl1<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
+                                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($hours_l1 == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo $i; ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+
+                                                    </select>
+                                                    <span class="separator">Hour</span>
+                                                    <select id="minutel1<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
+
+
+                                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($minutes_l1 == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+                                                    </select>
+                                                    <span class="separator">Min</span>
+
+                                                </div>
+                                            </td>
+                                            <td>
+
+                                                <div class="dhm-picker">
+                                                    <input type="hidden" value="<?php echo $department->close_time_l2; ?>" id="l2<?php echo $department->dprt_id; ?>" name='tat[close_time_l2][<?php echo $department->dprt_id; ?>]'>
+                                                    <select id="dayl2<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
+
+                                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($days_l2 == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo $i; ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+
+                                                    </select>
+                                                    <span class="separator">Day</span>
+
+                                                    <select id="hourl2<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
+                                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($hours_l2 == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo $i; ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+
+                                                    </select>
+                                                    <span class="separator">Hour</span>
+                                                    <select id="minutel2<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
+
+
+                                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                                            <option value="<?php echo $i; ?>" <?php if ($minutes_l2 == $i) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>>
+                                                                <?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
+                                                            </option>
+                                                        <?php
+                                                        } ?>
+                                                    </select>
+                                                    <span class="separator">Min</span>
+
+                                                </div>
+                                            </td>
+
+
+
+                                        </tr>
+                                        <?php
+                                        $sl++;
+                                        $i++;
+                                        ?>
+                                    <?php
+                                    } ?>
+                                <?php
+                                } ?>
+                            </tbody>
+                            <!-- table body end -->
+
+
+                        </table> <!-- /.table-responsive -->
+                    </div>
+                    <br>
+                    <input style="font-size: 18px; " value="Save" onclick="validateForm()" class="btn btn-primary btn-sm">
+
+                    <input type="submit" value="Sumit" id="submitform" style="display:none;" class="btn btn-primary">
+                    <?php echo form_close(); ?>
+                </div>
+            </div>
+        </div>
+        <!--  table area end-->
+    </div>
+</div>
+<style>
+    .dt-buttons.btn-group {
+        display: none;
+    }
+
+    .dhm-picker {
+        display: flex;
+        align-items: center;
+        background-color: #f7f7f7;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .dhm-picker select {
+        appearance: none;
+        border: none;
+        background-color: transparent;
+        padding: 5px 10px;
+        font-size: 16px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .dhm-picker .separator {
+        margin: 0 5px;
+        color: #888;
+    }
+
+    .global-time-setter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        /* Space between elements */
+        padding: 10px 0;
+        /* Add some padding for better spacing */
+    }
+
+    .global-label {
+        flex: 2;
+        /* Allocate more space for the label */
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .global-dropdown {
+        flex: 1;
+        /* Equal space for each dropdown */
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .global-button {
+        flex: 1;
+        /* Equal space for the button */
+        padding: 7px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .global-button:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+        /* Optional: Add a border between rows */
+    }
+</style>
+<script>
+    function modifyRowColor(id) {
+        $("#dep_row" + id).css("color", "red");
+    }
+
+    function setValueField(id, level) {
+        $("#dep_row" + id).css("color", "orange");
+
+        var day = parseInt($("#day" + level + id).val());
+        var hour = parseInt($("#hour" + level + id).val());
+        var minute = parseInt($("#minute" + level + id).val());
+
+        var totalSeconds = (day * 24 * 60 * 60) + (hour * 60 * 60) + (minute * 60);
+
+        $('#' + level + id).val(totalSeconds);
+    }
+
+    function validateForm() {
+        var departments = <?php echo json_encode($departments); ?>;
+
+        for (var i = 0; i < departments.length; i++) {
+            var department = departments[i];
+            var l1Value = parseInt(document.getElementById('l1' + department.dprt_id).value);
+            var l2Value = parseInt(document.getElementById('l2' + department.dprt_id).value);
+            var deptValue = parseInt(document.getElementById('dept_level' + department.dprt_id).value);
+
+            if (l2Value < deptValue) {
+                alert('Admin level escalation should be greater than Department level escalation for department: ' + department.description);
+                $("#dep_row" + department.dprt_id).css("color", "red");
+                return false; // This will prevent the form from submitting
+            }
+        }
+        $('#submitform').click();
+        return true; // This will allow the form to submit
+    }
+
+    function setGlobalTime(level, type) {
+        const globalDay = document.getElementById(`global-${level}-day`).value;
+        const globalHour = document.getElementById(`global-${level}-hour`).value;
+        const globalMinute = document.getElementById(`global-${level}-minute`).value;
+
+        document.getElementById(`global-${level}-day`).setAttribute('data-selected', globalDay);
+        document.getElementById(`global-${level}-hour`).setAttribute('data-selected', globalHour);
+        document.getElementById(`global-${level}-minute`).setAttribute('data-selected', globalMinute);
+    }
+
+    function applyGlobalTime(level) {
+        const globalDay = document.getElementById(`global-${level}-day`).getAttribute('data-selected') || 0;
+        const globalHour = document.getElementById(`global-${level}-hour`).getAttribute('data-selected') || 0;
+        const globalMinute = document.getElementById(`global-${level}-minute`).getAttribute('data-selected') || 0;
+
+        const allRows = document.querySelectorAll('tr[id^="dep_row"]');
+        allRows.forEach((row) => {
+            const departmentId = row.id.replace('dep_row', '');
+
+            document.getElementById(`day${level}${departmentId}`).value = globalDay;
+            document.getElementById(`hour${level}${departmentId}`).value = globalHour;
+            document.getElementById(`minute${level}${departmentId}`).value = globalMinute;
+
+            setValueField(departmentId, level);
+        });
+
+        alert(`Global time applied to all parameters for ${level} escalation!`);
+    }
+
+    function setGlobalTimedep(type) {
+        const globalDay = document.getElementById('global-day-dept').value;
+        const globalHour = document.getElementById('global-hour-dept').value;
+        const globalMinute = document.getElementById('global-minute-dept').value;
+
+        // Save global values in hidden fields for future reference
+        document.getElementById('global-day-dept').setAttribute('data-selected', globalDay);
+        document.getElementById('global-hour-dept').setAttribute('data-selected', globalHour);
+        document.getElementById('global-minute-dept').setAttribute('data-selected', globalMinute);
+    }
+
+    function applyGlobalTimedep() {
+        // Retrieve global values
+        const globalDay = document.getElementById('global-day-dept').getAttribute('data-selected') || 0;
+        const globalHour = document.getElementById('global-hour-dept').getAttribute('data-selected') || 0;
+        const globalMinute = document.getElementById('global-minute-dept').getAttribute('data-selected') || 0;
+
+        // Apply the time to all parameters
+        const allRows = document.querySelectorAll('tr[id^="dep_row"]');
+        allRows.forEach((row) => {
+            const departmentId = row.id.replace('dep_row', '');
+
+            document.getElementById(`daydept_level${departmentId}`).value = globalDay;
+            document.getElementById(`hourdept_level${departmentId}`).value = globalHour;
+            document.getElementById(`minutedept_level${departmentId}`).value = globalMinute;
+
+            // Call onchange handlers to update hidden fields
+            setValueField(departmentId, 'dept_level');
+        });
+
+        alert('Global time applied to all parameters for department level escalation!');
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var typed = new Typed(".typing-text1", {
+            strings: ["<?php echo $welcometext1; ?>"],
+            // delay: 10,
+            loop: false,
+            typeSpeed: 30,
+            backSpeed: 5,
+            backDelay: 1000,
+        });
+    });
+</script>

@@ -1,0 +1,141 @@
+Key,Value,
+inc_incidents_dashboard,INC- INCIDENTS DASHBOARD,
+inc_downloads,Downloads:
+inc_all_incidents,INC - ALL INCIDENTS,
+inc_open_incidents,Open Incidents,
+inc_adrressed_incidents,INC- ADDRESSED INCIDENTS,
+inc_closed_incidents,Closed Incidents,
+inc_capa_report,INC- CAPA REPORT,
+inc_incidents_resolution_rate,Incident Resolution Rate,
+inc_incidents_resolution_time,INC- INCIDENT RESOLUTION TIME,
+inc_total_incidents,Total Incidents,
+inc_total_incidents_tooltip,Total healthcare incidents registered during the selected period.,
+inc_open_incidents_tooltip,Number of healthcare incidents yet to be addressed or closed with RCA and CAPA.,
+inc_addressed_incidents,Addressed Incidents,
+inc_addressed_incidents_tooltip,Number of healthcare incidents addressed with the first response.,
+inc_closed_incidents_tooltip,Number of incidents resolved.,
+inc_incidents_resolution_rate_tooltip,Metric used to measure the efficiency and effectiveness of the team to close or resolve the healthcare incidents.,
+inc_average_resolution_time,Average Resolution Time,
+inc_average_resolution_time_tooltip,The average amount of time taken by the team to close the healthcare incidents.,
+inc_incidents_recived_by_category,Incidents Received By category,
+inc_incidents_recived_by_category_tooltip,This Pie chart shows how the incidents are divided into various incident categories and what percentage of each category incidents contributes to the total,
+inc_recent_incidents,Recent Incidents,
+inc_recent_incidents_tooltip,List of recent incidents received during the selected period,
+inc_key_takeaways,Key Takeaways,
+inc_select_category,Select Category,
+inc_slno,Sl. No,
+inc_incidents_id,Incident ID,
+inc_incident_reported_by,Incident reported by,
+inc_incident,Incident / Category,
+inc_category,Category :,
+inc_reported_on,Reported on,
+inc_modified_on,Modified on,
+inc_action,Action taken,
+inc_addressal_comment,Addressal comment,
+inc_root_cause,RCA,
+inc_rca,RCA,
+inc_capa,CAPA,
+inc_tat,time(TAT)
+inc_turn_around, Turn around
+inc_department,Department,
+inc_resolution_rate,Resolution rate,
+inc_avg_resolution_rate,Avg. resolution time,
+inc_incidents_deatails,Incidents details,
+inc_priority,Priority,
+inc_Incident_reported_in,Incident reported in,
+inc_patient_details,Patient details,
+inc_ncident_reported_by,Incident reported by,
+inc_incidents_status,Incidents Status,
+inc_last_updated_on,Last updated on,
+inc_select_incident,Select incident,
+inc_download_addressed_incident_report_tooltip,Download addressed incidents report,
+inc_download_all_incident_report,Download all incidents report,
+inc_inc,INC-,
+inc_parameter,Parameter,
+inc_you_have_received_least_complaints_in,You have received the least complaints in,
+inc_you_have_received_most_complaints_in,You have received the most patient complaints in ,
+inc_incident_analysis,Incident Analysis,
+inc_incident_analysis_tooltip,This pie chart gives you details on Incidents & requests received for your department.,
+inc_employee_name,Employee name,
+inc_employee_id,Employee ID,
+inc_employee_role,Employee role,
+inc_contact_details,Contact details,
+inc_source,Source,
+inc_incident_report,Incident details,
+inc_incident_type,Incident type,
+inc_attached_image,Attached image,
+inc_patient_type,Patient type:,
+inc_patient_id,Patient ID:,
+inc_patient_name,Patient name:,
+inc_primary_consultant,Primary consultant:,
+inc_find_by_employee_id,Find By Employee ID:,
+inc_sort_incident_by,Sort Incidents by :,
+inc_shortkey,Shortkey,
+inc_title_2l,Title 2L,
+inc_title_3l,Title 3L,
+inc_ques_2l,Ques 2L,
+inc_lang_3l,Lang 3L ,
+inc_no_comment,No Comments,
+inc_incident_thread,Incident Thread,
+inc_incident_history,Incident History,
+inc_ticket_is_open,Ticket is open,
+inc_you_have_received_least_incidents_in,You have received the least incidents in,
+inc_you_have_received_most_incidents_in,You have received the most patient incidents in ,
+inc_incident_received_by_category,Incidents Received By Category ,
+inc_description,Description,
+inc_incident_type,Incident Type:,
+inc_incident_assigned_to,Incident assigned to,
+inc_reopen_this_incident,Reopen this incident,
+inc_address_this_incident,Address this incident ,
+inc_capa_close_incident,Please submit an RCA and CAPA to close this incident
+inc_transfering_incident_to_category,Transfer incident to other category,
+inc_resolved,Resolved,
+inc_incident_resolved_executives,Your incident has been successfully resolved by one of our executives,
+inc_incident_actively_assigned,Your incident has been assigned to one of our executives, and they are actively working on resolving it
+inc_incident_registered,Your incident has been registered, and it has been assigned to one of our executives.
+inc_incident_summary,Incident Summary,
+inc_incidents,Incidents,
+inc_comment,Comment,
+inc_contact,Contact,
+inc_did_you_know,Did you know?,
+inc_employee_info,Employee Information,
+inc_id,ID,
+inc_status,Status,
+inc_closed_on,Closed on,
+inc_time_taken,Time Taken,
+inc_rate_this,Rate this,
+inc_site,Site,
+inc_updated_on,Updated on,
+inc_phone,Phone,
+inc_patient_info,Patient Information,
+inc_average,Average,
+inc_speciality,Speciality,
+inc_email_id,Email ID,
+inc_admission_date,Admission Date,
+inc_score,score,
+inc_reasons,Reasons,
+inc_tat,time(TAT),
+inc_view_list,View List,
+inc_view_all,View All,
+inc_no_record_found,No Records Found!,
+inc_avg_resolution_time,Avg. resolution time
+inc_incident_status,Incident status
+inc_address,Address
+inc_close,Close
+inc_transfer,Transfer
+inc_submit,Submit
+Inc_patient_id,Patient Id
+Inc_patient_name,Patient name
+inc_tat_l1_escalation,TAT for L1 Escalation
+inc_tat_l2_escalation,TAT for L2 Escalation
+inc_download_capa_report_tooltip,Download CAPA Report
+inc_assigned,Assigned
+inc_created_on,Created on
+inc_s_total_incidents,Total incidents
+inc_s_open_incidents,Open incidents
+inc_s_addressed_incidents,Addressed incidents
+inc_s_closed_incidents,Closed incidents
+inc_reopen,Reopen
+inc_status,Status
+inc_incident_reported_in,Incident reported in
+inc_attached_file,Attached file

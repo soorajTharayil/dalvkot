@@ -1,0 +1,238 @@
+sagarjnr.......................................
+
+cler deptable user details
+
+UPDATE `department` SET `email` = NULL ;
+UPDATE `department` SET `mobile` = NULL ;
+UPDATE `department` SET `pname` = NULL ;
+
+cler usertable settings
+
+
+ALTER TABLE `ticket_message` ADD `image` VARCHAR(50) NULL AFTER `comment`;
+ALTER TABLE `ticket_message` ADD `picture` VARCHAR(50) NULL AFTER `image`;
+
+ALTER TABLE `ticketop_message` ADD `picture` VARCHAR(50) NULL AFTER `rootcause`;
+
+
+
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('99', 1, NULL, 'Canteen', NULL, '1', 'Unsatisfied with the quality & taste of food', 'Unsatisfied with the quality & taste of food', 'int150', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಆಹಾರದ ಗುಣಮಟ್ಟ ಮತ್ತು ರುಚಿಯಲ್ಲಿ ಅತೃಪ್ತಿ', NULL, NULL);
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('100', 1, NULL, 'Canteen', NULL, '1', 'Unsatisfied with the timeliness of food service', 'Unsatisfied with the timeliness of food service', 'int151', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಆಹಾರ ಸೇವೆಯ ಸಮಯೋಚಿತತೆಯ ಬಗ್ಗೆ ಅತೃಪ್ತಿ', NULL, NULL);
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('101', 1, NULL, 'Canteen', NULL, '1', 'Unsatisfied with the temperature of food', 'Unsatisfied with the temperature of food', 'int152', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಆಹಾರದ ತಾಪಮಾನದಲ್ಲಿ ಅತೃಪ್ತಿ', NULL, NULL);
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('102', 1, NULL, 'Canteen', NULL, '1', 'Food not served according to the therapeutic restrictions', 'Food not served according to the therapeutic restrictions', 'int153', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಚಿಕಿತ್ಸಕ ನಿರ್ಬಂಧಗಳ ಪ್ರಕಾರ ಆಹಾರವನ್ನು ನೀಡಲಾಗುವುದಿಲ್ಲ', NULL, NULL);
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('103', 1, NULL, 'Canteen', NULL, '1', 'Quantity of food was too less/more', 'Quantity of food was too less/more', 'int154', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಆಹಾರದ ಪ್ರಮಾಣವು ತುಂಬಾ ಕಡಿಮೆ/ಹೆಚ್ಚು ಇತ್ತು', NULL, NULL);
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('104', 1, NULL, 'Canteen', NULL, '1', 'Unsatisfied with canteen staff\'s response', 'Unsatisfied with canteen staff\'s response', 'int155', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಕ್ಯಾಂಟೀನ್ ಸಿಬ್ಬಂದಿಯ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ', NULL, NULL);
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('105', 1, NULL, 'Canteen', NULL, '1', 'Unsatisfied with overall hygiene of food services', 'Unsatisfied with overall hygiene of food services', 'int156', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಆಹಾರ ಸೇವೆಗಳ ಒಟ್ಟಾರೆ ನೈರ್ಮಲ್ಯದಿಂದ ಅತೃಪ್ತಿ', NULL, NULL);
+INSERT INTO `setup_int` (`id`, `parent`, `icon`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`) 
+VALUES ('106', 1, NULL, 'Canteen', NULL, '1', 'Other Canteen issues', 'Other Canteen issues', 'int157', '0', 'set15', 'ಕ್ಯಾಂಟೀನ್', 'ಇತರ ಕ್ಯಾಂಟೀನ್ ಸಮಸ್ಯೆಗಳು', NULL, NULL);
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('302', 'Unsatisfied with the quality & taste of food', 'Canteen', '1800', '3600', NULL, '1', 'int150', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('303', 'Unsatisfied with the timeliness of food service', 'Canteen', '1800', '3600', NULL, '1', 'int151', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('304', 'Unsatisfied with the temperature of food', 'Canteen', '1800', '3600', NULL, '1', 'int152', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('305', 'Unsatisfied with the temperature of food', 'Canteen', '1800', '3600', NULL, '1', 'int153', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('306', 'Quantity of food was too less/more', 'Canteen', '1800', '3600', NULL, '1', 'int154', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('307', 'Unsatisfied with canteen staff's response', 'Canteen', '1800', '3600', NULL, '1', 'int155', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('308', 'Unsatisfied with overall hygiene of food services', 'Canteen', '1800', '3600', NULL, '1', 'int156', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `address_time`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) 
+VALUES ('309', 'Other Canteen issues', 'Canteen', '1800', '3600', NULL, '1', 'int157', 'set15', NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL, 'interim');
+
+
+
+
+
+INSERT INTO `setup_esr` (`id`, `title`, `sort_order`, `display`, `question`, `shortname`, `shortkey`, `valuetext`, `type`, `questionk`, `titlek`, `questionm`, `titlem`, `parent`, `icon`) VALUES
+(110, 'Biomedical', NULL, 1, 'ECG complaint', 'ECG complaint', 'isr70', 0, 'set7', 'ಇಸಿಜಿ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഇസിജി പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(111, 'Biomedical', NULL, 1, 'Patient monitor complaint', 'Patient monitor complaint', 'isr71', 0, 'set7', 'ರೋಗಿಯ ಮಾನಿಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'രോഗിയുടെ പരാതി നിരീക്ഷിക്കുന്നു', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(112, 'Biomedical', NULL, 1, 'Pulze oximeter complaint', 'Pulze oximeter complaint', 'isr72', 0, 'set7', 'ಪಲ್ಸ್ ಆಕ್ಸಿಮೀಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'പൾസ് ഓക്സിമീറ്റർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(113, 'Biomedical', NULL, 1, 'Nebulization machine complaint', 'Nebulizer complaint', 'isr73', 0, 'set7', 'ನೆಬ್ಯುಲೈಸೇಶನ್ ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'നെബുലൈസേഷൻ മെഷീന്റെ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(114, 'Biomedical', NULL, 1, 'Syringe pump complaint', 'Syringe pump complaint', 'isr74', 0, 'set7', 'ಸಿರಿಂಜ್ ಪಂಪ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'സിറിഞ്ച് പമ്പ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(115, 'Biomedical', NULL, 1, 'Infusion pump complaint', 'Infusion pump complaint', 'isr75', 0, 'set7', 'ಇನ್ಫ್ಯೂಷನ್ ಪಂಪ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഇൻഫ്യൂഷൻ പമ്പ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(116, 'Biomedical', NULL, 1, 'Defibrillator complaint', 'Defibrillator complaint', 'isr76', 0, 'set7', 'ಡಿಫಿಬ್ರಿಲೇಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഡിഫിബ്രിലേറ്റർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(117, 'Biomedical', NULL, 1, 'Ventilator complaint', 'Ventilator complaint', 'isr77', 0, 'set7', 'ವೆಂಟಿಲೇಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'വെന്റിലേറ്റർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(118, 'Biomedical', NULL, 1, 'BIPAP machine complaint', 'BIPAP complaint', 'isr78', 0, 'set7', 'BIPAP ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'BIPAP മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(119, 'Biomedical', NULL, 1, 'HFNC machine complaint', 'HFNC complaint', 'isr79', 0, 'set7', 'HFNC ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'HFNC മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(120, 'Biomedical', NULL, 1, 'Bubble CPAP machine complaint', 'Bubble CPAP complaint', 'isr710', 0, 'set7', 'ಬಬಲ್ CPAP ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ബബിൾ CPAP മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(121, 'Biomedical', NULL, 1, 'Infant ventilator complaint', 'Infant ventilator complaint', 'isr711', 0, 'set7', 'ಶಿಶು ವೆಂಟಿಲೇಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ശിശു വെന്റിലേറ്ററിനെതിരെ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(122, 'Biomedical', NULL, 1, 'Dialysis machine complaint', 'Dialysis machine complaint', 'isr712', 0, 'set7', 'ಡಯಾಲಿಸಿಸ್ ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഡയാലിസിസ് മെഷീന്റെ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(123, 'Biomedical', NULL, 1, 'NST machine complaint', 'NST machine complaint', 'isr713', 0, 'set7', 'NST ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എൻഎസ്ടി മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(124, 'Biomedical', NULL, 1, 'Phototherapy machine complaint', 'Phototherapy complaint', 'isr714', 0, 'set7', 'ಫೋಟೊಥೆರಪಿ ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഫോട്ടോതെറാപ്പി മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(125, 'Biomedical', NULL, 1, 'Baby warmer complaint', 'Baby warmer complaint', 'isr715', 0, 'set7', 'ಬೇಬಿ ವಾರ್ಮೆರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ബേബി വാർമെർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(126, 'Biomedical', NULL, 1, 'Baby cridal complaint', 'Baby cridal complaint', 'isr716', 0, 'set7', 'ಬೇಬಿ ಕ್ರಿಡಲ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ബേബി ക്രിഡൽ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(127, 'Biomedical', NULL, 1, 'CATHLAB machine complaint', 'CATHLAB complaint', 'isr717', 0, 'set7', 'CATHLAB ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'CATHLAB മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(128, 'Biomedical', NULL, 1, 'IABP machine complaint', 'IABP complaint', 'isr718', 0, 'set7', 'IABP ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'IABP മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(129, 'Biomedical', NULL, 1, 'C-ARM unit complaint', 'C-ARM unit complaint', 'isr719', 0, 'set7', 'C-ARM ಘಟಕದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'C-ARM യൂണിറ്റ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(130, 'Biomedical', NULL, 1, 'Nurodrill complaint', 'Nurodrill complaint', 'isr720', 0, 'set7', 'ನೂರೋಡ್ರಿಲ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ന്യൂറോഡ്രിൽ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(131, 'Biomedical', NULL, 1, 'Cuttery machine complaint', 'Cuttery machine complaint', 'isr721', 0, 'set7', 'ಕಟ್ಟರ್ ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'കട്ടറി മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(132, 'Biomedical', NULL, 1, 'Anaesthesia complaint', 'Anaesthesia complaint', 'isr722', 0, 'set7', 'ಅನಸ್ಥಿಷ್ಯಾ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'അനസ്തേഷ്യ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(133, 'Biomedical', NULL, 1, 'Tourniquet complaint', 'Tourniquet complaint', 'isr723', 0, 'set7', 'ಟೂರ್ನಿಕೆಟ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ടൂർണിക്കറ്റ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(134, 'Biomedical', NULL, 1, 'Ortho drill complaint', 'Ortho drill complaint', 'isr724', 0, 'set7', 'ಆರ್ಥೋ ಡ್ರಿಲ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഓർത്തോ ഡ്രിൽ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(135, 'Biomedical', NULL, 1, 'Micro motor complaint', 'Micro motor complaint', 'isr725', 0, 'set7', 'ಮೈಕ್ರೋ ಮೋಟಾರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'മൈക്രോ മോട്ടോർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(136, 'Biomedical', NULL, 1, 'OT- light complaint', 'OT- light complaint', 'isr726', 0, 'set7', 'OT- ಬೆಳಕಿನ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'OT- ലൈറ്റ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(137, 'Biomedical', NULL, 1, 'OT- table complaint', 'OT- table complaint', 'isr727', 0, 'set7', 'OT- ಟೇಬಲ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'OT- ടേബിൾ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(138, 'Biomedical', NULL, 1, 'Laproscopy / camera source complaint', 'Laproscopy complaint', 'isr728', 0, 'set7', 'ಲ್ಯಾಪ್ರೊಸ್ಕೋಪಿ / ಕ್ಯಾಮೆರಾ ಮೂಲ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ലാപ്രോസ്കോപ്പി / ക്യാമറ ഉറവിട പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(139, 'Biomedical', NULL, 1, 'Insoflator complaint', 'Insoflator complaint', 'isr729', 0, 'set7', 'ಇನ್ಸೋಫ್ಲೇಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഇൻസോഫ്ലേറ്റർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(140, 'Biomedical', NULL, 1, 'Light source complaint', 'Light source complaint', 'isr730', 0, 'set7', 'ಬೆಳಕಿನ ಮೂಲದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ലൈറ്റ് സോഴ്സ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(141, 'Biomedical', NULL, 1, 'Hormonic complaint', 'Hormonic complaint', 'isr731', 0, 'set7', 'ಹಾರ್ಮೋನಿಕ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഹോർമോണിക് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(142, 'Biomedical', NULL, 1, 'Litho complaint', 'Litho complaint', 'isr732', 0, 'set7', 'ಲಿಥೋ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ലിത്തോ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(143, 'Biomedical', NULL, 1, 'Mini autoclave complaint', 'Mini autoclave complaint', 'isr733', 0, 'set7', 'ಮಿನಿ ಆಟೋಕ್ಲೇವ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'മിനി ഓട്ടോക്ലേവ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(144, 'Biomedical', NULL, 1, 'Endoscope unit and leakage tester complaint', 'Endoscope unit complaint', 'isr734', 0, 'set7', 'ಎಂಡೋಸ್ಕೋಪ್ ಘಟಕ ಮತ್ತು ಸೋರಿಕೆ ಪರೀಕ್ಷಕ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എൻഡോസ്കോപ്പ് യൂണിറ്റും ലീക്കേജ് ടെസ്റ്ററും പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(145, 'Biomedical', NULL, 1, 'Endoscopy complaint', 'Endoscopy complaint', 'isr735', 0, 'set7', 'ಎಂಡೋಸ್ಕೋಪಿ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എൻഡോസ്കോപ്പി പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(146, 'Biomedical', NULL, 1, 'ERCP machine complaint', 'ERCP machine complaint', 'isr736', 0, 'set7', 'ERCP ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ERCP മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(147, 'Biomedical', NULL, 1, 'Colonoscopy complaint', 'Colonoscopy complaint', 'isr737', 0, 'set7', 'ಕೊಲೊನೋಸ್ಕೋಪಿ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'കൊളോനോസ്കോപ്പി പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(148, 'Biomedical', NULL, 1, 'Bronchoscopy complaint', 'Bronchoscopy complaint', 'isr738', 0, 'set7', 'ಬ್ರಾಂಕೋಸ್ಕೋಪಿ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ബ്രോങ്കോസ്കോപ്പി പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(149, 'Biomedical', NULL, 1, 'Fixed XRay complaint', 'Fixed XRay complaint', 'isr739', 0, 'set7', 'ಫಿಕ್ಸೆಡ್ XRay ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഫിക്സഡ് XRay പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(150, 'Biomedical', NULL, 1, 'CT machine complaint', 'CT machine complaint', 'isr740', 0, 'set7', 'CT ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'സിടി മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(151, 'Biomedical', NULL, 1, 'MRI machine complaint', 'MRI machine complaint', 'isr741', 0, 'set7', 'MRI ಯಂತ್ರದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എംആർഐ മെഷീൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(152, 'Biomedical', NULL, 1, 'Mobile XRay complaint', 'Mobile XRay complaint', 'isr742', 0, 'set7', 'ಮೊಬೈಲ್ ಎಕ್ಸ್ ರೇ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'മൊബൈൽ എക്സ്റേ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(153, 'Biomedical', NULL, 1, 'OPG-XRay complaint', 'OPG-XRay complaint', 'isr743', 0, 'set7', 'OPG-XRay ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'OPG-XRay പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(154, 'Biomedical', NULL, 1, 'CR system & printer complaint', 'CR system & printer complaint', 'isr744', 0, 'set7', 'CR ಸಿಸ್ಟಮ್ ಮತ್ತು ಪ್ರಿಂಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'CR സിസ്റ്റം & പ്രിന്റർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(155, 'Biomedical', NULL, 1, 'Injector complaint', 'Injector complaint', 'isr745', 0, 'set7', 'ಇಂಜೆಕ್ಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഇൻജക്ടർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(156, 'Biomedical', NULL, 1, 'TMT complaint', 'TMT complaint', 'isr746', 0, 'set7', 'TMT ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ടിഎംടിയുടെ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(157, 'Biomedical', NULL, 1, 'Ultrasound echo complaint', 'Ultrasound echo complaint', 'isr747', 0, 'set7', 'ಅಲ್ಟ್ರಾಸೌಂಡ್ ಎಕೋ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'അൾട്രാസൗണ്ട് എക്കോ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(158, 'Biomedical', NULL, 1, 'SEMI-Biochemistry complaint', 'SEMI-Biochemistry complaint', 'isr748', 0, 'set7', 'ಸೆಮಿ-ಬಯೋಕೆಮಿಸ್ಟ್ರಿ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'സെമി-ബയോകെമിസ്ട്രി പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(159, 'Biomedical', NULL, 1, 'Fully- Biochemistry complaint', 'Fully- Biochemistry complaint', 'isr749', 0, 'set7', 'ಫುಲ್ಲಿ- ಬಯೋಕೆಮಿಸ್ಟ್ರಿ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഫുള്ളി- ബയോകെമിസ്ട്രി പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(160, 'Biomedical', NULL, 1, 'S part cell counter complaint', 'S part cell counter complaint', 'isr750', 0, 'set7', 'ಎಸ್ ಭಾಗ ಸೆಲ್ ಕೌಂಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എസ് ഭാഗം സെൽ കൗണ്ടർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(161, 'Biomedical', NULL, 1, 'Urine analyser complaint', 'Urine analyser complaint', 'isr751', 0, 'set7', 'ಮೂತ್ರ ವಿಶ್ಲೇಷಕದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'യൂറിൻ അനലൈസർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(162, 'Biomedical', NULL, 1, 'Blood gas analyser complaint', 'Blood gas analyser complaint', 'isr752', 0, 'set7', 'ರಕ್ತ ಅನಿಲ ವಿಶ್ಲೇಷಕದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ബ്ലഡ് ഗ്യാസ് അനലൈസർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(163, 'Biomedical', NULL, 1, 'Coagulation analyser complaint', 'Coagulation analyser complaint', 'isr753', 0, 'set7', 'ಹೆಪ್ಪುಗಟ್ಟುವಿಕೆ ವಿಶ್ಲೇಷಕದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ശീതീകരണ അനലൈസർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(164, 'Biomedical', NULL, 1, 'HBA1C complaint', 'HBA1C complaint', 'isr754', 0, 'set7', 'HBA1C ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'HBA1C പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(165, 'Biomedical', NULL, 1, 'Blood mixer complaint', 'Blood mixer complaint', 'isr755', 0, 'set7', 'ರಕ್ತ ಮಿಕ್ಸರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ബ്ലഡ് മിക്സർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(166, 'Biomedical', NULL, 1, 'Centerfuge complaint', 'Centerfuge complaint', 'isr756', 0, 'set7', 'ಸೆಂಟರ್ಫ್ಯೂಜ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'സെന്റർഫ്യൂജ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(167, 'Biomedical', NULL, 1, 'Electrolites complaint', 'Electrolites complaint', 'isr757', 0, 'set7', 'ಎಲೆಕ್ಟ್ರೋಲೈಟ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഇലക്‌ട്രോലൈറ്റുകളുടെ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(168, 'Biomedical', NULL, 1, 'Microscope complaint', 'Microscope complaint', 'isr758', 0, 'set7', 'ಸೂಕ್ಷ್ಮದರ್ಶಕದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'മൈക്രോസ്കോപ്പ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(169, 'Biomedical', NULL, 1, 'EEG/ EMG complaint', 'EEG/EMG complaint', 'isr759', 0, 'set7', 'EEG/EMG ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'EEG/ EMG പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(170, 'Biomedical', NULL, 1, 'ENT workstation complaint', 'ENT workstation complaint', 'isr760', 0, 'set7', 'ENT ಕಾರ್ಯಸ್ಥಳದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ENT വർക്ക്സ്റ്റേഷൻ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(171, 'Biomedical', NULL, 1, 'Uro flowmeter complaint', 'Uro flowmeter complaint', 'isr761', 0, 'set7', 'ಉರೋ ಫ್ಲೋಮೀಟರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'യുറോ ഫ്ലോമീറ്റർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(172, 'Biomedical', NULL, 1, 'Ophthalmology unit complaint', 'Ophthalmology unit complaint', 'isr762', 0, 'set7', 'ನೇತ್ರ ಚಿಕಿತ್ಸಾ ಘಟಕದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഒഫ്താൽമോളജി യൂണിറ്റ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(173, 'Biomedical', NULL, 1, 'Dental chair complaint', 'Dental chair complaint', 'isr763', 0, 'set7', 'ದಂತ ಕುರ್ಚಿ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഡെന്റൽ ചെയർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(174, 'Biomedical', NULL, 1, 'Film scanner complaint', 'Film scanner complaint', 'isr764', 0, 'set7', 'ಫಿಲ್ಮ್ ಸ್ಕ್ಯಾನರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഫിലിം സ്കാനർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(175, 'Biomedical', NULL, 1, 'Instrument cleaner complaint', 'Instrument cleaner complaint', 'isr765', 0, 'set7', 'ಇನ್ಸ್ಟ್ರುಮೆಂಟ್ ಕ್ಲೀನರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഇൻസ്ട്രുമെന്റ് ക്ലീനറുടെ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(176, 'Biomedical', NULL, 1, 'XRay handheld complaint', 'XRay handheld complaint', 'isr766', 0, 'set7', 'XRay ಹ್ಯಾಂಡ್ಹೆಲ್ಡ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എക്സ്റേ ഹാൻഡ്ഹെൽഡ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(177, 'Biomedical', NULL, 1, 'Lazer system complaint', 'Lazer system complaint', 'isr767', 0, 'set7', 'ಲೇಜರ್ ಸಿಸ್ಟಮ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ലേസർ സിസ്റ്റം പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(178, 'Biomedical', NULL, 1, 'Air compressor complaint', 'Air compressor complaint', 'isr768', 0, 'set7', 'ಏರ್ ಕಂಪ್ರೆಸರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എയർ കംപ്രസർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(179, 'Biomedical', NULL, 1, 'Curing light(UV) complaint', 'Curing light(UV) complaint', 'isr769', 0, 'set7', 'ಕ್ಯೂರಿಂಗ್ ಲೈಟ್ (UV) ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ക്യൂറിംഗ് ലൈറ്റ് (UV) പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(180, 'Biomedical', NULL, 1, 'Endo motor complaint', 'Endo motor complaint', 'isr770', 0, 'set7', 'ಎಂಡೋ ಮೋಟಾರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'എൻഡോ മോട്ടോർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(181, 'Biomedical', NULL, 1, 'Implant unit complaint', 'Implant unit complaint', 'isr771', 0, 'set7', 'ಇಂಪ್ಲಾಂಟ್ ಘಟಕದ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'ഇംപ്ലാന്റ് യൂണിറ്റ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(182, 'Biomedical', NULL, 1, 'Sterlizer complaint', 'Sterlizer complaint', 'isr772', 0, 'set7', 'ಸ್ಟರ್ಲೈಸರ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'സ്റ്റെർലൈസർ പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(183, 'Biomedical', NULL, 1, 'UV cabinet complaint', 'UV cabinet complaint', 'isr773', 0, 'set7', 'ಯುವಿ ಕ್ಯಾಬಿನೆಟ್ ದೂರು', 'ಬಯೋಮೆಡಿಕಲ್', 'യുവി കാബിനറ്റ് പരാതി', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>'),
+(184, 'Biomedical', NULL, 1, 'Other biomedical issues', 'Other biomedical issues', 'isr774', 0, 'set7', 'ಇತರ ಬಯೋಮೆಡಿಕಲ್ ಸಮಸ್ಯೆಗಳು', 'ಬಯೋಮೆಡಿಕಲ್', 'മറ്റ് ബയോമെഡിക്കൽ പ്രശ്നങ്ങൾ', 'ബയോമെഡിക്കൽ', 1, '<i class=\"fa fa-heartbeat\" aria-hidden=\"true\"></i>')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO `department` (`dprt_id`, `name`, `description`, `dept_level_escalation`, `close_time`, `close_time_l2`, `status`, `slug`, `setkey`, `email`, `alternate_email`, `mobile`, `alternate_mobile`, `lastlogin`, `lastmodified`, `pname`, `password`, `type`) VALUES
+(1086, 'ECG complaint', 'Biomedical', '', '', '', 1, 'isr70', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1087, 'Patient monitor complaint', 'Biomedical', '', '', '', 1, 'isr71', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1088, 'Pulze oximeter complaint', 'Biomedical', '', '', '', 1, 'isr72', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1089, 'Nebulizer complaint', 'Biomedical', '', '', '', 1, 'isr73', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1090, 'Syringe pump complaint', 'Biomedical', '', '', '', 1, 'isr74', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1091, 'Infusion pump complaint', 'Biomedical', '', '', '', 1, 'isr75', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1092, 'Defibrillator complaint', 'Biomedical', '', '', '', 1, 'isr76', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1093, 'Ventilator complaint', 'Biomedical', '', '', '', 1, 'isr77', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1094, 'BIPAP complaint', 'Biomedical', '', '', '', 1, 'isr78', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1095, 'HFNC complaint', 'Biomedical', '', '', '', 1, 'isr79', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1096, 'Bubble CPAP complaint', 'Biomedical', '', '', '', 1, 'isr710', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1097, 'Infant ventilator complaint', 'Biomedical', '', '', '', 1, 'isr711', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1098, 'Dialysis machine complaint', 'Biomedical', '', '', '', 1, 'isr712', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1099, 'NST machine complaint', 'Biomedical', '', '', '', 1, 'isr713', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1100, 'Phototherapy complaint', 'Biomedical', '', '', '', 1, 'isr714', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1101, 'Baby warmer complaint', 'Biomedical', '', '', '', 1, 'isr715', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1102, 'Baby cridal complaint', 'Biomedical', '', '', '', 1, 'isr716', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1103, 'CATHLAB complaint', 'Biomedical', '', '', '', 1, 'isr717', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1104, 'IABP complaint', 'Biomedical', '', '', '', 1, 'isr718', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1105, 'C-ARM unit complaint', 'Biomedical', '', '', '', 1, 'isr719', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1106, 'Nurodrill complaint', 'Biomedical', '', '', '', 1, 'isr720', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1107, 'Cuttery machine complaint', 'Biomedical', '', '', '', 1, 'isr721', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1108, 'Anaesthesia complaint', 'Biomedical', '', '', '', 1, 'isr722', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1109, 'Tourniquet complaint', 'Biomedical', '', '', '', 1, 'isr723', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1110, 'Ortho drill complaint', 'Biomedical', '', '', '', 1, 'isr724', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1111, 'Micro motor complaint', 'Biomedical', '', '', '', 1, 'isr725', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1112, 'OT- light complaint', 'Biomedical', '', '', '', 1, 'isr726', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1113, 'OT- table complaint', 'Biomedical', '', '', '', 1, 'isr727', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1114, 'Laproscopy complaint', 'Biomedical', '', '', '', 1, 'isr728', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1115, 'Insoflator complaint', 'Biomedical', '', '', '', 1, 'isr729', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1116, 'Light source complaint', 'Biomedical', '', '', '', 1, 'isr730', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1117, 'Hormonic complaint', 'Biomedical', '', '', '', 1, 'isr731', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1118, 'Litho complaint', 'Biomedical', '', '', '', 1, 'isr732', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1119, 'Mini autoclave complaint', 'Biomedical', '', '', '', 1, 'isr733', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1120, 'Endoscope unit complaint', 'Biomedical', '', '', '', 1, 'isr734', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1121, 'Endoscopy complaint', 'Biomedical', '', '', '', 1, 'isr735', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1122, 'ERCP machine complaint', 'Biomedical', '', '', '', 1, 'isr736', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1123, 'Colonoscopy complaint', 'Biomedical', '', '', '', 1, 'isr737', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1124, 'Bronchoscopy complaint', 'Biomedical', '', '', '', 1, 'isr738', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1125, 'Fixed XRay complaint', 'Biomedical', '', '', '', 1, 'isr739', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1126, 'CT machine complaint', 'Biomedical', '', '', '', 1, 'isr740', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1127, 'MRI machine complaint', 'Biomedical', '', '', '', 1, 'isr741', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1128, 'Mobile XRay complaint', 'Biomedical', '', '', '', 1, 'isr742', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1129, 'OPG-XRay complaint', 'Biomedical', '', '', '', 1, 'isr743', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1130, 'CR system & printer complaint', 'Biomedical', '', '', '', 1, 'isr744', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1131, 'Injector complaint', 'Biomedical', '', '', '', 1, 'isr745', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1132, 'TMT complaint', 'Biomedical', '', '', '', 1, 'isr746', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1133, 'Ultrasound echo complaint', 'Biomedical', '', '', '', 1, 'isr747', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1134, 'SEMI-Biochemistry complaint', 'Biomedical', '', '', '', 1, 'isr748', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1135, 'Fully- Biochemistry complaint', 'Biomedical', '', '', '', 1, 'isr749', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1136, 'S part cell counter complaint', 'Biomedical', '', '', '', 1, 'isr750', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1137, 'Urine analyser complaint', 'Biomedical', '', '', '', 1, 'isr751', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1138, 'Blood gas analyser complaint', 'Biomedical', '', '', '', 1, 'isr752', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1139, 'Coagulation analyser complaint', 'Biomedical', '', '', '', 1, 'isr753', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1140, 'HBA1C complaint', 'Biomedical', '', '', '', 1, 'isr754', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1141, 'Blood mixer complaint', 'Biomedical', '', '', '', 1, 'isr755', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1142, 'Centerfuge complaint', 'Biomedical', '', '', '', 1, 'isr756', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1143, 'Electrolites complaint', 'Biomedical', '', '', '', 1, 'isr757', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1144, 'Microscope complaint', 'Biomedical', '', '', '', 1, 'isr758', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1145, 'EEG/EMG complaint', 'Biomedical', '', '', '', 1, 'isr759', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1146, 'ENT workstation complaint', 'Biomedical', '', '', '', 1, 'isr760', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1147, 'Uro flowmeter complaint', 'Biomedical', '', '', '', 1, 'isr761', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1148, 'Ophthalmology unit complaint', 'Biomedical', '', '', '', 1, 'isr762', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1149, 'Dental chair complaint', 'Biomedical', '', '', '', 1, 'isr763', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1150, 'Film scanner complaint', 'Biomedical', '', '', '', 1, 'isr764', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1151, 'Instrument cleaner complaint', 'Biomedical', '', '', '', 1, 'isr765', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1152, 'XRay handheld complaint', 'Biomedical', '', '', '', 1, 'isr766', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1153, 'Lazer system complaint', 'Biomedical', '', '', '', 1, 'isr767', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1154, 'Air compressor complaint', 'Biomedical', '', '', '', 1, 'isr768', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1155, 'Curing light(UV) complaint', 'Biomedical', '', '', '', 1, 'isr769', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1156, 'Endo motor complaint', 'Biomedical', '', '', '', 1, 'isr770', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1157, 'Implant unit complaint', 'Biomedical', '', '', '', 1, 'isr771', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1158, 'Sterlizer complaint', 'Biomedical', '', '', '', 1, 'isr772', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1159, 'UV cabinet complaint', 'Biomedical', '', '', '', 1, 'isr773', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr'),
+(1160, 'Other biomedical issues', 'Biomedical', '', '', '', 1, 'isr774', 'set7', NULL, NULL, NULL, NULL, NULL, '2024-09-30 10:52:36', NULL, NULL, 'esr')
+
+
+sort order in pcf
+change dietry to
+
+
+

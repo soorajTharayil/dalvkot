@@ -1,0 +1,74 @@
+{
+
+
+   
+   "patient_info":"URINARY CATHETER MAINTENANCE CHECKLIST",
+   
+   "patientname":"Patient Name",
+   "patient_name":"Enter Name",
+
+   "patientid":"Patient UHID",
+   "patient_name_placeholder":"Enter UHID",
+
+   "age": "Age",
+   "test_name_placeholder":"Enter age",
+   "department":"Designation",
+   "data_analysis":"Additional comments:",
+
+
+   "staffname":"Name of the assigned Nurse",
+   "staff_name_placeholder":"Enter name",
+
+   "audited_by":"Audited by",
+   "audited_by_placeholder":"Enter the name",
+
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of surgery",   
+   
+
+   "identification_details": "Is the balloon size adequate?",
+   "vital_signs": "Are appropriate hand hygiene and gloves used while handling the catheter or drainage bag?",
+   "surgery": "Are catheters properly secured to prevent movement and urethral traction?",
+   "complaints_communicated": "Is a sterile closed drainage system maintained?",
+   "intake":"Is good hygiene maintained at the catheter-urethral interface?",
+   "output":"Is urine flow unobstructed?",
+   "allergies":"Is the drainage bag maintained below the level of the bladder at all times?",
+   "medication":"Are indwelling catheters or drainage bags changed only when clinically indicated and not at arbitrary fixed intervals?",
+   "diagnostic":"If there are breaks in aseptic technique, disconnection, or leakage, is the catheter replaced using aseptic technique and sterile equipment?",
+   "lab_results":"Is periodical perineal and catheter care performed?",
+   "pending_investigation":"Is the urobag emptied every 6 hours?",
+   "medicine_order":"Is the patient assessed for any pain or discomfort?",
+   "facility_communicated":"Is the meatus inspected for redness, irritation, drainage, and documented?",
+   "health_education":"Is the catheter inspected where it enters the meatus for encrusted material and drainage?",
+   "risk_assessment":"Are any encrusted materials on the tubing removed?",
+
+
+   "meatus":"Is the meatus cleaned during daily bathing without using antiseptics?",
+   "tubing":"Is it ensured that the tubing does not go in and out of the urethra during cleaning?",
+   "sterile":"Is urine collected for culture using a sterile needle and syringe?"
+
+   
+
+
+
+
+
+
+   
+
+
+   
+}

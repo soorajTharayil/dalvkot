@@ -1,0 +1,380 @@
+Key,Value
+global_adf_feedback_ticket_escalation,ADF feedback ticket escalation
+global_sg_escalation,Grievance escalation
+sg_staff_grievances_dashboard,SG- STAFF GRIEVANCES DASHBOARD
+global_organization_logo,Organization Logo
+global_organization_name,Organization Name
+global_organization_id,Organization ID
+global_industry,Industry
+global_website,Website
+global_plan,Plan
+global_location,Location
+global_address,Address
+global_user_name,User Name
+global_contact_details,Contact Details
+global_user_role_access,User Role & Access	
+global_license_start,License Start Date
+global_license_exp,License Expiration Date
+global_remaining_days,Remaining Days for Expiry
+global_billing_cycle,Billing Cycle
+global_billing_staus,Billing Status
+global_product,Product
+global_modules_included,Modules Included
+global_usage_limit,Usage Limit
+global_general_setting,General Settings
+global_user_roles,Users and Roles
+global_supplementary_info,Supplementary Info
+global_manage_filter,Manage Filters(Floors/ Wards, Rooms, Specialities etc)
+global_ip_floors_wards,Inpatient Floors/ Wards
+global_op_specialitis,Outpatient specialities
+global_floors_sites_service,Floors & Sites for Service request
+global_manage_sla,Manage SLA(Escalation & TAT)
+global_ip_feedback_ticket_escalation,IP feedback ticket escalation
+global_op_feedback_ticket_escalation,OP feedback ticket escalation
+global_patient_complaint_esc,Patient complaints escalation
+global_isr_escalation,Internal service request escalation
+global_inc_escalation,Incident escalation
+global_employee_settings,Employee Settings(Service Request & Incident Module)
+global_employee_list,Employee list
+global_employee_job_roles,Employee job roles
+global_manage,Manage
+global_view,View
+global_view_list,View List
+global_configure_TAT,Configure TAT
+global_google_review_link,Google Review Link
+global_ip_feedback_link,IP Discharge Feedback Link
+global_op_feedback_link,Outpatient Feedback Link
+global_patient_cr_link,Patient Complaints & Request Link
+global_isr_link,Internal Service Request Link
+global_healthcare_inc_link,Healthcare Incident Link
+global_sg_link,Staff Grievance Link
+global_adf_feedback_link,Admission Feedback Link
+global_fc_link_ip,Feedback & complaint link for Inpatients
+global_quality_module_link,Quality module link for healthcare staffs
+global_android_app,Android APP(apk) 
+global_ip_qr_code,Inpatient QR Code
+global_op_qr_code,Outpatient QR Code
+global_ip_qr_code_poster,Inpatient QR Code poster
+global_op_qr_code_poster,Outpatient QR code poster
+global_fc_common_qr_code,Feedback & complaint common QR Code
+global_download,Download
+global_download_android_app,Download Android App
+global_add_employee,Add Employee
+global_import_employee,Import Employee
+global_employee_name,Employee Name
+global_employee_id,Employee ID
+global_phone_no,Phone Number
+global_role,Role
+global_date,Date
+global_login_pin,Login Pin
+global_edit,Edit
+global_delete,Delete
+global_slno,SL.NO
+global_floor_ward_name,Floor/ Ward Name
+global_short_name,Short Name
+global_action,Action
+global_add,Add
+global_speciality_name,Speciality Name
+global_enable_esc,Enable Escalation
+global_l1_esc,Level 1 Escalation
+global_time_until_esc_action,Time Until escalation action*
+global_esc_to,Escalate to*
+global_sms_alert,SMS Alert
+global_l2_esc,Level 2 Escalation
+global_demo_hospital,DEMO HOSPITAL(demo@vyko.com)
+global_department,Department
+global_parameter,Parameter
+global_tat_l1_esc,TAT for L1 Escalation
+global_submit,Submit
+global_tat_l2_esc,TAT for L2 Escalation
+global_list_of_speciality,LIST OF SPECIALITY
+global_manage_isr_f_w,MANAGE ISR FLOOR/WARDS
+global_manage_f_w,MANAGE FLOOR/WARDS
+global_ip_ticket_esc,IP- TICKET ESCALATION
+global_ip_ticket_esc,OP- TICKET ESCALATION
+global_manage_tat,Manage Turn Around Time
+global_pc_ticket_esc,PC- TICKET ESCALATION
+global_isr_ticket_esc,ISR- TICKET ESCALATION
+global_employee_list_h,EMPLOYEE LIST
+global_manage_staff_job_roles,MANAGE STAFF JOB ROLES
+global_admitted_patient_list,ADMITTED PATIENT LIST
+global_discharged_patient_list,DISCHARGED PATIENT LIST
+global_role_title,Role Title
+global_rooms_bed_no,Rooms/ Bed No.'s
+global_short_code,Short Code
+global_patients_name,Patients Name
+global_patients_id,Patients UHID
+global_mobile_no,Mobile No.
+global_email_alert,Email Alert
+global_email,Email
+global_ward,Ward
+global_select_ward,Select Ward
+global_bed_no,Bed No
+global_admitted_date,Admitted Date
+global_total_patients,Total Patients
+global_admitted_patients,Admitted Patients
+global_discharged_patients,Discharged Patients
+global_add_patient,Add Patient
+global_no_record_found,No Records Found!
+global_new_patient,New Patient
+global_phone,Phone
+global_discharge,Discharge
+global_with_msg,with message
+global_import_patient,Import Patient
+global_gender,Gender
+global_age,Age
+global_discharged_date,Discharged Date
+global_discharged_by,Discharged By
+global_message_status,Message status
+global_adf_feedbacks,ADMISSION FEEDBACKS
+global_ip_discharge_feedback,IP DISCHARGE FEEDBACKS
+global_ip_complaints,INPATIENT COMPLAINTS
+global_total_complaints,Total Complaints
+global_open_complaints,Open Complaints
+global_addressed_complaints,Addressed Complaints
+global_closed_complaints,Closed Complaints
+global_op_feedback,OUTPATIENT FEEDBACKS
+global_isr,INTERNAL REQUESTS
+global_total_requests,Total Requests
+global_open_requests,Open Requests
+global_addressed_requests,Addressed Requests
+global_closed_requests,Closed Requests
+global_inc,INCIDENTS
+global_total_inc,Total Incidents
+global_open_inc,Open Incidents
+global_addressed_inc,Addressed Incidents
+global_closed_inc,Closed Incidents
+global_sg,STAFF GRIEVANCES
+global_total_grievance,Total Grievances
+global_open_grievance,Open Grievances
+global_addressed_grievance,Addressed Grievances
+global_closed_grievance,Closed Grievances
+global_adf_tickets,ADMISSION TICKETS
+global_ip_tickets,IP DISCHARGE FEEDBACK TICKETS
+global_patient_complaints,INPATIENT COMPLAINTS
+global_op_tickets,OP FEEDBACK TICKETS
+global_open_tickets,Open Tickets
+global_addressed_tickets,Addressed Tickets
+global_closed_tickets,Closed Tickets
+global_name,Name
+global_alternate_email,Alternate Email
+global_mobile,Mobile
+global_alternate_mobile,Alternate Mobile
+global_password,Password
+global_user_role,User Role
+global_select_role,Select Role
+global_admin,Admin
+global_department_head,Department Head
+global_admission_section,Admission Section
+global_super_admin,Super Admin
+global_dashboard_access,DASHBOARD ACCESS
+global_adf_module,ADMISSION FEEDBACK MODULE
+global_ip_feedback_module,INPATIENT FEEDBACK MODULE
+global_ip_complaints_module,INPATIENT COMPLAINTS MODULE
+global_op_feedback_module,OUTPATIENT FEEDBACK MODULE
+global_isr_module,INTERNAL SERVICE REQUEST MODULE
+global_emp_exp_module,EMPLOYEE EXPERIENCE MODULE
+global_inc_module,INCIDENT MODULE
+global_sg_module,STAFF GRIEVANCE MODULE
+global_form_access,FORM ACCESS
+global_floorwise_access,FLOORWISE ACCESS
+global_sms_alert,SMS ALERTS
+global_adf_module_sms,ADMISSION MODULE SMS
+global_all_tickets,All Tickets
+global_weekly_feedback_report,Weekly Feedbacks Report.
+global_weekly_ticket_report,Weekly Tickets Report.
+global_weekly_nps_report,Weekly NPS Report.
+global_weekly_hs_analysis,Weekly Hospital Selection Analysis.
+global_weekly_tl_perf_parameters,Weekly Top & Least Performing Parameters
+global_weekly_r_analysis,Weekly Rating Analysis.
+global_montly_f_report,Monthly Feedbacks Report.
+global_monthly_t_report,Monthly Tickets Report.
+global_monthly_nps_report,Monthly NPS Report.
+global_monthly_hs_analysis,Monthly Hospital Selection Analysis.
+global_monthly_tl_perf_parameter,Monthly Top & Least Performing Parameters.
+global_monthly_r_analysis,Monthly Rating Analysis.
+global_ip_module_sms,INPATIENT MODULE SMS
+global_op_module_sms,OUTPATIENT MODULE SMS
+global_pcf_sms,PATIENT COMPLAINT SMS
+global_all_patient_complaints,All Patient Complaints.
+global_isr_sms,INTERNAL SERVICE SMS
+global_all_request_notification,All Request Notification
+global_inc_sms,INCIDENT SMS
+global_all_inc_notification,All Incident Notification
+global_sg_sms,GRIEVANCE SMS
+global_all_grievance_notification,All Grievance Notification
+global_email_alerts,EMAIL ALERTS
+global_adf_module_email,ADMISSION MODULE EMAILS
+global_daily_open_ticket,Daily Open Tickets.
+global_ip_module_email,INPATIENT MODULE EMAILS
+global_op_module_email,OUTPATIENT MODULE EMAILS
+global_pcf_email,PATIENT COMPLAINT 
+global_isr_email,INTERNAL SERVICE EMAILS
+global_inc_email,INCIDENT EMAILS
+global_sg_email,GRIEVANCE EMAILS
+global_admission_control,ADMISSION CONTROL
+global_patient_admission,PATIENT ADMISSION
+global_patient_discharge,PATIENT DISCHARGE
+global_all_access,ALL ACCESS
+global_department_head_adf_tickets,DEPARTMENT HEAD- ADMISSION TICKETS
+global_department_head_ipf_tickets,DEPARTMENT HEAD- INPATIENT FEEDBACK TICKETS
+global_department_head_opf_tickets,DEPARTMENT HEAD- OUTPATIENT FEEDBACK TICKETS
+global_department_head_ipc_tickets,DEPARTMENT HEAD- INPATIENT COMPLAINT TICKETS
+global_department_head_pcr,DEPARTMENT HEAD- PATIENT SERVICE REQUEST
+global_department_head_isr,DEPARTMENT HEAD- INTERNAL SERVICE REQUEST
+global_department_head_emp_exp,DEPARTMENT HEAD- EMPLOYEE EXPERIENCE
+global_department_head_inc_mgnt,DEPARTMENT HEAD- INCIDENT MANAGEMENT
+global_department_head_sg_tickets,DEPARTMENT HEAD- STAFF GRIEVANCE TICKETS
+global_adf_section,ADMISSION SECTION
+global_user_list,User List
+global_showing_data_from,SHOWING DATA FROM
+global_to,TO
+global_overall_f_report,OVERALL FEEDBACKS REPORT
+global_module,Module
+global_total_feedbacks,Total Feedbacks
+global_psat,PSAT
+global_nps,NPS
+global_total_tickets,Total Tickets
+global_admission_feedback,Admission Feedback
+global_inpatient_feedback,Inpatient Feedback
+global_otpatient_feedback,Outpatient Feedback
+global_total,TOTAL
+global_overall_ps_analysis,OVERALL PATIENT SATISFACTION ANALYSIS
+global_satisfied,Satisfied
+global_unsatisfied,Unsatisfied
+global_overall_np_analysis,OVERALL NET PROMOTER ANALYSIS
+global_promoters,Promoters
+global_passives,Passives
+global_detractors,Detractors
+global_overall_t_report,OVERALL TICKETS REPORT
+global_open,Open
+global_addressed,Addressed
+global_closed,Closed
+global_ticket_r_rate,Ticket Resolution Rate
+global_avg_r_time,Avg. Resolution Time
+global_inp_complaints,Inpatient Complaints
+global_ir_request,Internal Requests
+global_g_report,Grievance Reports
+global_efeedor_consolidated_hexpr,VYKO- CONSOLIDATED HEALTHCARE EXPERIENCE REPORT
+global_incidents,Incidents
+global_attenction_pct,Attention: Ticket PCT-
+global_open_tat_limit,Still Open Approaching TAT Limit in
+global_click_to_view,Click to view more.
+global_at,at
+global_from,From
+global_no_data,No data
+global_filter,Filters
+global_apply_filters,Apply Filters
+global_showing,Showing
+global_overall_summary,OVERALL SUMMARY
+global_ipd_feedback,INPATIENT DISCHARGE FEEDBACKS
+global_inc_reoprt,INCIDENTS REPORT
+global_sg_report,GRIEVANCES REPORT
+global_dsf_report,DISCHARGE FEEDBACK REPORT
+global_inc_report,INCIDENT TICKETS
+global_last_24_hours,Last 24 Hours
+global_last_7_days,Last 7 Days
+global_last_30_days,Last 30 Days
+global_last_90_days,Last 90 Days
+global_last_365_days,Last 365 Days
+global_custom,Custom
+global_speciality,Speciality
+global_floor_ward,Floor/Ward
+global_all,ALL
+global_reset,RESET
+global_close,Close
+global_sgc_report,STAFF GRIEVANCES REPORT
+global_sgs_tickets,STAFF GRIEVANCES TICKETS
+global_period,Period
+global_login_efeedor_patient_exp,Login - Vyko Healthcare Experience Platform
+global_login_to_access_dash,Login to access Vyko dashboard
+global_login,Login
+global_patient_efeedor_exp,Vyko Healthcare Experience Platform
+global_overall_summary_s,Overall Summary
+global_modules,Modules
+global_admission_feedbacks,Admission Feedbacks
+global_ipd_feedbacks,IP Discharge Feedbacks
+global_ops_feedbacks,OP Feedbacks
+global_incs_report,Incidents Report
+global_sgs_report,Staff Grievances Report
+global_dashboard,Dashboard
+global_tickets,Tickets
+global_ticket_dashboard,Tickets Dashboard
+global_feedback_report,Feedback Report
+global_staff_appreciation,Staff Appreciation
+global_capa_report,CAPA Report
+global_analytics,Analytics
+global_reports,Reports
+global_patient_s_complaints,Patient Complaints
+global_all_complaints,All Complaints
+global_search_complaint,Search Complaint
+global_action_report,Action Report
+global_request_dashboard,Requests Dashboard
+global_all_requests,All Requests
+global_search_requests,Search Requests
+global_inc_dash,Incidents Dashboard
+global_all_inc,All Incidents
+global_search_inc,Search Incidents
+global_sgs,Staff Grievances
+global_grievances_dash,Grievances Dashboard
+global_all_gs,All Grievances
+global_search_grievances,Search Grievances
+global_org_profile,Organization Profile
+global_app_setting,Application Settings
+global_manage_sub,Manage Subscription
+global_your_downloads,Your Downloads
+global_ticket_dash,Ticket Dashboards
+global_adfs_tickets,Admission Tickets
+global_ips_tickets,IP Discharge Tickets
+global_ops_tickets,OP Tickets
+global_gievance_ticket,Grievance Tickets
+global_grievance_dash,Grievance Dashboard
+global_all_g,All Grievance
+global_open_g,Open Grievance
+global_closed_g,Closed Grievance
+global_ip_list,InPatients List
+global_dis_ip,Discharged InPatients
+global_consolidated_report,Consolidated Report
+global_archive_data,Archive Data
+global_admit_patient,Admit Patient
+global_toogle_navi,Toggle navigation
+global_efeedor_patient_exp,VYKO HEALTHCARE EXPERIENCE PLATFORM
+global_efeedor_patient_exp_tooltip,VYKO HEALTHCARE EXPERIENCE PLATFORM
+global_if_an_org_emp,If you are an organisation employee,
+global_view_more_con,to view more controls
+global_select_your_data_range,Select your Date range to view the time-based report.
+global_from_date,From Date
+global_to_date,to Date
+global_search,Search
+global_no_feedback,No Feedbacks
+global_view_all,View All
+global_service_raised_by,Service Request raised by
+global_for,for
+global_complaint_raised_by,Complaint raised by
+global_no_complaints,No Complaints
+global_inc_reported_by,Incident reported by
+global_on,on
+global_grievance_reported_by,Grievance reported by
+global_sfrom,from
+global_complaint_dash,Complaints Dashboard
+global_settings,Settings
+global_your_dep,Your Departments
+global_showing_datafrom,Showing data from
+global_click_to_download_tooltip,Click on the download icon to download the reports.
+global_last_month,Last Month
+global_this_month,This Month
+global_all_downloads,Downloads
+global_pdf_discharge_feedback,POST DISCHARGE FEEDBACK
+global_pdf_feedbacks,Post Discharge Feedback
+global_pdf_complaints,POST DISCHARGE FEEDBACK
+global_pdf_tickets,POST DISCHARGE TICKETS
+global_post_feedback,Post Discharge Feedback
+global_pdf_ticketss,Post Discharge Tickets
+global_admission_section_op,Outpatient Section
+global_admit_patient_op,Add Outpatient 
+global_ip_list_op,Active Outpatients List
+global_dis_op,Former Outpatients List
+global_admitted_patients_op,Active Outpatients
+global_discharged_patients_op,Former Outpatients
+global_total_patients_op,Total Outpatients
+global_add_patient_op,Add Outpatients

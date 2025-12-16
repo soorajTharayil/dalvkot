@@ -1,0 +1,78 @@
+{
+
+
+   "reg_mobile":"Verify your identity",
+   "reg_mobile_message":"Please provide the details requested below to proceed. Ensure that the information you provide is associated with your employment data.",
+   "reg_mobile_message_placeholder":"Enter mobile number or email id",
+   "pin":"Enter PIN",
+   "pin_placeholder":"Enter 4 digits PIN",
+   "login":"Login to proceed",
+   "forgot":"Forgot PIN?",
+   "refresh": "Register another request",
+   "image":"Attach image",
+   "patientid": "Asset Code/ ID",
+   "enter_patientid": "Enter asset code",
+
+   "forgot_heading":"Forgot your PIN?",
+   "forgot_mainforgot":"Please enter your mobile number or email address associated with your employee information to regenerate a new 4 digit PIN.",
+   "forgot_mainresend":"Please enter your mobile number or email address associated with your employee information to resend the PIN.",
+   "forgot_mainplaceholder":"Enter mobile number or email id",
+   "nodata":"No data found",
+   "forgot_alert":"Please enter a valid mobile number or email",
+   "sentpin":"Send PIN",
+   "new_pin":"A newly generated PIN has been sent to your mobile number and email.",
+   "new_resentpin":"Your 4-digit PIN has been sent to your mobile number and email.",
+   "tooltip":"Please use the 4-digit PIN you have received via SMS or email.",
+
+
+   "employee_info":"INTERNAL SERVICE REQUEST",
+   "employeename":"Employee name",
+   "employee_name_placeholder":"Enter your name ",
+   "employeeid":"Employee ID",
+   "enter_placeholder":"Enter Employee ID",
+   "wardtitle": "Select your role",
+   "mobileno":"Mobile No",
+   "mobile_placeholder":"Enter your 10 digit mobile number",
+   "role":"Select employee role",
+   "showrole":"Employee role",
+
+   "floor":"Select Floor/Ward",
+   "showfloor":"Floor/Ward",
+   "location":"Select Site",
+   "showlocation":"Site",
+   "priority":"Select Priority",
+   "showpriority":"Priority",
+   
+   "raised":"Request reported by",
+   "recieved":"Request reported in",
+   "detail":"Service request details",
+   "showmobileno":"Mobile number",
+   "showemail":"Email ID",
+
+   
+   "gustmessageint": "Please select the category that best matches your concern or request",
+   "goodmorning": "Good morning!",
+   "goodafternoon": "Good afternoon!",
+   "goodevening": "Good evening!",
+
+   "mainSearch": "Search or type your concern here",
+   "chooseCategory": "Select your category",
+   "submission_pat_details": "Review your details before submission",
+   "SelectedCategory": "Category",
+   "concern_request": "Service request",
+   "issue_optional_title": "Please describe",
+   "issue_optional_desc": "Provide additional details or context to enhance clarity",
+
+   "pagetitle":"INTERNAL SERVICE REQUEST",
+   "telluswrong":"Tell us what went wrong in ",
+
+   "thankyou":"Thank you!",
+   "thankyoumessage":"Your request is registered with us.",
+
+   "next":"Next",
+   "previous":"Back",
+   "submit":"Submit"
+
+  
+   
+}

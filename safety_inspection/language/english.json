@@ -1,0 +1,222 @@
+{
+
+
+   "reg_mobile":"Registered Mobile Number",
+   "reg_mobile_message":"Please provide your 10 digit registered mobile number to proceed",
+   "reg_mobile_message_placeholder":"Enter your mobile number",
+
+   "patient_info":"FACILITY SAFETY INSPECTION CHECKLIST & AUDIT",
+   "patientname":"Patient Name",
+   "patient_name_placeholder":"Enter your name ",
+   "patientid":"Patient UHID",
+   "staff_name": "Staff Name",
+   "enter_placeholder":"Enter UHID",
+   "wardtitle": "Select Floor/Ward",
+   "mobileno":"Mobile No",
+   "email":"Email ID",
+   "emailid":"Enter Email ID",
+   "mobile_placeholder":"Enter your 10 digit mobile number",
+   "bedno": "Room/Bed number",
+   "consultant": "Primary Consultant",
+   "speciality": "Speciality",
+   "patient_category": "Patient Category",
+
+   "pagetitle":"IP DISCHARGE FEEDBACK FORM",
+   "gustname":"Dear ",
+   "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
+   "excellent":"Excellent",
+   "good":"Good",
+   "average":"Average",
+   "poor":"Poor",
+   "worst":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+   "depart": "Select Department",
+
+   "recommendationmessage":"On a scale from 0-10, how likely are you to recommend this hospital to your friends or family members?",
+   "yourreason":"Your reason for selecting our hospital",
+   "location":"Select Location/Site",
+   "specificservices":"Specific services offered",
+   "referredbydoc":"Referred by doctor",
+   "friendfamily":"Friend/Family recommendation",
+   "previousexp":"Previous experience",
+   "yourdoctor":"Insurance facilities",
+   "companyreco":"Company recommendation",
+   "other":"Print/Online media",
+   "stafrecognition":"Staff recognition:",
+   "recognizeateam":"Please help us recognize a staff member of our hospital who may have performed services beyond your expectations.",
+   "staffname":"Staff name",
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "file_audit":"MRD File Audit",
+   "kpi_info": "1. PSQ3a - Time taken for initial assessment of indoor patients",
+   "definition": "Definition : ",
+   "kpi_def": "The time shall begin from the time that the patient has arrived at the bed of the ward till the time that the initial assessment has been completed by a doctor",
+   "formula_para1": "Time at which patient got admitted (in 24hr format) ",   
+   "hr_placeholder":"Hr",
+   "min_placeholder": "Min",
+   "sec_placeholder": "Sec",
+   "formula_para2": "Time at which the doctor completed initial assessment (in 24hr format) ",
+   "formula_para2_placeholder": "No. of admissions",
+   "data_analysis": "Additional comments:",
+   "corrective_action": "Corrective action",
+   "preventive_action": "Preventive action",
+   "doctor_advice":"Time at which doctor adviced discharge (in 24hr format) ",
+   "bill_paid":"Time at which bill paid (in 24hr format) ",
+   "time_for_discharge":"Time taken for discharge",
+   "consent": "Consent Verified",
+   "discharge_summary": "Discharge summary available?",
+   "error_prone": "Error-prone abbreviation",
+
+
+   "obstruction": "Is the area free of obstruction?",
+   "slippery": "Are the step surfaces slippery?",
+   "rails": "Are the stairs and grab rails in good condition?",
+
+   "floors_slip": "Are the floors slippery?",
+   "avoid_falls":"Are the floors free of liquids to avoid trips and falls?",
+   "carpet":"Is the carpet intact?",
+   "warning_signages":"Are warning signages placed wherever necessary?",
+
+
+   "natural_light": "Is there good natural lighting?",
+   "illumination": "Is there adequate illumination?",
+   "glare": "Is there direct or reflected glare?",
+   "night_lights": "Are night lights fitted and in good condition?",
+
+   "plug_points": "Are there adequate plug points?",
+   "cords_damaged": "Are the power cords frayed or damaged?",
+   "cables_exposed": "Are the electric cables exposed?",
+   "safety_mats": "Are adequate safety mats placed in electrical areas?",
+   "fire_prevent": "Are enough precautions taken to prevent fire?",
+   "cords_conditions": "Are plugs and cords in good condition?",
+
+   "sufficient_oxygen": "Is there sufficient oxygen in the cylinders?",
+   "ro_water": "Is the RO water changed regularly and dated?",
+   "cylinder_chart": "Is there an oxygen cylinder monitoring chart?",
+   "cylinder_stand": "Is there a trolley/stand provided for the oxygen cylinder?",
+
+   "containers_coded": "Are the containers color-coded?",
+   "containers_closed": "Are the containers closed?",
+   "biohazard": "Is the bio-hazard symbol present on the containers?",
+   "segregation": "Is waste segregation according to the color code?",
+   "containers_fill": "Are the containers less than 3/4 filled up?",
+
+   "kit_accessible": "Is the spill kit readily accessible?",
+   "items_present": "Are all items present?",
+   "staff_knowledge": "Is the knowledge of staff adequate?",
+
+   "vial_needle": "Is there no needle kept in the vial?",
+   "opening_date": "Is the date of opening recorded?",
+   "storage": "Is the storage under proper conditions?",
+   "vial_expire": "Is the vial not expired?",
+
+   "temperature_chart": "Is there a temperature monitoring chart?",
+   "temperature_limits": "Is the temperature within normal limits?",
+   "freezing_done": "Is de-freezing done regularly?",
+   "medical_items": "Are there no non-medical items in the refrigerator?",
+   "expired_medicine": "Are there no expired/over-dated medicines in the refrigerator?",
+
+   "medicines_avail": "Are all medicines as per the list available?",
+   "medicines_near_exp": "Are the medicines within 2 months of expiry or near expiry?",
+   "overdated": "Are there no expired or over-dated medicines?",
+   "extra_medicines": "Are additional or extra medicines present (mismatches in the stock)?",
+
+   "hazardous_material": "Is the material safety data sheet available for all hazardous material used?",
+   "msds_sheet": "Are employees trained on how to locate, read, and understand an MSDS sheet?",
+   "workplace_storage": "Is the storage of minimal quantities in the workplace maintained?",
+
+   "extinguishers_accessible": "Are fire extinguishers easily accessible?",
+   "extinguishers_avail": "Are the fire extinguishers available in the area expired?",
+   "safety_trained": "Are the staff trained on fire safety?",
+   "exit_route": "Is the exit route free of obstacles?",
+   "fire_doors": "Are the fire doors open?",
+   "extinguishers_maintained": "Are the fire extinguishers properly maintained (checklist)?",
+   "exit_signages": "Are the fire exit signages placed?",
+
+   "use_ppe": "Is there the use of adequate PPE in the workplace?",
+   "staff_trained": "Are the staff trained in the proper use of PPE?",
+   "safety_devices": "Is the use of appropriate safety measures/devices in the workplace maintained?",
+
+   "work_station_neat": "Is the work station and entire premises neat and tidy?",
+   "cleaning_checklist": "Is the cleaning checklist maintained?",
+   "equipment_accidents": "Is the placement of furniture, overhead storage, equipment, etc. likely to cause accidents?",
+   "washrooms_clean": "Are the washrooms clean?",
+   "washroom_checklist": "Are the washroom checklists maintained?",
+
+   "equipment_numbered": "Are all equipment numbered?",
+   "log_sheet": "Is the equipment log sheet available?",
+   "equipment_maintain": "Are the equipment maintained in working condition?",
+   "assets_numbered": "Are the fixed assets numbered?",
+   "asset_register": "Is the asset register maintained?",
+   "complaint_updated": "Is the complaint register updated?",
+   "periodic_maintain": "Are periodic maintenance performed?",
+
+   "patient_right_visible":"Are the patient rights and responsibilities visible?",
+   "signages_placed":"Are the signages properly placed?",
+   "mission":"Are the mission and vision properly placed?",
+
+   "bm_waste_store":"Is the BM waste properly stored?",
+   "bm_waste_record":"Are the BM waste's weight and bag number properly recorded?",
+   "storage_area":"Is the storage area clean and maintained?",
+
+   "enough_water":"Is enough water stored?",
+   "tank_cleaning":"Is the tank cleaning checklist maintained?",
+   "plant_maintain":"Is the RO plant maintenance checklist maintained?",
+
+   "transformer_status": "Is the status of the transformer documented?",
+   "generators_status": "Is the status of backup generators documented?",
+   "electrical_areas": "Are adequate safety mats placed in electrical areas?",
+   "electrical_boxes": "Are all electrical boxes, ELCBs properly maintained?",
+   "precautions_to_fire": "Are enough precautions taken to prevent fire?",
+
+   "cylinders_chained":"Are the cylinders properly chained in storage areas?",
+   "empty_cylinders":"Can empty/full cylinders be easily identified?",
+   "warning_signage":"Are warning signages placed wherever necessary?"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+}

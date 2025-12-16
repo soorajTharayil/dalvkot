@@ -1,0 +1,55 @@
+{
+
+
+   "reg_mobile":"ನೋಂದಾಯಿತ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+   "reg_mobile_message":"ಮುಂದುವರಿಯಲು ದಯವಿಟ್ಟು ನಿಮ್ಮ ೧0 ಅಂಕಿಯ ನೋಂದಾಯಿತ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಒದಗಿಸಿ",
+   "reg_mobile_message_placeholder":"ನಿಮ್ಮ ಮೊಬೈಲ್ ನಂಬರನ್ನು ನಮೂದಿಸಿರಿ",
+
+   "patient_info":"ರೋಗಿಯ ಮಾಹಿತಿ",
+   "patientname":"\u0cb0\u0ccb\u0c97\u0cbf\u0caf \u0cb9\u0cc6\u0cb8\u0cb0\u0cc1",
+   "patient_name_placeholder":"ನಿಮ್ಮ ಹೆಸರು ಇಲ್ಲಿ",
+   "patientid":"\u0cb0\u0ccb\u0c97\u0cbf\u0caf \u0c90 \u0ca1\u0cbf",
+   "enter_placeholder":" UHID ನಮೂದಿಸಿ",
+   "wardtitle": "ಮಹಡಿ/ವಾರ್ಡ್",
+   "mobileno":"\u0ca6\u0cc2\u0cb0\u0cb5\u0cbe\u0ca3\u0cbf \u0cb8\u0c82\u0c96\u0ccd\u0caf\u0cc6",
+   "mobile_placeholder":"ನಿಮ್ಮ ೧0 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
+   "bedno": "ಕೊಠಡಿ / ಬೆಡ್ ಸಂಖ್ಯೆ",
+   
+   "pagetitle":"ಪ್ರವೇಶ ಪ್ರತಿಕ್ರಿಯೆ ಫಾರ್ಮ್",
+   "gustname":"\u0c86\u0ca4\u0ccd\u0cae\u0cc0\u0caf",
+   "gustmessage":"ನಿಮ್ಮ ಆರೋಗ್ಯ ಅಗತ್ಯಗಳಿಗಾಗಿ ನಮ್ಮ ಆಸ್ಪತ್ರೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು. ನಿಮ್ಮ ನಿರೀಕ್ಷೆಗಳನ್ನು ಸತತವಾಗಿ ಪೂರೈಸುವ ಮತ್ತು ಮೀರುವ ನಮ್ಮ ಪ್ರಯತ್ನದಲ್ಲಿ, ನಿಮ್ಮ ಆಸ್ಪತ್ರೆಯ ವಾಸ್ತವ್ಯದ ಮೊದಲ ದಿನದ ಅನುಭವಗಳ ಕುರಿತು ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಲು ಕೇವಲ ಎರಡು ನಿಮಿಷಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುವಂತೆ ನಾವು ನಿಮ್ಮನ್ನು ವಿನಂತಿಸುತ್ತೇವೆ.",
+   "excellent":"ಅತ್ತ್ಯುತ್ತಮ",
+   "good":"ಉತ್ತಮ",
+   "average":"ಸರಾಸರಿ",
+   "poor":"ಕಳಪೆ",
+   "worst":"ತುಂಬಾ ಕಳಪೆ",
+   "badreviewtitle":"\u0c95\u0cc6\u0cb3\u0c97\u0cbf\u0ca8\u0cb5\u0cc1\u0c97\u0cb3\u0cbf\u0c97\u0cc6 \u0ca8\u0c95\u0cbe\u0cb0\u0cbe\u0ca4\u0ccd\u0cae\u0c95 \u0cb0\u0cc7\u0c9f\u0cbf\u0c82\u0c97\u0ccd \u0ca8\u0cc0\u0ca1\u0cb2\u0cc1 \u0ca8\u0cbf\u0cae\u0ccd\u0cae \u0c95\u0cbe\u0cb0\u0ca3\u0cb5\u0ca8\u0ccd\u0ca8\u0cc1 \u0ca6\u0caf\u0cb5\u0cbf\u0c9f\u0ccd\u0c9f\u0cc1 \u0ca8\u0cae\u0c97\u0cc6 \u0ca4\u0cbf\u0cb3\u0cbf\u0cb8\u0cbf:",
+   "previous":"ಹಿಂದಿನ",
+   "next":"\u0cae\u0cc1\u0c82\u0ca6\u0cbf\u0ca8",
+   "optional":"ದಯವಿಟ್ಟು ವಿವರಿಸಿ (ಐಚ್ಛಿಕ)",
+   "telluswrong":"ಏನು ತಪ್ಪಾಗಿದೆ ಎಂದು ನಮಗೆ ತಿಳಿಸಿ",
+
+
+   "recommendationmessage":"0-10 ರಿಂದ, ಈ ಆಸ್ಪತ್ರೆಯನ್ನು ನಿಮ್ಮ ಸ್ನೇಹಿತರು ಅಥವಾ ಕುಟುಂಬ ಸದಸ್ಯರಿಗೆ ಶಿಫಾರಸು ಮಾಡಲು ನೀವು ಎಷ್ಟು ಸಾಧ್ಯ?",
+   "yourreason":"\u0ca8\u0cae\u0ccd\u0cae \u0c86\u0cb8\u0ccd\u0caa\u0ca4\u0ccd\u0cb0\u0cc6 \u0c86\u0caf\u0ccd\u0c95\u0cc6\u0c97\u0cc6 \u0ca8\u0cbf\u0cae\u0ccd\u0cae \u0c95\u0cbe\u0cb0\u0ca3\u00a0",
+   "location":"\u0cb8\u0ccd\u0ca5\u0cb3",
+   "specificservices":"\u0ca8\u0cbf\u0cb0\u0ccd\u0ca7\u0cbf\u0cb7\u0ccd\u0c9f \u0cb8\u0cc7\u0cb5\u0cc6\u0c97\u0cb3\u0cc1\u00a0",
+   "referredbydoc":"\u0cb5\u0cc8\u0ca6\u0ccd\u0caf\u0cb0\u0cbf\u0c82\u0ca6 \u0c89\u0cb2\u0ccd\u0cb2\u0cc7\u0c96\u0cbf\u0cb8\u0cb2\u0cbe\u0c97\u0cbf\u0ca6\u0cc6",
+   "friendfamily":"\u0cb8\u0ccd\u0ca8\u0cc7\u0cb9\u0cbf\u0ca4\u0cb0\u0cc1\/ \u0cb8\u0c82\u0cac\u0c82\u0ca6\u0cbf\u0c95\u0cb0 \u0cb6\u0cbf\u0cab\u0cbe\u0cb0\u0cb8\u0ccd\u0cb8\u0cc1",
+   "previousexp":"\u0cb9\u0cbf\u0c82\u0ca6\u0cbf\u0ca8 \u0c85\u0ca8\u0cc1\u0cad\u0cb5",
+   "yourdoctor":"ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮಾ ಸೌಲಭ್ಯಗಳು",
+   "companyreco":"ಕಂಪನಿ ಶಿಫಾರಸ್ಸು",
+   "other":"ಮುದ್ರಣ/ ಆನ್‌ಲೈನ್ ಮಾಧ್ಯಮ",
+   "stafrecognition":"\u0cb8\u0cbf\u0cac\u0ccd\u0cac\u0c82\u0ca6\u0cbf \u0c89\u0ca4\u0ccd\u0ca4\u0cc7\u0c9c\u0ca8\u00a0",
+   "recognizeateam":"ನಿಮ್ಮ ನಿರೀಕ್ಷೆಗೆ ಮೀರಿ ಸೇವೆಗಳನ್ನು ಮಾಡಿದ ನಮ್ಮ ಆಸ್ಪತ್ರೆಯ ಸಿಬ್ಬಂದಿಯನ್ನು ಗುರುತಿಸಲು ದಯವಿಟ್ಟು ನಮಗೆ ಸಹಾಯ ಮಾಡಿ.",
+   "staffname":"ಸಿಬ್ಬಂದಿ ಹೆಸರು",
+   "feedbacksuggestion":"ಇತರ ಪ್ರತಿಕ್ರಿಯೆಗಳು / ಸಲಹೆಗಳು?",
+
+   "submit":"\u0cb8\u0cb2\u0ccd\u0cb2\u0cbf\u0cb8\u0cbf",
+   "thankyou":"ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ನೀಡಲು ಸಮಯ ತೆಗೆದುಕೊಂಡಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.",
+   "happythankyoumessage":" ಕೆಳಗಿನ ಲಿಂಕ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡುವ ಮೂಲಕ ದಯವಿಟ್ಟು ನಮ್ಮ ಗೂಗಲ್ ವಿಮರ್ಶೆ ಪುಟದಲ್ಲಿ ನಮ್ಮನ್ನು ರೇಟ್ ಮಾಡಿ.",
+   "unhappythankyoumessage":"ನಿಮ್ಮ ನಿರೀಕ್ಷೆಗಳನ್ನು ಪೂರೈಸದಿದ್ದಕ್ಕಾಗಿ ನಾವು ಪ್ರಾಮಾಣಿಕವಾಗಿ ಕ್ಷಮೆಯಾಚಿಸುತ್ತೇವೆ. ನಿಮ್ಮ ವಿಶ್ವಾಸವನ್ನು ಮರಳಿ ಪಡೆಯಲು ನಾವು ಬಯಸುತ್ತೇವೆ. ನಮ್ಮ ಕಾರ್ಯನಿರ್ವಾಹಕರು ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತಾರೆ."
+   
+
+
+}

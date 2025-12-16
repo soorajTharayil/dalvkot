@@ -1,0 +1,159 @@
+Key,Value
+op_all_feedbacks_dashboard,OP- FEEDBACKS DASHBOARD
+op_all_feedbacks_report,OP- ALL FEEDBACKS REPORT
+op_satisfied_patient_list,OP- SATISFIED PATIENTS LIST
+op_unsatisfied_patient_list,OP- UNSATISFIED PATIENTS LIST
+op_psat_analysis,OP- PSAT ANALYSIS
+op_nps_analysis,OP- NPS ANALYSIS
+op_nps_promoter_list,OP- NPS PROMOTERS LIST
+op_nps_detractors_list,OP- NPS DETRACTORS LIST
+op_nps_passives,OP- NPS PASSIVES LIST
+op_ticket_dashboard,OP- TICKETS DASHBOARD
+op_all_tickets,OP- ALL TICKETS
+op_open_tickets,Open Tickets
+op_op_addressed_tickets,OP- ADDRESSED TICKETS
+op_closed_tickets,Closed Tickets
+op_capa_report,OP- CAPA REPORT
+op_ticket_resolution_rate,Ticket Resolution Rate
+op_average_resolution_time,Average resolution time
+op_total_feedbacks,Total Feedbacks
+op_total_feedbacks_tooltip,Total patient feedback response received during the selected period.
+op_psat_satisfied,Satisfied Patients
+op_psat_satisfied_tooltip,Patients who rated above average and do not have any negative experience.
+op_psat_unsatisfied,Unsatisfied Patients
+op_psat_unsatisfied_tooltip,Patient who rated below average and have one or more negative experiences.
+op_total_tickets,Total Tickets
+op_total_tickets_tooltip,Total no. of negative ratings received during the selected period.
+op_psat,PSAT
+op_psat_tooltip,The PSAT is a metric that indicates how satisfied patients are with the services they have received from you.
+op_nps,NPS
+op_nps_tooltip,NPS is a metric used to measure patient loyalty and also to understand how much your patients like your services and whether they are willing to recommend them to others.
+op_ticket_resolution_rate_tooltip,Metric used to measure the efficiency and effectiveness of the team to close the negative feedbacks.
+op_average_resolution_time,Average Resolution Time
+op_average_resolution_time_tooltip,The average amount of time taken by the team to close the tickets.
+op_open_tickets_tooltip,Number of tickets yet to be addressed or closed.
+op_addressed_tickets,Addressed tickets
+op_addressed_tickets_tooltip,Number of tickets addressed with the first response.
+op_closed_tickets_tooltip,Number of tickets resolved.
+op_satisfied_patients,Satisfied Patients
+op_unsatisfied_patients,Unsatisfied Patients
+op_promoters,Promoters
+op_detractors,Detractors
+op_passives,Passives
+op_key_takeaways,Key Takeaways
+op_key_takeaways_tooltip,AI-generated recommendations highlighting key insights based on rating scores and negative feedback received for the category.
+op_patient_feedbacks_analysis,Patient Feedbacks Analysis
+op_patient_feedbacks_analysis_tooltip,Bar chart representing rating performance of each touchpoints throughout the patient journey.
+op_patient_satisfaction_analysis,Patient Satisfaction Analysis
+op_patient_satisfaction_analysis_tooltip,Graph showcasing fluctuations or improvements in the Patient's Satisfaction Score(PSAT) over continuous time intervals.
+op_netpromoter_analysis,Net Promoter Analysis
+op_netpromoter_analysis_tooltip,Graph showcasing variations in the NPS score over continuous time intervals.
+op_tickets_received_by_department,Tickets Received By Department
+op_tickets_received_by_department_tooltip,This Pie chart shows how the tickets are divided into various categories and what percentage of each department tickets contributes to the total.
+op_recent_patient_feedbacks,Recent Patient Feedbacks
+op_recent_patient_feedbacks_tooltip,List of recent patient feedbacks during the selected period
+op_hospital_selection_analysis,Hospital Selection Analysis
+op_hospital_selection_analysis_tooltip,Chart to analyze patients coming to the hospital through various sources.
+op_recent_patient_comments,Recent Patient Comments
+op_recent_patient_comments_tooltip,List of recent patient comments during the selected period.
+op_tickets_recived_by_department,Tickets Received By Department
+op_tickets_recived_by_department_tooltip,This Pie chart shows how the tickets are divided into various categories and what percentage of each department tickets contributes to the total feedback tickets
+op_recent_tickets,Recent Tickets
+op_recent_tickets_tooltip,List of recent tickets for the selected period
+op_patient_name,Patient Name
+op_patient_id,Patient ID
+op_floor_ward,Floor/Ward
+op_room_bedno,Room/Bed No.
+op_contact_number,Contact Number
+op_date_time,Date Time
+op_source,Source
+op_slno,Sl. No
+op_date,Date
+op_feedback_id,Feedback ID
+op_patient_details,Patient details
+op_average_rating,Average rating
+op_comment,Comment
+op_nps_comment,NPS comment
+op_nps_score,NPS score
+op_departments,Departments
+op_concern,Concern
+op_nps_score_9_10,score (9-10)
+op_nps_score_0_6,score (0-6)
+op_nps_score_7_8,score (7-8)
+op_select_department,Select Department
+op_ticket_id,Ticket ID
+op_rating,Rating
+op_department,Department
+op_created_on,Created on
+op_modified_on,Modified on
+op_action,Action
+op_addresal_comment,Addressal comment
+op_rca,RCA
+op_capa,CAPA
+op_tat,time(TAT)
+op_turn_around, Turn around
+op_resolution_rate,Resolution rate
+op_ticket_deatails,Ticket details
+op_assigned_to,Assigned to
+op_ticket_status,Ticket Status
+op_last_updated_on,Last updated on
+op_received_the_highest_satisfaction_rating,received the highest satisfaction rating for the selected period.
+op_your,Your
+op_has_to_be_improved,has to be improved as it received the lowest rating for the selected period.
+op_unhappy_feedback_submitted_by,"Unhappy feedback submitted by,"
+op_happy_feedback_submitted_by,"Happy feedback submitted by,"
+op_you_have_received_most_complaints_in,You have received the most patient complaints in
+op_you_have_received_least_complaints_in,You have received the least complaints in
+op_no_record_found,No Records Found!
+op_view_list,View List
+op_view_all,View All
+op_average,Average
+op_opt,OPT-
+op_rated,Rated
+op_ticket_details,Ticket details
+op_speciality,Speciality
+op_ff_rocommendation,Friend/Family recommendation
+op_referred_by_doctors,Reffered by doctors
+op_choose_hospital,Choose Hospital
+op_feedback_suggestion,Feedback suggestion
+op_addressed_tickets,Addressed Tickets
+op_address,Address
+op_close,Close
+op_transfer,Transfer
+op_address_this_ticket,Address this ticket 
+op_submit,Submit
+op_capa_close_ticket,Please submit an RCA and CAPA to close this ticket
+op_transfering_ticket_department,Transfer ticket to other department
+op_reopen,Reopen
+op_reopen_this_ticket,Reopen this ticket
+op_root_cause,RCA
+op_discharge_feedback_id_tooltip,OUTPATIENT DISCHARGE FEEDBACK-<Feedback ID>
+op_downloads,Downloads
+op_from,From
+op_passive,Passive
+op_negative_events_analysis,Negative Events Analysis
+op_negative_analysis_tooltip,This pie chart gives you detailed metrics on no. of tickets received by each department.
+op_opf,OPF-
+op_promoters_tooltip,On a scale from 0-10
+op_promoters_tooltip_r,how likely are you to recommend this hospital to your friends or family members?
+op_close_hospital,Reason to choose hospital
+op_location_proximity,Location / Proximity
+op_specific_service,Specific Services offered
+op_ff_rocommendation,Friend/Family recommendation
+op_referred_by_doctors,Referred by doctors
+op_previous_experience,Previous experience
+op_insurance_facilities,Insurance facilities
+op_company_recommendation,Company Recommendation
+op_print_online,Print or Online Media
+op_recognized_staff;Recognized Staff:
+op_staff_name,Staff Name
+op_feedback_suggestions,Feedback/ Suggestions
+op_score,Score
+op_download_capa_report_tooltip,Download CAPA report
+op_download_total_feedback_tooltip,Download detailed patient wise feedback report for OP.
+op_s_total_tickets,Total tickets
+op_s_open_tickets,Open tickets
+op_s_addressed_tickets,Addressed tickets
+op_s_closed_tickets,Closed tickets
+op_avg_resolution_time,Avg. resolution time
+op_download_addressed_report_tooltip,Download addressed tickets report

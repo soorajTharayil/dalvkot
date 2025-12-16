@@ -1,0 +1,75 @@
+{
+
+
+   
+   "patient_info":"CATHETER INSERTION CHECKLIST",
+   
+   "patientname":"Patient Name",
+   "patient_name":"Enter Name",
+
+   "patientid":"Patient UHID",
+   "patient_name_placeholder":"Enter UHID",
+
+   "age": "Age",
+   "test_name_placeholder":"Enter age",
+   "department":"Designation",
+   "data_analysis":"Additional comments:",
+
+
+   "staffname":"Name of the assigned Nurse",
+   "staff_name_placeholder":"Enter name",
+
+   "audited_by":"Audited by",
+   "audited_by_placeholder":"Enter the name",
+
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of surgery",   
+   
+
+   "identification_details": "Has an alternative for the indwelling catheterization been considered and documented?",
+   "vital_signs": "Is the patient confirmed using two identifiers?",
+   "surgery": "Are the clinical reasons for insertion specified, communicated to the patient/bystander, and documented?",
+   "complaints_communicated": "Has the need, possible complications, potential outcomes, and procedures been explained, and consent obtained from the patient/bystander by the performing staff?",
+   "intake":"Did the person performing the procedure perform hand hygiene?",
+   "output":"Is the person performing the procedure wearing PPE?",
+   "allergies":"Does the person performing the procedure use sterile gloves?",
+   "medication":"Is the catheterization kit available with a sterile catheter, sterile gloves, antiseptic solution, saline and syringe, dressing packs, scissors and forceps, lubricant, tray, and hand rub?",
+   "diagnostic":"Is the smallest gauge of the catheter selected for effective drainage?",
+
+
+
+   "lab_results":"Has perineal care been performed, and has hand hygiene been re-performed?",
+   "pending_investigation":"Is the catheter lubricated with sterile lubricant?",
+   "medicine_order":"Is aseptic technique maintained throughout the insertion, ensuring the appropriate length is inserted, and has hand hygiene been re-performed?",
+   "facility_communicated":"Is urine allowed to drain before the catheter balloon is inflated?",
+   "health_education":"Is the balloon inflated correctly?",
+   "risk_assessment":"Is the catheter connected to a sterile drainage bag, placed safely below the level of the bladder, and has hand hygiene been re-performed?",
+   
+
+   "urethral":"Is urine flow checked, and is it ensured that there is no urethral trauma?",
+   "urine_sample":"Is a urine sample sent to the laboratory, if required/advised, and has hand hygiene been re-performed?",
+   "bystander":"Has the patient/bystander been educated regarding catheter care, the frequency of follow-ups, and has the procedure been documented?"
+
+
+
+
+
+
+   
+
+
+   
+}

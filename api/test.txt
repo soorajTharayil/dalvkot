@@ -1,0 +1,1 @@
+[{"datetime":1627999065616,"name":"Vvvtt","patientid":123458,"otherReason":false,"contactnumber":null,"ward":"2ND FLOOR- ALL ROOMS","bedno":"12","fontoffice1":5,"overallScore":3,"fontoffice2":1,"recommend1Score":5,"location":true,"patientType":"In-Patient"}]

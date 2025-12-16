@@ -1,0 +1,76 @@
+{
+
+
+   
+   "patient_info":"CENTRAL LINE INSERTION CHECKLIST",
+   
+   "patientname":"Patient Name",
+   "patient_name":"Enter Name",
+
+   "patientid":"Patient UHID",
+   "patient_name_placeholder":"Enter UHID",
+
+   "age": "Age",
+   "test_name_placeholder":"Enter age",
+   "department":"Designation",
+   "data_analysis":"Additional comments:",
+
+
+   "staffname":"Name of the assigned Nurse",
+   "staff_name_placeholder":"Enter name",
+
+   "audited_by":"Audited by",
+   "audited_by_placeholder":"Enter the name",
+
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of surgery",   
+   
+
+   "identification_details": "Have alternatives been considered and documented?",
+   "vital_signs": "Has the patient been confirmed using two identifications?",
+   "surgery": "Are the clinical reasons for insertion specified, communicated to the patient/bystander, and documented?",
+   "complaints_communicated": "Has the need, possible complications, potential outcomes, and procedure been explained, and has the patient/bystander's informed consent been obtained by the performing doctor?",
+   "intake":"Have the person performing the procedure and their assistants performed hand hygiene?",
+   "output":"Is the person performing the procedure wearing PPE?",
+   "allergies":"Is the person performing the procedure using sterile gloves?",
+   "medication":"Is the insertion kit available?",
+
+
+   "diagnostic":"Has the insertion site been prepared with chlorhexidine/alcohol, and has hand hygiene been re-performed?",
+   "lab_results":"Has the site been properly positioned and draped?",
+   "pending_investigation":"Was local anesthesia or sedation used?",
+   "medicine_order":"Was aseptic technique maintained throughout the insertion, and was hand hygiene re-performed?",
+   "facility_communicated":"Is it ensured that lumens are not cut?",
+   "health_education":"Are unused ports clamped?",
+   "risk_assessment":"Has blood been aspirated from each lumen, and is the site cleaned?",
+   
+
+   "urethral":"Has the site been checked and cleaned with chlorhexidine?",
+   "urine_sample":"Has sterile dressing been applied, and has hand hygiene been re-performed?",
+   "bystander":"Has the placement been verified by X-Ray?",
+   "follow":"Has the patient/bystander been educated regarding central line care and the frequency of follow-ups, and has the procedure been documented?"
+
+
+
+
+
+
+
+   
+
+
+   
+}

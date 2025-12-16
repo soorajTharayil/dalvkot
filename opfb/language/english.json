@@ -1,0 +1,48 @@
+{
+   
+   "patient_info":"PATIENT INFORMATION",
+   "patientname":"Patient Name",
+   "patient_name_placeholder":"Enter your name ",
+   "patientid":"Patient UHID",
+   "enter_placeholder":"Enter UHID",
+   "department": "Department",
+   "mobileno":"Mobile No",
+   "mobile_placeholder":"Enter your 10 digit mobile number",
+
+   "consultant": "Primary Consultant",
+   "speciality": "Speciality",
+   
+   "pagetitle":"OUTPATIENT FEEDBACK FORM",
+   "guestname":"Dear ",
+   "guestmessage":"Thank you for choosing our hospital for your healthcare needs. We work constantly to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill this feedback form. Your opinion is of immense value to us.",
+   "excellent":"Excellent",
+   "good":"Good",
+   "average":"Average",
+   "poor":"Poor",
+   "worst":"Worst",
+   "badreviewtitle":"Tell us what went wrong",
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "recommendationmessage":"On a scale from 0-10, how likely are you to recommend this hospital to your friends or family members?",
+   "yourreason":"Your reason for selecting our hospital",
+   "location":"Location/Proximity",
+   "specificservices":"Specific services offered",
+   "referredbydoc":"Referred by doctor",
+   "friendfamily":"Friend/Family recommendation",
+   "previousexp":"Previous experience",
+   "yourdoctor":"Insurance facilities",
+   "companyreco":"Company recommendation",
+   "other":"Print/Online media",
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you for taking time out to provide the feedback.",
+   "happythankyoumessage":"Kindly rate us on our Google review page by clicking on the below link.",
+   "unhappythankyoumessage":"We sincerely apologize for not meeting your expectations. We would like to regain your trust. Our executive will get in touch with you."
+   
+   
+}

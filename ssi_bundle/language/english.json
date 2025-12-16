@@ -1,0 +1,85 @@
+{
+
+
+   
+   "patient_info":"SSI BUNDLE CARE POLICY",
+   
+   "patientname":"Patient Name",
+   "patient_name":"Enter Name",
+
+   "patientid":"Patient UHID",
+   "patient_name_placeholder":"Enter UHID",
+
+   "age": "Age",
+   "test_name_placeholder":"Enter age",
+   "department":"Designation",
+   "data_analysis":"Additional comments:",
+
+
+   "staffname":"Name of the assigned Nurse",
+   "staff_name_placeholder":"Enter name",
+
+   "audited_by":"Audited by",
+   "audited_by_placeholder":"Enter the name",
+
+   "previous":"Back",
+   "next":"Next",
+   "optional":"Please describe :",
+   "telluswrong":"Tell us what went wrong",
+   "detractor" : "Please describe reason for low rating",
+
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+
+   "submit":"Submit",
+   "thankyou":"Thank you!",
+   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+
+
+   "formula_para1": "Date of surgery",   
+   
+
+   "identification_details": "Is the patient diagnosed by following all clinical protocols?",
+   "vital_signs": "Are allergies mentioned?",
+   "surgery": "Are the 5 moments of hand hygiene followed?",
+   "complaints_communicated": "Has the patient been scrubbed or bathed with an antiseptic solution prior to surgery?",
+   "intake":"Is the patient’s hair clipped or removed as required?",
+   "output":"Is the patient’s skin cleaned before surgery?",
+   "allergies":"Are prophylactic antibiotics administered within 60 minutes before the incision?",
+   "medication":"Are all surgical team members scrubbed and in proper OT attire?",
+   "diagnostic":"Are the surgical instruments properly sterilized?",
+   "lab_results":"Have informed consents been taken and duly signed?",
+   "pending_investigation":"Is the patient covered with a drape?",
+   "medicine_order":"Are blood glucose levels monitored and maintained?",
+   "facility_communicated":"Is foot traffic in the surgical area restricted to a minimum?",
+
+
+
+   "health_education":"Are the patient details, surgery, site, and procedures read before the incision?",
+   "risk_assessment":"Are the counts of instruments and consumables listed out before the procedure?",
+   "urethral":"Is a sterile technique followed throughout the procedure?",
+   "urine_sample":"Is hypothermia maintained during the procedure?",
+   "bystander":"Are vitals and fluid balances continuously monitored?",
+   "instruments":"Are counts of instruments and consumables performed after the procedure?",
+
+
+   "sterile":"Is a sterile dressing applied?",
+   "antibiotics":"Are post-operative antibiotics administered?",
+   "surgical_site":"Is the surgical site assessed?",
+   "wound":"Are necessary wound management instructions documented?",
+   "documented":"Are pre-operative, intra-operative, and post-operative notes and advice documented?"
+
+
+   
+
+
+
+
+
+
+
+   
+
+
+   
+}

@@ -1,0 +1,44 @@
+{
+   "reg_mobile": "Registered Mobile Number",
+   "reg_mobile_message": "Please provide your 10 digit registered mobile number to proceed",
+   "reg_mobile_message_placeholder": "Enter your mobile number",
+   
+   "patient_info": "PATIENT INFORMATION",
+   "patientname": "Patient Name",
+   "patient_name_placeholder": "Enter your name ",
+   "patientid": "Patient UHID",
+   "enter_placeholder": "Enter UHID",
+   "wardtitle": "Select Floor/Ward",
+   "showwardtitle": "Floor/Ward",
+   "mobileno": "Mobile No",
+   "mobile_placeholder": "Enter your 10 digit mobile number",
+   "bedno": "Room/Bed number",
+
+   "pagetitle": "COMPLAINT / REQUEST FORM",
+   "telluswrong": "Tell us what went wrong in ",
+
+   "thankyou": "Thank you!",
+   "refresh": "Register another concern/request",
+   "thankyoumessage": "Your issue is registered with us! One of our executive will get in touch with you shortly.",
+   "next": "Next",
+   "previous": "Back",  
+   "submit": "Submit",
+
+   "details": "Complaint details",
+   "raisedin": "Complaint raised in",
+   "raisedby": "Complaint raised by",
+
+   "gustmessageint": "Please select the category that best matches your concern or request",
+   "goodmorning": "Good morning!",
+   "goodafternoon": "Good afternoon!",
+   "goodevening": "Good evening!",
+
+   "mainSearch": "Search or type your concern here",
+   "chooseCategory": "Select complaint category",
+
+   "submission_pat_details": "Review your details before submission:",
+   "SelectedCategory": "Selected category",
+   "concern_request": "Concern/Request",
+   "issue_optional_title": "Please describe",
+   "issue_optional_desc": "Provide additional details or context to enhance clarity"
+}

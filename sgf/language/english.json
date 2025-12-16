@@ -1,0 +1,103 @@
+{
+
+
+   "reg_mobile":"Verify your identity",
+   "reg_mobile_message":"Please provide the details requested below to proceed. Ensure that the information you provide is associated with your employment data.",
+   "reg_mobile_message_placeholder":"Enter mobile number or email id",
+   "pin":"Enter PIN",
+   "pin_placeholder":"Enter 4 digits PIN",
+   "login":"Login to proceed",
+   "forgot":"Forgot PIN?",
+
+   "review":"Review your details before submission:",
+   "details":"Grievance details",
+   "descb":"Description",
+   "image":"Attached image",
+   "reported":"Grievance reported by",
+   "occurred":"Grievance reported in",
+  
+
+   "forgot_heading":"Forgot your PIN?",
+   "forgot_mainforgot":"Please enter your mobile number or email address associated with your employee information to regenerate a new 4 digit PIN.",
+   "forgot_mainresend":"Please enter your mobile number or email address associated with your employee information to resend the PIN.",
+   "forgot_mainplaceholder":"Enter mobile number or email id",
+   "nodata":"No data found",
+   "forgot_alert":"Please enter a valid mobile number or email",
+   "sentpin":"Send PIN",
+   "new_pin":"A newly generated PIN has been sent to your mobile number and email.",
+   "new_resentpin":"Your 4-digit PIN has been sent to your mobile number and email.",
+   "tooltip":"Please use the 4-digit PIN you have received via SMS or email.",
+
+
+   "employee_info":"EMPLOYEE INFORMATION",
+   "employeename":"Employee name",
+   "employee_name_placeholder":"Enter your name ",
+   "employeeid":"Employee ID",
+   "enter_placeholder":"Enter employee ID",
+   "wardtitle": "Select your role",
+   "mobileno":"Mobile No",
+   "showmobileno":"Mobile Number",
+   "showemail":"Email ID",
+   "mobile_placeholder":"Enter your 10 digit mobile number",
+   "role":"Role",
+   "showrole":"Employee role",
+
+   "floor":"Select Floor/Ward",
+   "showfloor":"Floor/Ward",
+   "location":"Select Site",
+   "showlocation":"Site",
+   "priority":"Select Priority",
+   "showpriority":"Priority",
+   
+
+   
+   "gustmessageint": "Please select the category that best matches your concern or grievance",
+   "goodmorning": "Good morning!",
+   "goodafternoon": "Good afternoon!",
+   "goodevening": "Good evening!",
+
+   "mainSearch": "Search or type grievance here",
+   "chooseCategory": "Select grievance category",
+   "submission_pat_details": "Review your details before submission:",
+   "SelectedCategory": "Category",
+   "concern_request": "Grievance",
+   "issue_optional_title": "Please describe:",
+   "issue_optional_desc": "Provide additional details or context to enhance clarity",
+
+   "pagetitle":"STAFF GRIEVANCE",
+   "department":"Select Category",
+
+   "telluswrong":"Tell us what went wrong in ",
+   
+
+   "thankyou":"Thank you!",
+   "thankyoumessage":"Your grievance is registered with us.",
+
+   "next":"Next",
+   "previous":"Back",
+   "submit":"Submit",
+
+   
+   "attach_img":"Attach image",
+      
+   "forgot_main":"Please enter your mobile number or email address associated with your employee information to regenerate a new 4 digit PIN.",
+   
+
+   "raised":"Grievance raised by",
+   "recieved":"Grievance recieved in",
+   "detail":"Grievance details",
+  
+   "gustname":"Dear ",
+   
+   "commentt":"Please describe your issue",
+
+   "u_select":"You have selected",
+   "incident_category":"Grievance category:",
+   "incident_parameter":"Grievance parameter:",
+   "add_details_to_incident":"Add more detail to this grievance",
+   "describe_incident":"Describe this grievance:",
+   "describe_incident_placeholder":"Type your text here:"
+
+  
+   
+}
