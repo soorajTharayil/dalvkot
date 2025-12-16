@@ -305,7 +305,7 @@
                 </div>
 
                 <div ng-if="profilen['INCIDENT-MODULE'] == true">
-                  <a href="../imf?src=Link&userid={{ adminId }} " class="btn btn-primary btn-block" style="padding: 15px; border-radius: 45px; font-size: 16px; box-shadow: 0px 1px 1px rgba(0,0,0,0.5); background-color:#DB6B27; border:none;">{{lang.button5}}</a>
+                  <a href="../inn?src=Link&userid={{ adminId }} " class="btn btn-primary btn-block" style="padding: 15px; border-radius: 45px; font-size: 16px; box-shadow: 0px 1px 1px rgba(0,0,0,0.5); background-color:#DB6B27; border:none;">{{lang.button5}}</a>
                   <br>
                 </div>
 

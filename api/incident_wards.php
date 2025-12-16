@@ -21,14 +21,13 @@ $datap = file_get_contents($path);
 $data['setting_data']->logo = 'data:image/' . $type . ';base64,' . base64_encode($datap);
 
 
-$data['setting_data']->android_apk = 'http://' . $link . '/uploads/' . $data['setting_data']->android_apk;
+$data['setting_data']->android_apk = 'https://' . $link . '/uploads/' . $data['setting_data']->android_apk;
 
 
 $ch = curl_init($baseurl . 'SetupEfeeder/questionsinc?s=INCIDENT');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 $output = curl_exec($ch);
-// var_dump($output);
 
 $data['question_set'] = json_decode($output);
 $x = count($data['question_set']);
@@ -58,7 +57,7 @@ if ($num1 > 0) {
 	while ($row = mysqli_fetch_object($result)) {
 
 		$data['user'][] = $row;
-
+	
 	}
 }
 

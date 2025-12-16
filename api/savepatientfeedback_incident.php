@@ -9,6 +9,17 @@ $data = json_decode($d, true);
 if (count($data) > 1) {
 
 
+    $risk_matrix = $data['risk_matrix']['level'];
+    $incident_occured_in_raw = $data['incident_occured_in']; // e.g. "2025-09-10T03:36:00.000Z"
+
+    // Convert to DateTime and localize to IST
+    $dt = new DateTime($incident_occured_in_raw);
+    $dt->setTimezone(new DateTimeZone('Asia/Kolkata'));
+
+    // Format as "22 Sep, 2025 - 1:37 PM"
+    $incident_occured_in = $dt->format('d M, Y - g:i A');
+
+     $incident_occured_in;
 
 
     date_default_timezone_set('Asia/Kolkata');
@@ -75,10 +86,17 @@ if (count($data) > 1) {
 
 
     $bed = $data['bedno'];
+
     $image = $data['image'];
-    $file = $data['file'];
+
+    $files_name = $data['files_name'];
+    $files_name = json_encode($files_name);
+    $escaped_files_name = mysqli_real_escape_string($con, $files_name);
+
     $ward = $data['ward'];
-    $priority = $data['priority'];
+
+    $priority = trim(str_replace('–', '-', $data['priority']));
+
     $incident_type = $data['incident_type'];
     $sql = 'SELECT * FROM `bf_ward_esr` WHERE title="' . $ward . '"';
     $ward = mysqli_query($con, $sql);
@@ -87,7 +105,7 @@ if (count($data) > 1) {
 
 
   $query = 'INSERT INTO `bf_feedback_incident`(`datetime`,`datet`,`remarks`, `nurseid`, `patientid`, `dataset`, `source`,`ward`,`bed_no`,`pid`,`image`,`file`) 
-  VALUES ("' . date('Y-m-d H:i:s') . '","' . $today . '","' . $data['remarks'] . '","' . $_GET['administratorId'] . '","' . $patinet_id . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $source . '","' . $wardd->title . '","' . $bed . '","' . $rid . '","' . $image . '","' . $file . '")';
+  VALUES ("' . date('Y-m-d H:i:s') . '","' . $today . '","' . $data['remarks'] . '","' . $_GET['administratorId'] . '","' . $patinet_id . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $source . '","' . $wardd->title . '","' . $bed . '","' . $rid . '","' . $image . '","' . $escaped_files_name . '")';
 
 
     $result = mysqli_query($con, $query);
@@ -113,7 +131,8 @@ if (count($data) > 1) {
             if ($r->slug == $key) {
                 //var_dump($value);
                 if ($value == true) {
-                    $query = 'INSERT INTO `tickets_incident` (`created_by`, `departmentid`, `rating`, `anymessage`, `feedbackid`,`ward`,`priority`,`incident_type`) VALUES ("' . $patinet_id . '","' . $r->dprt_id . '","' . $value . '","' . $data['comments'] . '","' . $fid . '","' . $wardd->title . '","' . $priority . '","' . $incident_type . '")';                    mysqli_query($con, $query);
+                    $query = 'INSERT INTO `tickets_incident` (`created_by`, `departmentid`, `rating`, `anymessage`, `feedbackid`,`ward`,`priority`,`incident_type`,`assigned_risk`,`incident_occured_in`) VALUES ("' . $patinet_id . '","' . $r->dprt_id . '","' . $value . '","' . $data['comments'] . '","' . $fid . '","' . $wardd->title . '","' . $priority . '","' . $incident_type . '","' . $risk_matrix . '","' . $incident_occured_in . '")';
+                    mysqli_query($con, $query);
                 }
             }
         }
