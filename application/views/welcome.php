@@ -58,7 +58,7 @@ $hour = date('H');
 if ($hour < 12) {
 	$greeting = '<b>Good morning,<\/b>';
 } elseif ($hour < 17) {
-	$greeting = '<b>Good afternoon sooraj,<\/b> ';
+	$greeting = '<b>Good afternoon,<\/b> ';
 } else {
 	$greeting = '<b>Good evening,<\/b> ';
 }
