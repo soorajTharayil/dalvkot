@@ -1,6 +1,6 @@
 <?php
 include('db.php');
-exit;
+
 $patinet_id = $_GET['patient_id'];
 $d = file_get_contents('php://input');
 
