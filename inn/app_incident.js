@@ -1,5 +1,5 @@
 var app = angular.module("ehandorApp", ["ngSanitize"]);
-exit;
+
 app.filter('questionSearch', function () {
   return function (items, search) {
     if (!search) return items;
