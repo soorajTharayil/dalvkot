@@ -30,7 +30,7 @@ if (count($data) > 1) {
     // Format as "22 Sep, 2025 - 1:37 PM"
     $incident_occured_in = $dt->format('d M, Y - g:i A');
 
-     $incident_occured_in;
+    $incident_occured_in;
 
 
     date_default_timezone_set('Asia/Kolkata');
@@ -115,11 +115,30 @@ if (count($data) > 1) {
 
 
 
-  $query = 'INSERT INTO `bf_feedback_incident`(`datetime`,`datet`,`remarks`, `nurseid`, `patientid`, `dataset`, `source`,`ward`,`bed_no`,`pid`,`image`,`file`) 
+    $query = 'INSERT INTO `bf_feedback_incident`(`datetime`,`datet`,`remarks`, `nurseid`, `patientid`, `dataset`, `source`,`ward`,`bed_no`,`pid`,`image`,`file`) 
   VALUES ("' . date('Y-m-d H:i:s') . '","' . $today . '","' . $data['remarks'] . '","' . $_GET['administratorId'] . '","' . $patinet_id . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $source . '","' . $wardd->title . '","' . $bed . '","' . $rid . '","' . $image . '","' . $escaped_files_name . '")';
 
 
     $result = mysqli_query($con, $query);
+    $query = 'INSERT INTO bf_feedback_incident (...) VALUES (...)';
+
+    $result = mysqli_query($con, $query);
+    if (!$result) {
+        echo json_encode([
+            'status' => 'fail',
+            'sql_error' => mysqli_error($con),
+            'query' => $query
+        ]);
+        exit;
+    }
+
+    // TEMP DEBUG
+    echo json_encode([
+        'status' => 'success',
+        'debug_query' => $query
+    ]);
+    exit;
+
     $fid = mysqli_insert_id($con);
 
     $query = 'SELECT * FROM department WHERE type ="incident"';
