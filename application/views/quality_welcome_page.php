@@ -44,9 +44,15 @@ require_once 'quality_tables.php';
 
 	<!-- </span> -->
 
+    <input type="text" id="searchKPI" placeholder="🔍 Search KPIs" style="width:49%; margin:5px auto;margin-right:0px; display:block; padding:8px 10px; border:1px solid #ccc; border-radius:4px; font-size:16px;">
+
+
 	<!-- Close Download Buttons-->
 	<!-- Metric Boxes-->
 	<div class="row">
+		<div class="heading heading-block">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold; text-align: center;">Mandatory Indicators</h2>
+		</div>
 		<?php if (isfeature_active('QUALITY-KPI1') === true) { ?>
 			<?php
 			// $fdate = $_SESSION['from_date'];
@@ -58,7 +64,7 @@ require_once 'quality_tables.php';
 			// $setup = 'setup';
 			//  $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 15px;" data-title="<?php echo strtolower(lang_loader('ip', 'kpi1')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -90,7 +96,7 @@ require_once 'quality_tables.php';
 			// $setup = 'setup';
 			// $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi2')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -110,7 +116,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI3') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi3')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -130,7 +136,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI4') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi4')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -150,7 +156,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI5') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi5')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -170,7 +176,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI6') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi6')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -190,7 +196,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI7') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi7')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -210,7 +216,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI8') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi8')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -233,7 +239,7 @@ require_once 'quality_tables.php';
 
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi9')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -253,7 +259,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI10') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi10')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -273,7 +279,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI11') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi11')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -293,7 +299,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI12') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi12')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -313,7 +319,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI13') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi13')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -333,7 +339,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI14') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi14')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -353,7 +359,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI15') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi15')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -372,7 +378,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI16') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi16')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -394,7 +400,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI17') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi17')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -413,7 +419,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI18') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi18')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -433,7 +439,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI19') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi19')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -453,7 +459,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI20') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi20')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -473,7 +479,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI21') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi21')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -492,7 +498,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI21a') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi21a')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -512,7 +518,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI22') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi22')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -533,7 +539,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI23a') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi23a')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -554,7 +560,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI23b') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi23b')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -575,7 +581,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI23c') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi23c')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -596,7 +602,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI23d') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi23d')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -616,7 +622,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI24') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi24')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -637,7 +643,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI25') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi25')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -656,7 +662,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI26') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi26')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -676,7 +682,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI27') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi27')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -696,7 +702,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI28') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi28')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -716,7 +722,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI29') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi29')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -736,7 +742,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI30') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi30')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -757,7 +763,7 @@ require_once 'quality_tables.php';
 		<?php if (isfeature_active('QUALITY-KPI31') === true) { ?>
 
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi31')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -776,7 +782,7 @@ require_once 'quality_tables.php';
 		<?php } ?>
 		<?php if (isfeature_active('QUALITY-KPI32') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi32')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -793,29 +799,16 @@ require_once 'quality_tables.php';
 				</div>
 			</div>
 		<?php } ?>
-		<?php if (isfeature_active('QUALITY-KPI33') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
-				<div class="panel panel-bd">
-					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
-					<div class="panel-body" style="height: 100px; padding-top:0px;">
-						<div class="statistic-box" style="padding-top: 44px;">
-
-							<div class="small" style="font-size: 20px;"> <?php echo lang_loader('ip', 'kpi33'); ?> <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $readmission_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
-							<div class="icon large-screen-only">
-								<i class="fa fa-undo" style="font-size: 80px;"></i>
-							</div>
-							<a href="<?php echo $quality_feedback_PSQ3a; ?>" style="float: right; font-size: 17px; margin-top: 7px;margin-bottom: 10px;margin-right: 1px">Explore</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php } ?>
+		
+		<div class="heading heading-block">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold; text-align: center;">Clinical Indicators</h2>
+		</div>
 
 		<?php if (isfeature_active('QUALITY-KPI34') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 15px;" data-title="<?php echo strtolower(lang_loader('ip', 'kpi34')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -835,7 +828,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI35') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi35')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -856,7 +849,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI36') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi36')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -877,7 +870,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI37') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi37')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -897,7 +890,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI38') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi38')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -917,7 +910,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI39') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi39')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -937,7 +930,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI40') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi40')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -957,7 +950,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI41') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi41')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -977,7 +970,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI42') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi42')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -997,7 +990,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI43') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi43')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1017,7 +1010,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI44') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi44')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1037,7 +1030,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI45') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi45')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1057,7 +1050,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI46') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi46')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1077,7 +1070,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI47') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi47')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1097,7 +1090,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI48') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi48')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1117,7 +1110,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI49') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi49')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1137,7 +1130,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI50') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi50')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1157,7 +1150,7 @@ require_once 'quality_tables.php';
 
 		<?php if (isfeature_active('QUALITY-KPI51') === true) { ?>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" data-title="<?php echo strtolower(lang_loader('ip', 'kpi51')); ?>">
 				<div class="panel panel-bd">
 					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
 
@@ -1169,6 +1162,32 @@ require_once 'quality_tables.php';
 								<i class="fa fa-tint" style="font-size: 80px;"></i>
 							</div>
 							<a href="<?php echo $quality_feedback_50PSQ3a; ?>" style="float: right; font-size: 17px; margin-top: 7px;margin-bottom: 10px;margin-right: 1px">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+
+		<div class="heading heading-block">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold; text-align: center;">Additional Indicators</h2>
+		</div>
+
+
+		<?php if (isfeature_active('QUALITY-KPI33') === true) { ?>
+
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 15px;" data-title="<?php echo strtolower(lang_loader('ip', 'kpi33')); ?>">
+				<div class="panel panel-bd">
+					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
+
+					<div class="panel-body" style="height: 100px; padding-top:0px;">
+						<div class="statistic-box" style="padding-top: 44px;">
+
+							<div class="small" style="font-size: 20px;"> <?php echo lang_loader('ip', 'kpi33'); ?> <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $readmission_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa fa-undo" style="font-size: 80px;"></i>
+							</div>
+							<a href="<?php echo $quality_feedback_PSQ3a; ?>" style="float: right; font-size: 17px; margin-top: 7px;margin-bottom: 10px;margin-right: 1px">Explore</a>
 						</div>
 					</div>
 				</div>
@@ -1309,3 +1328,52 @@ require_once 'quality_tables.php';
 		}
 	}
 </style>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("searchKPI");
+            const allHeadings = document.querySelectorAll(".heading-block");
+
+            // 🧩 Helper to get all KPI cards under a given heading
+            function getKPICardsUnderHeading(headingBlock) {
+                const cards = [];
+                let next = headingBlock.nextElementSibling;
+                while (next && !next.classList.contains("heading-block")) {
+                    if (next.classList.contains("kpi-card")) cards.push(next);
+                    next = next.nextElementSibling;
+                }
+                return cards;
+            }
+
+            // 🔍 Function to update visibility of headings based on content
+            function updateHeadings(searchQuery = "") {
+                allHeadings.forEach(block => {
+                    const kpis = getKPICardsUnderHeading(block);
+                    let hasVisibleCard = false;
+
+                    kpis.forEach(card => {
+                        const title = (card.dataset.title || "").toLowerCase();
+                        if (!searchQuery || title.includes(searchQuery)) {
+                            card.style.display = "block";
+                            hasVisibleCard = true;
+                        } else {
+                            card.style.display = "none";
+                        }
+                    });
+
+                    // Show or hide heading based on visible KPI cards
+                    block.style.display = hasVisibleCard ? "block" : "none";
+                });
+            }
+
+            // 🏁 Initial check after DOM load
+            updateHeadings();
+
+            // ✨ Handle search filter dynamically
+            if (searchInput) {
+                searchInput.addEventListener("input", function() {
+                    const query = searchInput.value.toLowerCase().trim();
+                    updateHeadings(query);
+                });
+            }
+        });
+    </script>

@@ -58,14 +58,14 @@
    "kpi_info": "5. PSQ3a - Percentage of medication charts with error-prone abbreviations for the month of",
    "definition": "Definition:",
    "kpi_def": "Error-prone abbreviations shall be defined in consonance with the guidelines laid down by Institution for Safe Medication Practices.",
-   "formula_para1": "Number of medication charts with error prone abbreviation (s)",   
+   "formula_para1": "Number of medication charts with error prone abbreviation (s) (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of medication charts reviewed",
+   "formula_para2": "Number of medication charts reviewed (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

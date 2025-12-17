@@ -12,6 +12,8 @@
 		if (count($results) >= 1) {
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
+
+
 	?>
 				<div class="row">
 					<div class="col-lg-12">
@@ -21,7 +23,7 @@
 									<a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
 										<i class="fa fa-question-circle" aria-hidden="true"></i>
 									</a>
-									PPE audit - <?php echo $result->id; ?>
+									Radiology safety audit - <?php echo $result->id; ?>
 								</h3>
 							</div>
 							<div class="btn-group" style="float: right;">
@@ -31,80 +33,134 @@
 							</div>
 							<div class="panel-body" style="background: #fff;">
 								<table class="table table-striped table-bordered no-footer dtr-inline" style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
 									<tr>
 										<td><b>Staff name</b></td>
 										<td>
-											<?php echo $result->staffname; ?>
+											<?php echo $param['staffname']; ?>
 										</td>
 									</tr>
-									<?php if ($result->department) { ?>
 									<tr>
-										<td><b>Department</b></td>
-										<td><?php echo $result->department; ?></td>
+										<td><b>ID No</b></td>
+										<td>
+											<?php echo $param['idno']; ?>
+										</td>
 									</tr>
+									<?php if (!empty($param['department'])) { ?>
+										<tr>
+											<td><b>Department</b></td>
+											<td><?php echo $param['department']; ?></td>
+										</tr>
 									<?php } ?>
-									<?php if ($result->comment) { ?>
+
+
 									<tr>
 										<td><b>Staff engaged in</b></td>
-										<td><?php echo $result->comment; ?></td>
+										<td><?php echo $param['comment']; ?></td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->gloves) { ?>
+
+
 									<tr>
-										<td><b>Is the staff wearing gloves?</b></td>
-										<td><?php echo $result->gloves; ?></td>
+										<td><b>Is personal protective equipment (LED apron, thyroid shield, gonad shield, LED goggles, LED gloves) being used appropriately?</b></td>
+										<td>
+											<?= !empty($param['gloves']) ? ucfirst(htmlspecialchars($param['gloves'])) : '-' ?><br>
+											Remarks: <?= !empty($param['gloves_text']) ? htmlspecialchars($param['gloves_text']) : '-' ?>
+										</td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->mask) { ?>
+
+
 									<tr>
-										<td><b>Is the staff wearing mask?</b></td>
-										<td><?php echo $result->mask; ?></td>
+										<td><b>Is the TLD badge being used correctly by staff?</b></td>
+										<td>
+											<?= !empty($param['mask']) ? ucfirst(htmlspecialchars($param['mask'])) : '-' ?><br>
+											Remarks: <?= !empty($param['mask_text']) ? htmlspecialchars($param['mask_text']) : '-' ?>
+										</td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->cap) { ?>
+
 									<tr>
-										<td><b>Is the staff wearing cap?</b></td>
-										<td><?php echo $result->cap; ?></td>
+										<td><b>Is the patient identification policy followed by staff to performing tests?</b></td>
+										<td>
+											<?= !empty($param['cap']) ? ucfirst(htmlspecialchars($param['cap'])) : '-' ?><br>
+											Remarks: <?= !empty($param['cap_text']) ? htmlspecialchars($param['cap_text']) : '-' ?>
+										</td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->apron) { ?>
+
 									<tr>
-										<td><b>Is the staff wearing apron?</b></td>
-										<td><?php echo $result->apron; ?></td>
+										<td><b>Is the staff following the hand hygiene policy as required?</b></td>
+										<td>
+											<?= !empty($param['apron']) ? ucfirst(htmlspecialchars($param['apron'])) : '-' ?><br>
+											Remarks: <?= !empty($param['apron_text']) ? htmlspecialchars($param['apron_text']) : '-' ?>
+										</td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->leadApron) { ?>
+
 									<tr>
-										<td><b>Is the staff wearing lead apron?</b></td>
-										<td><?php echo $result->leadApron; ?></td>
+										<td><b>Do staff demonstrate knowledge of the ALARA Principle in their daily practices?</b></td>
+										<td>
+											<?= !empty($param['leadApron']) ? ucfirst(htmlspecialchars($param['leadApron'])) : '-' ?><br>
+											Remarks: <?= !empty($param['leadApron_text']) ? htmlspecialchars($param['leadApron_text']) : '-' ?>
+										</td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->xrayBarrior) { ?>
+
 									<tr>
-										<td><b>Is X-ray barrier used?</b></td>
-										<td><?php echo $result->xrayBarrior; ?></td>
+										<td><b>Is the radiation warning light activated by staff prior to conducting tests?</b></td>
+										<td>
+											<?= !empty($param['xrayBarrior']) ? ucfirst(htmlspecialchars($param['xrayBarrior'])) : '-' ?><br>
+											Remarks: <?= !empty($param['xrayBarrior_text']) ? htmlspecialchars($param['xrayBarrior_text']) : '-' ?>
+										</td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->tld) { ?>
+
 									<tr>
-										<td><b>Is TLD badge used?</b></td>
-										<td><?php echo $result->tld; ?></td>
+										<td><b>Do staff adequately screen female patients prior to performing tests?</b></td>
+										<td>
+											<?= !empty($param['tld']) ? ucfirst(htmlspecialchars($param['tld'])) : '-' ?><br>
+											Remarks: <?= !empty($param['tld_text']) ? htmlspecialchars($param['tld_text']) : '-' ?>
+										</td>
 									</tr>
-									<?php } ?>
-									<?php if ($result->general_comment) { ?>
+
+									<tr>
+										<td><b>Do staff provide adequate PPE to patients to minimize radiation exposure before the procedure?</b></td>
+										<td>
+											<?= !empty($param['ppe_to_patients']) ? ucfirst(htmlspecialchars($param['ppe_to_patients'])) : '-' ?><br>
+											Remarks: <?= !empty($param['ppe_to_patients_text']) ? htmlspecialchars($param['ppe_to_patients_text']) : '-' ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
+
 									<tr>
 										<td><b>Additional comments</b></td>
-										<td><?php echo $result->general_comment; ?></td>
+										<td><?= $param['dataAnalysis'] ?? '' ?></td>
 									</tr>
-									<?php } ?>
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td><?php echo $result->name; ?></td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
+
 								</table>
 							</div>
 						</div>

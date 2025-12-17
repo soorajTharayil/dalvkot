@@ -1,54 +1,104 @@
 {
+  "patient_info": "MEDICATION MANAGEMENT PROCESS AUDIT",
 
+  "patientid": "Patient UHID",
+  "patient_name_placeholder": "Enter UHID",
 
-   
-   "patient_info":"MEDICINE DISPENSING AUDIT FORM",
-   
-   "patientid":"Patient UHID",
-   "patient_name_placeholder":"Enter UHID",
+  "consultant_name": "Consultant Name",
+  "consultant_name_placeholder": "Enter consultant name",
 
-   "test_name": "Medicine Name",
-   "test_name_placeholder":"Enter the medicine name",
+  "diagnosis": "Diagnosis",
+  "diagnosis_placeholder": "Your input here",
 
-   "audited_by":"Audited by",
-   "audited_by_placeholder":"Enter the name",
-   "data_analysis":"Additional comments:",
+  "test_name": "Medicine Name",
+  "test_name_placeholder": "Enter the medicine name",
 
-   "pagetitle":"IP DISCHARGE FEEDBACK FORM",
-   "gustname":"Dear ",
-   "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
-   "excellent":"Excellent",
-   "good":"Good",
-   "average":"Average",
-   "poor":"Poor",
-   "worst":"Worst",
-   "badreviewtitle":"Tell us what went wrong",
-   "previous":"Back",
-   "next":"Next",
-   "optional":"Please describe :",
-   "telluswrong":"Tell us what went wrong",
-   "detractor" : "Please describe reason for low rating",
+  "audited_by": "Audited by",
+  "audited_by_placeholder": "Enter the name",
+  "data_analysis": "Additional comments:",
 
-   "feedbacksuggestion": "Other feedbacks/suggestions:",
+  "name": "Audit Name",
+  "dtandtym": "Date & Time of Audit",
+  "stname": "Audit Short Name",
+  "dep": "Department",
+  "seldep": "Select Department",
+  "audby": "Audit by",
+  "patname": "Patient Name",
+  "patage": "Patient Age",
+  "patgen": "Patient Gender",
+  "location": "Area",
+  "selgen": "Select Gender",
+  "atdoc": "Attended Doctor",
+  "seldoc": "Select Doctor",
+  "admidat": "Admission / Visit Date & Time",
+  "discha": "Discharge Date & Time",
 
-   "submit":"Submit",
-   "thankyou":"Thank you!",
-   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
-   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+  "pagetitle": "IP DISCHARGE FEEDBACK FORM",
+  "gustname": "Dear ",
+  "gustmessage": "Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
+  "excellent": "Excellent",
+  "good": "Good",
+  "average": "Average",
+  "poor": "Poor",
+  "worst": "Worst",
+  "badreviewtitle": "Tell us what went wrong",
+  "previous": "Back",
+  "next": "Next",
+  "optional": "Please describe :",
+  "telluswrong": "Tell us what went wrong",
+  "detractor": "Please describe reason for low rating",
 
+  "feedbacksuggestion": "Other feedbacks/suggestions:",
 
-   "formula_para1": "Date of surgery",   
-   
+  "submit": "Submit",
+  "thankyou": "Thank you!",
+  "happythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
+  "unhappythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
 
-   "gloves": "Was the correct medicine dispensed?",
-   "mask": "Was the correct quantity dispensed?",
-   "cap": "Was the medicine within its expiry date?",
+  "formula_para1": "Date of surgery",
 
-   "apron": "Was an appropriate time-out performed?",
-   "lead_apron":"Is the staff wearing lead apron?",
-   "use_xray_barrior":"Was there any unplanned return to the OT?"
-   
+  "correct_medicine": "Has the correct drug been selected for the patient's condition?",
+  "correct_quantity": "Has the appropriate dose been prescribed?",
+  "medicine_expiry": "Has the correct unit of measurement for the drug dose been used?",
 
+  "apron": "Has the correct frequency of administration been specified?",
+  "lead_apron": "Has the correct route of administration been mentioned?",
 
-   
+  "use_xray_barrior": "Has the correct drug concentration been prescribed?",
+  "administration_rate": "Has the correct rate of administration been indicated?",
+
+  "therapeutic_duplication": "Has the prescription been checked for therapeutic duplication?",
+
+  "handwriting_legible": "Is the handwriting legible and easily understandable?",
+
+  "medical_abbreviations": "Have only approved medical abbreviations been used in the prescription?",
+
+  "capital_letters": "Have drug names been written using capital letters to avoid confusion?",
+
+  "generic_name": "Has the drug been prescribed using its generic name?",
+
+  "drug_interaction": "Has the drug dose been modified considering potential drug-drug interactions?",
+
+  "food_drug": "Has the timing, dose, or choice of drug been adjusted considering food-drug interactions?",
+
+  "drug_dispensed": "Has the correct drug been dispensed as per the prescription?",
+  "dose_dispensed": "Has the correct dose of the medication been dispensed?",
+  "formulation_dispensed": "Has the correct formulation (e.g., tablet, syrup, injection) been dispensed?",
+  "expired_drungs": "Has the pharmacist ensured that expired or near-expiry drugs are not dispensed?",
+  "accurate_patient": "Has the medication been properly labeled with accurate patient and drug information?",
+  "medication_dispese": "Was the medication dispensed within the defined acceptable timeframe?",
+  "generic_substitution": "Has any generic or therapeutic substitution been done only after consulting the prescribing doctor?",
+
+  "correct_patient": "Has the medication been administered to the correct patient?",
+  "dose_omitted": "Has any prescribed dose been unintentionally omitted?",
+  "medication_dose": "Has the correct dose of the medication been administered?",
+  "drug_administered": "Has the correct drug been administered as per the prescription?",
+  "correct_dosage": "Has the correct dosage form (e.g., tablet, injection, syrup) been used?",
+  "correct_route": "Has the correct route of administration (e.g., oral, IV, IM) been followed?",
+  "correct_rate": "Has the medication been administered at the correct rate?",
+  "correct_duration": "Has the medication been administered for the correct duration?",
+  "correct_time": "Has the medication been given at the correct time as prescribed?",
+  "drug_administration": "Has the drug administration been properly documented?",
+  "nursing_staff": "Has the documentation by nursing staff been complete and accurate?",
+  "documentation_drug": "Has there been any documentation without actual drug administration?"
 }

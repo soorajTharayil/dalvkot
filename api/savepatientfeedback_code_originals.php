@@ -15,6 +15,8 @@ if (count($data) > 1) {
     $location = $data['location'];
     $email = $data['email'];
     $contactnumber = $data['contactnumber'];
+    $audit_date = $data['audit_date'];
+    $audit_type = $data['audit_type'];
 
     // Create an associative array with the fields to be consolidated
 

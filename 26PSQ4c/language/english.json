@@ -58,14 +58,14 @@
    "kpi_info": "26. PSQ4c - Stock out rate of emergency medications for the month of",
    "definition": "Definition:",
    "kpi_def": "A stock out is an event which occurs when an item listed as an emergency medication by the organisation is not available upon the requested need date in the organisation.",
-   "formula_para1": "Number of stock outs of emergency drugs",   
+   "formula_para1": "Number of stock outs of emergency drugs (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of drugs listed as emergency drugs in hospital formulary",
+   "formula_para2": "Number of drugs listed as emergency drugs in hospital formulary (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

@@ -5,7 +5,7 @@
    "reg_mobile_message":"Please provide your 10 digit registered mobile number to proceed",
    "reg_mobile_message_placeholder":"Enter your mobile number",
 
-   "patient_info":"SAFETY ADHERENCE AUDIT FORM",
+   "patient_info":"RADIOLOGY STAFF SAFETY ADHERENCE AUDIT",
    "patientname":"Patient Name",
    "patient_name_placeholder":"Enter your name ",
    "patientid":"Patient UHID",
@@ -13,14 +13,23 @@
    "enter_placeholder":"Enter UHID",
    "wardtitle": "Select Floor/Ward",
    "mobileno":"Mobile No",
-   "email":"Email ID",
-   "emailid":"Enter Email ID",
+
+
+   "idno":"ID No",
+   "idno_placeholder":"Enter ID",
    "mobile_placeholder":"Enter your 10 digit mobile number",
    "bedno": "Room/Bed number",
    "consultant": "Primary Consultant",
    "speciality": "Speciality",
    "department":"Department",
    "patient_category": "Patient Category",
+
+   "name": "Audit Name",
+   "dtandtym": "Date & Time of Audit",
+   "stname": "Audit Short Name",
+   "dep": "Department",
+   "seldep": "Select Department",
+   "audby": "Audit by",
 
    "pagetitle":"IP DISCHARGE FEEDBACK FORM",
    "gustname":"Dear ",
@@ -77,13 +86,32 @@
    "consent": "Consent Verified",
    "discharge_summary": "Discharge summary available?",
    "error_prone": "Error-prone abbreviation",
-   "gloves": "Is the staff wearing gloves?",
-   "mask": "Is the staff wearing mask?",
-   "cap": "Is the staff wearing cap?",
-   "apron": "Is the staff wearing apron?",
-   "lead_apron":"Is the staff wearing lead apron?",
-   "use_xray_barrior":"Is X-ray barrier used?",
-   "use_tld_badge":"Is TLD badge used?",
+
+
+   "gloves": "Is personal protective equipment (LED apron, thyroid shield, gonad shield, LED goggles, LED gloves) being used appropriately?",
+   "mask": "Is the TLD badge being used correctly by staff?",
+   "cap": "Is the patient identification policy being followed by staff prior to performing tests?",
+   "apron": "Is the staff following the hand hygiene policy as required?",
+   "leadApron":"Do staff demonstrate knowledge of the ALARA Principle in their daily practices?",
+   "xrayBarrior":"Is the radiation warning light activated by staff prior to conducting tests?",
+   "tld":"Do staff adequately screen female patients prior to performing tests?",
+   "ppe_to_patients":"Do staff provide adequate personal protective equipment (PPE) to patients to minimize radiation exposure before the procedure",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    "action": "What is the staff engaged in?"
 
 

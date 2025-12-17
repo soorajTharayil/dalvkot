@@ -1,63 +1,63 @@
 {
+  "patient_info": "CENTRAL LINE MAINTENANCE CHECKLIST",
 
+  "patientname": "Patient Name",
+  "patient_name": "Enter Name",
 
-   
-   "patient_info":"CENTRAL LINE MAINTENANCE CHECKLIST",
-   
-   "patientname":"Patient Name",
-   "patient_name":"Enter Name",
+  "patientid": "Patient UHID",
+  "patient_name_placeholder": "Enter UHID",
 
-   "patientid":"Patient UHID",
-   "patient_name_placeholder":"Enter UHID",
+  "age": "Age",
+  "test_name_placeholder": "Enter age",
+  "department": "Designation",
+  "data_analysis": "Additional comments:",
 
-   "age": "Age",
-   "test_name_placeholder":"Enter age",
-   "department":"Designation",
-   "data_analysis":"Additional comments:",
+  "staffname": "Name of the assigned Nurse",
+  "staff_name_placeholder": "Enter name",
 
+  "audited_by": "Audited by",
+  "audited_by_placeholder": "Enter the name",
 
-   "staffname":"Name of the assigned Nurse",
-   "staff_name_placeholder":"Enter name",
+  "previous": "Back",
+  "next": "Next",
+  "optional": "Please describe :",
+  "telluswrong": "Tell us what went wrong",
+  "detractor": "Please describe reason for low rating",
 
-   "audited_by":"Audited by",
-   "audited_by_placeholder":"Enter the name",
+  "feedbacksuggestion": "Other feedbacks/suggestions:",
 
-   "previous":"Back",
-   "next":"Next",
-   "optional":"Please describe :",
-   "telluswrong":"Tell us what went wrong",
-   "detractor" : "Please describe reason for low rating",
+  "submit": "Submit",
+  "thankyou": "Thank you!",
+  "happythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
+  "unhappythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
 
-   "feedbacksuggestion": "Other feedbacks/suggestions:",
+  "formula_para1": "Date of surgery",
 
-   "submit":"Submit",
-   "thankyou":"Thank you!",
-   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
-   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+  "name": "Audit Name",
+  "dtandtym": "Date & Time of Audit",
+  "stname": "Audit Short Name",
+  "dep": "Department",
+  "seldep": "Select Department",
+  "audby": "Audit by",
+  "mid": "Patient MID",
+  "patname": "Patient Name",
+  "patage": "Patient Age",
+  "patgen": "Patient Gender",
+  "location": "Area",
+  "selgen": "Select Gender",
+  "atdoc": "Attended Doctor",
+  "seldoc": "Select Doctor",
+  "admidat": "Admission / Visit Date & Time",
+  "discha": "Discharge Date & Time",
 
-
-   "formula_para1": "Date of surgery",   
-   
-
-   "identification_details": "Are hand hygiene requirements being complied with?",
-   "vital_signs": "Are patients bathed daily with a chlorhexidine preparation?",
-   "surgery": "Is the access port or hub scrubbed with friction immediately prior to each use with an appropriate antiseptic (chlorhexidine, povidone-iodine, iodophor, or 70% alcohol)?",
-   "complaints_communicated": "Are only sterile devices used to access catheters?",
-   "intake":"Are dressings that are wet, soiled, or dislodged immediately replaced?",
-   "output":"Are routine dressing changes performed using aseptic technique with clean or sterile gloves?",
-   "allergies":"Are administration sets for continuous infusions changed at the frequency set by the hospital?",
-   "medication":"Is the need for each central line assessed daily?",
-   "diagnostic":"Is the site inspected for redness, irritation, or infection, and is this inspection documented?",
-   "lab_results":"Is hand hygiene performed before and after each contact?"
-   
-
-
-
-
-
-
-   
-
-
-   
+  "identification_details": "Are hand hygiene requirements being complied with?",
+  "vital_signs": "Are patients bathed daily with a chlorhexidine preparation?",
+  "surgery": "Is the access port or hub scrubbed with friction immediately prior to each use with an appropriate antiseptic (chlorhexidine, povidone-iodine, iodophor, or 70% alcohol)?",
+  "complaints_communicated": "Are only sterile devices used to access catheters?",
+  "intake": "Are dressings that are wet, soiled, or dislodged immediately replaced?",
+  "output": "Are routine dressing changes performed using aseptic technique with clean or sterile gloves?",
+  "allergies": "Are administration sets for continuous infusions changed at the frequency set by the hospital?",
+  "medication": "Is the need for each central line assessed daily?",
+  "diagnostic": "Is the site inspected for redness, irritation, or infection, and is this inspection documented?",
+  "lab_results": "Is hand hygiene performed before and after each contact?"
 }

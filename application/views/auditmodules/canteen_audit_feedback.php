@@ -17,7 +17,11 @@
 		if (count($results) >= 1) {
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
-				
+				// echo '<pre>';
+				// 					print_r($param);
+				// 					echo '</pre>';
+				// 					exit;
+
 	?>
 
 				<div class="row">
@@ -35,318 +39,384 @@
 
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
+
+
 
 									<tr>
-										<td><b>Are walls, ceilings, and doors free from flaking paint/plaster?</b></td>
-										<td><?php echo $param->identification_details; ?></td>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
 									</tr>
+
+
 									<tr>
-										<td><b>Are all equipment non-toxic and free from rust?</b></td>
-										<td><?php echo $param->vital_signs; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is potable water used where it contacts food?</b></td>
-										<td><?php echo $param->surgery; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is proper ventilation and lighting provided?</b></td>
-										<td><?php echo $param->complaints_communicated; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is there separate storage for raw materials, processed food, and packaging?</b></td>
-										<td><?php echo $param->intake; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is all food stored properly in clean, closed containers with appropriate temperatures?</b></td>
-										<td><?php echo $param->output; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are hand washing, pot washing, and toilets segregated from food areas?</b></td>
-										<td><?php echo $param->allergies; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is cleaning done regularly, with pest control in place?</b></td>
-										<td><?php echo $param->medication; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is food and water tested periodically in FSSAI labs?</b></td>
-										<td><?php echo $param->diagnostic; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is raw material procured from licensed suppliers, with expiry checked?</b></td>
-										<td><?php echo $param->lab_results; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are cutlery and utensils made of food-grade materials?</b></td>
-										<td><?php echo $param->pending_investigation; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is garbage removed on time and bins kept clean?</b></td>
-										<td><?php echo $param->medicine_order; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is there segregation of vegetarian and non-vegetarian food?</b></td>
-										<td><?php echo $param->facility_communicated; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is there segregation of raw and cooked food?</b></td>
-										<td><?php echo $param->health_education; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are ill persons excluded from food handling?</b></td>
-										<td><?php echo $param->risk_assessment; ?></td>
-									</tr>
-									<tr>
-										<td><b>Do food handlers maintain personal hygiene?</b></td>
-										<td><?php echo $param->urethral; ?></td>
+										<th colspan="2" style="background:#f0f0f0;"><b>PERSONAL HYGIENE</b></th>
 									</tr>
 
 									<tr>
-										<td><b>Is the FSSAI license updated and displayed?</b></td>
-										<td><?php echo $param->urine_sample; ?></td>
-									</tr>
-									<tr>
-										<td><b>Does the premises design allow for cleaning and prevent dirt entry?</b></td>
-										<td><?php echo $param->bystander; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are internal structures made of non-toxic, impermeable materials?</b></td>
-										<td><?php echo $param->instruments; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are walls, ceilings, and doors free from shedding paint and condensation?</b></td>
-										<td><?php echo $param->sterile; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are floors non-absorbent, non-slippery, and sloped?</b></td>
-										<td><?php echo $param->antibiotics; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are windows fitted with insect-proof screens when open?</b></td>
-										<td><?php echo $param->surgical_site; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are doors smooth, non-absorbent, and pest-proof?</b></td>
-										<td><?php echo $param->wound; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are containers made of non-toxic, impervious, and easy-to-clean materials?</b></td>
-										<td><?php echo $param->documented; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are adequate heating, cooling, refrigeration, and freezing facilities available?</b></td>
-										<td><?php echo $param->adequate_facilities; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is there sufficient lighting, with fixtures protected to prevent contamination?</b></td>
-										<td><?php echo $param->sufficient_lighting; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is there adequate storage for food, packaging materials, and chemicals?</b></td>
-										<td><?php echo $param->storage_facility_for_food; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are hygiene facilities available for staff (handwashing, toilets, changing rooms)?</b></td>
-										<td><?php echo $param->personnel_hygiene_facilities; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is food tested in labs with proper records?</b></td>
-										<td><?php echo $param->food_material_testing; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is raw material procured from approved vendors as per specifications?</b></td>
-										<td><?php echo $param->incoming_material; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are vegetables, fruits, and eggs inspected on receipt for safety hazards?</b></td>
-										<td><?php echo $param->raw_materials_inspection; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are materials stored hygienically at required temperatures, following FIFO/FEFO?</b></td>
-										<td><?php echo $param->storage_of_materials; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are raw materials cleaned thoroughly before food preparation?</b></td>
-										<td><?php echo $param->raw_materials_cleaning; ?></td>
+										<td><b>Are hair caps worn by all food handlers?</b></td>
+										<td>
+											<?php echo !empty($param['identification_details']) ? ucfirst(htmlspecialchars($param['identification_details'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text']) : '-'; ?>
+										</td>
 									</tr>
 
 									<tr>
-										<td><b>Is all equipment sanitized before and after use?</b></td>
-										<td><?php echo $param->equipment_sanitization; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is frozen food thawed hygienically, with proper temperatures for different foods?</b></td>
-										<td><?php echo $param->frozen_food_thawing; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are vegetarian and non-vegetarian items cooked to safe temperatures?</b></td>
-										<td><?php echo $param->vegetarian_and_non_vegetarian; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is cooked food cooled to safe temperatures in a timely manner?</b></td>
-										<td><?php echo $param->cooked_food_cooling; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is food portioned in hygienic conditions, with high-risk food kept cold?</b></td>
-										<td><?php echo $param->food_portioning; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is hot food held at correct temperatures and monitored for up to 42 hours?</b></td>
-										<td><?php echo $param->temperature_control; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is reheating done appropriately, ensuring safe core temperatures?</b></td>
-										<td><?php echo $param->reheating_food; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the oil used suitable for cooking and periodically checked?</b></td>
-										<td><?php echo $param->oil_suitability; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are food transport vehicles clean and capable of maintaining required temperatures?</b></td>
-										<td><?php echo $param->vehicles_for_food; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are food and non-food items separated during transportation?</b></td>
-										<td><?php echo $param->food_non_food_separation; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are cutlery and dining accompaniments sanitized?</b></td>
-										<td><?php echo $param->cutlery_crockery; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is packaging material of food-grade quality?</b></td>
-										<td><?php echo $param->packaging_material_quality; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is equipment cleaning scheduled and water stagnation avoided?</b></td>
-										<td><?php echo $param->equipment_cleaning; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is equipment maintained regularly as per manufacturer instructions?</b></td>
-										<td><?php echo $param->pm_of_equipment; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are measuring and monitoring devices calibrated periodically?</b></td>
-										<td><?php echo $param->measuring_devices; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is there a pest control program, with trained personnel and records?</b></td>
-										<td><?php echo $param->pest_control_program; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are drains designed to handle flow loads and equipped with traps?</b></td>
-										<td><?php echo $param->drain_design; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is food waste removed regularly to prevent accumulation?</b></td>
-										<td><?php echo $param->food_waste_removal; ?></td>
+										<td><b>Are fingernails of food handlers short and clean?</b></td>
+										<td>
+											<?php echo !empty($param['vital_signs']) ? ucfirst(htmlspecialchars($param['vital_signs'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text']) : '-'; ?>
+										</td>
 									</tr>
 
 									<tr>
-										<td><b>Are food handlers given medical exams and inoculations, with records?</b></td>
-										<td><?php echo $param->food_handler_medical; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are ill persons excluded from handling food or materials that touch food?</b></td>
-										<td><?php echo $param->ill_individual_exclusion; ?></td>
-									</tr>
-									<tr>
-										<td><b>Do food handlers maintain cleanliness and appropriate behavior?</b></td>
-										<td><?php echo $param->food_handler_personal; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are food handlers provided with necessary protective gear?</b></td>
-										<td><?php echo $param->food_handler_protection; ?></td>
-									</tr>
-									<tr>
-										<td><b>Does the food business have a consumer complaints system?</b></td>
-										<td><?php echo $param->consumer_complaints; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are food handlers trained and equipped with necessary skills?</b></td>
-										<td><?php echo $param->food_handler_training; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are records maintained for at least one year?</b></td>
-										<td><?php echo $param->documentation_and_records; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are tables and chairs kept clean?</b></td>
-										<td><?php echo $param->tables_and_chairs; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the waiting time for food supplies acceptable?</b></td>
-										<td><?php echo $param->waiting_time_for_food; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the inpatient food supply schedule followed?</b></td>
-										<td><?php echo $param->inpatient_food_schedule; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is banned synthetic substance use avoided?</b></td>
-										<td><?php echo $param->use_of_banned_synthetic; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are TPC meter checks used in food establishments on campus?</b></td>
-										<td><?php echo $param->vegetable_oil; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are used cooking oil disposal records maintained as per FSSAI guidelines?</b></td>
-										<td><?php echo $param->used_oil_disposal; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is used cooking oil collected by authorized aggregators for biodiesel?</b></td>
-										<td><?php echo $param->used_oil_collection; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is daily food waste monitored and food waste audits conducted?</b></td>
-										<td><?php echo $param->monitoring_food_waste; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are methods used to reduce food waste (portion sizes, procurement, etc.)?</b></td>
-										<td><?php echo $param->food_waste_reduction; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is food waste separated and recycled, reused, or composted?</b></td>
-										<td><?php echo $param->food_waste_recycling; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is surplus food shared with those in need?</b></td>
-										<td><?php echo $param->surplus_food; ?></td>
-									</tr>
-									<tr>
-										<td><b>Does the campus minimize plastic use with alternative options?</b></td>
-										<td><?php echo $param->plastic_use; ?></td>
+										<td><b>Are gloves worn by food handlers during the preparation of raw and cooked food?</b></td>
+										<td>
+											<?php echo !empty($param['surgery']) ? ucfirst(htmlspecialchars($param['surgery'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['surgery_text']) ? htmlspecialchars($param['surgery_text']) : '-'; ?>
+										</td>
 									</tr>
 
 									<tr>
-										<td><b>Does the campus organize recycling drives for plastics, cans, and paper?</b></td>
-										<td><?php echo $param->waste_collection; ?></td>
+										<td><b>Are any open infections, cuts, or bandages on hands properly covered while handling food?</b></td>
+										<td>
+											<?php echo !empty($param['complaints_communicated']) ? ucfirst(htmlspecialchars($param['complaints_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are adequate handwashing and drying facilities available?</b></td>
+										<td>
+											<?php echo !empty($param['intake']) ? ucfirst(htmlspecialchars($param['intake'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['intake_text']) ? htmlspecialchars($param['intake_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Do catering staff understand when and how to wash their hands?</b></td>
+										<td>
+											<?php echo !empty($param['output']) ? ucfirst(htmlspecialchars($param['output'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['output_text']) ? htmlspecialchars($param['output_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is smoking prohibited in the kitchen area?</b></td>
+										<td>
+											<?php echo !empty($param['allergies']) ? ucfirst(htmlspecialchars($param['allergies'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['allergies_text']) ? htmlspecialchars($param['allergies_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is Personal Hygiene training regularly provided to new and existing staff?</b></td>
+										<td>
+											<?php echo !empty($param['medication']) ? ucfirst(htmlspecialchars($param['medication'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medication_text']) ? htmlspecialchars($param['medication_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<!-- UTENSILS AND EQUIPMENT -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>UTENSILS AND EQUIPMENT</b></td>
+									</tr>
+
+									<tr>
+										<td><b>Are all small equipment and utensils, including cutting boards, thoroughly cleaned between uses?</b></td>
+										<td>
+											<?php echo !empty($param['diagnostic']) ? ucfirst(htmlspecialchars($param['diagnostic'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are all utensils clean and dry?</b></td>
+										<td>
+											<?php echo !empty($param['lab_results']) ? ucfirst(htmlspecialchars($param['lab_results'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are work surfaces clean?</b></td>
+										<td>
+											<?php echo !empty($param['pending_investigation']) ? ucfirst(htmlspecialchars($param['pending_investigation'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['pending_investigation_text']) ? htmlspecialchars($param['pending_investigation_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are drawers and racks clean?</b></td>
+										<td>
+											<?php echo !empty($param['medicine_order']) ? ucfirst(htmlspecialchars($param['medicine_order'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text']) : '-'; ?>
+										</td>
+									</tr>
+									<!-- CLEANING -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>CLEANING</b></td>
+									</tr>
+
+									<tr>
+										<td><b>Is there periodic cleaning schedule in place for utensils, equipment, and canteen areas?</b></td>
+										<td>
+											<?php echo !empty($param['facility_communicated']) ? ucfirst(htmlspecialchars($param['facility_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['facility_communicated_text']) ? htmlspecialchars($param['facility_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is cleaning equipment stored appropriately?</b></td>
+										<td>
+											<?php echo !empty($param['health_education']) ? ucfirst(htmlspecialchars($param['health_education'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['health_education_text']) ? htmlspecialchars($param['health_education_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the dining area clean and sanitized?</b></td>
+										<td>
+											<?php echo !empty($param['risk_assessment']) ? ucfirst(htmlspecialchars($param['risk_assessment'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['risk_assessment_text']) ? htmlspecialchars($param['risk_assessment_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are cleaning solutions properly labelled and stored?</b></td>
+										<td>
+											<?php echo !empty($param['urethral']) ? ucfirst(htmlspecialchars($param['urethral'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urethral_text']) ? htmlspecialchars($param['urethral_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are Material Safety Data Sheets (MSDS) for chemicals available?</b></td>
+										<td>
+											<?php echo !empty($param['urine_sample']) ? ucfirst(htmlspecialchars($param['urine_sample'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urine_sample_text']) ? htmlspecialchars($param['urine_sample_text']) : '-'; ?>
+										</td>
+									</tr>
+									<!-- GARBAGE DISPOSAL -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>GARBAGE DISPOSAL</b></td>
+									</tr>
+
+									<tr>
+										<td><b>Are garbage containers regularly washed and well maintained?</b></td>
+										<td>
+											<?php echo !empty($param['bystander']) ? ucfirst(htmlspecialchars($param['bystander'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['bystander_text']) ? htmlspecialchars($param['bystander_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the garbage/waste storage area protected from insects, pests, or rodent infestation?</b></td>
+										<td>
+											<?php echo !empty($param['instruments']) ? ucfirst(htmlspecialchars($param['instruments'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['instruments_text']) ? htmlspecialchars($param['instruments_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is garbage removed from the canteen in a timely manner?</b></td>
+										<td>
+											<?php echo !empty($param['sterile']) ? ucfirst(htmlspecialchars($param['sterile'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['sterile_text']) ? htmlspecialchars($param['sterile_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are records of food waste disposal maintained?</b></td>
+										<td>
+											<?php echo !empty($param['antibiotics']) ? ucfirst(htmlspecialchars($param['antibiotics'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['antibiotics_text']) ? htmlspecialchars($param['antibiotics_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are records of oil waste disposal maintained?</b></td>
+										<td>
+											<?php echo !empty($param['surgical_site']) ? ucfirst(htmlspecialchars($param['surgical_site'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['surgical_site_text']) ? htmlspecialchars($param['surgical_site_text']) : '-'; ?>
+										</td>
+									</tr>
+									<!-- PEST CONTROL -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>PEST CONTROL</b></td>
 									</tr>
 									<tr>
-										<td><b>Is water recycled and reused on campus?</b></td>
-										<td><?php echo $param->recycling_and_reusing; ?></td>
+										<td><b>Is a regular pest control program in place, and are records of the same available?</b></td>
+										<td>
+											<?php echo !empty($param['wound']) ? ucfirst(htmlspecialchars($param['wound'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['wound_text']) ? htmlspecialchars($param['wound_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<!-- RECEIVING -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>RECEIVING</b></td>
 									</tr>
 									<tr>
-										<td><b>Are awareness messages about food safety regularly shared on campus?</b></td>
-										<td><?php echo $param->awareness_messages; ?></td>
+										<td><b>Are products supplied by approved suppliers?</b></td>
+										<td>
+											<?php echo !empty($param['documented']) ? ucfirst(htmlspecialchars($param['documented'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['documented_text']) ? htmlspecialchars($param['documented_text']) : '-'; ?>
+										</td>
 									</tr>
 									<tr>
-										<td><b>Are global food safety/environment days celebrated for awareness?</b></td>
-										<td><?php echo $param->celebration; ?></td>
+										<td><b>Are incoming food and supplies promptly inspected upon receipt?</b></td>
+										<td>
+											<?php echo !empty($param['adequate_facilities']) ? ucfirst(htmlspecialchars($param['adequate_facilities'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['adequate_facilities_text']) ? htmlspecialchars($param['adequate_facilities_text']) : '-'; ?>
+										</td>
 									</tr>
 									<tr>
-										<td><b>Are activities organized monthly to encourage healthy food choices?</b></td>
-										<td><?php echo $param->healthy_food_choices; ?></td>
+										<td><b>Are all food items, materials, and supplies immediately moved to appropriate storage areas?</b></td>
+										<td>
+											<?php echo !empty($param['sufficient_lighting']) ? ucfirst(htmlspecialchars($param['sufficient_lighting'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['sufficient_lighting_text']) ? htmlspecialchars($param['sufficient_lighting_text']) : '-'; ?>
+										</td>
 									</tr>
 									<tr>
-										<td><b>Does the campus promote healthier food choices through various means?</b></td>
-										<td><?php echo $param->encouraging_healthier; ?></td>
+										<td><b>Is all food labelled with the name and delivery/expiry date?</b></td>
+										<td>
+											<?php echo !empty($param['storage_facility_for_food']) ? ucfirst(htmlspecialchars($param['storage_facility_for_food'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['storage_facility_for_food_text']) ? htmlspecialchars($param['storage_facility_for_food_text']) : '-'; ?>
+										</td>
 									</tr>
 									<tr>
-										<td><b>Is there a feedback system for suggestions, complaints, and improvements?</b></td>
-										<td><?php echo $param->feedback_system; ?></td>
+										<td><b>Is food protected from contamination during the receiving process?</b></td>
+										<td>
+											<?php echo !empty($param['personnel_hygiene_facilities']) ? ucfirst(htmlspecialchars($param['personnel_hygiene_facilities'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['personnel_hygiene_facilities_text']) ? htmlspecialchars($param['personnel_hygiene_facilities_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<!-- STORAGE -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>STORAGE</b></td>
+									</tr>
+									<tr>
+										<td><b>Is there proper separation between food and chemicals in storage areas?</b></td>
+										<td>
+											<?php echo !empty($param['food_material_testing']) ? ucfirst(htmlspecialchars($param['food_material_testing'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['food_material_testing_text']) ? htmlspecialchars($param['food_material_testing_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td><b>Is air-conditioned storage available where required?</b></td>
+										<td>
+											<?php echo !empty($param['incoming_material']) ? ucfirst(htmlspecialchars($param['incoming_material'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['incoming_material_text']) ? htmlspecialchars($param['incoming_material_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td><b>Is all food stored off the floor?</b></td>
+										<td>
+											<?php echo !empty($param['raw_materials_inspection']) ? ucfirst(htmlspecialchars($param['raw_materials_inspection'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['raw_materials_inspection_text']) ? htmlspecialchars($param['raw_materials_inspection_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td><b>Is the storage unit clean?</b></td>
+										<td>
+											<?php echo !empty($param['storage_of_materials']) ? ucfirst(htmlspecialchars($param['storage_of_materials'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['storage_of_materials_text']) ? htmlspecialchars($param['storage_of_materials_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<!-- TRANSPORT -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>TRANSPORT</b></td>
+									</tr>
+									<tr>
+										<td><b>Are transport containers and carts regularly cleaned?</b></td>
+										<td>
+											<?php echo !empty($param['raw_materials_cleaning']) ? ucfirst(htmlspecialchars($param['raw_materials_cleaning'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['raw_materials_cleaning_text']) ? htmlspecialchars($param['raw_materials_cleaning_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td><b>Are proper temperatures maintained during transport for hot foods?</b></td>
+										<td>
+											<?php echo !empty($param['equipment_sanitization']) ? ucfirst(htmlspecialchars($param['equipment_sanitization'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['equipment_sanitization_text']) ? htmlspecialchars($param['equipment_sanitization_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td><b>Are transport trolleys clean?</b></td>
+										<td>
+											<?php echo !empty($param['frozen_food_thawing']) ? ucfirst(htmlspecialchars($param['frozen_food_thawing'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['frozen_food_thawing_text']) ? htmlspecialchars($param['frozen_food_thawing_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<!-- HEALTH -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>HEALTH</b></td>
+									</tr>
+									<tr>
+										<td><b>Are food handlers' medical checkup records up to date?</b></td>
+										<td>
+											<?php echo !empty($param['vegetarian_and_non_vegetarian']) ? ucfirst(htmlspecialchars($param['vegetarian_and_non_vegetarian'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['vegetarian_and_non_vegetarian_text']) ? htmlspecialchars($param['vegetarian_and_non_vegetarian_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td><b>Is Food Safety training regularly provided?</b></td>
+										<td>
+											<?php echo !empty($param['cooked_food_cooling']) ? ucfirst(htmlspecialchars($param['cooked_food_cooling'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['cooked_food_cooling_text']) ? htmlspecialchars($param['cooked_food_cooling_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<!-- QUALITY -->
+									<tr>
+										<td colspan="2" style="background:#f2f2f2;"><b>QUALITY</b></td>
+									</tr>
+									<tr>
+										<td><b>Are food samples preserved for 24 hours?</b></td>
+										<td>
+											<?php echo !empty($param['food_portioning']) ? ucfirst(htmlspecialchars($param['food_portioning'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['food_portioning_text']) ? htmlspecialchars($param['food_portioning_text']) : '-'; ?>
+										</td>
+									</tr>
+
+
+
+
+
+
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
 
 									<tr>
@@ -356,17 +426,11 @@
 										</td>
 									</tr>
 
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
 
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
+
+
+
+
 
 
 

@@ -21,6 +21,13 @@
    "speciality": "Speciality",
    "patient_category": "Patient Category",
 
+   "name": "Audit Name",
+   "dtandtym": "Date & Time of Audit",
+   "stname": "Audit Short Name",
+   "dep": "Department",
+   "seldep": "Select Department",
+   "audby": "Audit by",
+
    "pagetitle":"IP DISCHARGE FEEDBACK FORM",
    "gustname":"Dear ",
    "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
@@ -154,6 +161,17 @@
    "washrooms_clean": "Are the washrooms clean?",
    "washroom_checklist": "Are the washroom checklists maintained?",
 
+   "terrace_restrict": "Is the access to terrace restricted?",
+   "terrace_neat": "Is the entire premises neat and tidy?",
+
+   "space_linen":"Is there enough space for collecting, cleaning, drying, and storing linen?",
+   "staff_record":"Are the staff maintaining records of linen properly?",
+
+   "hypochlorite":"Are the staff using 1% hypochlorite solution for body fluid-contaminated linen?",
+
+
+
+
    "equipment_numbered": "Are all equipment numbered?",
    "log_sheet": "Is the equipment log sheet available?",
    "equipment_maintain": "Are the equipment maintained in working condition?",
@@ -182,40 +200,13 @@
 
    "cylinders_chained":"Are the cylinders properly chained in storage areas?",
    "empty_cylinders":"Can empty/full cylinders be easily identified?",
-   "warning_signage":"Are warning signages placed wherever necessary?"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   "warning_signage":"Are warning signages placed wherever necessary?",
 
    
-
-
-
-
-
-
-
-
-
-
-
+   "medicine_stored":"Are medicines stored appropriately?",
+   "over_dated":"Are there expired or over-dated medicines?",
+   "near_expiry":"Are near expiry medicines returned to supplier?",
+   "credit_note":"Are staff maintains credit note book?"
 
 
    

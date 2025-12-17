@@ -12,7 +12,7 @@
 
 <head>
 
-  <title>Efeedor Feedback System</title>
+  <title>Quality KPI Management Software - Efeedor Healthcare Experience Management Platform</title>
 
   <meta charset="utf-8">
 
@@ -60,9 +60,9 @@
 
     <!-- Add a button to trigger the modal -->
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}}
-      <i class="fa fa-language" aria-hidden="true"></i>
-    </button>
+    <!--  {{type2}}-->
+    <!--  <i class="fa fa-language" aria-hidden="true"></i>-->
+    <!--</button>-->
     <!-- dropdown for three language end -->
 
   </nav>
@@ -380,17 +380,17 @@
 
                   <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left: 0;">
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0; padding-left: 0; margin-left: 0; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px; text-align: left; padding-left: 0;"><b>{{lang.data_analysis}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px; text-align: left; padding-left: 0;"><b>{{lang.data_analysis}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 100%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0; padding-left: 0; margin-left: 0; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px; text-align: left; padding-left: 0;"><b>{{lang.corrective_action}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px; text-align: left; padding-left: 0;"><b>{{lang.corrective_action}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 100%; height: 85px;" class="form-control" id="textarea2" ng-model="feedback.correctiveAction" rows="5"></textarea>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0; padding-left: 0; margin-left: 0; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px; text-align: left; padding-left: 0;"><b>{{lang.preventive_action}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px; text-align: left; padding-left: 0;"><b>{{lang.preventive_action}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 100%; height: 85px;" class="form-control" id="textarea3" ng-model="feedback.preventiveAction" rows="5"></textarea>
                     </div>
                   </div>
@@ -491,6 +491,30 @@
     </div>
 
   </div>
+
+  <!-- KPI Deadline Popup -->
+  <div class="modal fade" id="deadlineModal" tabindex="-1" role="dialog" aria-labelledby="deadlineModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deadlineModalLabel">KPI Submission Deadline- {{selectedMonths}} {{selectedYears}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" ng-if="deadlineMessage">
+          <p style="margin:0; font-size:16px; line-height:1.5;">
+            {{deadlineMessage}}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- KPI Deadline Popup -->
+
 
 </body>
 

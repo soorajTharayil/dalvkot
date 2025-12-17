@@ -57,13 +57,13 @@
    "kpi_info": "49. PSQ3a - Time taken for triage during the month of ",
    "definition": "Definition : ",
    "kpi_def": "",
-   "formula_para1": "Sum of time taken (in minutes) for triage",   
+   "formula_para1": "Sum of time taken (in minutes) for triage (Numerator)",   
    "hr_placeholder":"Hours",
    "min_placeholder": "Minutes",
    "sec_placeholder": "Seconds",
-   "formula_para2": "Total number of patients coming to the emergency",
+   "formula_para2": "Total number of patients coming to the emergency (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

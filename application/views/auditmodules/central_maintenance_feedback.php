@@ -37,80 +37,179 @@
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
 
+									<!-- Audit Details -->
 									<tr>
-										<td><b>Patient details</b></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
+
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+									<tr>
+										<td>Patient MID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['department']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
 										<td>
-											<?php echo $result->patientname; ?><br>
-											<?php echo $result->patientid; ?><br>
-											<?php echo $result->age; ?><br>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td><b>Are hand hygiene requirements being complied with?</b></td>
+										<td>
+											<?php echo !empty($param['identification_details']) ? ucfirst(htmlspecialchars($param['identification_details'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text']) : '-'; ?>
 										</td>
 									</tr>
 
 									<tr>
-										<td><b>Staff name</b></td>
+										<td><b>Are patients bathed daily with a chlorhexidine preparation?</b></td>
 										<td>
-											<?php echo $result->staffname; ?>
+											<?php echo !empty($param['vital_signs']) ? ucfirst(htmlspecialchars($param['vital_signs'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the access port or hub scrubbed with friction immediately prior to each use with an appropriate antiseptic (chlorhexidine, povidone-iodine, iodophor, or 70% alcohol)?</b></td>
+										<td>
+											<?php echo !empty($param['surgery']) ? ucfirst(htmlspecialchars($param['surgery'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['surgery_text']) ? htmlspecialchars($param['surgery_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are only sterile devices used to access catheters?</b></td>
+										<td>
+											<?php echo !empty($param['complaints_communicated']) ? ucfirst(htmlspecialchars($param['complaints_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are dressings that are wet, soiled, or dislodged immediately replaced?</b></td>
+										<td>
+											<?php echo !empty($param['intake']) ? ucfirst(htmlspecialchars($param['intake'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['intake_text']) ? htmlspecialchars($param['intake_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are routine dressing changes performed using aseptic technique with clean or sterile gloves?</b></td>
+										<td>
+											<?php echo !empty($param['output']) ? ucfirst(htmlspecialchars($param['output'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['output_text']) ? htmlspecialchars($param['output_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are administration sets for continuous infusions changed at the frequency set by the hospital?</b></td>
+										<td>
+											<?php echo !empty($param['allergies']) ? ucfirst(htmlspecialchars($param['allergies'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['allergies_text']) ? htmlspecialchars($param['allergies_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the need for each central line assessed daily?</b></td>
+										<td>
+											<?php echo !empty($param['medication']) ? ucfirst(htmlspecialchars($param['medication'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medication_text']) ? htmlspecialchars($param['medication_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the site inspected for redness, irritation, or infection, and is this inspection documented?</b></td>
+										<td>
+											<?php echo !empty($param['diagnostic']) ? ucfirst(htmlspecialchars($param['diagnostic'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is hand hygiene performed before and after each contact?</b></td>
+										<td>
+											<?php echo !empty($param['lab_results']) ? ucfirst(htmlspecialchars($param['lab_results'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text']) : '-'; ?>
 										</td>
 									</tr>
 									<tr>
-										<td><b>Are hand hygiene requirements being complied with?</b></td>
-										<td><?php echo $result->identification_details; ?></td>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
-									<tr>
-										<td><b>Are patients bathed daily with a chlorhexidine preparation?</b></td>
-										<td><?php echo $result->vital_signs; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the access port or hub scrubbed with friction immediately prior to each use with an appropriate antiseptic (chlorhexidine, povidone-iodine, iodophor, or 70% alcohol)?</b></td>
-										<td><?php echo $result->surgery; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are only sterile devices used to access catheters?</b></td>
-										<td><?php echo $result->complaints_communicated; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are dressings that are wet, soiled, or dislodged immediately replaced?</b></td>
-										<td><?php echo $result->intake; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are routine dressing changes performed using aseptic technique with clean or sterile gloves?</b></td>
-										<td><?php echo $result->output; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are administration sets for continuous infusions changed at the frequency set by the hospital?</b></td>
-										<td><?php echo $result->allergies; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the need for each central line assessed daily?</b></td>
-										<td><?php echo $result->medication; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the site inspected for redness, irritation, or infection, and is this inspection documented?</b></td>
-										<td><?php echo $result->diagnostic; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is hand hygiene performed before and after each contact?</b></td>
-										<td><?php echo $result->lab_results; ?></td>
-									</tr>
+
 
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
 
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
 
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
+
+
+
+
 
 
 

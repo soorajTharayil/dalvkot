@@ -4,6 +4,11 @@
 	include 'info_buttons_ip.php';
 	include 'audit_tables.php';
 
+	$code_red_feedback = base_url('audit/code_red_feedback?id=');
+	$code_blue_feedback = base_url('audit/code_blue_feedback?id=');
+	$code_pink_feedback = base_url('audit/code_pink_feedback?id=');
+	$code_yellow_feedback = base_url('audit/code_yellow_feedback?id=');
+
 
 	/* START DATE AND CALENDER */
 	$dates = get_from_to_date();
@@ -31,13 +36,116 @@
 	?>
 
 		<div class="row">
+
+			<!-- Audit details -->
 			<div class="col-lg-12 col-sm-12">
 				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<strong>Audit Details</strong>
+					</div>
+
+					<div class="panel-body" style="font-size:14px; line-height:1.5;">
+
+						<?php
+						// Frequency (case-insensitive by title)
+						$auditTitle = 'Mock Drills audit';
+						$norm = mb_strtolower($auditTitle, 'UTF-8');
+
+						$row = $this->db->select('frequency, target')
+							->from('bf_audit_frequency')
+							->where("LOWER(title) = " . $this->db->escape($norm), NULL, FALSE)
+							->limit(1)->get()->row();
+
+						$freq   = $row ? $row->frequency : 'N/A';
+
+
+						// Load all users
+						$users = $this->db->select('user.*, roles.role_id')
+							->join('roles', 'user.user_role = roles.role_id')
+							->order_by('roles.role_id', 'asc')
+							->get('user')->result();
+
+						// Per-user permission check (example feature: AUDIT-FORM1)
+						$custodian_names = [];
+						if (!empty($users)) {
+							foreach ($users as $user) {
+								$this->db->from('user_permissions as UP');
+								$this->db->select('F.feature_name');
+								$this->db->join('features as F', 'UP.feature_id = F.feature_id');
+								$this->db->where('UP.user_id', $user->user_id);
+								$this->db->where('UP.status', 1);
+								$perms = $this->db->get()->result();
+
+								foreach ($perms as $p) {
+									if (strcasecmp(trim($p->feature_name), 'AUDIT-FORM20') === 0) {
+										$custodian_names[] = htmlspecialchars($user->firstname, ENT_QUOTES, 'UTF-8');
+										break;
+									}
+								}
+							}
+						}
+						$custodian_names = array_unique($custodian_names);
+
+						// Last audit date (using your current array shape)
+						$lastDate = (!empty($feedbacktaken) && !empty($feedbacktaken[0]->datet))
+							? date('d-M-Y', strtotime($feedbacktaken[0]->datet))
+							: 'N/A';
+						?>
+
+						<table class="table table-bordered table-condensed" style="margin:0;">
+							<tbody>
+								<tr>
+									<th style="width:240px;">Audit Definition</th>
+									<td>Audits code mock drills to assess emergency response, child safety, staff readiness & debriefing, aligned with NABH, JCI, CAHO, MoHFW & hospital safety protocols for preparedness.</td>
+								</tr>
+								<tr>
+									<th>Audit Frequency</th>
+									<td>
+										<?= htmlspecialchars($freq, ENT_QUOTES, 'UTF-8'); ?>
+
+									</td>
+								</tr>
+								<tr>
+									<th>Last Audit Date</th>
+									<td><?= $lastDate; ?></td>
+								</tr>
+								<tr>
+									<th>Audit Custodians</th>
+									<td><?= !empty($custodian_names) ? implode(', ', $custodian_names) : 'N/A'; ?></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+
+
+
+
+			<div class="col-lg-12 col-sm-12">
+				<div class="panel panel-default">
+					<div style="float: right; margin-top: 10px; margin-right: 10px;">
+						<span style="font-size:17px"><strong>Download Chart:</strong></span>
+						<span style="margin-right: 10px;">
+							<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
+								onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
+						</span>
+						<span>
+							<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
+								onclick="downloadChartImage()" data-toggle="tooltip"
+								title="Download Chart as Image"></i>
+						</span>
+					</div>
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
 							<?php $text = "In the " .  $dates['pagetitle'] . "," . "a total of " . count($ip_feedbacks_count) . " audits were conducted." ?>
 							<span class="typing-text"></span>
-
+						</span>
+						<span id="audit-report-text" style="display: none;">
+							<?php echo "In the " . $dates['pagetitle'] . ", a total of " . count($ip_feedbacks_count) . " audits were conducted."; ?>
 						</span>
 					</div>
 					<div class="panel-body" style="height:250px;" id="bar">
@@ -52,8 +160,11 @@
 
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: left;">
-						<h3>Code Pink</h3>
+					<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+						<div>
+							<strong>Code Pink</strong>
+						</div>
+						
 					</div>
 					<div class="panel-body">
 						<?php
@@ -63,73 +174,66 @@
 
 						foreach ($feedbacktaken as $r) {
 							$param = json_decode($r->dataset);
+							// print_r($param);
+							// 		exit;
+
 							if ($param->checklist == 'Code Pink') {
 								// Add id to the data object
 								$param->id = $r->id;
 								$param->datetime = $r->datetime;
+								$param->name = $r->name;
 								$param->location = $r->location;
 								$codePinkData[] = $param;
 							}
 						}
 
 						// Function to display the data for Code Pink
-						function displayCodePinkTable($data)
+						function displayCodePinkTable($data, $code_pink_feedback)
 						{
 							if (!empty($data)) {
 								echo '<table class="codepink table table-striped table-hover table-bordered" cellspacing="0" width="100%">';
 								echo '<thead>
 									<th>Sl. No.</th>
-									<th>Date</th>
+									<th>Audit by</th>
+									<th>Audit Date</th>
 									<th>Location</th>
 									<th>Hospital Emergency Code</th>
-									<th>Spot activation time</th>
-									<th>Announcement time</th>
-									<th>Number of code announcements</th>
-									<th>Was the description of the child included in the announcement?</th>
-									<th>Was the Code Pink team activated?</th>
-									<th>Were all exit points closed?</th>
-									<th>Were security guards positioned at all entry/exit points</th>
-									<th>Was counseling provided to the mother?</th>
-									<th>Were all areas, including exteriors, terrace searched?</th>
-									<th>Were suspicious persons within the hospital premises checked?</th>
-									<th>Were all areas closely examined through CCTV?</th>
-									<th>Was the child handed over?</th>
-									<th>Were all events described to the mother?</th>
-									<th>Code Pink clearance time</th>
-									<th>Are deviations explained?</th>
-									<th>Have all events of Code Pink been debriefed?</th>
-									<th>Code Pink closure time</th>
-									<th>Additional comments</th>
+									<th>View</th>
+									
 								</thead>';
 								echo '<tbody>';
 								$sl = 1;
 								foreach ($data as $param) {
 									echo '<tr class="' . (($sl & 1) ? 'odd gradeX' : 'even gradeC') . '" onclick="window.location=\'' . base_url('audit/code_pink_feedback?id=') . $param->id . '\';" style="cursor: pointer;">';
 									echo "<td>$sl</td>";
+
+									echo '<td>' . $param->name . '</td>';
+
 									echo '<td style="white-space: nowrap;">' .
 										(isset($param->datetime) ? date('d-M-Y', strtotime($param->datetime)) . '<br>' . date('g:i a', strtotime($param->datetime)) : '') .
 										'</td>';
 									echo '<td>' . $param->location . '</td>';
 									echo '<td>' . $param->checklist . '</td>';
-									echo '<td>' . $param->initial_assessment_hr1 . '</td>';
-									echo '<td>' . $param->initial_assessment_hr2 . '</td>';
-									echo '<td>' . $param->number_of_code . '</td>';
-									echo '<td>' . $param->child_announce . '</td>';
-									echo '<td>' . $param->code_pink_team . '</td>';
-									echo '<td>' . $param->exit_points . '</td>';
-									echo '<td>' . $param->security_guard . '</td>';
-									echo '<td>' . $param->counseling_to_mother . '</td>';
-									echo '<td>' . $param->searched . '</td>';
-									echo '<td>' . $param->suspicious . '</td>';
-									echo '<td>' . $param->cctv . '</td>';
-									echo '<td>' . $param->handing . '</td>';
-									echo '<td>' . $param->events . '</td>';
-									echo '<td>' . $param->initial_assessment_hr4 . '</td>';
-									echo '<td>' . $param->deviations . '</td>';
-									echo '<td>' . $param->debrief_p . '</td>';
-									echo '<td>' . $param->initial_assessment_hr5 . '</td>';
-									echo '<td>' . $param->comments . '</td>';
-									echo '</tr>';
+									echo '<td>
+									<a href="' . $code_pink_feedback . $param->id . '" class="btn btn-info btn-sm"
+										style="padding: 6px 14px; font-size: 13px;">
+										View Details
+									</a>';
+
+									if (isfeature_active('DELETE-AUDIT') === true) {
+
+										echo '<a class="btn btn-sm btn-danger"
+										href="' . base_url($segment1 . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())) . '"
+										onclick="return confirm(\'Are you sure you want to delete this audit record?\');"
+										title="Delete the audit record"
+										style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+										<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+									</a>';
+									}
+
+									echo '</td></tr>';
+
+
 									$sl++;
 								}
 								echo '</tbody>';
@@ -138,7 +242,7 @@
 						}
 
 						// Display the tables for each checklist type
-						displayCodePinkTable($codePinkData);
+						displayCodePinkTable($codePinkData, $code_pink_feedback);
 
 						?>
 					</div>
@@ -149,8 +253,11 @@
 
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: left;">
-						<h3>Code Red</h3>
+					<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+						<div>
+							<strong>Code Red</strong>
+						</div>
+						
 					</div>
 					<div class="panel-body">
 						<?php
@@ -164,41 +271,26 @@
 								// Add id to the data object
 								$param->id = $r->id;
 								$param->datetime = $r->datetime;
+								$param->name = $r->name;
 								$param->location = $r->location;
 								$codeRedData[] = $param;
 							}
 						}
 
-						function displayCodeRedTable($data)
+						function displayCodeRedTable($data, $code_red_feedback)
 						{
 							if (!empty($data)) {
 								echo '<table class="codered table table-striped table-hover table-bordered" cellspacing="0" width="100%">';
 								echo '<thead>
                                     <tr>
                                       <th>Sl. No.</th>
-                                      <th>Date</th>
+                                      <th>Audit by</th>									  
+                                      <th>Audit Date</th>
                                       <th>Location</th>
                                       <th>Hospital Emergency Code</th>
-                                      <th>Spot activation time</th>
-                                      <th>Announcement time</th>
-                                      <th>Number of code announcements</th>
-                                      <th>Team arrival time</th>
-                                      <th>Number of Respondents</th>
-                                      <th>Have they tried to assess the situation?</th>
-                                      <th>Is there availability of fire fighting equipment?</th>
-                                      <th>Have they demonstrated the use of fire fighting equipment?</th>
-                                      <th>Is the lift closed?</th>
-                                      <th>Are the fire doors opened?</th>
-                                      <th>Has the patient safety officer announced evacuation?</th>
-                                      <th>Are transportation modes available for evacuation?</th>
-                                      <th>Is the triage arranged?</th>
-                                      <th>Have they cleared the assembly point?</th>
-                                      <th>Has the safety officer and team revisited the spot for follow-up?</th>
-                                      <th>Code Red clearance time</th>
-                                      <th>Are deviations explained?</th>
-                                      <th>Have all events of Code Red been debriefed?</th>
-                                      <th>Code Red closure time</th>
-                                      <th>Additional comments</th>
+
+									  <th>View</th>
+                                      
                                     </tr>
                                 </thead>';
 								echo '<tbody>';
@@ -206,32 +298,35 @@
 								foreach ($data as $param) {
 									echo '<tr class="' . (($sl & 1) ? 'odd gradeX' : 'even gradeC') . '" onclick="window.location=\'' . base_url('audit/code_red_feedback?id=') . $param->id . '\';" style="cursor: pointer;">';
 									echo "<td>$sl</td>";
+
+									echo '<td>' . $param->name . '</td>';
+
 									echo '<td style="white-space: nowrap;">' .
 										(isset($param->datetime) ? date('d-M-Y', strtotime($param->datetime)) . '<br>' . date('g:i a', strtotime($param->datetime)) : '') .
 										'</td>';
 									echo '<td>' . $param->location . '</td>';
 									echo '<td>' . $param->checklist . '</td>';
-									echo '<td>' . $param->initial_assessment_hr1 . '</td>';
-									echo '<td>' . $param->initial_assessment_hr2 . '</td>';
-									echo '<td>' . $param->number_of_code . '</td>';
-									echo '<td>' . $param->initial_assessment_hr3 . '</td>';
-									echo '<td>' . $param->respondents . '</td>';
-									echo '<td>' . $param->situation . '</td>';
-									echo '<td>' . $param->fire . '</td>';
-									echo '<td>' . $param->demonstrated . '</td>';
-									echo '<td>' . $param->lift . '</td>';
-									echo '<td>' . $param->doors . '</td>';
-									echo '<td>' . $param->safety . '</td>';
-									echo '<td>' . $param->transportation . '</td>';
-									echo '<td>' . $param->action . '</td>';
-									echo '<td>' . $param->assembly_point . '</td>';
-									echo '<td>' . $param->follow_up . '</td>';
-									echo '<td>' . $param->initial_assessment_hr4 . '</td>';
-									echo '<td>' . $param->deviations . '</td>';
-									echo '<td>' . $param->debrief . '</td>';
-									echo '<td>' . $param->initial_assessment_hr5 . '</td>';
-									echo '<td>' . $param->comments . '</td>';
-									echo '</tr>';
+									
+									echo '<td>
+								<a href="' . $code_red_feedback . $param->id . '" class="btn btn-info btn-sm"
+									style="padding: 6px 14px; font-size: 13px;">
+									View Details
+								</a>';
+
+									if (isfeature_active('DELETE-AUDIT') === true) {
+
+										echo '<a class="btn btn-sm btn-danger"
+										href="' . base_url($segment1 . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())) . '"
+										onclick="return confirm(\'Are you sure you want to delete this audit record?\');"
+										title="Delete the audit record"
+										style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+										<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+									</a>';
+									}
+
+									echo '</td></tr>';
+
+
 									$sl++;
 								}
 								echo '</tbody>';
@@ -241,7 +336,7 @@
 
 
 						// Display the tables for each checklist type
-						displayCodeRedTable($codeRedData);
+						displayCodeRedTable($codeRedData, $code_red_feedback);
 
 						?>
 					</div>
@@ -249,11 +344,13 @@
 				<!-- End of Code Red table -->
 			</div>
 
-
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: left;">
-						<h3>Code Blue</h3>
+					<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+						<div>
+							<strong>Code Blue</strong>
+						</div>
+						
 					</div>
 					<div class="panel-body">
 						<?php
@@ -267,90 +364,63 @@
 								// Add id to the data object
 								$param->id = $r->id;
 								$param->datetime = $r->datetime;
+								$param->name = $r->name;
 								$param->location = $r->location;
 								$codeBlueData[] = $param;
 							}
 						}
 
-						function displayCodeBlueTable($data)
+						function displayCodeBlueTable($data, $code_blue_feedback)
 						{
 							if (!empty($data)) {
 								echo '<table class="codeblue table table-striped table-hover table-bordered" cellspacing="0" width="100%">';
 								echo '<thead>
                                     <tr>
                                       <th>Sl. No.</th>
-                                      <th>Date</th>
+                                      <th>Audit by</th>
+                                      <th>Audit Date</th>
                                       <th>Location</th>
                                       <th>Hospital Emergency Code</th>
-                                      <th>Spot activation time</th>
-                                      <th>Announcement time</th>
-                                      <th>Number of code announcements</th>
-                                      <th>Team arrival time</th>
-                                      <th>Number of Respondents</th>
-                                      <th>Was the crash cart or emergency kit available?</th>
-                                      <th>Was the patient identified?</th>
-                                      <th>Was the patient\'s response checked?</th>
-                                      <th>Was the patient\'s circulation (pulse) checked?</th>
-                                      <th>Was the airway cleared?</th>
-                                      <th>Was the patient\'s breathing checked?</th>
-                                      <th>Was CPR started?</th>
-                                      <th>Were compressions given as per standard?</th>
-                                      <th>Were rescue breaths given?</th>
-                                      <th>Were patient transportation modes available?</th>
-                                      <th>Were proper safety measures used?</th>
-                                      <th>Was a lift available?</th>
-                                      <th>Was the patient shifted to the CCU?</th>
-                                      <th>Code Blue clearance time</th>
-                                      <th>Was the medical team available in the CCU?</th>
-                                      <th>Was the CCU ready to receive the patient with adequate life support measures?</th>
-                                      <th>Was the patient\'s condition assessed?</th>
-                                      <th>Was DC shock applied?</th>
-                                      <th>Were deviations communicated?</th>
-                                      <th>Was there a repetition of deviated areas?</th>
-                                      <th>Were all events of Code Blue debriefed?</th>
-                                      <th>Code Blue closure time</th>
-                                      <th>Additional comments</th>
+									  <th>View</th>
+                                     
+                                      
                                     </tr>
                                 </thead>';
 								echo '<tbody>';
 								$sl = 1;
 								foreach ($data as $param) {
+
 									echo '<tr class="' . (($sl & 1) ? 'odd gradeX' : 'even gradeC') . '" onclick="window.location=\'' . base_url('audit/code_blue_feedback?id=') . $param->id . '\';" style="cursor: pointer;">';
 									echo "<td>$sl</td>";
+
+									echo '<td>' . $param->name . '</td>';
+
 									echo '<td style="white-space: nowrap;">' .
 										(isset($param->datetime) ? date('d-M-Y', strtotime($param->datetime)) . '<br>' . date('g:i a', strtotime($param->datetime)) : '') .
 										'</td>';
 									echo '<td>' . $param->location . '</td>';
 									echo '<td>' . $param->checklist . '</td>';
-									echo '<td>' . $param->initial_assessment_hr1 . '</td>';
-									echo '<td>' . $param->initial_assessment_hr2 . '</td>';
-									echo '<td>' . $param->number_of_code . '</td>';
-									echo '<td>' . $param->initial_assessment_hr3 . '</td>';
-									echo '<td>' . $param->respondents . '</td>';
-									echo '<td>' . $param->emergency . '</td>';
-									echo '<td>' . $param->identified . '</td>';
-									echo '<td>' . $param->response . '</td>';
-									echo '<td>' . $param->circulation . '</td>';
-									echo '<td>' . $param->airway . '</td>';
-									echo '<td>' . $param->breathing . '</td>';
-									echo '<td>' . $param->cpr . '</td>';
-									echo '<td>' . $param->compressions . '</td>';
-									echo '<td>' . $param->rescue . '</td>';
-									echo '<td>' . $param->mode . '</td>';
-									echo '<td>' . $param->safety_measure . '</td>';
-									echo '<td>' . $param->lift_avail . '</td>';
-									echo '<td>' . $param->shift_ccu . '</td>';
-									echo '<td>' . $param->initial_assessment_hr4 . '</td>';
-									echo '<td>' . $param->medical . '</td>';
-									echo '<td>' . $param->adequate . '</td>';
-									echo '<td>' . $param->condition . '</td>';
-									echo '<td>' . $param->shock . '</td>';
-									echo '<td>' . $param->deviations_c . '</td>';
-									echo '<td>' . $param->repetition . '</td>';
-									echo '<td>' . $param->debriefed . '</td>';
-									echo '<td>' . $param->initial_assessment_hr5 . '</td>';
-									echo '<td>' . $param->comments . '</td>';
-									echo '</tr>';
+								
+									echo '<td>
+									<a href="' . $code_blue_feedback . $param->id . '" class="btn btn-info btn-sm"
+										style="padding: 6px 14px; font-size: 13px;">
+										View Details
+									</a>';
+
+									if (isfeature_active('DELETE-AUDIT') === true) {
+
+										echo '<a class="btn btn-sm btn-danger"
+										href="' . base_url($segment1 . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())) . '"
+										onclick="return confirm(\'Are you sure you want to delete this audit record?\');"
+										title="Delete the audit record"
+										style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+										<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+									</a>';
+									}
+
+									echo '</td></tr>';
+
+
 									$sl++;
 								}
 								echo '</tbody>';
@@ -359,8 +429,9 @@
 						}
 
 
+
 						// Display the tables for each checklist type
-						displayCodeBlueTable($codeBlueData);
+						displayCodeBlueTable($codeBlueData, $code_blue_feedback);
 						?>
 					</div>
 				</div>
@@ -368,8 +439,115 @@
 			</div>
 
 
+
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+				<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+						<div>
+							<strong>Code Yellow</strong>
+						</div>
+						
+					</div>
+					<div class="panel-body">
+						<?php
+						// Initialize arrays to collect data for each checklist type
+						$codeyellowData = [];
+
+						// Collect data
+						foreach ($feedbacktaken as $r) {
+							$param = json_decode($r->dataset);
+							if ($param->checklist == 'Code Yellow') {
+								// Add id to the data object
+								$param->id = $r->id;
+								$param->datetime = $r->datetime;
+								$param->name = $r->name;
+								$param->location = $r->location;
+								$codeyellowData[] = $param;
+							}
+						}
+						// echo '<pre>';
+						// 			print_r($param);
+						// 			echo '</pre>';
+						// 			exit;
+
+						function displayCodeyellowTable($data, $code_yellow_feedback)
+						{
+							if (!empty($data)) {
+								echo '<table class="codeyellow table table-striped table-hover table-bordered" cellspacing="0" width="100%">';
+								echo '<thead>
+                                    <tr>
+                                      <th>Sl. No.</th>
+									  <th>Audit By</th>
+                                      <th>Audit Date</th>
+									  
+                                      <th>Location</th>
+                                      <th>Hospital Emergency Code</th>
+									  <th>View</th>
+                                     
+                                      
+                                    </tr>
+                                </thead>';
+								echo '<tbody>';
+								$sl = 1;
+								foreach ($data as $param) {
+
+									echo '<tr class="' . (($sl & 1) ? 'odd gradeX' : 'even gradeC') . '" onclick="window.location=\'' . base_url('audit/code_yellow_feedback?id=') . $param->id . '\';" style="cursor: pointer;">';
+									echo "<td>$sl</td>";
+
+
+									echo '<td>' . $param->name . '</td>';
+
+									echo '<td style="white-space: nowrap;">' .
+										(isset($param->datetime) ? date('d-M-Y', strtotime($param->datetime)) . '<br>' . date('g:i a', strtotime($param->datetime)) : '') .
+										'</td>';
+									echo '<td>' . $param->location . '</td>';
+									echo '<td>' . $param->checklist . '</td>';
+								
+									echo '<td>
+									<a href="' . $code_yellow_feedback . $param->id . '" class="btn btn-info btn-sm"
+										style="padding: 6px 14px; font-size: 13px;">
+										View Details
+									</a>';
+
+									if (isfeature_active('DELETE-AUDIT') === true) {
+
+										echo '<a class="btn btn-sm btn-danger"
+										href="' . base_url($segment1 . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())) . '"
+										onclick="return confirm(\'Are you sure you want to delete this audit record?\');"
+										title="Delete the audit record"
+										style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+										<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+									</a>';
+									}
+
+									echo '</td></tr>';
+
+
+									$sl++;
+								}
+								echo '</tbody>';
+								echo '</table>';
+							}
+						}
+
+
+
+						// Display the tables for each checklist type
+						displayCodeyellowTable($codeyellowData, $code_yellow_feedback);
+						?>
+					</div>
+				</div>
+				<!-- End of Code yellow table -->
+			</div>
+
+
+
+
+
 			<!-- /.row -->
 		</div>
+
+
 
 	<?php } else {   ?>
 		<div class="row">
@@ -485,7 +663,7 @@
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_tat_blood"; // Replace with your API endpoint
+		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_mock_drill"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {
@@ -590,4 +768,94 @@
 		resposnsechart(resposnseChart);
 	}, 1000);
 	/*patient_feedback_analysis*/
+</script>
+
+<script>
+	function printChart() {
+		const canvas = document.getElementById('resposnsechart');
+		const dataUrl = canvas.toDataURL();
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		const windowContent = `
+		<html>
+		<head>
+			<title>Print Chart</title>
+			<style>
+				body {
+					text-align: center;
+					margin: 0;
+					padding: 20px;
+					font-family: Arial;
+				}
+				h3, p {
+					margin-bottom: 10px;
+				}
+				img {
+					max-width: 100%;
+					height: auto;
+				}
+			</style>
+		</head>
+		<body>
+			<h3>MOCK DRILLS AUDIT</h3>
+			<p>${reportText}</p>
+			<img src="${dataUrl}" alt="Chart">
+		</body>
+		</html>
+	`;
+
+		const printWin = window.open('', '', 'width=800,height=600');
+		printWin.document.open();
+		printWin.document.write(windowContent);
+		printWin.document.close();
+		printWin.focus();
+
+		setTimeout(() => {
+			printWin.print();
+			printWin.close();
+		}, 500);
+	}
+</script>
+<script>
+	function downloadChartImage() {
+		const canvas = document.getElementById('resposnsechart');
+		const chartImage = canvas.toDataURL('image/png');
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		// Create new canvas
+		const newCanvas = document.createElement('canvas');
+		const ctx = newCanvas.getContext('2d');
+
+		const width = canvas.width;
+		const height = canvas.height;
+		const extraHeight = 60; // Space for text
+
+		newCanvas.width = width;
+		newCanvas.height = height + extraHeight;
+
+		// White background
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+		// Draw the report text
+		ctx.fillStyle = '#000';
+		ctx.font = '20px Arial';
+		ctx.fillText(reportText, 10, 30);
+
+		// Draw the chart image after it loads
+		const img = new Image();
+		img.onload = function() {
+			ctx.drawImage(img, 0, extraHeight);
+
+			// Create downloadable image
+			const finalImage = newCanvas.toDataURL('image/png');
+			const link = document.createElement('a');
+			link.href = finalImage;
+			link.download = 'MOCK DRILLS AUDIT.png';
+			link.click();
+		};
+		img.src = chartImage;
+	}
 </script>

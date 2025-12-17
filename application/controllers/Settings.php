@@ -144,9 +144,24 @@ class Settings extends CI_Controller
 		redirect('auditdepartment');
 	}
 
+	public function audit_area()
+	{
+		redirect('audit_area');
+	}
+
+	public function audit_custodians()
+	{
+		redirect('audit_custodians');
+	}
+
 	public function audit_patient_category()
 	{
 		redirect('audit_patient_category');
+	}
+
+	public function audit_doctor()
+	{
+		redirect('audit_doctor');
 	}
 
 	public function audit_safety_department()
@@ -206,6 +221,12 @@ class Settings extends CI_Controller
 	}
 
 
+	public function audit_frequency()
+	{
+		redirect('audit_frequency');
+	}
+
+
 
 	public function staffs()
 	{
@@ -257,6 +278,7 @@ class Settings extends CI_Controller
 			$this->upload_qucode();
 			$this->upload_ipqucode();
 			$this->upload_opqucode();
+			$this->upload_opqcode_eme();
 			$this->upload_ipposterqucode();
 			$this->upload_opposterqucode();
 		}
@@ -359,6 +381,8 @@ class Settings extends CI_Controller
 		}
 		return true;
 	}
+
+
 	public function upload_opqucode()
 	{
 		$config['upload_path']   = './uploads/';
@@ -380,6 +404,31 @@ class Settings extends CI_Controller
 		}
 		return true;
 	}
+
+
+	public function upload_opqcode_eme()
+	{
+		$config['upload_path']   = './uploads/';
+		$config['allowed_types'] = '*';
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('op_eme_qr_code_image')) {
+
+			$error = array('error' => $this->upload->display_errors());
+		} else {
+			$data = array('upload_data' => $this->upload->data());
+
+			$op_eme_qr_code_image = $data['upload_data']['file_name'];
+			$d = array(
+				'op_eme_qr_code_image' => $op_eme_qr_code_image
+			);
+			$this->db->where('setting_id', 2);
+			$this->db->update('setting', $d);
+		}
+		return true;
+	}
+
+
 	public function upload_ipposterqucode()
 	{
 		$config['upload_path']   = './uploads/';

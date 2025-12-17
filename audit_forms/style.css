@@ -241,6 +241,61 @@ select.list-dt:focus {
     object-fit: cover
 }
 
+.menu-dropdown {
+      position: absolute;
+      right: 10px;
+      top: 50px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      width: 200px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .menu-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-dropdown ul li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-dropdown ul li a {
+      text-decoration: none;
+      color: black;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .menu-dropdown ul li a i {
+      margin-right: 10px;
+    }
+
+    .menu-dropdown ul li:last-child {
+      border-bottom: none;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+    }
+
+    [ng-show="menuVisible"] {
+      display: block;
+    }
+
+    .menu-dropdown ul li a:hover {
+      color: #555;
+    }
+
 
 ul.modulelist {
     padding: 0px;

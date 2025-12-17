@@ -74,7 +74,8 @@ if (!in_array($table, $allowedTables)) {
 	exit();
 }
 
-$query = "SELECT * FROM `$table` WHERE MONTH(`datet`) = '$monthNumber' AND YEAR(`datet`) = '$year'";
+$query = " SELECT * FROM `$table` WHERE MONTH(`datetime`) = '$monthNumber' AND YEAR(`datetime`) = '$year' AND (`status` IS NULL OR `status` != 'Deleted')";
+
 $result = mysqli_query($con, $query);
 
 if (mysqli_num_rows($result) > 0) {

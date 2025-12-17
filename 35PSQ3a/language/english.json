@@ -58,14 +58,14 @@
    "kpi_info": "35. PSQ3a - Percentage of Hospitalized patients with hypoglycemia who achieved targeted blood glucose level for the month of",
    "definition": "Definition:",
    "kpi_def": "The definitions provided by the American diabetes association (ADA) from time to time shall be used to define hypoglycemia. The blood glucose level is detected by POCT as well as continuous glucose monitoring.",
-   "formula_para1": "Number of patients with hypoglycemic events where the target glucose level was achieved post-treatment",   
+   "formula_para1": "Number of patients with hypoglycemic events where the target glucose level was achieved post-treatment (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of patients with Hypoglycemic events",
+   "formula_para2": "Number of patients with Hypoglycemic events (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

@@ -15,6 +15,10 @@ if (count($data) > 1) {
     $location = $data['location'];
     $email = $data['email'];
     $contactnumber = $data['contactnumber'];
+    $audit_date = $data['audit_date'];
+    $audit_type = $data['audit_type'];
+
+
 
     // Create an associative array with the fields to be consolidated
 
@@ -66,6 +70,35 @@ if (count($data) > 1) {
         case 'Code Blue':
             $dataset['initial_assessment_hr1'] = $data['initial_assessment_hr1'];
             $dataset['initial_assessment_hr2'] = $data['initial_assessment_hr2'];
+            $dataset['yell2'] = $data['yell2'];
+            $dataset['yell3'] = $data['yell3'];
+            $dataset['yell4'] = $data['yell4'];
+            $dataset['yell5'] = $data['yell5'];
+            $dataset['yell6'] = $data['yell6'];
+            $dataset['yell7'] = $data['yell7'];
+            $dataset['yell8'] = $data['yell8'];
+            $dataset['yell9'] = $data['yell9'];
+            $dataset['yell10'] = $data['yell10'];
+            $dataset['yell11'] = $data['yell11'];
+            $dataset['yell12'] = $data['yell12'];
+            $dataset['yell13'] = $data['yell13'];
+            $dataset['yell14'] = $data['yell14'];
+            $dataset['initial_assessment_hr3'] = $data['initial_assessment_hr3'];
+            $dataset['yell16'] = $data['yell16'];
+            $dataset['yell17'] = $data['yell17'];
+            $dataset['yell18'] = $data['yell18'];
+            $dataset['initial_assessment_hr4'] = $data['initial_assessment_hr4'];
+            $dataset['yell19'] = $data['yell19'];
+            $dataset['yell20'] = $data['yell20'];
+            $dataset['yell21'] = $data['yell21'];
+            $dataset['yell22'] = $data['yell22'];
+            $dataset['yell23'] = $data['yell23'];
+            $dataset['initial_assessment_hr5'] = $data['initial_assessment_hr5'];
+            $dataset['comments'] = $data['dataAnalysis'];
+            break;
+            case 'Code Yellow':
+            $dataset['initial_assessment_hr1'] = $data['initial_assessment_hr1'];
+            $dataset['initial_assessment_hr2'] = $data['initial_assessment_hr2'];
             $dataset['number_of_code'] = $data['number_of_code'];
             $dataset['initial_assessment_hr3'] = $data['initial_assessment_hr3'];
             $dataset['respondents'] = $data['respondents'];
@@ -92,7 +125,6 @@ if (count($data) > 1) {
             $dataset['debriefed'] = $data['debriefed'];
             $dataset['initial_assessment_hr5'] = $data['initial_assessment_hr5'];
             $dataset['comments'] = $data['dataAnalysis'];
-            break;
 
     }
 

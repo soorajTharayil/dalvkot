@@ -3,19 +3,19 @@
 	<?php
 	include 'info_buttons_ip.php';
 	// require 'ip_table_variables.php';
-		/* START DATE AND CALENDER */
-		$dates = get_from_to_date();
-		$pagetitle = $dates['pagetitle'];
-		$fdate = $dates['fdate'];
-		$tdate = $dates['tdate'];
-		$pagetitle = $dates['pagetitle'];
-		$fdate = date('Y-m-d', strtotime($fdate));
-		$fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
-		$days = $dates['days'];
-		/* END DATE AND CALENDER */
+	/* START DATE AND CALENDER */
+	$dates = get_from_to_date();
+	$pagetitle = $dates['pagetitle'];
+	$fdate = $dates['fdate'];
+	$tdate = $dates['tdate'];
+	$pagetitle = $dates['pagetitle'];
+	$fdate = date('Y-m-d', strtotime($fdate));
+	$fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
+	$days = $dates['days'];
+	/* END DATE AND CALENDER */
 	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_6PSQ3a?id=');
 
-	$table_feedback_2PSQ3a = '	bf_feedback_6PSQ3a';
+	$table_feedback_2PSQ3a = 'bf_feedback_6PSQ3a';
 	$table_patients_1PSQ3a = 'bf_patients';
 	$desc_1PSQ3a = 'desc';
 	$sorttime = 'asc';
@@ -31,7 +31,7 @@
 				<div class="panel panel-default">
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
-						<?php $text = "In the " .  $dates['pagetitle'] . "," . count($ip_feedbacks_count) . " KPI forms were submitted." ?>
+							<?php $text = "In the " .  $dates['pagetitle'] . "," . count($ip_feedbacks_count) . " KPI forms were submitted." ?>
 							<span class="typing-text"></span>
 
 						</span>
@@ -50,9 +50,9 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<!-- <a class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_download_total_feedback_tooltip'); ?>" href="<?php echo base_url($this->uri->segment(1)) . '/overall_patient_excel' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_6psq3a_report' ?>">
 								<i class="fa fa-download"></i>
-							</a> -->
+							</a>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -60,10 +60,10 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th><?php echo lang_loader('ip', 'ip_date'); ?></th> -->
-								<th>Recorded by</th>
-								<th>Month-Year</th>
+								<th>KPI Recorded on</th>
+								<th style="white-space: nowrap;">KPI Recorded by</th>
 
-								<th style="white-space: nowrap;">Employee details</th>
+
 
 
 								<th>Number of patients developing adverse drug reactions</th>
@@ -71,10 +71,11 @@
 								<th>Number of in-patients</th>
 
 								<th>Percentage of in-patients developing adverse drug reaction</th>
+								<th>View</th>
 
 
 
-								<th>Data analysis</th>
+								<!-- <th>Data analysis</th>
 
 
 
@@ -83,8 +84,8 @@
 
 
 
-								<th>Preventive action</th>
-							
+								<th>Preventive action</th> -->
+
 
 
 							</thead>
@@ -100,56 +101,45 @@
 
 									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>" onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'" style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
-										<td>
-											<?php echo $r->name; ?>
-										</td>
-										<!-- <td style="white-space: nowrap;"><?php if ($r->datetime) { ?>
 
-												<?php
-																				// Assuming $r->datetime contains the datetime value
-																				$datetime = new DateTime($r->datetime);
-																				$formatted_date = $datetime->format('Y-m-d');
-																				$formatted_time = $datetime->format('h:i a');
-
-																				echo $formatted_date . "<br>"; // Display date on one line
-																				echo $formatted_time; // Display time on another line
-												?>
-
-
-											<?php } ?>
-										</td> -->
+										<!-- changes in this td -->
 										<td style="white-space: nowrap;">
-											<?php if ($r->datetime) { ?>
-												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-												
+											<?php if (!empty($r->datetime)) { ?>
+												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+												<?php echo date('h:i A', strtotime($r->datetime)); ?>
+											<?php } else { ?>
+												-
 											<?php } ?>
 										</td>
-										<?php if (allfeedbacks_page('feedback_id') == true) { ?>
-											<td>
-												<a href="<?php echo  $ip_link_patient_feedback . $id; ?>">IPDF-<?php echo $id; ?></a>
-											</td>
-										<?php } ?>
 
+
+										<!-- changes in this td -->
 										<td style="overflow: clip;">
-											<?php echo $param->name; ?>
+											<?php echo $r->name; ?>
 											<?php if (allfeedbacks_page('feedback_id') == false) { ?>
-												(<a href="<?php echo  $patient_feedback_1PSQ3a . $id; ?>"><?php echo $param->patientid; ?></a>)
+												(<a href="<?php echo  $patient_feedback_1PSQ3a . $id; ?>"><?php echo $r->patientid; ?></a>)
 											<?php } else { ?>
-												(<?php echo $param->patientid; ?>)
+												(<?php echo $r->patientid; ?>)
 											<?php } ?>
-
-
 
 											<br>
 											<?php
-											echo "<i class='fa fa-phone'></i> ";
-											echo $param->contactnumber;
+											// Fetch designation based on firstname = $r->name (case-insensitive)
+											$name = strtolower(trim($r->name));
+											$designation = '';
+
+											$query = $this->db->query("SELECT designation FROM user WHERE LOWER(firstname) = " . $this->db->escape($name) . " LIMIT 1");
+
+											if ($query->num_rows() > 0) {
+												$designation = $query->row()->designation;
+											}
+
+											if ($designation) {
+												echo "<i class='fa fa-id-badge'></i> " . htmlspecialchars($designation);
+											} else {
+												echo "<i class='fa fa-id-badge'></i> Not Assigned";
+											}
 											?>
-											<?php if ($param->email) { ?>
-												<br>
-												<?php echo "<i class='fa fa-envelope'></i> "; ?>
-												<?php echo $param->email; ?>
-											<?php } ?>
 										</td>
 
 
@@ -165,7 +155,7 @@
 										</td>
 
 
-										<td>
+										<!-- <td>
 											<?php echo $param->dataAnalysis; ?>
 										</td>
 
@@ -175,8 +165,25 @@
 
 										<td>
 											<?php echo $param->preventiveAction; ?>
+										</td> -->
+										<td>
+											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
+												View Details
+											</a>
+											<?php if (isfeature_active('DELETE-KPI') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_kpi/' . $id . '?table=' . urlencode($table_feedback_2PSQ3a) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this KPI record?');"
+													title="Delete the KPI record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
 										</td>
-										
+
+
 
 									</tr>
 									<?php $sl++; ?>

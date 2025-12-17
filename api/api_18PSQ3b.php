@@ -41,10 +41,13 @@ $result = mysqli_query($con, $sql);
 // Check if there are any results
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_object($result)) {
+
+        $dataset = json_decode($row->dataset);
+
         // Extract necessary information
         $surgicalCount++;
 
-        if ($row->antibiotic === 'yes') {
+        if (isset($dataset->antibiotic) && $dataset->antibiotic === 'yes') {
             $antibioticCount++;
         }
     }

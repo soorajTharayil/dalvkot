@@ -58,14 +58,14 @@
    "kpi_info": "31. PSQ3d - Appropriate handovers during shift change (To be done separately for doctors and nurses) - (per patient per shift) for the month of",
    "definition": "Definition:",
    "kpi_def": "A near miss is an unplanned event that did not result in injury, illness, or damage - but had the potential to do so. Errors that did not result in patient harm, but could have, can be categorized as near misses.",
-   "formula_para1": "Total no. of handovers done appropriately",   
+   "formula_para1": "Total no. of handovers done appropriately (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total no. of handover opportunities",
+   "formula_para2": "Total no. of handover opportunities (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

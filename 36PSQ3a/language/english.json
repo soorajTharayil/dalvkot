@@ -58,14 +58,14 @@
    "kpi_info": "36. PSQ3a - Spontaneous Perineal Tear Rate for the month of",
    "definition": "Definition:",
    "kpi_def": "A Perineal tear (Perineal laceration) is a tear in the tissue (skin and muscle) around the patient's vagina and perineum.",
-   "formula_para1": "Number of cases where a spontaneous perineal tear occurs",   
+   "formula_para1": "Number of cases where a spontaneous perineal tear occurs (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total number of vaginal deliveries",
+   "formula_para2": "Total number of vaginal deliveries (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

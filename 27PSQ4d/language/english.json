@@ -58,14 +58,14 @@
    "kpi_info": "27. PSQ4d - Number of variations observed in mock drills for the month of",
    "definition": "Definition:",
    "kpi_def": "Mock drill is a simulation exercise of preparedness for any type of event. It could be event or disaster. This is basically a dry run or preparedness drill. For example, fire mock drill, disaster drill, Code Blue Drill, Global Pandemic preparedness drill.",
-   "formula_para1": "Total number of variations observed in a mock drill",   
+   "formula_para1": "Total number of variations observed in a mock drill (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total number of opportunities of variations",
+   "formula_para2": "Total number of opportunities of variations (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

@@ -36,95 +36,176 @@
 
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
 
 									<tr>
-										<td><b>Patient UHID</b></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+									<tr>
+										<td>Patient UHID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['department']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
 										<td>
-											<?php echo $result->patientid; ?>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Ward</b></td>
 										<td>
-											<?php echo $result->ward; ?>
+											<?php echo $param['ward']; ?>
 										</td>
 									</tr>
-									<tr>
-										<td><b>Department</b></td>
-										<td>
-											<?php echo $result->department; ?>
-										</td>
-									</tr>
+
+									
+
 									<tr>
 										<td><b>Consultant name</b></td>
 										<td>
-											<?php echo $result->staffname; ?>
+											<?php echo $param['staffname']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Is the prescription written in capital?</b></td>
 										<td>
-											<?php echo $result->identification_details; ?>
+											<?php echo !empty($param['identification_details']) ? ucfirst(htmlspecialchars($param['identification_details'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Is the administration route mentioned?</b></td>
 										<td>
-											<?php echo $result->vital_signs; ?>
+											<?php echo !empty($param['vital_signs']) ? ucfirst(htmlspecialchars($param['vital_signs'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Is the dose mentioned?</b></td>
 										<td>
-											<?php echo $result->surgery; ?>
+											<?php echo !empty($param['surgery']) ? ucfirst(htmlspecialchars($param['surgery'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['surgery_text']) ? htmlspecialchars($param['surgery_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Is the frequency mentioned?</b></td>
 										<td>
-											<?php echo $result->complaints_communicated; ?>
+											<?php echo !empty($param['complaints_communicated']) ? ucfirst(htmlspecialchars($param['complaints_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Is the patient identification present?</b></td>
 										<td>
-											<?php echo $result->intake; ?>
+											<?php echo !empty($param['intake']) ? ucfirst(htmlspecialchars($param['intake'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['intake_text']) ? htmlspecialchars($param['intake_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Does it use non-standard abbreviations?</b></td>
 										<td>
-											<?php echo $result->output; ?>
+											<?php echo !empty($param['output']) ? ucfirst(htmlspecialchars($param['output'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['output_text']) ? htmlspecialchars($param['output_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Is the date mentioned?</b></td>
 										<td>
-											<?php echo $result->date_mentioned; ?>
+											<?php echo !empty($param['date_mentioned']) ? ucfirst(htmlspecialchars($param['date_mentioned'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['date_mentioned_text']) ? htmlspecialchars($param['date_mentioned_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Is the name & sign of Doctor present?</b></td>
 										<td>
-											<?php echo $result->sign_doctor; ?>
+											<?php echo !empty($param['sign_doctor']) ? ucfirst(htmlspecialchars($param['sign_doctor'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['sign_doctor_text']) ? htmlspecialchars($param['sign_doctor_text']) : '-'; ?>
 										</td>
 									</tr>
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
+									
+									
+									
+
+
 
 
 

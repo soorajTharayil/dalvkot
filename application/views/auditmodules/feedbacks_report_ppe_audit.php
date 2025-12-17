@@ -30,13 +30,118 @@
 	?>
 
 		<div class="row">
+
+			<!-- Audit details -->
 			<div class="col-lg-12 col-sm-12">
 				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<strong>Audit Details</strong>
+					</div>
+
+					<div class="panel-body" style="font-size:14px; line-height:1.5;">
+
+						<?php
+						// Frequency (case-insensitive by title)
+						$auditTitle = 'Radiology safety adherence audit';
+						$norm = mb_strtolower($auditTitle, 'UTF-8');
+
+						$row = $this->db->select('frequency, target')
+							->from('bf_audit_frequency')
+							->where("LOWER(title) = " . $this->db->escape($norm), NULL, FALSE)
+							->limit(1)->get()->row();
+
+						$freq   = $row ? $row->frequency : 'N/A';
+
+
+						// Load all users
+						$users = $this->db->select('user.*, roles.role_id')
+							->join('roles', 'user.user_role = roles.role_id')
+							->order_by('roles.role_id', 'asc')
+							->get('user')->result();
+
+						// Per-user permission check (example feature: AUDIT-FORM1)
+						$custodian_names = [];
+						if (!empty($users)) {
+							foreach ($users as $user) {
+								$this->db->from('user_permissions as UP');
+								$this->db->select('F.feature_name');
+								$this->db->join('features as F', 'UP.feature_id = F.feature_id');
+								$this->db->where('UP.user_id', $user->user_id);
+								$this->db->where('UP.status', 1);
+								$perms = $this->db->get()->result();
+
+								foreach ($perms as $p) {
+									if (strcasecmp(trim($p->feature_name), 'AUDIT-FORM2') === 0) {
+										$custodian_names[] = htmlspecialchars($user->firstname, ENT_QUOTES, 'UTF-8');
+										break;
+									}
+								}
+							}
+						}
+						$custodian_names = array_unique($custodian_names);
+
+						// Last audit date (using your current array shape)
+						$lastDate = (!empty($feedbacktaken) && !empty($feedbacktaken[0]->datet))
+							? date('d-M-Y', strtotime($feedbacktaken[0]->datet))
+							: 'N/A';
+						?>
+
+						<table class="table table-bordered table-condensed" style="margin:0;">
+							<tbody>
+								<tr>
+									<th style="width:240px;">Audit Definition</th>
+									<td>Ensures radiology staff comply with PPE, ALARA, patient ID & hygiene protocols as per NABH, WHO, AERB, ICRP, CAHO & CDC standards to enhance safety and minimize radiation risks.</td>
+								</tr>
+								<tr>
+									<th>Audit Frequency</th>
+									<td>
+										<?= htmlspecialchars($freq, ENT_QUOTES, 'UTF-8'); ?>
+
+									</td>
+								</tr>
+								<tr>
+									<th>Last Audit Date</th>
+									<td><?= $lastDate; ?></td>
+								</tr>
+								<tr>
+									<th>Audit Custodians</th>
+									<td><?= !empty($custodian_names) ? implode(', ', $custodian_names) : 'N/A'; ?></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-lg-12 col-sm-12">
+				<div class="panel panel-default">
+
+					<div style="float: right; margin-top: 10px; margin-right: 10px;">
+						<span style="font-size:17px"><strong>Download Chart:</strong></span>
+						<span style="margin-right: 10px;">
+							<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
+								onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
+						</span>
+						<span>
+							<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
+								onclick="downloadChartImage()" data-toggle="tooltip"
+								title="Download Chart as Image"></i>
+						</span>
+					</div>
+
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
 							<?php $text = "In the " .  $dates['pagetitle'] . "," . "a total of " . count($ip_feedbacks_count) . " audits were conducted." ?>
 							<span class="typing-text"></span>
 
+						</span>
+
+						<span id="audit-report-text" style="display: none;">
+							<?php echo "In the " . $dates['pagetitle'] . ", a total of " . count($ip_feedbacks_count) . " audits were conducted."; ?>
 						</span>
 					</div>
 					<div class="panel-body" style="height:250px;" id="bar">
@@ -49,37 +154,37 @@
 
 			</div>
 
+			<!-- Table start -->
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: right;">
-						<div class="btn-group">
-							<!-- <a class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_download_total_feedback_tooltip'); ?>" href="<?php echo base_url($this->uri->segment(1)) . '/overall_patient_excel' ?>">
+					<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+						<div>
+							<strong>RADIOLOGY SAFETY AUDIT - Audit Summary</strong>
+						</div>
+						<div>
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
+								title="Download detailed audit report"
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_radiology_audit' ?>">
 								<i class="fa fa-download"></i>
-							</a> -->
+							</a>
 						</div>
 					</div>
 					<div class="panel-body">
 						<table class="ppeauditallfeedbacks table table-striped table-hover table-bordered" cellspacing="0" width="100%">
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
-								<th>PPE Audit Date</th>
+								<th>Audit by</th>
+								<th>Audit Date</th>
 
 								<?php if (allfeedbacks_page('feedback_id') == true) { ?>
 									<th style="white-space: nowrap;"><?php echo lang_loader('ip', 'ip_feedback_id'); ?></th>
 								<?php } ?>
 
 								<th>Staff name</th>
+								<th>ID No</th>
 								<th>Department</th>
-								<th>Staff engaged in</th>
-								<th>Is the staff wearing gloves?</th>
-								<th>Is the staff wearing mask?</th>
-								<th>Is the staff wearing cap?</th>
-								<th>Is the staff wearing apron?</th>
-								<th>Is the staff wearing lead apron?</th>
-								<th>Is X-ray barrier used?</th>
-								<th>Is TLD badge used?</th>
-								<th>Additional comments</th>
-
+								<th>View</th>
+								
 
 							</thead>
 							<tbody>
@@ -91,11 +196,18 @@
 									$id = $r->id;
 									$check = true;
 
+									// echo '<pre>';
+									// print_r($param);
+									// echo '</pre>';
+									// exit;
+
 
 								?>
 
 									<tr class="<?php echo ($sl & 1) ? 'odd gradeX' : 'even gradeC'; ?>" onclick="window.location='<?php echo $ppe_audit_feedback . $id; ?>';" style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
+										<td><?php echo $param->audit_by; ?></td>
+
 										<td style="white-space: nowrap;">
 											<?php if ($r->datetime) { ?>
 												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
@@ -110,19 +222,28 @@
 
 
 										<td style="overflow: clip;">
-											<?php echo $r->staffname; ?>
+											<?php echo $param->staffname; ?>
 										</td>
 
-										<td><?php echo $r->department; ?></td>
-										<td><?php echo $r->comment; ?></td>
-										<td><?php echo $r->gloves; ?></td>
-										<td><?php echo $r->mask; ?></td>
-										<td><?php echo $r->cap; ?></td>
-										<td><?php echo $r->apron; ?></td>
-										<td><?php echo $r->leadApron; ?></td>
-										<td><?php echo $r->xrayBarrior; ?></td>
-										<td><?php echo $r->tld; ?></td>
-										<td><?php echo $r->general_comment; ?></td>
+										<td><?php echo $param->idno; ?></td>
+										<td><?php echo $param->department; ?></td>
+										<td>
+											<a href="<?php echo $ppe_audit_feedback . $id; ?>"
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
+												View Details
+											</a>
+											<?php if (isfeature_active('DELETE-AUDIT') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this audit record?');"
+													title="Delete the audit record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
+										</td>
+
 
 
 
@@ -359,4 +480,94 @@
 		resposnsechart(resposnseChart);
 	}, 1000);
 	/*patient_feedback_analysis*/
+</script>
+
+<script>
+	function printChart() {
+		const canvas = document.getElementById('resposnsechart');
+		const dataUrl = canvas.toDataURL();
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		const windowContent = `
+		<html>
+		<head>
+			<title>Print Chart</title>
+			<style>
+				body {
+					text-align: center;
+					margin: 0;
+					padding: 20px;
+					font-family: Arial;
+				}
+				h3, p {
+					margin-bottom: 10px;
+				}
+				img {
+					max-width: 100%;
+					height: auto;
+				}
+			</style>
+		</head>
+		<body>
+			<h3>PPE AUDIT REPORT</h3>
+			<p>${reportText}</p>
+			<img src="${dataUrl}" alt="Chart">
+		</body>
+		</html>
+	`;
+
+		const printWin = window.open('', '', 'width=800,height=600');
+		printWin.document.open();
+		printWin.document.write(windowContent);
+		printWin.document.close();
+		printWin.focus();
+
+		setTimeout(() => {
+			printWin.print();
+			printWin.close();
+		}, 500);
+	}
+</script>
+<script>
+	function downloadChartImage() {
+		const canvas = document.getElementById('resposnsechart');
+		const chartImage = canvas.toDataURL('image/png');
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		// Create new canvas
+		const newCanvas = document.createElement('canvas');
+		const ctx = newCanvas.getContext('2d');
+
+		const width = canvas.width;
+		const height = canvas.height;
+		const extraHeight = 60; // Space for text
+
+		newCanvas.width = width;
+		newCanvas.height = height + extraHeight;
+
+		// White background
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+		// Draw the report text
+		ctx.fillStyle = '#000';
+		ctx.font = '20px Arial';
+		ctx.fillText(reportText, 10, 30);
+
+		// Draw the chart image after it loads
+		const img = new Image();
+		img.onload = function() {
+			ctx.drawImage(img, 0, extraHeight);
+
+			// Create downloadable image
+			const finalImage = newCanvas.toDataURL('image/png');
+			const link = document.createElement('a');
+			link.href = finalImage;
+			link.download = 'PPE AUDIT REPORT.png';
+			link.click();
+		};
+		img.src = chartImage;
+	}
 </script>

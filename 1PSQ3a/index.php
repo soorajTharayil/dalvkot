@@ -12,7 +12,7 @@
 
 <head>
 
-  <title>Efeedor Feedback System</title>
+  <title>Quality KPI Management Software - Efeedor Healthcare Experience Management Platform</title>
 
   <meta charset="utf-8">
 
@@ -60,10 +60,10 @@
 
     <!-- Add a button to trigger the modal -->
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}}
-      <i class="fa fa-language" aria-hidden="true"></i>
-    </button>
-    <!-- dropdown for three language end -->
+      <!--  {{type2}}-->
+      <!--  <i class="fa fa-language" aria-hidden="true"></i>-->
+      <!--</button>-->
+      <!-- dropdown for three language end -->
 
   </nav>
 
@@ -211,7 +211,11 @@
 
                       <!-- KPI Name -->
 
-                      <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p>
+
+
+
+                      <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:20px; margin-top: -20px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p>
+
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
                         <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">
@@ -269,18 +273,45 @@
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.corrective_action}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.corrective_action}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea2" ng-model="feedback.correctiveAction" rows="5"></textarea>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.preventive_action}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.preventive_action}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea3" ng-model="feedback.preventiveAction" rows="5"></textarea>
+                    </div>
+
+
+                    <!-- Code for Upload files -->
+                    <div style="margin-top: 20px; text-align: left; margin-left:17px;">
+                      <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:16px;">
+                        Upload Files
+                      </label>
+
+                      <!-- File Input for Document Upload -->
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple
+                        onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <br>
+
+                      <!-- Display the list of uploaded files -->
+                      <div ng-if="feedback.files_name && feedback.files_name.length > 0">
+                        <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
+                        <ul style="margin-left: 19px;">
+                          <li ng-repeat="files_name in feedback.files_name track by $index"
+                            style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank"
+                              style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;"
+                              ng-click="removeFile($index)">&#10060;</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
 
                   </div>
@@ -383,6 +414,31 @@
     </div>
 
   </div>
+
+  <!-- KPI Deadline Popup -->
+  <div class="modal fade" id="deadlineModal" tabindex="-1" role="dialog" aria-labelledby="deadlineModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deadlineModalLabel">KPI Submission Deadline- {{selectedMonths}} {{selectedYears}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" ng-if="deadlineMessage">
+          <p style="margin:0; font-size:16px; line-height:1.5;">
+            {{deadlineMessage}}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- KPI Deadline Popup -->
+
+
 
 </body>
 
@@ -580,8 +636,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

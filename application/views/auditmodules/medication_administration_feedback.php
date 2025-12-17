@@ -36,170 +36,281 @@
 
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
 
 									<tr>
-										<td><b>Patient UHID</b></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+									<tr>
+										<td>Patient UHID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['department']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
 										<td>
-											<?php echo $result->patientid; ?>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
 										</td>
 									</tr>
 									<tr>
-										<td><b>Have you checked own medications and verified the medication order, including drug name, dose, route, time, and frequency?</b></td>
+									<td><b>Have you checked own medications and verified the medication order, including drug name, dose, route, time, and frequency?</b></td>
+									<td>
+										<?php echo !empty($param['triple_check']) ? ucfirst(htmlspecialchars($param['triple_check'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['triple_check_text']) ? htmlspecialchars($param['triple_check_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you confirm that the prescribed medicine is written in the order?</b></td>
+									<td>
+										<?php echo !empty($param['medicine_labelled']) ? ucfirst(htmlspecialchars($param['medicine_labelled'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['medicine_labelled_text']) ? htmlspecialchars($param['medicine_labelled_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Is the medication tray stocked with all required articles?</b></td>
+									<td>
+										<?php echo !empty($param['file_verified']) ? ucfirst(htmlspecialchars($param['file_verified'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['file_verified_text']) ? htmlspecialchars($param['file_verified_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you perform handwashing or use hand rub before administering the medication to patient?</b></td>
+									<td>
+										<?php echo !empty($param['six_rights']) ? ucfirst(htmlspecialchars($param['six_rights'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['six_rights_text']) ? htmlspecialchars($param['six_rights_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you greet and identify the patient using two identification methods?</b></td>
+									<td>
+										<?php echo !empty($param['administration_documented']) ? ucfirst(htmlspecialchars($param['administration_documented'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['administration_documented_text']) ? htmlspecialchars($param['administration_documented_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Have you explained the procedure to the patient and verified their allergic status?</b></td>
+									<td>
+										<?php echo !empty($param['use_xray_barrior']) ? ucfirst(htmlspecialchars($param['use_xray_barrior'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['use_xray_barrior_text']) ? htmlspecialchars($param['use_xray_barrior_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you check and ensure that all medications are present at the patient’s side with patient’s file?</b></td>
+									<td>
+										<?php echo !empty($param['patient_file']) ? ucfirst(htmlspecialchars($param['patient_file'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['patient_file_text']) ? htmlspecialchars($param['patient_file_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Have you verified the medicine for its name, expiry date, color, and texture?</b></td>
+									<td>
+										<?php echo !empty($param['verified']) ? ucfirst(htmlspecialchars($param['verified'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['verified_text']) ? htmlspecialchars($param['verified_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you explain the drug indication, expected action, reaction, and side effects to the patient or relatives?</b></td>
+									<td>
+										<?php echo !empty($param['indication']) ? ucfirst(htmlspecialchars($param['indication'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['indication_text']) ? htmlspecialchars($param['indication_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Is all medicine available for use at the bedside on time?</b></td>
+									<td>
+										<?php echo !empty($param['medicine']) ? ucfirst(htmlspecialchars($param['medicine'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['medicine_text']) ? htmlspecialchars($param['medicine_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>For high-alert drugs, did you ensure verification by one staff nurse before administration?</b></td>
+									<td>
+										<?php echo !empty($param['alert']) ? ucfirst(htmlspecialchars($param['alert'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['alert_text']) ? htmlspecialchars($param['alert_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Have you labeled the prepared medicine with the drug name and dilution?</b></td>
+									<td>
+										<?php echo !empty($param['dilution']) ? ucfirst(htmlspecialchars($param['dilution'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['dilution_text']) ? htmlspecialchars($param['dilution_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Are you administering the medication as per approved techniques?</b></td>
+									<td>
+										<?php echo !empty($param['administering']) ? ucfirst(htmlspecialchars($param['administering'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['administering_text']) ? htmlspecialchars($param['administering_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you provide privacy for the patient if needed?</b></td>
+									<td>
+										<?php echo !empty($param['privacy']) ? ucfirst(htmlspecialchars($param['privacy'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['privacy_text']) ? htmlspecialchars($param['privacy_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>For multi-dose vials, did you note the date and time of opening on the medicine?</b></td>
+									<td>
+										<?php echo !empty($param['vials']) ? ucfirst(htmlspecialchars($param['vials'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['vials_text']) ? htmlspecialchars($param['vials_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you check the patency and status of the cannula, including the date and time of cannulation near the site?</b></td>
+									<td>
+										<?php echo !empty($param['cannula']) ? ucfirst(htmlspecialchars($param['cannula'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['cannula_text']) ? htmlspecialchars($param['cannula_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>After IV administration, did you flush the line with normal saline?</b></td>
+									<td>
+										<?php echo !empty($param['flush']) ? ucfirst(htmlspecialchars($param['flush'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['flush_text']) ? htmlspecialchars($param['flush_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Are IV medications being run on time, and have they been discontinued or discarded appropriately?</b></td>
+									<td>
+										<?php echo !empty($param['medications']) ? ucfirst(htmlspecialchars($param['medications'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['medications_text']) ? htmlspecialchars($param['medications_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>After administering the medication, did you reassess the patient for any reactions and ensure their comfort?</b></td>
+									<td>
+										<?php echo !empty($param['reassess']) ? ucfirst(htmlspecialchars($param['reassess'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['reassess_text']) ? htmlspecialchars($param['reassess_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>For oral medications, have you ensured that the patient has taken the medications and that no medicine is left unattended?</b></td>
+									<td>
+										<?php echo !empty($param['oral']) ? ucfirst(htmlspecialchars($param['oral'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['oral_text']) ? htmlspecialchars($param['oral_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Have you discarded waste and replaced used articles?</b></td>
+									<td>
+										<?php echo !empty($param['discarded']) ? ucfirst(htmlspecialchars($param['discarded'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['discarded_text']) ? htmlspecialchars($param['discarded_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Did you perform handwashing or use hand rub after the procedure?</b></td>
+									<td>
+										<?php echo !empty($param['handwashing']) ? ucfirst(htmlspecialchars($param['handwashing'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['handwashing_text']) ? htmlspecialchars($param['handwashing_text']) : '-'; ?>
+									</td>
+								</tr>
+
+								<tr>
+									<td><b>Have you recorded the procedure in the documents immediately after completing it?</b></td>
+									<td>
+										<?php echo !empty($param['procedures']) ? ucfirst(htmlspecialchars($param['procedures'])) : '-'; ?><br>
+										Remarks: <?php echo !empty($param['procedures_text']) ? htmlspecialchars($param['procedures_text']) : '-'; ?>
+									</td>
+								</tr>
+								<tr>
+										<td><b>Uploaded files</b></td>
 										<td>
-											<?php echo $result->triple_check; ?>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
 										</td>
 									</tr>
-									<tr>
-										<td><b>Did you confirm that the prescribed medicine is written in the order?</b></td>
-										<td>
-											<?php echo $result->medicine_labelled; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Is the medication tray stocked with all required articles?</b></td>
-										<td>
-											<?php echo $result->file_verified; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Did you perform handwashing or use hand rub before administering the medication to patient?</b></td>
-										<td>
-											<?php echo $result->six_rights; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Did you greet and identify the patient using two identification methods?</b></td>
-										<td>
-											<?php echo $result->administration_documented; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Have you explained the procedure to the patient and verified their allergic status?</b></td>
-										<td>
-											<?php echo $result->use_xray_barrior; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Did you check and ensure that all medications are present at the patient’s side with patient’s file?</b></td>
-										<td>
-											<?php echo $result->patient_file; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Have you verified the medicine for its name, expiry date, color, and texture?</b></td>
-										<td>
-											<?php echo $result->verified; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Did you explain the drug indication, expected action, reaction, and side effects to the patient or relatives?</b></td>
-										<td>
-											<?php echo $result->indication; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Is all medicine available for use at the bedside on time?</b></td>
-										<td>
-											<?php echo $result->medicine; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>For high-alert drugs, did you ensure verification by one staff nurse before administration?</b></td>
-										<td>
-											<?php echo $result->alert; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Have you labeled the prepared medicine with the drug name and dilution?</b></td>
-										<td>
-											<?php echo $result->dilution; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Are you administering the medication as per approved techniques?</b></td>
-										<td>
-											<?php echo $result->administering; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Did you provide privacy for the patient if needed?</b></td>
-										<td>
-											<?php echo $result->privacy; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>For multi-dose vials, did you note the date and time of opening on the medicine?</b></td>
-										<td>
-											<?php echo $result->vials; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Did you check the patency and status of the cannula, including the date and time of cannulation near the site?</b></td>
-										<td>
-											<?php echo $result->cannula; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>After IV administration, did you flush the line with normal saline?</b></td>
-										<td>
-											<?php echo $result->flush; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Are IV medications being run on time, and have they been discontinued or discarded appropriately?</b></td>
-										<td>
-											<?php echo $result->medications; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>After administering the medication, did you reassess the patient for any reactions and ensure their comfort?</b></td>
-										<td>
-											<?php echo $result->reassess; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>For oral medications, have you ensured that the patient has taken the medications and that no medicine is left unattended?</b></td>
-										<td>
-											<?php echo $result->oral; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Have you discarded waste and replaced used articles?</b></td>
-										<td>
-											<?php echo $result->discarded; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Did you perform handwashing or use hand rub after the procedure?</b></td>
-										<td>
-											<?php echo $result->handwashing; ?>
-										</td>
-									</tr>
-									<tr>
-										<td><b>Have you recorded the procedure in the documents immediately after completing it?</b></td>
-										<td>
-											<?php echo $result->procedures; ?>
-										</td>
-									</tr>
+
 
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
 
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
+									
+									
+									
 
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
+
 
 
 

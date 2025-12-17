@@ -58,14 +58,14 @@
    "kpi_info": "8. PSQ3a - Percentage of surgeries where the organisation's procedure to prevent adverse events like wrong site, wrong patient and wrong surgery have been adhered for the month of",
    "definition": "Definition:",
    "kpi_def": "Unplanned return to the OT is defined as any secondary procedure required for a complication resulting directly from the index operation during same admission.",
-   "formula_para1": "Number of surgeries where the procedure was followed",   
+   "formula_para1": "Number of surgeries where the procedure was followed (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of surgeries performed",
+   "formula_para2": "Number of surgeries performed (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

@@ -88,110 +88,87 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
 
 
   $scope.months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   $scope.years = [
     new Date().getFullYear() - 1,
     new Date().getFullYear(),
-    new Date().getFullYear() + 1
+    new Date().getFullYear() + 1,
   ];
 
-  $scope.selectedMonth = $scope.months[new Date().getMonth()];
-  $scope.selectedYear = $scope.years[1];
+  // Decide month & year every time page loads
+  function calculateMonthYear() {
+    var today = new Date();
+    var month = today.getMonth(); // 0 = Jan
+    var year = today.getFullYear();
+    var day = today.getDate();
 
-  // Define an array of patient IDs and corresponding API URLs
-  $scope.patients = [
-    { id: '1PSQ3a', url: $rootScope.baseurl_main + '/api_1PSQ3a.php' },
-    { id: '2PSQ3a', url: $rootScope.baseurl_main + '/api_2PSQ3a.php' },
-    { id: '3PSQ3a', url: $rootScope.baseurl_main + '/api_3PSQ3a.php' },
-    { id: '4PSQ3a', url: $rootScope.baseurl_main + '/api_4PSQ3a.php' },
-    { id: '5PSQ3a', url: $rootScope.baseurl_main + '/api_5PSQ3a.php' },
-    { id: '6PSQ3a', url: $rootScope.baseurl_main + '/api_6PSQ3a.php' },
-    { id: '7PSQ3a', url: $rootScope.baseurl_main + '/api_7PSQ3a.php' },
-    { id: '8PSQ3a', url: $rootScope.baseurl_main + '/api_8PSQ3a.php' },
-    { id: '9PSQ3a', url: $rootScope.baseurl_main + '/api_9PSQ3a.php' },
-    { id: '10PSQ3a', url: $rootScope.baseurl_main + '/api_10PSQ3a.php' },
-    { id: '11PSQ3a', url: $rootScope.baseurl_main + '/api_11PSQ3a.php' },
-    { id: '12PSQ3a', url: $rootScope.baseurl_main + '/api_12PSQ3a.php' },
-    { id: '13PSQ3b', url: $rootScope.baseurl_main + '/api_13PSQ3b.php' },
-    { id: '14PSQ3b', url: $rootScope.baseurl_main + '/api_14PSQ3b.php' },
-    { id: '15PSQ3b', url: $rootScope.baseurl_main + '/api_15PSQ3b.php' },
-    { id: '16PSQ3b', url: $rootScope.baseurl_main + '/api_16PSQ3b.php' },
-    { id: '17PSQ3b', url: $rootScope.baseurl_main + '/api_17PSQ3b.php' },
-    { id: '18PSQ3b', url: $rootScope.baseurl_main + '/api_18PSQ3b.php' },
-    { id: '19PSQ3c', url: $rootScope.baseurl_main + '/api_19PSQ3c.php' },
-    { id: '20PSQ3c', url: $rootScope.baseurl_main + '/api_20PSQ3c.php' },
-    { id: '21PSQ3c', url: $rootScope.baseurl_main + '/api_21PSQ3c.php' },
-    { id: '21aPSQ3c', url: $rootScope.baseurl_main + '/api_21aPSQ3c.php' },
-    { id: '22PSQ3c', url: $rootScope.baseurl_main + '/api_22PSQ3c.php' },
-    { id: '23aPSQ4c', url: $rootScope.baseurl_main + '/api_23aPSQ4c.php' },
-    { id: '23bPSQ4c', url: $rootScope.baseurl_main + '/api_23bPSQ4c.php' },
-    { id: '23cPSQ4c', url: $rootScope.baseurl_main + '/api_23cPSQ4c.php' },
-    { id: '23dPSQ4c', url: $rootScope.baseurl_main + '/api_23dPSQ4c.php' },
-    { id: '24PSQ4c', url: $rootScope.baseurl_main + '/api_24PSQ4c.php' },
-    { id: '25PSQ4c', url: $rootScope.baseurl_main + '/api_25PSQ4c.php' },
-    { id: '26PSQ4c', url: $rootScope.baseurl_main + '/api_26PSQ4c.php' },
-    { id: '27PSQ4d', url: $rootScope.baseurl_main + '/api_27PSQ4d.php' },
-    { id: '28PSQ4d', url: $rootScope.baseurl_main + '/api_28PSQ4d.php' },
-    { id: '29PSQ4d', url: $rootScope.baseurl_main + '/api_29PSQ4d.php' },
-    { id: '30PSQ3d', url: $rootScope.baseurl_main + '/api_30PSQ3d.php' },
-    { id: '31PSQ3d', url: $rootScope.baseurl_main + '/api_31PSQ3d.php' },
-    { id: '32PSQ3d', url: $rootScope.baseurl_main + '/api_32PSQ3d.php' },
-  ];
-
-  $scope.selectedPatientIndex = 0; // Select the first patient by default
-
-  $scope.initialize = function () {
-    var storedMonth = localStorage.getItem('selectedMonth');
-    var storedYear = localStorage.getItem('selectedYear');
-    var storedPatientIndex = localStorage.getItem('selectedPatientIndex');
-
-    if (storedMonth && storedYear && storedPatientIndex !== null) {
-      $scope.selectedMonth = storedMonth;
-      $scope.selectedYear = parseInt(storedYear, 10);
-      $scope.selectedPatientIndex = parseInt(storedPatientIndex, 10);
+    if (day <= 30) {
+      month -= 1;
+      if (month < 0) {
+        month = 11; // wrap to December
+        year -= 1;
+      }
     }
 
-    $scope.fetchData();
+    return { month: $scope.months[month], year: year };
+  }
+
+  // search
+  $scope.matchSearch = function (text) {
+    if (!$scope.searchAudit || $scope.searchAudit.trim() === "") return true;
+    if (!text) return false;
+    return text.toLowerCase().indexOf($scope.searchAudit.toLowerCase()) !== -1;
   };
 
+
+
+  $scope.hasKPIInGroup = function (start, end) {
+    for (let i = start; i <= end; i++) {
+      let key = 'KPI' + i;
+      if ($scope.profilen[key]) {
+        let label = $scope.lang[key.toLowerCase()] || '';
+        if (!$scope.searchAudit || $scope.searchAudit.trim() === '') {
+          return true;
+        }
+        if ($scope.matchSearch(label)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+
+
+
+
+
+  // Save selected values
   $scope.saveSelection = function () {
-    // Save month, year, and patient index to localStorage
-    localStorage.setItem('selectedMonth', $scope.selectedMonth);
-    localStorage.setItem('selectedYear', $scope.selectedYear);
-    localStorage.setItem('selectedPatientIndex', $scope.selectedPatientIndex);
-
-    $scope.fetchData();
+    localStorage.setItem("selectedMonth", $scope.selectedMonth);
+    localStorage.setItem("selectedYear", $scope.selectedYear);
   };
 
-  $scope.fetchData = function () {
-    var monthNumber = $scope.months.indexOf($scope.selectedMonth) + 1;
-    var year = $scope.selectedYear;
-
-    $scope.data = {};
-
-    //var selectedPatient = $scope.patients[$scope.selectedPatientIndex];
-
-    angular.forEach($scope.patients, function (patient) {
-      var url = patient.url +
-        '?patientid=' + encodeURIComponent('https://maj.efeedor.com/' + patient.id + '/') +
-        '&month=' + monthNumber +
-        '&year=' + year;
-
-      // Make an API request for each patient
-      $http.get(url).then(function (response) {
-        // Store the response data keyed by patient id
-        $scope.data[patient.id] = response.data;
-      }, function (error) {
-        console.error('Error fetching data for patient ' + patient.id + ':', error);
-      });
-    });
-  };
-
-  // Initialize on page load
-  $scope.initialize();
+  // Initialize
+  (function init() {
+    var def = calculateMonthYear();
+    $scope.selectedMonth = def.month;
+    $scope.selectedYear = def.year;
+    $scope.saveSelection();
+  })();
 
 
 
@@ -315,6 +292,93 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
         }
       );
   };
+
+  $scope.menuVisible = false;
+  $scope.aboutVisible = false;
+
+  // Function to hide menu only when clicking "Home"
+  $scope.hideMenu = function () {
+    $scope.menuVisible = false;
+  };
+
+  // Function to show all content
+  $scope.showAllContent = function () {
+    $scope.aboutVisible = false;
+    $scope.supportVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.menuVisible = true;
+    $scope.hideMenu();
+  };
+
+
+  // Function to show the 'About' content
+  $scope.showAbout = function () {
+    $scope.menuVisible = false;
+    $scope.supportVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.aboutVisible = true;
+  };
+
+  // Function to show the 'Support' content
+  $scope.showSupport = function () {
+    $scope.menuVisible = false;
+    $scope.aboutVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.supportVisible = true;
+  };
+
+  // Function to show the 'Web dashboard' content
+  $scope.showDashboard = function () {
+    $scope.menuVisible = false;
+    $scope.aboutVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.supportVisible = false;
+    $scope.dashboardVisible = true;
+
+  };
+
+  // Function to show the 'App download' content
+  $scope.showAppDown = function () {
+    $scope.menuVisible = false;
+    $scope.aboutVisible = false;
+    $scope.supportVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.appDownloadVisible = true;
+  };
+
+  // To downlaod the apk
+  $scope.downloadApk = function () {
+    if ($scope.setting_data && $scope.setting_data.android_apk) {
+      window.location.href = $scope.setting_data.android_apk;
+    } else {
+      alert("APK download link is not available.");
+    }
+  };
+
+  //To redirect to user activity page
+  $scope.redirectToUserActivity = function (event) {
+    event.preventDefault();
+    window.location.href = "/view/user_activity";
+  };
+
+  $scope.closeMenuOnClickOutside = function (event) {
+    if ($scope.menuVisible && !event.target.closest('.menu-dropdown') && !event.target.closest('.menu-toggle')) {
+      $scope.menuVisible = false;
+      $scope.$apply(); // Ensure Angular updates the UI
+    }
+  };
+
+  // Attach event listener when step is active
+  $scope.$watchGroup(['step2', 'step3', 'step4', 'step5'], function (newVals) {
+    if (newVals.includes(true)) {
+      document.addEventListener('click', $scope.closeMenuOnClickOutside);
+    } else {
+      document.removeEventListener('click', $scope.closeMenuOnClickOutside);
+    }
+  });
 
 
   $scope.pin_popup = function () {

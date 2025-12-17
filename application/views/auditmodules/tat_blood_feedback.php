@@ -17,6 +17,9 @@
 		if (count($results) >= 1) {
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
+				// echo '<pre>';
+				// print_r($param);
+				// exit;
 
 
 	?>
@@ -36,68 +39,133 @@
 
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
 
 									<tr>
-										<td><b>Patient UHID</b></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+									<tr>
+										<td>Patient UHID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['dep']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
 										<td>
-											<?php echo $result->patientid; ?>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Transfusion Type</b></td>
 										<td>
-											<?php echo $result->transfusion; ?>
+											<?php echo $param['department']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Transfusion request time</b></td>
 										<td>
-											<?php echo $result->transfusion_request_time; ?>
+											<?php echo $param['initial_assessment_hr1']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Blood received time</b></td>
 										<td>
-											<?php echo $result->blood_received_time; ?>
+											<?php echo $param['initial_assessment_hr2']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>TAT for issue of blood and blood components</b></td>
 										<td>
-											<?php echo $result->tat_blood; ?>
+											<?php echo $param['calculatedResultTime']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Benchmark time</b></td>
 										<td>
-											<?php echo $result->benchmark; ?>
+											<?php echo $param['benchmark']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Transfusion start time</b></td>
 										<td>
-											<?php echo $result->transfusion_started_time; ?>
+											<?php echo $param['initial_assessment_hr3']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
-
 									<tr>
-										<td><b>Data collected by</b></td>
+										<td><b>Uploaded files</b></td>
 										<td>
-											<?php echo $result->name; ?>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
 										</td>
 									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
-
-
 
 								</table>
 

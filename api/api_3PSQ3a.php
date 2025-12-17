@@ -3,18 +3,18 @@
 include('db.php');
 
 $monthNames = array(
-    "January" => 1,
-    "February" => 2,
-    "March" => 3,
-    "April" => 4,
-    "May" => 5,
-    "June" => 6,
-    "July" => 7,
-    "August" => 8,
-    "September" => 9,
-    "October" => 10,
-    "November" => 11,
-    "December" => 12
+	"January" => 1,
+	"February" => 2,
+	"March" => 3,
+	"April" => 4,
+	"May" => 5,
+	"June" => 6,
+	"July" => 7,
+	"August" => 8,
+	"September" => 9,
+	"October" => 10,
+	"November" => 11,
+	"December" => 12
 );
 
 // Retrieve parameters from the query string
@@ -34,34 +34,42 @@ $staffAdheringCount = 0;
 $staffAuditedCount = 0;
 
 
-// Query to retrieve data from bf_feedback_ppe_audit table
+// Query to retrieve data
+
+// USG and X-Ray
 $sql = "SELECT * FROM `bf_feedback_ppe_audit` WHERE YEAR(datet) = $selectedYear AND MONTH(datet) = $selectedMonth";
 $result = mysqli_query($con, $sql);
 
-// Check if there are any results
 if (mysqli_num_rows($result) > 0) {
 	while ($row = mysqli_fetch_object($result)) {
-		// Extract necessary information
-		$staffAuditedCount++;
-
-		// Assuming the column name for safety precautions is 'safety_precautions'
-		if ($row->department === 'Lab' || $row->department === 'USG') {
-			// Conditions for Lab and USG departments
-			if ($row->gloves === 'yes' && $row->mask === 'yes' && $row->cap === 'yes' && $row->apron === 'yes') {
+		if ($row->department === 'USG' || $row->department === 'X-Ray') {
+			$staffAuditedCount++;
+			$param = json_decode($row->dataset, true);
+			if (is_array($param) && ($param['gloves'] ?? '') !== 'no' && ($param['mask'] ?? '') !== 'no' && ($param['cap'] ?? '') !== 'no' && ($param['apron'] ?? '') !== 'no' && ($param['leadApron'] ?? '') !== 'no' && ($param['xrayBarrior'] ?? '') !== 'no' && ($param['tld'] ?? '') !== 'no' && ($param['ppe_to_patients'] ?? '') !== 'no') {
 				$staffAdheringCount++;
-				
-
 			}
 		} else {
-			// Conditions for Radiology department
-			if ($row->gloves === 'yes' && $row->mask === 'yes' && $row->cap === 'yes' && $row->leadApron === 'yes' && $row->xrayBarrior === 'yes' && $row->tld === 'yes') {
-				$staffAdheringCount++;
-				
-
-			}
+			continue;
 		}
 	}
 }
+
+
+// Lab (no department filter in SQL)
+$labSql = "SELECT * FROM `bf_feedback_lab_safety_audit` WHERE YEAR(datet) = $selectedYear AND MONTH(datet) = $selectedMonth";
+$labRes = mysqli_query($con, $labSql);
+
+if (mysqli_num_rows($labRes) > 0) {
+	while ($row = mysqli_fetch_object($labRes)) {
+		$staffAuditedCount++;
+		$param = json_decode($row->dataset, true);
+		if (is_array($param) && ($param['gloves'] ?? '') !== 'no' && ($param['mask'] ?? '') !== 'no' && ($param['cap'] ?? '') !== 'no' && ($param['apron'] ?? '') !== 'no' && ($param['lead_apron'] ?? '') !== 'no' && ($param['use_xray_barrior'] ?? '') !== 'no' && ($param['use_tld_badge'] ?? '') !== 'no' && ($param['ppe_to_patients'] ?? '') !== 'no' && ($param['no_recapping'] ?? '') !== 'no' && ($param['pts_disinfection'] ?? '') !== 'no') {
+			$staffAdheringCount++;
+		}
+	}
+}
+
+
 
 //echo "safety precaution count in the current month: " . $staffAdheringCount;
 

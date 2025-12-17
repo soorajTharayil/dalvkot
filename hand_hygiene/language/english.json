@@ -2,7 +2,7 @@
 
 
    
-   "patient_info":"HAND HYGIENE AUDIT FORM",
+   "patient_info":"HAND HYGIENE AUDIT",
    
    "op_number":"OP Number",
    "patient_name_placeholder":"Enter OP number",
@@ -19,6 +19,12 @@
 
 
 
+   "name": "Audit Name",
+   "dtandtym": "Date & Time of Audit",
+   "stname": "Audit Short Name",
+   "dep": "Department",
+   "seldep": "Select Department",
+   "audby": "Audit by",
 
 
    "staffname":"Name of the involved staff",

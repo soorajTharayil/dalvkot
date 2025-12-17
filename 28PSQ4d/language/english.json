@@ -58,14 +58,14 @@
    "kpi_info": "28. PSQ4d - Patient fall rate (Falls per 1000 patient days) for the month of",
    "definition": "Definition:",
    "kpi_def": "A fall is defined as Loss of upright position that results in landing on the floor, ground or an object or furniture or a sudden, uncontrolled, unintentional, non-purposeful, downward displacement of the body to the floor/ground or hitting another object like a chair or stair. It is an event that results in a person coming to rest inadvertently on the ground or floor or other lower level.",
-   "formula_para1": "Number of patient falls",   
+   "formula_para1": "Number of patient falls (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total number of patient days",
+   "formula_para2": "Total number of patient days (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

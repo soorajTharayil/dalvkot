@@ -42,6 +42,23 @@
 
 
    "formula_para1": "Date of surgery",   
+
+   "name":"Audit Name",
+    "dtandtym":"Date & Time of Audit",
+    "stname":"Audit Short Name",
+    "dep":"Department",
+    "seldep":"Select Department",
+    "audby":"Audit by",
+    "mid":"Patient MID",
+    "patname":"Patient Name",
+    "patage":"Patient Age",
+    "patgen":"Patient Gender",
+    "location":"Area",
+    "selgen":"Select Gender",
+    "atdoc":"Attended Doctor",
+    "seldoc":"Select Doctor",
+    "admidat":"Admission Date & Time",
+    "discha":"Discharge Date & Time",
    
 
    "identification_details": "Is the toilet cleaned properly?",

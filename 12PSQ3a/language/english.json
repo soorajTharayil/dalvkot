@@ -58,14 +58,14 @@
    "kpi_info": "12. PSQ3a - Incidence of hospital associated pressure ulcers after admission (Bed sore per 1000 patient days) for the month of",
    "definition": "Definition:",
    "kpi_def": "A pressure ulcer is localized injury to the skin and/or underlying tissue usually over a bony prominence, as a result of pressure, or pressure in combination with shear and/or friction.",
-   "formula_para1": "Number of patients who develop new / worsening of pressure ulcer",   
+   "formula_para1": "Number of patients who develop new / worsening of pressure ulcer (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total no. of patient days",
+   "formula_para2": "Total no. of patient days (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

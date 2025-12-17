@@ -33,7 +33,7 @@
                             </div>
 
                             <?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-                                <div class="btn-group" style="float: right;">
+                                <div class="btn-group no-print" style="float: right;">
                                     <a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_24PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
                                 </div>
                             <?php } ?>
@@ -91,6 +91,22 @@
                                         <td><b>Data collection on</b></td>
                                         <td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
                                     </tr>
+                                    <tr>
+										<td>Uploaded files:</td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
+
                                 </table>
                             </div>
                         </div>
@@ -147,12 +163,12 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div style="float: right; margin-top: 10px; margin-right: 10px;">
-                    <span style="font-size:17px"><strong>Download Chart:</strong></span>
-                    <span style="margin-right: 10px;">
+                    <span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+					 <span class="no-print" style="margin-right: 10px;">
                         <i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
                             onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
                     </span>
-                    <span>
+                    <span class="no-print">
                         <i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
                             onclick="downloadChartImage()" data-toggle="tooltip"
                             title="Download Chart as Image"></i>
@@ -391,7 +407,7 @@
                             </div>
 
                             <?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-                                <div class="btn-group" style="float: right;">
+                                <div class="btn-group no-print" style="float: right;">
                                     <a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_24PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
                                 </div>
                             <?php } ?>
@@ -505,12 +521,12 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div style="float: right; margin-top: 10px; margin-right: 10px;">
-                    <span style="font-size:17px"><strong>Download Chart:</strong></span>
-                    <span style="margin-right: 10px;">
+                   	<span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+						<span class="no-print" style="margin-right: 10px;">
                         <i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
                             onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
                     </span>
-                    <span>
+                    <span class="no-print">
                         <i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
                             onclick="downloadChartImage()" data-toggle="tooltip"
                             title="Download Chart as Image"></i>
@@ -749,7 +765,7 @@
                             </div>
 
                             <?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-                                <div class="btn-group" style="float: right;">
+                                <div class="btn-group no-print" style="float: right;">
                                     <a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_24PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
                                 </div>
                             <?php } ?>
@@ -863,12 +879,12 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div style="float: right; margin-top: 10px; margin-right: 10px;">
-                    <span style="font-size:17px"><strong>Download Chart:</strong></span>
-                    <span style="margin-right: 10px;">
+                   <span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+					 <span class="no-print" style="margin-right: 10px;">
                         <i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
                             onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
                     </span>
-                    <span>
+                    <span class="no-print">
                         <i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
                             onclick="downloadChartImage()" data-toggle="tooltip"
                             title="Download Chart as Image"></i>

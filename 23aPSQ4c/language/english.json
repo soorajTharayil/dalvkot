@@ -57,13 +57,13 @@
    "kpi_info": "23a. PSQ4c - Waiting time for laboratory diagnostics for the month of ",
    "definition": "Definition: ",
    "kpi_def": "Waiting time for diagnostics is the time from which the patient has come to the diagnostic service (requisition form has been presented to the counter) till the time that the test is initiated.",
-   "formula_para1": "Sum of total patient reporting time",   
+   "formula_para1": "Sum of total patient reporting time (Numerator)",   
    "hr_placeholder":"Hours",
    "min_placeholder": "Minutes",
    "sec_placeholder": "Seconds",
-   "formula_para2": "Number of patients reported in diagnostics",
+   "formula_para2": "Number of patients reported in diagnostics (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

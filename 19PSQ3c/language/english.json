@@ -58,14 +58,14 @@
    "kpi_info": "19. PSQ3c - Percentage of re-scheduling of surgeries for the month of",
    "definition": "Definition:",
    "kpi_def": "Re-scheduling of surgeries includes cancellation and postponement(beyond 4 hours) of the surgery",
-   "formula_para1": "Number of cases rescheduled",   
+   "formula_para1": "Number of cases rescheduled (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of surgeries planned",
+   "formula_para2": "Number of surgeries planned (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

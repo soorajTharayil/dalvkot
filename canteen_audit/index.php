@@ -12,7 +12,7 @@
 
 <head>
 
-  <title>Efeedor Feedback System</title>
+  <title>Quality Audit Management Software - Efeedor Healthcare Experience Management Platform</title>
 
   <meta charset="utf-8">
 
@@ -60,9 +60,9 @@
 
     <!-- Add a button to trigger the modal -->
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}}
-      <i class="fa fa-language" aria-hidden="true"></i>
-    </button>
+    <!--  {{type2}}-->
+    <!--  <i class="fa fa-language" aria-hidden="true"></i>-->
+    <!--</button>-->
     <!-- dropdown for three language end -->
 
   </nav>
@@ -192,7 +192,114 @@
               <form id="msform">
 
                 <!-- PATIENT INFORMATION page start -->
+
                 <fieldset ng-show="step0 == true">
+
+                  <!--<h4><strong>AUDIT & PATIENT INFORMATION</strong></h4>-->
+                  <h4 style="font-size:22px;"><strong>{{lang.patient_info}}</strong></h4>
+
+                  <!--<p>Fill all form field to go to next step</p>-->
+                  <br>
+                  <div class="form-card">
+
+                    <div class="row">
+
+                      <!-- Audit Type -->
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
+                        <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6>
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled/>
+                          </span>
+                        </div>
+
+
+
+                        <!-- Date of Audit -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
+                            {{lang.dtandtym}}<sup style="color:red">*</sup><br>
+                            <p style="font-size: 14px; margin: 4px 0 0 0; color:#6c757d;">
+                              {{lang.format}}
+                            </p>
+                          </span>
+
+                          <!-- Input -->
+                          <div style="position: relative; width: 100%;">
+                            <input class="form-control" ng-model="feedback.audit_date" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
+                              autocomplete="off" onclick="this.showPicker && this.showPicker()"
+                              onfocus="this.showPicker && this.showPicker()"
+                              style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
+                          </div>
+                        </div>
+
+
+
+                        <!-- Audit Short Name -->
+
+                        <!--<div class="form-group">-->
+                        <!--  <span class="addon" style="font-size: 18px; margin-bottom: 6px;">{{lang.stname}}</span>-->
+                        <!--  <span class="has-float-label" style="margin-top: 8px;">-->
+                        <!--    <input class="form-control" type="text" ng-model="feedback.audit_shortname" placeholder="Enter short name" maxlength="30" autocomplete="off" />-->
+                        <!--  </span>-->
+                        <!--</div>-->
+
+                        <!-- Audit By -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
+                          </span>
+                        </div>
+                        <!-- Location -->
+                        <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
+                          click-outside="locationOpen=false">
+
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup
+                              style="color: red;">*</sup></span>
+
+                          <div style="margin-top:8px; position:relative;">
+                            <!-- Trigger -->
+                            <div class="form-control" ng-click="locationOpen=!locationOpen">
+                              {{ feedback.location || 'Select Area' }}
+                            </div>
+
+                            <!-- Dropdown panel -->
+                            <div ng-show="locationOpen"
+                              style="position:absolute; z-index:1000; left:0; right:0; margin-top:4px; background:#fff; border:1px solid #ced4da; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
+                              <input class="form-control" placeholder="Search Area" ng-model="locationSearch"
+                                style="margin-bottom:8px;" autofocus />
+
+                              <div style="max-height:200px; overflow:auto;">
+                                <div ng-repeat="x in area | filter:locationSearch"
+                                  ng-if="x.title !== 'ALL'"
+                                  ng-click="selectLocation(x.title)"
+                                  style="padding:8px; cursor:pointer;">
+                                  {{x.title}}
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+
+                        
+
+
+                        <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
+
+                        <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
+
+                </fieldset>
+
+                
+                <fieldset ng-show="step1 == true">
 
                   <h4><strong>{{lang.patient_info}}</strong></h4>
 
@@ -202,29 +309,10 @@
 
                     <div class="row">
 
-<!-- 
-                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: -14px;">
-
-                        <div class="form-group">
-
-                          <span class="addon" style="font-size: 16px;">{{lang.department}}<sup style="color:red">*</sup></span>
-
-                          <span class="has-float-label">
-
-                            <input class="form-control" placeholder="{{lang.staff_name_placeholder}}" maxlength="20" type="text" id="contactnumber" ng-required="true" ng-model="feedback.department" autocomplete="off" style="padding-top:0px;" />
-
-                            <label for="contactnumber"></label>
-
-                          </span>
-
-                        </div>
-
-                      </div> -->
-
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:7px; top: 10px;">
                         <div class="form-group">
-                          <!-- <h4 style="font-size: 17px;margin-left:-6px;margin-top:13px;"><b>Before Procedure:</b></h4> -->
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>PERSONAL HYGIENE:</b></h6>
                           <div style="margin-top: 12px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.identification_details}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -241,6 +329,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.identification_details_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vital_signs}}</p>
@@ -258,6 +350,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.vital_signs_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.surgery}}</p>
@@ -275,6 +371,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.surgery_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.complaints_communicated}}</p>
@@ -292,6 +392,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.complaints_communicated_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.intake}}</p>
@@ -309,6 +413,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.intake_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -327,6 +435,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.output_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -345,6 +457,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.allergies_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -363,8 +479,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.medication_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>UTENSILS AND EQUIPMENT:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.diagnostic}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -381,6 +502,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.diagnostic_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -399,6 +524,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.lab_results_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -417,6 +546,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.pending_investigation_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -435,8 +568,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.medicine_order_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>CLEANING:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.facility_communicated}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -453,6 +591,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.facility_communicated_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <!-- <h4 style="font-size: 17px;margin-left:-6px;margin-top:17px;"><b>During Procedure:</b></h4> -->
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -471,6 +613,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.health_education_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -489,6 +635,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.risk_assessment_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.urethral}}</p>
@@ -506,6 +656,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.urethral_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -524,8 +678,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.urine_sample_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>GARBAGE DISPOSAL:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.bystander}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -542,6 +701,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.bystander_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -560,6 +723,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.instruments_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <!-- <h4 style="font-size: 17px;margin-left:-6px;margin-top:17px;"><b>After Procedure:</b></h4> -->
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -578,6 +745,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.sterile_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.antibiotics}}</p>
@@ -595,6 +766,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.antibiotics_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -613,8 +788,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.surgical_site_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>PEST CONTROL:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.wound}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -631,8 +811,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.wound_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>RECEIVING:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.documented}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -649,6 +834,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.documented_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -667,6 +856,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.adequate_facilities_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -685,6 +878,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.sufficient_lighting_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -703,6 +900,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.storage_facility_for_food_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -721,8 +922,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.personnel_hygiene_facilities_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>STORAGE:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_material_testing}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -739,6 +945,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.food_material_testing_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -757,6 +967,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.incoming_material_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -775,6 +989,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.raw_materials_inspection_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -793,8 +1011,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.storage_of_materials_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>TRANSPORT:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.raw_materials_cleaning}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -811,6 +1034,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.raw_materials_cleaning_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -829,6 +1056,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.equipment_sanitization_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -847,8 +1078,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.frozen_food_thawing_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>HEALTH:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vegetarian_and_non_vegetarian}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -865,6 +1101,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.vegetarian_and_non_vegetarian_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -883,8 +1123,13 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.cooked_food_cooling_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
+                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b>QUALITY:</b></h6>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_portioning}}</p>
                             <div style="display: flex; gap: 20px; align-items: center;">
@@ -901,711 +1146,14 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.food_portioning_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.temperature_control}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.temperature_control" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.temperature_control" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.temperature_control" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.reheating_food}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.reheating_food" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.reheating_food" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.reheating_food" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.oil_suitability}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.oil_suitability" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.oil_suitability" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.oil_suitability" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vehicles_for_food}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vehicles_for_food" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vehicles_for_food" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vehicles_for_food" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_non_food_separation}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_non_food_separation" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_non_food_separation" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_non_food_separation" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cutlery_crockery}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.cutlery_crockery" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.cutlery_crockery" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.cutlery_crockery" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.packaging_material_quality}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.packaging_material_quality" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.packaging_material_quality" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.packaging_material_quality" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.equipment_cleaning}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.equipment_cleaning" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.equipment_cleaning" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.equipment_cleaning" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.pm_of_equipment}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.pm_of_equipment" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.pm_of_equipment" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.pm_of_equipment" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.measuring_devices}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.measuring_devices" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.measuring_devices" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.measuring_devices" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.pest_control_program}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.pest_control_program" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.pest_control_program" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.pest_control_program" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.drain_design}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.drain_design" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.drain_design" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.drain_design" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_waste_removal}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_removal" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_removal" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_removal" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_handler_medical}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_medical" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_medical" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_medical" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.ill_individual_exclusion}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.ill_individual_exclusion" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.ill_individual_exclusion" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.ill_individual_exclusion" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_handler_personal}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_personal" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_personal" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_personal" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_handler_protection}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_protection" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_protection" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_protection" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.consumer_complaints}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.consumer_complaints" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.consumer_complaints" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.consumer_complaints" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_handler_training}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_training" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_training" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_handler_training" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.documentation_and_records}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.documentation_and_records" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.documentation_and_records" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.documentation_and_records" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.tables_and_chairs}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.tables_and_chairs" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.tables_and_chairs" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.tables_and_chairs" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.waiting_time_for_food}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.waiting_time_for_food" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.waiting_time_for_food" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.waiting_time_for_food" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.inpatient_food_schedule}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.inpatient_food_schedule" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.inpatient_food_schedule" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.inpatient_food_schedule" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.use_of_banned_synthetic}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.use_of_banned_synthetic" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.use_of_banned_synthetic" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.use_of_banned_synthetic" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vegetable_oil}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vegetable_oil" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vegetable_oil" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vegetable_oil" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.used_oil_disposal}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.used_oil_disposal" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.used_oil_disposal" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.used_oil_disposal" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.used_oil_collection}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.used_oil_collection" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.used_oil_collection" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.used_oil_collection" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.monitoring_food_waste}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.monitoring_food_waste" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.monitoring_food_waste" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.monitoring_food_waste" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_waste_reduction}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_reduction" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_reduction" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_reduction" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.food_waste_recycling}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_recycling" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_recycling" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.food_waste_recycling" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.surplus_food}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.surplus_food" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.surplus_food" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.surplus_food" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.plastic_use}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.plastic_use" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.plastic_use" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.plastic_use" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.waste_collection}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.waste_collection" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.waste_collection" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.waste_collection" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.recycling_and_reusing}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.recycling_and_reusing" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.recycling_and_reusing" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.recycling_and_reusing" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.awareness_messages}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.awareness_messages" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.awareness_messages" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.awareness_messages" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.celebration}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.celebration" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.celebration" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.celebration" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.healthy_food_choices}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.healthy_food_choices" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.healthy_food_choices" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.healthy_food_choices" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.encouraging_healthier}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.encouraging_healthier" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.encouraging_healthier" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.encouraging_healthier" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.feedback_system}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.feedback_system" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.feedback_system" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.feedback_system" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                          </div>
-
-
+                          
+                        
                           <!-- <div class="col-xs-12 col-sm-12 col-md-12">
 
                             <div class="form-group" style="margin-top: 15px; margin-left: -16px;">
@@ -1631,6 +1179,30 @@
                       <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 13px;">
                         <p style="font-size: 16px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
                         <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                        <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                      <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
+                        Upload file( Evidences, proofs, etc)
+                      </label>
+
+                      <!-- File Input for Document Upload -->
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple
+                        onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <br>
+
+                      <!-- Display the list of uploaded files -->
+                      <div ng-if="feedback.files_name && feedback.files_name.length > 0">
+                        <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
+                        <ul style="margin-left: 19px;">
+                          <li ng-repeat="files_name in feedback.files_name track by $index"
+                            style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank"
+                              style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;"
+                              ng-click="removeFile($index)">&#10060;</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                       </div>
 
 
@@ -1640,7 +1212,7 @@
                   </div>
 
                   <!-- submit button -->
-                  <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:12px;margin-top:35px;" ng-click="prev()" value="{{lang.previous}}" />
+                  <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:12px;margin-top:35px;" ng-click="prev1()" value="{{lang.previous}}" />
 
                   <div>
                     <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:12px;margin-top:35px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
@@ -1699,6 +1271,15 @@
 
                           {{lang.unhappythankyoumessage}}
                         </p>
+                        <div class="thankyou-buttons" style="margin-top: 40px;">
+                          <button type="button" class="btn btn-primary" ng-click="repeatAudit()">
+                            🔄 Repeat Audit
+                          </button>
+                          <a ng-href="/audit_forms?user_id={{user_id}}" class="btn btn-secondary"
+                            style="margin-left: 15px;">
+                            🏠 Audits Home Page
+                          </a>
+                        </div>
 
                       </div>
 

@@ -1,4 +1,28 @@
 var app = angular.module('ehandorApp', []);
+
+app.directive('clickOutside', function ($document) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			function handleClick(event) {
+				// If click is outside this element
+				if (!element[0].contains(event.target)) {
+					scope.$apply(function () {
+						scope.$eval(attrs.clickOutside);
+					});
+				}
+			}
+
+			// Listen for clicks on the whole page
+			$document.on('click', handleClick);
+
+			// Remove listener when scope destroyed
+			scope.$on('$destroy', function () {
+				$document.off('click', handleClick);
+			});
+		}
+	};
+});
 // adf 
 app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $location, $window) {
 	$scope.typel = 'english';
@@ -14,6 +38,58 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.step1 = false;
 	$scope.step4 = false;
 
+	//show date and time in input field
+	let now = new Date();
+	now.setSeconds(0, 0);
+
+	$scope.feedback.audit_date = now;
+
+    $scope.repeatAudit = function () {
+		// keep the values you don’t want to reset
+		var keep = {
+			audit_by: $scope.feedback.audit_by,
+			audit_date: $scope.feedback.audit_date,
+			audit_type: $scope.feedback.audit_type
+		};
+
+		// reset everything else
+		$scope.feedback = {};
+
+		// restore the kept values
+		$scope.feedback.audit_by = keep.audit_by;
+		$scope.feedback.audit_date = keep.audit_date;
+		$scope.feedback.audit_type = keep.audit_type;
+
+		// reset steps
+		$scope.step0 = true;
+		$scope.step1 = $scope.step2 = $scope.step3 = $scope.step4 = false;
+		$scope.step = 0;
+	};
+
+	// max (current date/time)
+	let maxDate = new Date();
+	maxDate.setSeconds(59, 999);
+
+	let year = maxDate.getFullYear();
+	let month = ('0' + (maxDate.getMonth() + 1)).slice(-2);
+	let day = ('0' + maxDate.getDate()).slice(-2);
+	let hours = ('0' + maxDate.getHours()).slice(-2);
+	let minutes = ('0' + maxDate.getMinutes()).slice(-2);
+	$scope.todayDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+	// min (7 days back)
+	let minDate = new Date();
+	minDate.setDate(minDate.getDate() - 7);
+
+	let minYear = minDate.getFullYear();
+	let minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+	let minDay = ('0' + minDate.getDate()).slice(-2);
+	let minHours = ('0' + minDate.getHours()).slice(-2);
+	let minMinutes = ('0' + minDate.getMinutes()).slice(-2);
+	$scope.minDateTime = `${minYear}-${minMonth}-${minDay}T${minHours}:${minMinutes}`;
+
+	
+
 
 	$rootScope.language = function (type) {
 		$scope.typel = type;
@@ -21,7 +97,9 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			$http.get('language/english.json').then(function (responsedata) {
 
 				$rootScope.lang = responsedata.data;
-				$scope.type2 = 'English'
+				$scope.type2 = 'English';
+				//load main heading
+				$scope.feedback.audit_type = $rootScope.lang.patient_info;
 			});
 		}
 		if (type == 'lang2') {
@@ -57,6 +135,9 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginnumber = ehandor.mobile;
 
 
+		//load audit name
+		$scope.feedback.audit_by = $scope.loginname;
+		console.log($scope.feedback.audit_by);
 
 		console.log($scope.loginemail);
 		console.log($scope.loginid);
@@ -69,26 +150,58 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	}
 
 	$scope.next1 = function () {
-		if ($scope.feedback.patientid == '' || $scope.feedback.patientid == undefined) {
-			alert('Please enter UHID');
-			return false;
-		}
-		if ($scope.feedback.department == "" || $scope.feedback.department == undefined) {
-			alert("Please select department");
-			return false;
-		}
-		if ($scope.feedback.patient_category == "" || $scope.feedback.patient_category == undefined) {
-			alert("Please select patient category");
-			return false;
+
+		if (!$scope.feedback.audit_by || ($scope.feedback.audit_by + '').trim() === '') {
+			alert('Please enter audit by');
+			return;
 		}
 
-		else {
-			$scope.step0 = false;
-			$scope.step1 = true;
-			$(window).scrollTop(0);
+		
 
+		if (!$scope.feedback.mid_no || ($scope.feedback.mid_no + '').trim() === '') {
+			alert('Please enter Patient UHID');
+			return;
 		}
 
+		if (!$scope.feedback.patient_name || ($scope.feedback.patient_name + '').trim() === '') {
+			alert('Please enter Patient Name');
+			return;
+		}
+
+		// if (!$scope.feedback.patient_age) {
+		// 	alert("Please enter Patient Age");
+		// 	return;
+		// }
+
+		// if (!$scope.feedback.patient_gender) {
+		// 	alert("Please select Patient Gender");
+		// 	return;
+		// }
+
+		if (!$scope.feedback.location || ($scope.feedback.location + '').trim() === '') {
+			alert("Please select Area");
+			return;
+		}
+
+		if (!$scope.feedback.department || ($scope.feedback.department + '').trim() === '') {
+			alert("Please select Department");
+			return;
+		}
+
+		if (!$scope.feedback.attended_doctor || ($scope.feedback.attended_doctor + '').trim() === '') {
+			alert("Please select Attended Doctor");
+			return;
+		}
+
+		if (!$scope.feedback.initial_assessment_hr6) {
+			alert("Please enter admission date.");
+			return; // stop submission
+		}
+
+		// ✅ If all passed → go next
+		$scope.step0 = false;
+		$scope.step1 = true;
+		$(window).scrollTop(0);
 	}
 
 	$scope.prev1 = function () {
@@ -97,12 +210,386 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.step1 = false;
 		$(window).scrollTop(0);
 
+	}
 
+	//$scope.todayDateTime = new Date().toISOString().slice(0, 16);
+
+
+
+
+	$scope.menuVisible = false;
+	$scope.aboutVisible = false;
+
+	// Function to hide menu only when clicking "Home"
+	$scope.hideMenu = function () {
+		$scope.menuVisible = false;
+	};
+
+	// Function to show all content (Home)
+	$scope.showAllContent = function () {
+		$scope.aboutVisible = false;
+		$scope.supportVisible = false;
+		$scope.appDownloadVisible = false;
+		$scope.dashboardVisible = false;
+		$scope.menuVisible = false; // Close the menu directly
+
+		// Redirect to Home URL
+		window.location.href = '/audit_forms';
+	};
+
+
+
+	// Function to show the 'About' content
+	$scope.showAbout = function () {
+		$scope.menuVisible = false;
+		$scope.supportVisible = false;
+		$scope.appDownloadVisible = false;
+		$scope.dashboardVisible = false;
+		$scope.aboutVisible = true;
+	};
+
+	// Function to show the 'Support' content
+	$scope.showSupport = function () {
+		$scope.menuVisible = false;
+		$scope.aboutVisible = false;
+		$scope.appDownloadVisible = false;
+		$scope.dashboardVisible = false;
+		$scope.supportVisible = true;
+	};
+
+	// Function to show the 'Web dashboard' content
+	$scope.showDashboard = function () {
+		$scope.menuVisible = false;
+		$scope.aboutVisible = false;
+		$scope.appDownloadVisible = false;
+		$scope.supportVisible = false;
+		$scope.dashboardVisible = true;
+
+	};
+
+	// Function to show the 'App download' content
+	$scope.showAppDown = function () {
+		$scope.menuVisible = false;
+		$scope.aboutVisible = false;
+		$scope.supportVisible = false;
+		$scope.dashboardVisible = false;
+		$scope.appDownloadVisible = true;
+	};
+
+	// To downlaod the apk
+	$scope.downloadApk = function () {
+		if ($scope.setting_data && $scope.setting_data.android_apk) {
+			window.location.href = $scope.setting_data.android_apk;
+		} else {
+			alert("APK download link is not available.");
+		}
+	};
+
+	//To redirect to user activity page
+	$scope.redirectToUserActivity = function (event) {
+		event.preventDefault();
+		window.location.href = "/view/user_activity";
+	};
+
+	// Close menu when clicking outside
+	$scope.closeMenuOnClickOutside = function (event) {
+		const isClickInsideMenu = event.target.closest('.menu-dropdown') || event.target.closest('.menu-toggle');
+
+		if ($scope.menuVisible && !isClickInsideMenu) {
+			$scope.menuVisible = false;
+
+			// Use $applyAsync to avoid "$digest already in progress" errors
+			$scope.$applyAsync();
+		}
+	};
+
+	// Attach event listener ONCE
+	document.addEventListener('click', $scope.closeMenuOnClickOutside);
+
+	// Cleanup when scope is destroyed (important for single-page apps)
+	$scope.$on('$destroy', function () {
+		document.removeEventListener('click', $scope.closeMenuOnClickOutside);
+	});
+	$scope.encodeFiles = function (element) {
+		var files_name = Array.from(element.files);
+
+		files_name.forEach(function (file) {
+			var formData = new FormData();
+			formData.append('file', file);
+
+			$http.post($rootScope.baseurl_main + '/upload_file.php', formData, {
+				transformRequest: angular.identity,
+				headers: { 'Content-Type': undefined }
+			}).then(function (response) {
+				if (response.data.file_url) {
+					var fileUrl = response.data.file_url;
+					if (!fileUrl.startsWith('http')) {
+						fileUrl = $rootScope.baseurl_main + '/' + fileUrl;
+					}
+
+					// Ensure files_name is an array before pushing
+					if (!$scope.feedback.files_name) {
+						$scope.feedback.files_name = []; // Initialize if undefined
+					}
+
+					// Push file info to the array
+					$scope.feedback.files_name.push({
+						url: fileUrl,
+						name: file.name
+					});
+				}
+			}).catch(function (error) {
+				console.error('Error uploading file:', error);
+			});
+		});
+	};
+
+
+	$scope.removeFile = function (index) {
+		$scope.feedback.files_name.splice(index, 1);
+	};
+
+
+	$scope.locations = [
+		"1ST FLOOR",
+		"2ND FLOOR",
+		"3RD FLOOR",
+		"4TH FLOOR",
+		"5TH FLOOR",
+		"6TH FLOOR"
+	];
+
+	$scope.selectLocation = function (loc) {
+		$scope.feedback.location = loc;
+		$scope.locationOpen = false; // close dropdown after selection
+	};
+
+	// Select Department
+	$scope.selectDepartment = function (dep) {
+		$scope.feedback.department = dep;
+		$scope.depOpen = false;   // close dropdown
+		$scope.depSearch = "";    // clear search
+	};
+
+	// Close dropdown on outside click
+	$scope.closeDepartment = function () {
+		$scope.depOpen = false;
+	};
+
+	// Select Doctor
+	$scope.selectDoctor = function (doc) {
+		$scope.feedback.attended_doctor = doc;
+		$scope.docOpen = false;   // close dropdown
+		$scope.docSearch = "";    // clear search
+	};
+
+	// Close on outside click
+	$scope.closeDoctor = function () {
+		$scope.docOpen = false;
+	};
+
+
+	//load doctor list
+	$scope.setupapplication = function () {
+		//$rootScope.loader = true;
+		var url = window.location.href;
+		//console.log(url);
+		var id = url.substring(url.lastIndexOf('=') + 1);
+		//alert(id);
+		$http.get($rootScope.baseurl_main + '/audit_load_doctor.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
+			$scope.doctor = responsedata.data;
+			console.log($scope.doctor);
+		},
+			function myError(response) {
+				$rootScope.loader = false;
+
+			}
+		);
 
 	}
 
+	$scope.setupapplication();
+
+
+	$scope.setupapplication1 = function () {
+		//$rootScope.loader = true;
+		var url = window.location.href;
+		//console.log(url);
+		var id = url.substring(url.lastIndexOf('=') + 1);
+		//alert(id);
+		$http.get($rootScope.baseurl_main + '/audit_load_department.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
+			$scope.auditdept = responsedata.data;
+			console.log($scope.auditdept);
+		},
+			function myError(response) {
+				$rootScope.loader = false;
+
+			}
+		);
+
+	}
+
+	$scope.setupapplication1();
+	
+	//Audit area
+    $scope.setupapplication3 = function () {
+		//$rootScope.loader = true;
+		var url = window.location.href;
+		//console.log(url);
+		var id = url.substring(url.lastIndexOf('=') + 1);
+		//alert(id);
+		$http.get($rootScope.baseurl_main + '/audit_load_area.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
+			$scope.area = responsedata.data.area;
+			console.log($scope.area);
+		},
+			function myError(response) {
+				$rootScope.loader = false;
+
+			}
+		);
+
+	}
+
+	$scope.setupapplication3();
+
+	//Audit frequency
+	$scope.setupapplication2 = function () {
+		//$rootScope.loader = true;
+		var url = window.location.href;
+		//console.log(url);
+		var id = url.substring(url.lastIndexOf('=') + 1);
+		//alert(id);
+		$http.get($rootScope.baseurl_main + '/audit_load_frequency.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
+			$scope.auditfrequency = responsedata.data;
+			console.log($scope.auditfrequency);
+			$scope.loadAuditCounts();
+		},
+			function myError(response) {
+				$rootScope.loader = false;
+
+			}
+		);
+
+	}
+
+	$scope.showAuditMsg = false;
+
+	$scope.closeAuditMsg = function () { $scope.showAuditMsg = false; };
+    
+
+	$scope.loadAuditCounts = function () {
+
+		var url = window.location.href;
+		var id = url.substring(url.lastIndexOf('=') + 1);
+
+		$http.get($rootScope.baseurl_main + '/audit_count.php?patientid=' + id + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_mrd_audit', { timeout: 20000 })
+			.then(function (res) {
+
+				var monthCount = parseInt(res.data.conducted_month, 10) || 0;
+				var lastDate = res.data.previous_audit_date || 'N/A';
+				var yearCount = parseInt(res.data.conducted_year, 10) || 0;
+				var lastDateYear = res.data.last_audit_date_year || 'N/A';
+
+				var recList = ($scope.auditfrequency && Array.isArray($scope.auditfrequency.auditfrequency))
+					? $scope.auditfrequency.auditfrequency : [];
+				var rec = recList[0] || {};
+
+				var freqRaw = (rec.frequency || '').toString().trim();
+				var freq = freqRaw.toLowerCase();
+				var audit_type = rec.audit_type;
+				var target = rec.target;
+				var title = rec.title || 'This audit';
+
+				var isRandom = (freq === 'random audit');
+
+
+				var isMonthlyType =
+					(freq === 'daily') ||
+					(freq === 'weekly') ||
+					(freq === 'monthly') ||
+					(freq === 'twice a week') ||
+					(freq.indexOf('fortnight') !== -1);
+
+				var remaining = isMonthlyType ? Math.max(target - monthCount, 0) : '—';
+				var extra = isMonthlyType ? Math.max(monthCount - target, 0) : '—';
+
+				$scope.auditFreq = freqRaw;
+				$scope.audit_type = audit_type;
+				$scope.auditTargetPerMonth = (isMonthlyType || isRandom) ? target : '—';
+				$scope.auditLastDate = lastDate;
+				$scope.auditConductedMonth = monthCount;
+
+				$scope.showRemaining = isMonthlyType;
+				$scope.auditRemaining = isMonthlyType ? remaining : '—';
+
+				if (isMonthlyType) {
+					if (target > 0 && monthCount >= target) {
+						$scope.auditStatusMessage = 'Minimum monthly target met. Completed ' + monthCount + (extra > 0 ? ' (+' + extra + ' above target)' : '') + '. Last audit on ' + lastDate + '.';
+						$scope.auditSentence = 'The ' + title + ' is conducted ' + freqRaw + ' with a minimum target of ' + target + ' audits this month. The target has been achieved, with ' + monthCount + ' completed' + (extra > 0 ? ' (' + extra + ' above target)' : '') + '. The last audit was performed on ' + lastDate + '.';
+					} else {
+						$scope.auditStatusMessage = 'Minimum monthly target: ' + target + '. Completed ' + monthCount + '; ' + remaining + ' to target. Last audit on ' + lastDate + '.';
+						$scope.auditSentence = 'The ' + title + ' is conducted ' + freqRaw + ' with a minimum target of ' + target + ' audits this month. So far, ' + monthCount + ' audits have been conducted, leaving ' + remaining + ' to reach the target. The last audit was performed on ' + lastDate + '.';
+					}
+
+				} else if (freq === 'random audit') {
+					// Random: show target (sample size) and completed; do not mention "remaining"
+					$scope.auditStatusMessage = 'Target sample size (minimum per month): ' + target + '. Completed this month: ' + monthCount + '. Last audit on ' + lastDate + '.';
+					$scope.auditSentence = 'The ' + title + ' is conducted as a Random audit with a minimum monthly sample size of ' + target + '. So far, ' + monthCount + ' audits have been conducted this month. The last audit was performed on ' + lastDate + '.';
+
+				} else if (freq === 'quarterly') {
+					var yrTargetQ = 4, yrRemainQ = Math.max(yrTargetQ - yearCount, 0), yrExtraQ = Math.max(yearCount - yrTargetQ, 0);
+					$scope.auditTargetPerYear = yrTargetQ;
+					$scope.auditConductedYear = yearCount;
+					$scope.auditRemainingYear = yrRemainQ;
+					$scope.auditLastDateYear = lastDateYear;
+
+					$scope.auditStatusMessage = 'Minimum yearly target (Quarterly): ' + yrTargetQ + '. Completed ' + yearCount + (yrExtraQ > 0 ? ' (+' + yrExtraQ + ' above target)' : '') + '. Last audit in ' + $scope.selectedYears + ' on ' + lastDateYear + '.';
+					$scope.auditSentence = 'The ' + title + ' is conducted Quarterly with a minimum target of ' + yrTargetQ + ' audits in ' + $scope.selectedYears + '. ' + (yrRemainQ > 0 ? ('So far, ' + yearCount + ' have been conducted, leaving ' + yrRemainQ + ' to reach the target. ') : ('Completed ' + yearCount + (yrExtraQ > 0 ? ' (' + yrExtraQ + ' above target). ' : '. '))) + 'The last audit in ' + $scope.selectedYears + ' was performed on ' + lastDateYear + '.';
+
+				} else if (freq === 'half-yearly' || freq === 'half yearly') {
+					var yrTargetH = 2, yrRemainH = Math.max(yrTargetH - yearCount, 0), yrExtraH = Math.max(yearCount - yrTargetH, 0);
+					$scope.auditTargetPerYear = yrTargetH;
+					$scope.auditConductedYear = yearCount;
+					$scope.auditRemainingYear = yrRemainH;
+					$scope.auditLastDateYear = lastDateYear;
+
+					$scope.auditStatusMessage = 'Minimum yearly target (Half-Yearly): ' + yrTargetH + '. Completed ' + yearCount + (yrExtraH > 0 ? ' (+' + yrExtraH + ' above target)' : '') + '. Last audit in ' + $scope.selectedYears + ' on ' + lastDateYear + '.';
+					$scope.auditSentence = 'The ' + title + ' is conducted Half-Yearly with a minimum target of ' + yrTargetH + ' audits in ' + $scope.selectedYears + '. ' + (yrRemainH > 0 ? ('So far, ' + yearCount + ' have been conducted, leaving ' + yrRemainH + ' to reach the target. ') : ('Completed ' + yearCount + (yrExtraH > 0 ? ' (' + yrExtraH + ' above target). ' : '. '))) + 'The last audit in ' + $scope.selectedYears + ' was performed on ' + lastDateYear + '.';
+
+				} else if (freq === 'annual') {
+					var yrTargetA = 1, yrRemainA = Math.max(yrTargetA - yearCount, 0), yrExtraA = Math.max(yearCount - yrTargetA, 0);
+					$scope.auditTargetPerYear = yrTargetA;
+					$scope.auditConductedYear = yearCount;
+					$scope.auditRemainingYear = yrRemainA;
+					$scope.auditLastDateYear = lastDateYear;
+
+					$scope.auditStatusMessage = 'Minimum yearly target (Annual): ' + yrTargetA + '. Completed ' + yearCount + (yrExtraA > 0 ? ' (+' + yrExtraA + ' above target)' : '') + '. Last audit in ' + $scope.selectedYears + ' on ' + lastDateYear + '.';
+					$scope.auditSentence = 'The ' + title + ' is conducted Annually with a minimum target of ' + yrTargetA + ' audit in ' + $scope.selectedYears + '. ' + (yrRemainA > 0 ? ('So far, ' + yearCount + ' have been conducted, leaving ' + yrRemainA + ' to reach the target. ') : ('Completed ' + yearCount + (yrExtraA > 0 ? ' (' + yrExtraA + ' above target). ' : '. '))) + 'The last audit in ' + $scope.selectedYears + ' was performed on ' + lastDateYear + '.';
+
+				} else {
+					$scope.auditStatusMessage = '';
+					$scope.auditSentence = '';
+				}
+
+
+				console.log($scope.auditSentence);
+				$scope.showAuditMsg = true;
+			});
+	};
+
+
+
+
+	$scope.setupapplication2();
+
+	//aduit frequency end
+
+
+
 
 	//Calculate function for initail assessment
+
+	$scope.assessmentCalculated = false;
 
 	$scope.calculateTimeFormat = function () {
 		function convertMillisecondsToTime(ms) {
@@ -185,7 +672,13 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.feedback.initial_assessment_hr2 = $scope.formattedAssessmentDateTime;
 
 		console.log("Calculated Result Time:", $scope.feedback.calculatedResultTime);
+		$scope.assessmentCalculated = true;
 	};
+
+
+
+
+	$scope.dischargeCalculated = false;
 
 	$scope.calculateDoctorAdviceToBillPaid = function () {
 		function convertMillisecondsToTime(ms) {
@@ -222,28 +715,28 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		}
 
 		// For initial_assessment_hr3
-var admissionDateTime = new Date($scope.feedback.initial_assessment_hr3);
-var admissionYear = admissionDateTime.getFullYear();
-var admissionMonth = ('0' + (admissionDateTime.getMonth() + 1)).slice(-2); // Months are zero-based
-var admissionDay = ('0' + admissionDateTime.getDate()).slice(-2);
-var admissionHours = ('0' + admissionDateTime.getHours()).slice(-2);
-var admissionMinutes = ('0' + admissionDateTime.getMinutes()).slice(-2);
-var admissionSeconds = ('0' + admissionDateTime.getSeconds()).slice(-2);
-var formattedAdmissionDateTime = `${admissionYear}-${admissionMonth}-${admissionDay} ${admissionHours}:${admissionMinutes}:${admissionSeconds}`;
-$scope.feedback.initial_assessment_hr3 = formattedAdmissionDateTime;
-console.log("Formatted admission date-time:", formattedAdmissionDateTime);
+		var admissionDateTime = new Date($scope.feedback.initial_assessment_hr3);
+		var admissionYear = admissionDateTime.getFullYear();
+		var admissionMonth = ('0' + (admissionDateTime.getMonth() + 1)).slice(-2); // Months are zero-based
+		var admissionDay = ('0' + admissionDateTime.getDate()).slice(-2);
+		var admissionHours = ('0' + admissionDateTime.getHours()).slice(-2);
+		var admissionMinutes = ('0' + admissionDateTime.getMinutes()).slice(-2);
+		var admissionSeconds = ('0' + admissionDateTime.getSeconds()).slice(-2);
+		var formattedAdmissionDateTime = `${admissionYear}-${admissionMonth}-${admissionDay} ${admissionHours}:${admissionMinutes}:${admissionSeconds}`;
+		$scope.feedback.initial_assessment_hr3 = formattedAdmissionDateTime;
+		console.log("Formatted admission date-time:", formattedAdmissionDateTime);
 
-// For initial_assessment_hr4
-var assessmentDateTime = new Date($scope.feedback.initial_assessment_hr4);
-var assessmentYear = assessmentDateTime.getFullYear();
-var assessmentMonth = ('0' + (assessmentDateTime.getMonth() + 1)).slice(-2); // Months are zero-based
-var assessmentDay = ('0' + assessmentDateTime.getDate()).slice(-2);
-var assessmentHours = ('0' + assessmentDateTime.getHours()).slice(-2);
-var assessmentMinutes = ('0' + assessmentDateTime.getMinutes()).slice(-2);
-var assessmentSeconds = ('0' + assessmentDateTime.getSeconds()).slice(-2);
-var formattedAssessmentDateTime = `${assessmentYear}-${assessmentMonth}-${assessmentDay} ${assessmentHours}:${assessmentMinutes}:${assessmentSeconds}`;
-$scope.feedback.initial_assessment_hr4 = formattedAssessmentDateTime;
-console.log("Formatted assessment date-time:", formattedAssessmentDateTime);
+		// For initial_assessment_hr4
+		var assessmentDateTime = new Date($scope.feedback.initial_assessment_hr4);
+		var assessmentYear = assessmentDateTime.getFullYear();
+		var assessmentMonth = ('0' + (assessmentDateTime.getMonth() + 1)).slice(-2); // Months are zero-based
+		var assessmentDay = ('0' + assessmentDateTime.getDate()).slice(-2);
+		var assessmentHours = ('0' + assessmentDateTime.getHours()).slice(-2);
+		var assessmentMinutes = ('0' + assessmentDateTime.getMinutes()).slice(-2);
+		var assessmentSeconds = ('0' + assessmentDateTime.getSeconds()).slice(-2);
+		var formattedAssessmentDateTime = `${assessmentYear}-${assessmentMonth}-${assessmentDay} ${assessmentHours}:${assessmentMinutes}:${assessmentSeconds}`;
+		$scope.feedback.initial_assessment_hr4 = formattedAssessmentDateTime;
+		console.log("Formatted assessment date-time:", formattedAssessmentDateTime);
 
 
 		// Calculate the difference in milliseconds
@@ -260,21 +753,13 @@ console.log("Formatted assessment date-time:", formattedAssessmentDateTime);
 		$scope.calculatedDoctorAdviceToBillPaid = formattedDate + ' ' + formattedTime;
 		$scope.calculatedDoctorAdviceToBillPaidTime = formattedTime;
 		$scope.feedback.calculatedDoctorAdviceToBillPaid = $scope.calculatedDoctorAdviceToBillPaid;
-		
-		
+
+
 
 		console.log("Calculated Result Time:", $scope.calculatedDoctorAdviceToBillPaidTime);
+
+		$scope.dischargeCalculated = true;
 	};
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -323,10 +808,63 @@ console.log("Formatted assessment date-time:", formattedAssessmentDateTime);
 	var srcValue = params.get('src');
 	$scope.savefeedback = function () {
 
+		if (!$scope.assessmentCalculated || !$scope.dischargeCalculated) {
+			alert("Please calculate before saving.");
+			return;
+		}
 
+		var formatDateToLocalString = function (date) {
+			if (!date) return "";
+			var d = new Date(date);
 
+			if (isNaN(d.getTime())) return "";
 
+			var year = d.getFullYear();
+			var month = ('0' + (d.getMonth() + 1)).slice(-2);
+			var day = ('0' + d.getDate()).slice(-2);
+			var hours = ('0' + d.getHours()).slice(-2);
+			var minutes = ('0' + d.getMinutes()).slice(-2);
 
+			return `${year}-${month}-${day} ${hours}:${minutes}`;
+		};
+
+	
+		$scope.feedback.audit_date = formatDateToLocalString($scope.feedback.audit_date);
+		$scope.feedback.initial_assessment_hr1 = formatDateToLocalString($scope.feedback.initial_assessment_hr1);
+		$scope.feedback.initial_assessment_hr2 = formatDateToLocalString($scope.feedback.initial_assessment_hr2);
+		$scope.feedback.initial_assessment_hr3 = formatDateToLocalString($scope.feedback.initial_assessment_hr3);
+		$scope.feedback.initial_assessment_hr4 = formatDateToLocalString($scope.feedback.initial_assessment_hr4);
+
+		
+		if (!$scope.feedback.initial_assessment_hr1) {
+			alert("Please enter valid admission date & time.");
+			return;
+		}
+
+		if (!$scope.feedback.initial_assessment_hr2) {
+			alert("Please enter valid assessment completion date & time.");
+			return;
+		}
+
+		if (new Date($scope.feedback.initial_assessment_hr2) <= new Date($scope.feedback.initial_assessment_hr1)) {
+			alert("Assessment completion time must be greater than admission time.");
+			return;
+		}
+
+		if (!$scope.feedback.initial_assessment_hr3) {
+			alert("Please enter valid doctor advice time.");
+			return;
+		}
+
+		if (!$scope.feedback.initial_assessment_hr4) {
+			alert("Please enter valid time at which the bill was paid.");
+			return;
+		}
+
+		if (new Date($scope.feedback.initial_assessment_hr4) <= new Date($scope.feedback.initial_assessment_hr3)) {
+			alert("Time at which the bill was paid must be greater than the doctor advice time.");
+			return;
+		}
 
 
 		$rootScope.loader = true;

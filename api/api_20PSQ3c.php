@@ -32,7 +32,7 @@ $selectedYear = mysqli_real_escape_string($con, $selectedYear);
 
 
 // Construct the SQL query to retrieve records for the current month
-$sql = "SELECT * FROM `bf_feedback_tat_blood` WHERE YEAR(transfusion_request_time) = $selectedYear AND MONTH(transfusion_request_time) = $selectedMonth";
+$sql = "SELECT * FROM `bf_feedback_tat_blood` WHERE YEAR(datetime) = $selectedYear AND MONTH(datetime) = $selectedMonth";
 $result = mysqli_query($con, $sql);
 $num1 = mysqli_num_rows($result);
 
@@ -43,8 +43,11 @@ $totalSeconds = 0;
 
 if ($num1 > 0) {
     while ($row = mysqli_fetch_object($result)) {
+
+        $dataset = json_decode($row->dataset);
+
         // Extract datetime from initial_assessment
-        $time = $row->tat_blood;
+        $time = $dataset->calculatedResultTime;
 
         list($hours, $minutes, $seconds) = explode(':', $time);
 

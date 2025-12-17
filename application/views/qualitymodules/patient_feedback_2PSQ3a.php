@@ -28,7 +28,7 @@
 								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a> 2. PSQ3a - <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-								<div class="btn-group" style="float: right;">
+								<div class="btn-group no-print" style="float: right;">
 									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_2PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
 								</div>
 							<?php } ?>
@@ -82,6 +82,22 @@
 										<td><b>Data collection on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
 									</tr>
+									<tr>
+										<td>Uploaded files:</td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
+
 
 
 
@@ -157,12 +173,12 @@
 						<div class="panel panel-default">
 
 							<div style="float: right; margin-top: 10px; margin-right: 10px;">
-								<span style="font-size:17px"><strong>Download Chart:</strong></span>
-								<span style="margin-right: 10px;">
+								<span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+								<span class="no-print" style="margin-right: 10px;">
 									<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
 										onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
 								</span>
-								<span>
+								<span class="no-print">
 									<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
 										onclick="downloadChartImage()" data-toggle="tooltip"
 										title="Download Chart as Image"></i>
@@ -173,6 +189,330 @@
 
 						</div>
 					</div>
+				</div>
+
+				<!-- Raw data section -->
+
+				<?php
+				// KPI recorded datetime
+				$kpiDate = $result->datetime;
+
+				// Convert to year-month
+				$monthStart = date("Y-m-01", strtotime($kpiDate));
+				$monthEnd   = date("Y-m-t", strtotime($kpiDate));   // Last day of month
+				?>
+
+				<div style="width: 100%; margin-top: 30px; margin-left: 8px; border:1px solid #ccc; border-radius:6px; background-color:#fafafa; font-family:Arial, sans-serif; font-size:14px; position: relative;">
+
+					<div style="background-color:#e9f1ff; color:#004aad; padding:10px 15px; font-weight:bold; border-bottom:1px solid #ccc; display:flex; justify-content:space-between; align-items:center;">
+						<span>📊 KPI: 2. PSQ3a – Number of reporting errors per 1000 investigations- Raw data derived from <b>Incident Management</b></span>
+
+						<a href="/incident/download_alltickets?kpi=incident&from=<?= $monthStart; ?>&to=<?= $monthEnd; ?>"
+							target="_blank"
+							style="text-decoration:none;">
+							<i class="fa fa-download"></i>
+						</a>
+
+					</div>
+
+					<table style="width:100%; border-collapse:collapse;">
+						<tr>
+							<td style="width:40%; padding:10px 15px; font-weight:bold; color:#333; border-top:1px solid #eee;">
+								Number of reporting errors
+							</td>
+							<td style="width:60%; padding:10px 15px; color:#555; border-top:1px solid #eee;">
+								This value is fetched from the <b>Incident Management</b> — It represents the count of all incidents reported under the
+								<b>"Reporting Error"</b> category.
+							</td>
+
+						</tr>
+						<tr>
+							<td style="padding:10px 15px; font-weight:bold; color:#333; border-top:1px solid #eee;">
+								Number of tests performed
+							</td>
+							<td style="padding:10px 15px; color:#555; border-top:1px solid #eee;">
+								This represents the <b>total number of incidents</b> reported during the selected month.
+							</td>
+						</tr>
+					</table>
+
+					<?php
+					// individual patient feedback link
+					$ip_link_patient_feedback = base_url($this->uri->segment(1) . '/employee_complaint?empid=');
+					$this->db->select("*");
+					$this->db->from('setup_incident');
+					//$this->db->where('parent', 0);
+					$query = $this->db->get();
+					$reasons  = $query->result();
+					foreach ($reasons as $row) {
+						$keys[$row->shortkey] = $row->shortkey;
+						$res[$row->shortkey] = $row->shortname;
+						$titles[$row->shortkey] = $row->title;
+					}
+
+					if (!empty($departments)) { ?>
+
+						<div class="panel-body">
+
+							<table class="incident table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th style="width:5%"><?php echo lang_loader('inc', 'inc_slno'); ?></th>
+										<th style="width:20%;">Incident details</th>
+										<th style="width:15%;"><?php echo lang_loader('inc', 'inc_incident_reported_by'); ?></th>
+										<th style="width:13%;"><?php echo lang_loader('inc', 'inc_reported_on'); ?> / Occurred on</th>
+										<th style="width:17%;">Risk / Priority / Category</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<?php if (!empty($departments)) { ?>
+										<?php $sl = 1; ?>
+
+										<?php foreach ($departments as $department) {
+
+											$auditDate = date("Y-m-d", strtotime($department->created_on));
+
+											// Show only records from this KPI's month
+											if ($auditDate < $monthStart || $auditDate > $monthEnd) {
+												continue;
+											}
+
+											$userss = $this->db->select('user_id, firstname')
+												->where('user_id !=', 1)
+												->get('user')
+												->result();
+
+											$userMap = [];
+											foreach ($userss as $u) {
+												$userMap[$u->user_id] = $u->firstname;
+											}
+
+											$assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
+												? explode(',', $department->assign_for_process_monitor) : [];
+
+											$assign_to_ids = !empty($department->assign_to)
+												? explode(',', $department->assign_to) : [];
+
+											$assign_for_team_member_ids = !empty($department->assign_for_team_member)
+												? explode(',', $department->assign_for_team_member) : [];
+
+
+											$assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+												return isset($userMap[$id]) ? $userMap[$id] : $id;
+											}, $assign_for_process_monitor_ids);
+
+											$assign_to_names = array_map(function ($id) use ($userMap) {
+												return isset($userMap[$id]) ? $userMap[$id] : $id;
+											}, $assign_to_ids);
+
+											$assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+												return isset($userMap[$id]) ? $userMap[$id] : $id;
+											}, $assign_for_team_member_ids);
+
+
+											$actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+											$names = implode(', ', $assign_to_names);
+											$actionText_team_member = implode(', ', $assign_for_team_member_names);
+
+
+											if ($department->status == 'Addressed') {
+												$this->db->where('ticketid', $department->id)->where('ticket_status', 'Addressed');
+												$ticket = $this->db->get('ticket_incident_message')->result();
+												$rowmessage = $ticket[0]->message . ' addressed the ticket with, ' . $ticket[0]->reply;
+											} elseif ($department->status == 'Transfered') {
+												$this->db->where('ticketid', $department->id)->where('ticket_status', 'Transfered');
+												$ticket = $this->db->get('ticket_incident_message')->result();
+												$rowmessage = $ticket[0]->message . ' Transfered because, ' . $ticket[0]->reply;
+											} elseif ($department->status == 'Reopen') {
+												$this->db->where('ticketid', $department->id)->where('ticket_status', 'Reopen');
+												$ticket = $this->db->get('ticket_incident_message')->result();
+												$rowmessage = $ticket[0]->message . ' Reopened because, ' . $ticket[0]->reply;
+											} elseif ($department->status == 'Closed') {
+												$this->db->where('ticketid', $department->id)->where('ticket_status', 'Closed');
+												$ticket = $this->db->get('ticket_incident_message')->result();
+												$rowmessage = $ticket[0]->message . ' Closed the ticket, Root Cause: ' . $ticket[0]->rootcause . '. CAPA: ' . $ticket[0]->corrective;
+											} else {
+												$rowmessage = 'THIS TICKET IS OPEN';
+											}
+
+											if (strlen($rowmessage) > 60) {
+												$rowmessage = substr($rowmessage, 0, 60) . ' ... click status to view';
+											}
+										?>
+
+											<tr class="<?php echo ($sl & 1) ? 'odd gradeX' : 'even gradeC'; ?>"
+												data-placement="bottom" data-toggle="tooltip" title="<?php echo $rowmessage; ?>">
+
+												<td><?php echo $sl; ?></td>
+
+												<td style="overflow-wrap: break-word; white-space: normal;">
+													<strong>Incident ID:</strong> <?php echo $department->id; ?><br>
+
+													<?php
+													if ($department->departmentid_trasfered != 0) {
+														$show = false;
+														if ($department->status == 'Addressed') {
+															echo '<strong>Incident:</strong> Ticket was transferred<br>';
+															$show = true;
+														}
+														if ($department->status == 'Transfered') {
+															echo '<strong>Incident:</strong> ' . $trans_comm . '<br>';
+															$show = true;
+														}
+														if ($department->status == 'Reopen') {
+															echo '<strong>Incident:</strong> ' . $reopen_comm . '<br>';
+															$show = true;
+														}
+														if (!$show && $department->status == 'Closed') {
+															echo '<strong>Incident:</strong> Ticket was transferred<br>';
+														}
+													} else {
+														foreach ($department->feed->reason as $key => $value) {
+															if ($key && $titles[$key] == $department->department->description) {
+																if (in_array($key, $keys)) {
+																	echo '<strong>Incident:</strong> ' . $res[$key] . '<br>';
+																	echo '<strong>Incident Short Name:</strong> ' . $department->department->description . '<br>';
+																}
+															}
+														}
+													}
+													?>
+												</td>
+
+
+												<td style="word-break: break-all;">
+
+													<?php if (!empty($department->feed->patientid)) : ?>
+														<?php echo $department->feed->name; ?>
+														&nbsp;(<a href="<?php echo $ip_link_patient_feedback . $department->id; ?>">
+															<?php echo $department->feed->patientid; ?>
+														</a>)
+													<?php else : ?>
+														<?php echo $department->feed->name; ?>
+													<?php endif; ?>
+
+													<br><?php echo $department->feed->ward; ?>
+													<?php if ($department->feed->bedno) echo ' in ' . $department->feed->bedno; ?>
+													<br>
+
+													<i class="fa fa-phone"></i> <?php echo $department->feed->contactnumber; ?>
+
+													<?php if ($department->feed->email) { ?>
+														<br><i class="fa fa-envelope"></i> <?php echo $department->feed->email; ?>
+													<?php } ?>
+
+												</td>
+
+
+												<td style="word-break: break-all;">
+													<strong>Reported on:</strong><br>
+													<?php echo date('g:i A', strtotime($department->created_on)); ?><br>
+													<?php echo date('d-m-Y', strtotime($department->created_on)); ?><br><br>
+
+													<strong>Occurred on:</strong><br>
+													<?php
+													if (!empty($department->incident_occured_in)) {
+														echo date('g:i A', strtotime(str_replace([',', '-'], '', $department->incident_occured_in))) . "<br>";
+														echo date('d-m-Y', strtotime(str_replace([',', '-'], '', $department->incident_occured_in)));
+													} else {
+														echo '-';
+													}
+													?>
+												</td>
+
+												<?php
+												/* Colors for priority & category */
+												$priority = !empty($department->feed->priority)
+													? str_replace('–', '-', $department->feed->priority) : 'Unassigned';
+
+												$incident_type = !empty($department->feed->incident_type)
+													? str_replace('–', '-', $department->feed->incident_type) : 'Unassigned';
+
+												$riskMatrix = !empty($department->feed->risk_matrix) ? (array) $department->feed->risk_matrix : [];
+												$level = $riskMatrix['level'] ?? '';
+
+												$riskColors = [
+													'High' => '#d9534f',
+													'Medium' => '#f0ad4e',
+													'Low' => '#1c8e42ff',
+													'default' => '#6c757d'
+												];
+
+												$priorityColors = [
+													'P1-Critical' => '#ff4d4d',
+													'P2-High' => '#ff9800',
+													'P3-Medium' => '#fbc02d',
+													'P4-Low' => '#1c8e42ff',
+													'Unassigned' => '#6c757d'
+												];
+
+												$incidentColors = [
+													'Sentinel' => '#ff4d4d',
+													'Hazardous Condition' => '#ff9800',
+													'Adverse' => '#fbc02d',
+													'No-harm' => '#1c36b4ff',
+													'Near miss' => '#1c8e42ff',
+													'Unassigned' => '#6c757d'
+												];
+												?>
+
+												<td>
+													<table style="width:100%; font-size:14px;">
+
+														<!-- RISK -->
+														<tr>
+															<td style="width:30px; font-weight:bold;">Risk</td>
+															<td style="width:10px;">:</td>
+															<td>
+																<strong style="color:<?php echo $riskColors[$level] ?? $riskColors['default']; ?>;">
+																	<?php echo $level ?: 'Unassigned'; ?>
+																</strong>
+															</td>
+														</tr>
+
+														<!-- PRIORITY -->
+														<tr>
+															<td style="font-weight:bold;">Priority</td>
+															<td>:</td>
+															<td>
+																<strong style="color:<?php echo $priorityColors[$priority]; ?>;">
+																	<?php echo $priority; ?>
+																</strong>
+															</td>
+														</tr>
+
+														<!-- CATEGORY -->
+														<tr>
+															<td style="font-weight:bold;">Category</td>
+															<td>:</td>
+															<td>
+																<strong style="color:<?php echo $incidentColors[$incident_type]; ?>;">
+																	<?php echo $incident_type; ?>
+																</strong>
+															</td>
+														</tr>
+
+													</table>
+												</td>
+
+
+											</tr>
+
+										<?php $sl++;
+										} ?>
+
+									<?php } ?>
+								</tbody>
+							</table>
+
+
+						</div>
+
+					<?php } ?>
+
+
 				</div>
 
 

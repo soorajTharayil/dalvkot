@@ -2,6 +2,7 @@
 include('db.php');
 
 $patinet_id = $_GET['patient_id'];
+
 $d = file_get_contents('php://input');
 
 $data = json_decode($d, true);
@@ -12,26 +13,38 @@ if (count($data) > 1) {
 	$today = date('Y-m-d');
 
 
-	
+
+
 	$name =	$data['name'];
 	$patientid =	$data['patientid'];
 	$department =	$data['department'];
+	$patient_category =	$data['patient_category'];
 	$email =	$data['email'];
 	$contactnumber =	$data['contactnumber'];
-	$register_time = $data['initial_assessment_hr1'];
-	$room_enter_time = $data['initial_assessment_hr2'];
-	$calculatedResult = $data['calculatedResultTime'];
-	$general_comment = $data['dataAnalysis'];
-    
+	$patient_got_admitted =	$data['initial_assessment_hr1'];
+	$doctor_completed_assessment =	$data['initial_assessment_hr2'];
 	
+	$initial_assessment =	$data['calculatedResult'];
+	$consent_verified =	$data['consent_verified'];
+	$consent_verified_comment = $data['consent_comment'];
+	$discharge_summary =	$data['discharge_summary'];
+	$error_prone =	$data['error_prone'];
+	$error_prone_comment =	$data['error_prone_comment'];
+	$doctor_adviced_discharge =	$data['initial_assessment_hr3'];
+	$bill_paid_time =	$data['initial_assessment_hr4'];
+	$time_taken_for_discharge =	$data['calculatedDoctorAdviceToBillPaid'];
+	$comments = $data['dataAnalysis'];
 
-	
 
-   $query = 'INSERT INTO `bf_feedback_consultation_time` (`name`,`patientid`,`department`,`mobile`,`email`,`datetime`,`datet`,`register_time`,`room_enter_time`,`consultation_wait_time`,`general_comment`, `dataset`) 
-   VALUES ("' . $name . '","' . $patientid . '","' . $department . '","' . $contactnumber . '","' . $email . '","' . date('Y-m-d H:i:s') . '","' . $today . '","' . $register_time. '","' . $room_enter_time. '","' . $calculatedResult. '","' . $general_comment. '","' . mysqli_real_escape_string($con, json_encode($data)) . '")';
 
-  $result = mysqli_query($con, $query);
-  $fid = mysqli_insert_id($con);
+
+
+
+	$query = 'INSERT INTO `bf_feedback_consultation_time` (`name`,`patientid`,`department`,`patient_category`,`mobile`,`email`,`datetime`,`datet`,`patient_got_admitted`, `doctor_completed_assessment`, `initial_assessment`, `consent_verified`,`consent_comment`, `discharge_summary`,`error_prone`,`error_prone_comment`,`doctor_adviced_discharge`, `bill_paid_time`, `time_taken_for_discharge`,`comments`, `dataset`) 
+   VALUES ("' . $name . '","' . $patientid . '","' . $department . '","' . $patient_category . '","' . $contactnumber . '","' . $email . '","' . date('Y-m-d H:i:s') . '","' . $today . '","' . $patient_got_admitted . '","' . $doctor_completed_assessment . '","' . $initial_assessment . '","' . $consent_verified . '","' . $consent_verified_comment . '","' . $discharge_summary . '","' . $error_prone . '","' . $error_prone_comment . '","' . $doctor_adviced_discharge . '","' . $bill_paid_time . '","' . $time_taken_for_discharge . '","' . $comments . '","' . mysqli_real_escape_string($con, json_encode($data)) . '")';
+
+	$result = mysqli_query($con, $query);
+	$fid = mysqli_insert_id($con);
 
 	$response['status'] = 'success';
 	$response['message'] = 'Data saved sucessfully';

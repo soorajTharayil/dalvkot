@@ -13,6 +13,7 @@ $data = json_decode($d, true);
 if (count($data) > 1) {
 	date_default_timezone_set('Asia/Kolkata');
 	$data['name'] = strtoupper($data['name']);
+$today = date('Y-m-d');
 
 	// Convert month name to number
 	$monthNumber = date('m', strtotime($month));  // Converts "January" to "01", etc.
@@ -22,7 +23,7 @@ if (count($data) > 1) {
 	$currentTime = date('H:i:s');  // Get the current time
 
 	// Construct `datet` and `datetime`
-	$datet = $year . '-' . $monthNumber . '-' . $currentDay;  // Constructs the date as "YYYY-MM-01"
+	//$datet = $year . '-' . $monthNumber . '-' . $currentDay;  // Constructs the date as "YYYY-MM-01"
 	$datetime = $year . '-' . $monthNumber . '-' . $currentDay . ' ' . $currentTime;  // Constructs the datetime as "YYYY-MM-DD HH:MM:SS"
 
 	$actual_deaths_icu =	$data['initial_assessment_hr'];
@@ -42,7 +43,7 @@ if (count($data) > 1) {
 
 
     $query = 'INSERT INTO `bf_feedback_41PSQ3a` (`name`,`email`,`patientid`,`mobile`,`actual_deaths_icu`, `predicted_deaths_icu`, `percentage_of_mortality_ratio`, `bench_mark_time`, `data_analysis`,`corrective_action`,`preventive_action`, `dataset`,`datet`,`datetime`) 
-	VALUES ("' . $name . '","' . $email . '","' . $patientid . '","' . $contactnumber . '","' . $actual_deaths_icu . '","' . $predicted_deaths_icu . '","' . $calculatedResult . '","' . $benchmark . '","' . $dataAnalysis . '","' . $correctiveAction . '","' . $preventiveAction . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $datet . '","' . $datetime . '")';
+	VALUES ("' . $name . '","' . $email . '","' . $patientid . '","' . $contactnumber . '","' . $actual_deaths_icu . '","' . $predicted_deaths_icu . '","' . $calculatedResult . '","' . $benchmark . '","' . $dataAnalysis . '","' . $correctiveAction . '","' . $preventiveAction . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $today . '","' . $datetime . '")';
 
 	$result = mysqli_query($con, $query);
 	$fid = mysqli_insert_id($con);

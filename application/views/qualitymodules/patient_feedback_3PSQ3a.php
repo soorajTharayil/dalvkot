@@ -28,7 +28,7 @@
 								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a> 3. PSQ3a - <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-								<div class="btn-group" style="float: right;">
+								<div class="btn-group no-print" style="float: right;">
 									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_3PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
 								</div>
 							<?php } ?>
@@ -81,6 +81,22 @@
 										<td><b>Data collection on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
 									</tr>
+									<tr>
+										<td>Uploaded files:</td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
+
 
 
 
@@ -156,12 +172,12 @@
 						<div class="panel panel-default">
 
 							<div style="float: right; margin-top: 10px; margin-right: 10px;">
-								<span style="font-size:17px"><strong>Download Chart:</strong></span>
-								<span style="margin-right: 10px;">
+								<span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+								<span class="no-print" style="margin-right: 10px;">
 									<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
 										onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
 								</span>
-								<span>
+								<span class="no-print">
 									<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
 										onclick="downloadChartImage()" data-toggle="tooltip"
 										title="Download Chart as Image"></i>
@@ -173,6 +189,124 @@
 						</div>
 					</div>
 				</div>
+				<!-- Raw data section -->
+
+				<?php
+				// KPI recorded datetime
+				$kpiDate = $result->datetime;
+
+				// Convert to year-month
+				$monthStart = date("Y-m-01", strtotime($kpiDate));
+				$monthEnd   = date("Y-m-t", strtotime($kpiDate));   // Last day of month
+				?>
+
+				<div style="width: 100%; margin-top: 30px; margin-left: 8px; border:1px solid #ccc; border-radius:6px; background-color:#fafafa; font-family:Arial, sans-serif; font-size:14px; position: relative;">
+
+					<div style="background-color:#e9f1ff; color:#004aad; padding:10px 15px; font-weight:bold; border-bottom:1px solid #ccc; display:flex; justify-content:space-between; align-items:center;">
+						<span>📊 KPI: 3.PSQ3a – Percentage of adherence to safety precautions by staff working in diagnostics for- Raw data derived from <b>RADIOLOGY STAFF SAFETY ADHERENCE AUDIT AND LABORATORY STAFF SAFETY ADHERENCE AUDIT</b></span>
+
+						<a href="/audit/overall_mrd_audit?kpi=1&from=<?= $monthStart; ?>&to=<?= $monthEnd; ?>"
+							target="_blank"
+							style="text-decoration:none;">
+							<i class="fa fa-download"></i>
+						</a>
+
+					</div>
+
+					<table style="width:100%; border-collapse:collapse;">
+						<tr>
+							<td style="width:40%; padding:10px 15px; font-weight:bold; color:#333; border-top:1px solid #eee;">
+								Number of staff adhering to safety precautions
+							</td>
+							<td style="width:60%; padding:10px 15px; color:#555; border-top:1px solid #eee;">
+								This value is calculated from the <b>RADIOLOGY STAFF SAFETY ADHERENCE AUDIT AND LABORATORY STAFF SAFETY ADHERENCE AUDIT</b> — It represents the
+								<b>Percentage of adherence to safety precautions by staff working in diagnostics”</b> values, where it is the
+								difference between the <b>Number of staff adhering to safety precautions</b> and the <b>Number of staff audited</b>,
+								aggregated for all audited patients within the selected date range.
+							</td>
+
+						</tr>
+						<tr>
+							<td style="padding:10px 15px; font-weight:bold; color:#333; border-top:1px solid #eee;">
+								Number of staff audited
+							</td>
+							<td style="padding:10px 15px; color:#555; border-top:1px solid #eee;">
+								This represents the <b>total number of Radiology safety adherence audits</b> records,
+								and the <b> Laboratory safety adherence audits conducted for that month</b>.
+							</td>
+						</tr>
+					</table>
+
+					<?php if (!empty($feedbacktaken)) { ?>
+
+						<div class="panel-body">
+
+							<table class="mrdkpitable table table-striped table-hover table-bordered" cellspacing="0" width="100%">
+								<thead>
+									<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
+									<th>Audit by</th>
+									<th>Audit Date</th>
+									<th style="white-space: nowrap;"><?php echo lang_loader('ip', 'ip_patient_details'); ?></th>
+									<th>Number of staff adhering to safety precautions</th>
+									<th>Number of staff audited</th>
+									<th>Percentage of adherence to safety precautions by staff working in diagnostics</th>
+
+								</thead>
+								<tbody>
+									<?php
+									$sl = 1;
+									foreach ($feedbacktaken as $r) {
+
+										$auditDate = date("Y-m-d", strtotime($r->datetime));
+
+										// Show only records from this KPI's month
+										if ($auditDate < $monthStart || $auditDate > $monthEnd) {
+											continue;
+										}
+
+										$audit = json_decode($r->dataset);
+									?>
+
+
+										<tr class="<?php echo ($sl & 1) ? 'odd gradeX' : 'even gradeC'; ?>">
+											<td><?php echo $sl; ?></td>
+											<td><?php echo $audit->audit_by; ?></td>
+
+											<td style="white-space: nowrap;">
+												<?php if ($r->datetime) { ?>
+													<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+													<?php echo date('g:i a', strtotime($r->datetime)); ?>
+												<?php } ?>
+											</td>
+
+											<td style="overflow: clip;">
+												<?php echo $audit->patient_name; ?> (<?php echo $audit->mid_no; ?>)
+												<br>
+												Age: <?php echo $audit->patient_age; ?>
+												<br>
+												Gender: <?php echo $audit->patient_gender; ?>
+											</td>
+
+											<td>
+											<?php echo $result->no_staff_adher_safety; ?>
+										</td>
+											<td><?php echo $audit->initial_assessment_hr2; ?></td>
+											<td><?php echo date("H:i:s", strtotime($audit->calculatedResult)); ?></td>
+
+
+
+
+										</tr>
+										<?php $sl++; ?>
+									<?php } ?>
+
+								</tbody>
+							</table>
+
+						</div>
+
+					<?php } ?>
+					</div>
 
 
 

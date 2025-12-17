@@ -18,6 +18,10 @@
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
 
+				// echo '<pre>';
+				// print_r($param);
+				// exit;
+
 
 	?>
 
@@ -36,56 +40,84 @@
 
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
 
 									<tr>
 										<td><b>Site</b></td>
 										<td>
-											<?php echo $result->site; ?>
+											<?php echo $param['site']; ?>
 										</td>
 									</tr>
-									
+
 									<tr>
 										<td><b>Selected ICU</b></td>
 										<td>
-											<?php echo $result->icu; ?>
+											<?php echo $param['icu']; ?>
 										</td>
 									</tr>
 									<tr>
 										<td><b>Patient status</b></td>
 										<td>
-											<?php echo $result->patient_status; ?>
+											<?php echo $param['department']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Number of occupied beds</b></td>
 										<td>
-											<?php echo $result->beds; ?>
+											<?php echo $param['beds']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Number of nurses</b></td>
 										<td>
-											<?php echo $result->nurses; ?>
+											<?php echo $param['nurses']; ?>
 										</td>
 									</tr>
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
 
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
 
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
+									
+									
+									
+
+
 
 
 

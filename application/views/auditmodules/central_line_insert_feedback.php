@@ -37,119 +37,258 @@
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
 
+									<!-- Audit Details -->
 									<tr>
-										<td><b>Patient details</b></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
+
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+									<tr>
+										<td>Patient MID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['department']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
 										<td>
-											<?php echo $result->patientname; ?><br>
-											<?php echo $result->patientid; ?><br>
-											<?php echo $result->age; ?><br>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
 										</td>
 									</tr>
 
 									<tr>
-										<td><b>Staff name</b></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Before Procedure</th>
+									</tr>
+
+
+									<tr>
+										<td><b>Have alternatives been considered and documented?</b></td>
 										<td>
-											<?php echo $result->staffname; ?>
+											<?php echo !empty($param['identification_details']) ? ucfirst(htmlspecialchars($param['identification_details'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Has the patient been confirmed using two identifications?</b></td>
+										<td>
+											<?php echo !empty($param['vital_signs']) ? ucfirst(htmlspecialchars($param['vital_signs'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are the clinical reasons for insertion specified, communicated to the patient/bystander, and documented?</b></td>
+										<td>
+											<?php echo !empty($param['surgery']) ? ucfirst(htmlspecialchars($param['surgery'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['surgery_text']) ? htmlspecialchars($param['surgery_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Has the need, possible complications, potential outcomes, and procedure been explained, and has the patient/bystander's informed consent been obtained by the performing doctor?</b></td>
+										<td>
+											<?php echo !empty($param['complaints_communicated']) ? ucfirst(htmlspecialchars($param['complaints_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Have the person performing the procedure and their assistants performed hand hygiene?</b></td>
+										<td>
+											<?php echo !empty($param['intake']) ? ucfirst(htmlspecialchars($param['intake'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['intake_text']) ? htmlspecialchars($param['intake_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the person performing the procedure wearing PPE?</b></td>
+										<td>
+											<?php echo !empty($param['output']) ? ucfirst(htmlspecialchars($param['output'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['output_text']) ? htmlspecialchars($param['output_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the person performing the procedure using sterile gloves?</b></td>
+										<td>
+											<?php echo !empty($param['allergies']) ? ucfirst(htmlspecialchars($param['allergies'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['allergies_text']) ? htmlspecialchars($param['allergies_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the insertion kit available?</b></td>
+										<td>
+											<?php echo !empty($param['medication']) ? ucfirst(htmlspecialchars($param['medication'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medication_text']) ? htmlspecialchars($param['medication_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">During Procedure</th>
+									</tr>
+
+									<tr>
+										<td><b>Has the insertion site been prepared with chlorhexidine/alcohol, and has hand hygiene been re-performed?</b></td>
+										<td>
+											<?php echo !empty($param['diagnostic']) ? ucfirst(htmlspecialchars($param['diagnostic'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Has the site been properly positioned and draped?</b></td>
+										<td>
+											<?php echo !empty($param['lab_results']) ? ucfirst(htmlspecialchars($param['lab_results'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Was local anesthesia or sedation used?</b></td>
+										<td>
+											<?php echo !empty($param['pending_investigation']) ? ucfirst(htmlspecialchars($param['pending_investigation'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['pending_investigation_text']) ? htmlspecialchars($param['pending_investigation_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Was aseptic technique maintained throughout the insertion, and was hand hygiene re-performed?</b></td>
+										<td>
+											<?php echo !empty($param['medicine_order']) ? ucfirst(htmlspecialchars($param['medicine_order'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is it ensured that lumens are not cut?</b></td>
+										<td>
+											<?php echo !empty($param['facility_communicated']) ? ucfirst(htmlspecialchars($param['facility_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['facility_communicated_text']) ? htmlspecialchars($param['facility_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are unused ports clamped?</b></td>
+										<td>
+											<?php echo !empty($param['health_education']) ? ucfirst(htmlspecialchars($param['health_education'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['health_education_text']) ? htmlspecialchars($param['health_education_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Has blood been aspirated from each lumen, and is the site cleaned?</b></td>
+										<td>
+											<?php echo !empty($param['risk_assessment']) ? ucfirst(htmlspecialchars($param['risk_assessment'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['risk_assessment_text']) ? htmlspecialchars($param['risk_assessment_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">After Procedure</th>
+									</tr>
+
+									<tr>
+										<td><b>Has the site been checked and cleaned with chlorhexidine?</b></td>
+										<td>
+											<?php echo !empty($param['urethral']) ? ucfirst(htmlspecialchars($param['urethral'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urethral_text']) ? htmlspecialchars($param['urethral_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Has sterile dressing been applied, and has hand hygiene been re-performed?</b></td>
+										<td>
+											<?php echo !empty($param['urine_sample']) ? ucfirst(htmlspecialchars($param['urine_sample'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urine_sample_text']) ? htmlspecialchars($param['urine_sample_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Has the placement been verified by X-Ray?</b></td>
+										<td>
+											<?php echo !empty($param['bystander']) ? ucfirst(htmlspecialchars($param['bystander'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['bystander_text']) ? htmlspecialchars($param['bystander_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Has the patient/bystander been educated regarding central line care and the frequency of follow-ups, and has the procedure been documented?</b></td>
+										<td>
+											<?php echo !empty($param['instruments']) ? ucfirst(htmlspecialchars($param['instruments'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['instruments_text']) ? htmlspecialchars($param['instruments_text']) : '-'; ?>
 										</td>
 									</tr>
 									<tr>
-										<td><b>Have alternatives been considered and documented?</b></td>
-										<td><?php echo $result->identification_details; ?></td>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
-									<tr>
-										<td><b>Has the patient been confirmed using two identifications?</b></td>
-										<td><?php echo $result->vital_signs; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are the clinical reasons for insertion specified, communicated to the patient/bystander, and documented?</b></td>
-										<td><?php echo $result->surgery; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has the need, possible complications, potential outcomes, and procedure been explained, and has the patient/bystander's informed consent been obtained by the performing doctor?</b></td>
-										<td><?php echo $result->complaints_communicated; ?></td>
-									</tr>
-									<tr>
-										<td><b>Have the person performing the procedure and their assistants performed hand hygiene?</b></td>
-										<td><?php echo $result->intake; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the person performing the procedure wearing PPE?</b></td>
-										<td><?php echo $result->output; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the person performing the procedure using sterile gloves?</b></td>
-										<td><?php echo $result->allergies; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the insertion kit available?</b></td>
-										<td><?php echo $result->medication; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has the insertion site been prepared with chlorhexidine/alcohol, and has hand hygiene been re-performed?</b></td>
-										<td><?php echo $result->diagnostic; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has the site been properly positioned and draped?</b></td>
-										<td><?php echo $result->lab_results; ?></td>
-									</tr>
-									<tr>
-										<td><b>Was local anesthesia or sedation used?</b></td>
-										<td><?php echo $result->pending_investigation; ?></td>
-									</tr>
-									<tr>
-										<td><b>Was aseptic technique maintained throughout the insertion, and was hand hygiene re-performed?</b></td>
-										<td><?php echo $result->medicine_order; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is it ensured that lumens are not cut?</b></td>
-										<td><?php echo $result->facility_communicated; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are unused ports clamped?</b></td>
-										<td><?php echo $result->health_education; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has blood been aspirated from each lumen, and is the site cleaned?</b></td>
-										<td><?php echo $result->risk_assessment; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has the site been checked and cleaned with chlorhexidine?</b></td>
-										<td><?php echo $result->urethral; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has sterile dressing been applied, and has hand hygiene been re-performed?</b></td>
-										<td><?php echo $result->urine_sample; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has the placement been verified by X-Ray?</b></td>
-										<td><?php echo $result->bystander; ?></td>
-									</tr>
-									<tr>
-										<td><b>Has the patient/bystander been educated regarding central line care and the frequency of follow-ups, and has the procedure been documented?</b></td>
-										<td><?php echo $result->instruments; ?></td>
-									</tr>
+
 
 
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
-
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
-
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
-
-
 
 								</table>
 

@@ -31,34 +31,205 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td>
-                                <b>Patient details</b>
+                                <b>Audit Details</b>
                             </td>
                             <td style="overflow: clip;">
-                                (<?php echo $param['patientid']; ?>)
+                                Audit Name: <?php echo $param['audit_type']; ?>
                                 <br>
-                                <?php echo $param['department']; ?>
+                                Date & Time of Audit: <?php echo date('Y-m-d H:i', strtotime($row->datetime)); ?>
                                 <br>
-                                <?php echo $param['patient_category']; ?>
-                                <input class="form-control" style="display:none" name="name" value="<?php echo $param['name']; ?>" />
-                                <input class="form-control" style="display:none" name="patientid" value="<?php echo $param['patientid']; ?>" />
-                                <input class="form-control" style="display:none" name="contactnumber" value="<?php echo $param['contactnumber']; ?>" />
-                                <input class="form-control" style="display:none" name="department" value="<?php echo $param['department']; ?>" />
-                                <input class="form-control" style="display:none" name="patient_category" value="<?php echo $param['patient_category']; ?>" />
+                                Audit by: <?php echo $param['audit_by']; ?>
+
+                                <!-- Hidden inputs -->
+                                <input class="form-control" type="hidden" name="audit_type"
+                                    value="<?php echo $param['audit_type']; ?>" />
+                                <input class="form-control" type="hidden" name="datetime"
+                                    value="<?php echo $row->datetime; ?>" />
+                                <input class="form-control" type="hidden" name="audit_by"
+                                    value="<?php echo $param['audit_by']; ?>" />
                             </td>
                         </tr>
+
+
                     </table>
 
                     <table class="table table-striped table-bordered no-footer dtr-inline collapsed">
                         <tr>
-                            <td><b>Admitted time</b></td>
+                            <td style="width: 43%;"><b>Patient MID</b></td>
                             <td>
-                                <input class="form-control" type="text" id="formula_para1_hr" name="initial_assessment_hr1" value="<?php echo $param['initial_assessment_hr1']; ?>">
+                                <input class="form-control" type="text" name="mid_no"
+                                    value="<?php echo $param['mid_no']; ?>">
                             </td>
                         </tr>
                         <tr>
-                            <td><b>Initial assessment time</b></td>
+                            <td><b>Patient Name</b></td>
                             <td>
-                                <input class="form-control" type="text" id="formula_para1_min" name="initial_assessment_hr2" value="<?php echo $param['initial_assessment_hr2']; ?>">
+                                <input class="form-control" type="text" name="patient_name"
+                                    value="<?php echo $param['patient_name']; ?>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Patient Age</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="patient_age"
+                                    value="<?php echo $param['patient_age']; ?>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Patient Gender</b></td>
+                            <td>
+                                <select class="form-control" name="patient_gender">
+                                    <option value="" <?php if (empty($param['patient_gender']))
+                                        echo 'selected'; ?>>
+                                    </option>
+                                    <option value="Male" <?php if ($param['patient_gender'] == 'Male')
+                                        echo 'selected'; ?>>Male</option>
+                                    <option value="Female" <?php if ($param['patient_gender'] == 'Female')
+                                        echo 'selected'; ?>>Female</option>
+                                    <option value="Other" <?php if ($param['patient_gender'] == 'Other')
+                                        echo 'selected'; ?>>Other</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Area</b></td>
+                            <td>
+                                <select class="form-control" name="location">
+                                    <option value="">Select Area</option>
+                                    <?php
+                                    $areas = $this->db->get('bf_audit_area')->result_array();
+                                    foreach ($areas as $a) {
+                                        $selected = ($param['location'] == $a['title']) ? 'selected' : '';
+                                        echo "<option value='{$a['title']}' $selected>{$a['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Department</b></td>
+                            <td>
+                                <select class="form-control" name="department">
+                                    <option value="">Select Department</option>
+                                    <?php
+                                    $departments = $this->db->get('bf_audit_department')->result_array();
+                                    foreach ($departments as $d) {
+                                        $selected = ($param['department'] == $d['title']) ? 'selected' : '';
+                                        echo "<option value='{$d['title']}' $selected>{$d['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Attended Doctor</b></td>
+                            <td>
+                                <select class="form-control" name="attended_doctor">
+                                    <option value="">Select Doctor</option>
+                                    <?php
+                                    $doctors = $this->db->get('bf_audit_doctor')->result_array();
+                                    foreach ($doctors as $doc) {
+                                        $selected = ($param['attended_doctor'] == $doc['title']) ? 'selected' : '';
+                                        echo "<option value='{$doc['title']}' $selected>{$doc['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <?php
+                        // Common max datetime to disable future selection
+                        $maxDatetime = date('Y-m-d\TH:i');
+                        ?>
+
+                        <!-- 🟩 Admission Date & Time (Editable) -->
+                        <tr>
+                            <td><b>Admission / Visit Date & Time</b></td>
+                            <td>
+                                <?php
+                                $admissionDatetime = '';
+                                if (!empty($param['initial_assessment_hr6']) && $param['initial_assessment_hr6'] != '1970-01-01 05:30:00') {
+                                    $admissionDatetime = date('Y-m-d\TH:i', strtotime($param['initial_assessment_hr6']));
+                                } else {
+                                    $admissionDatetime = $maxDatetime; // Default current date-time
+                                }
+                                ?>
+                                <input class="form-control datetime-picker" type="datetime-local" id="admissionDatetime"
+                                    name="initial_assessment_hr6" value="<?php echo $admissionDatetime; ?>"
+                                    max="<?php echo $maxDatetime; ?>">
+                            </td>
+                        </tr>
+
+                        <!-- 🟩 Discharge Date & Time (Editable) -->
+                        <tr>
+                            <td><b>Discharge Date & Time</b></td>
+                            <td>
+                                <?php
+                                $dischargeDatetime = '';
+                                if (!empty($param['discharge_date_time']) && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+                                    $dischargeDatetime = date('Y-m-d\TH:i', strtotime($param['discharge_date_time']));
+                                } else {
+                                    $dischargeDatetime = ''; // Leave empty if no valid value
+                                }
+                                ?>
+                                <input class="form-control datetime-picker" type="datetime-local" id="dischargeDatetime"
+                                    name="discharge_date_time" value="<?php echo $dischargeDatetime; ?>"
+                                    max="<?php echo date('Y-m-d\TH:i'); ?>">
+                            </td>
+                        </tr>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                // Select all datetime pickers
+                                const pickers = document.querySelectorAll(".datetime-picker");
+
+                                pickers.forEach(function (input) {
+                                    // Dynamically restrict to current date/time as maximum
+                                    input.max = new Date().toISOString().slice(0, 16);
+
+                                    // Auto-open picker on click (modern browsers)
+                                    input.addEventListener("click", function () {
+                                        if (this.showPicker) this.showPicker();
+                                    });
+                                });
+                            });
+                        </script>
+
+
+
+                        <script>
+                            // Force open calendar picker when clicking anywhere in the input box
+                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
+                                input.addEventListener('click', function () {
+                                    this.showPicker(); // Opens the native calendar/clock popup
+                                });
+                            });
+                        </script>
+                        <style>
+                            .datetime-picker {
+                                cursor: pointer;
+                            }
+                        </style>
+                        <?php
+                        // Common max datetime to disable future selection
+                        $maxDatetime = date('Y-m-d\TH:i');
+                        ?>
+
+                    </table>
+
+                    <table class="table table-striped table-bordered no-footer dtr-inline collapsed">
+                        <tr>
+                            <td><b>Patient arrived time</b></td>
+                            <td>
+                                <input class="form-control datetime-picker" type="datetime-local" id="formula_para1_hr" name="initial_assessment_hr1" value="<?php echo $param['initial_assessment_hr1']; ?>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Initial assessment completed time</b></td>
+                            <td>
+                                <input class="form-control datetime-picker" type="datetime-local" id="formula_para1_min" name="initial_assessment_hr2" value="<?php echo $param['initial_assessment_hr2']; ?>">
                                 <br>
                                 <button type="button" class="btn btn-primary" onclick="calculateTimeFormat()">
                                     <input type="hidden" id="formattedTime" name="formattedTime" value="">
@@ -69,13 +240,23 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Time taken for initial assessment</b></td>
                             <td>
-                                <input class="form-control" type="text" name="calculatedResult" value="<?php echo $param['calculatedResult']; ?>">
+                                <input class="form-control" type="text" name="calculatedResult" value="<?php echo date("H:i:s", strtotime($param['calculatedResult'])); ?>" readonly>
                             </td>
                         </tr>
                         <tr>
-                            <td><b>Consent verified</b></td>
-                            <td><input class="form-control" type="text" name="consent_verified" value="<?php echo $param['consent_verified']; ?>"></td>
-                        </tr>
+                        <td><b>Consent verified</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="consent_verified"
+                                value="<?php echo isset($param['consent_verified']) ? htmlspecialchars($param['consent_verified'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top: 5px;">
+                                Remarks:
+                                <input class="form-control" type="text" name="consent_verified_text"
+                                    value="<?php echo isset($param['consent_verified_text']) ? htmlspecialchars($param['consent_verified_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
                         <?php if ($param['consent_comment']) { ?>
                             <tr>
                                 <td><b>Consent comment</b></td>
@@ -83,27 +264,57 @@ $param = json_decode($row->dataset, true);
                             </tr>
                         <?php  } ?>
                         <tr>
-                            <td><b>Discharge summary</b></td>
-                            <td><input class="form-control" type="text" name="discharge_summary" value="<?php echo $param['discharge_summary']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Error prone abbreviation</b></td>
-                            <td><input class="form-control" type="text" name="error_prone" value="<?php echo $param['error_prone']; ?>"></td>
-                        </tr>
-                        <?php if ($param['error_prone_comment']) { ?>
-                            <tr>
-                                <td><b>Error prone comment</b></td>
-                                <td><input class="form-control" type="text" name="error_prone_comment" value="<?php echo $param['error_prone_comment']; ?>"></td>
-                            </tr>
-                        <?php  } ?>
+                        <td><b>Discharge summary</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="discharge_summary"
+                                value="<?php echo isset($param['discharge_summary']) ? htmlspecialchars($param['discharge_summary'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top: 5px;">
+                                Remarks:
+                                <input class="form-control" type="text" name="discharge_summary_text"
+                                    value="<?php echo isset($param['discharge_summary_text']) ? htmlspecialchars($param['discharge_summary_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Error prone abbreviation</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="error_prone"
+                                value="<?php echo isset($param['error_prone']) ? htmlspecialchars($param['error_prone'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top: 5px;">
+                                Remarks:
+                                <input class="form-control" type="text" name="error_prone_text"
+                                    value="<?php echo isset($param['error_prone_text']) ? htmlspecialchars($param['error_prone_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <?php if (!empty($param['error_prone_comment'])) { ?>
+                    <tr>
+                        <td><b>Error prone comment</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="error_prone_comment"
+                                value="<?php echo htmlspecialchars($param['error_prone_comment'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <div style="margin-top: 5px;">
+                                Remarks:
+                                <input class="form-control" type="text" name="error_prone_comment_text"
+                                    value="<?php echo isset($param['error_prone_comment_text']) ? htmlspecialchars($param['error_prone_comment_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+                    <?php } ?>
+
                         <tr>
                             <td><b>Discharge advice time</b></td>
-                            <td><input class="form-control" type="text" id="formula_para1_sec" name="initial_assessment_hr3" value="<?php echo $param['initial_assessment_hr3']; ?>"></td>
+                            <td><input class="form-control datetime-picker" type="datetime-local" id="formula_para1_sec" name="initial_assessment_hr3" value="<?php echo $param['initial_assessment_hr3']; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Billing time</b></td>
                             <td>
-                                <input class="form-control" type="text" id="formula_para1_bt" name="initial_assessment_hr4" value="<?php echo $param['initial_assessment_hr4']; ?>">
+                                <input class="form-control datetime-picker" type="datetime-local" id="formula_para1_bt" name="initial_assessment_hr4" value="<?php echo $param['initial_assessment_hr4']; ?>">
                                 <br>
                                 <button type="button" class="btn btn-primary" onclick="calculateTimeFor()">
                                     <input type="hidden" id="formattedTime" name="formattedTime" value="">
@@ -113,16 +324,119 @@ $param = json_decode($row->dataset, true);
                         </tr>
                         <tr>
                             <td><b>Time taken for discharge</b></td>
-                            <td><input class="form-control" type="text" name="calculatedDoctorAdviceToBillPaid" value="<?php echo $param['calculatedDoctorAdviceToBillPaid']; ?>"></td>
+                            <td><input class="form-control" type="text" name="calculatedDoctorAdviceToBillPaid" value="<?php echo date("H:i:s", strtotime($param['calculatedDoctorAdviceToBillPaid'])); ?>" readonly></td>
                         </tr>
                         <tr>
                             <td><b>Additional comments</b></td>
                             <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
+                        
                         <tr>
-                            <td><b>Data collected on</b></td>
-                            <td><input  class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
+                            <td><b>Uploaded Files</b></td>
+                            <td>
+                                <?php
+                                // $param = json_decode($record->dataset, true);
+                                $existingFiles = !empty($param['files_name']) ? $param['files_name'] : [];
+                                ?>
+
+                                <!-- 🗂 Existing Files Section -->
+                                <div id="existing-files">
+                                    <?php if (!empty($existingFiles)) { ?>
+                                        <!-- <label><b>Current Files:</b></label> -->
+                                        <ul id="file-list" style="list-style-type:none; padding-left:0;">
+                                            <?php foreach ($existingFiles as $index => $file) { ?>
+                                                <li data-index="<?php echo $index; ?>"
+                                                    style="margin-bottom:6px; background:#f8f9fa; padding:6px 10px; border-radius:6px; display:flex; align-items:center; justify-content:space-between;">
+                                                    <a href="<?php echo htmlspecialchars($file['url']); ?>" target="_blank"
+                                                        style="text-decoration:none; color:#007bff;">
+                                                        <?php echo htmlspecialchars($file['name']); ?>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-danger remove-file"
+                                                        style="margin-left:10px; padding:2px 6px; font-size:12px;">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <p id="no-files">No files uploaded</p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- 📤 Dynamic Upload Inputs -->
+                                <div class="form-group" id="upload-container" style="margin-top:10px;">
+                                    <label><b>Add New Files:</b></label>
+                                    <div class="upload-row"
+                                        style="display:flex; align-items:center; margin-bottom:6px;">
+                                        <input type="file" name="uploaded_files[]" class="form-control upload-input"
+                                            style="flex:1; margin-right:10px;">
+                                        <button type="button" class="btn btn-danger btn-sm remove-upload"
+                                            style="display:none;">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- ➕ Add More Files Button -->
+                                <button type="button" id="add-more-files" class="btn btn-sm btn-success"
+                                    style="margin-top:5px;">
+                                    <i class="fa fa-plus"></i> Add More Files
+                                </button>
+
+                                <!-- Hidden input for removed old files -->
+                                <input type="hidden" name="remove_files_json" id="remove_files_json" value="">
+                            </td>
                         </tr>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+
+                                // 🗑️ Handle removing existing old files
+                                const removeInput = document.getElementById("remove_files_json");
+                                let removedIndexes = [];
+
+                                document.querySelectorAll(".remove-file").forEach(btn => {
+                                    btn.addEventListener("click", function () {
+                                        const li = this.closest("li");
+                                        const index = li.getAttribute("data-index");
+                                        removedIndexes.push(index);
+                                        removeInput.value = JSON.stringify(removedIndexes);
+                                        li.remove();
+                                        if (document.querySelectorAll("#file-list li").length === 0) {
+                                            document.getElementById("existing-files").innerHTML = "<p id='no-files'>No files uploaded</p>";
+                                        }
+                                    });
+                                });
+
+                                // ➕ Dynamic "Add More Files"
+                                const addMoreBtn = document.getElementById("add-more-files");
+                                const uploadContainer = document.getElementById("upload-container");
+
+                                addMoreBtn.addEventListener("click", function () {
+                                    const newRow = document.createElement("div");
+                                    newRow.className = "upload-row";
+                                    newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
+
+                                    const input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "uploaded_files[]";
+                                    input.className = "form-control upload-input";
+                                    input.style.cssText = "flex:1; margin-right:10px;";
+
+                                    const removeBtn = document.createElement("button");
+                                    removeBtn.type = "button";
+                                    removeBtn.className = "btn btn-danger btn-sm remove-upload";
+                                    removeBtn.innerHTML = '<i class="fa fa-times"></i>';
+                                    removeBtn.addEventListener("click", function () {
+                                        newRow.remove();
+                                    });
+                                    removeBtn.style.display = "inline-block";
+
+                                    newRow.appendChild(input);
+                                    newRow.appendChild(removeBtn);
+                                    uploadContainer.appendChild(newRow);
+                                });
+                            });
+                        </script>
                         <tr>
                             <td colspan="2">
                                 <div class="col-sm-offset-3 col-sm-6">
@@ -138,6 +452,7 @@ $param = json_decode($row->dataset, true);
                                 </div>
                             </td>
                         </tr>
+                        
                     </table>
 
                     </form>

@@ -58,14 +58,14 @@
    "kpi_info": "16. PSQ3b - Surgical site infection rate for the month of",
    "definition": "Definition:",
    "kpi_def": "As per the latest CDC/NHSN definition",
-   "formula_para1": "Number of surgical site infections in a given month",   
+   "formula_para1": "Number of surgical site infections in a given month (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of surgeries performed in that month",
+   "formula_para2": "Number of surgeries performed in that month (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

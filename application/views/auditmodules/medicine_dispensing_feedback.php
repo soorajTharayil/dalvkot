@@ -18,6 +18,10 @@
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
 
+				// echo '<pre>';
+				// print_r($param);
+				// exit;
+
 
 	?>
 
@@ -25,7 +29,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a> Medicine dispensing audit - <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a> Medication management process audit - <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('AUDIT') === true  && isfeature_active('AUDIT-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group" style="float: right;">
@@ -36,54 +40,467 @@
 
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
-
+									<!-- Audit Details -->
 									<tr>
-										<td><b>Patient UHID</b></td>
-										<td>
-											<?php echo $result->patientid; ?>
-										</td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
 									</tr>
 									<tr>
-										<td><b>Medicine name</b></td>
-										<td>
-											<?php echo $result->medicinename; ?>
-										</td>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
 									</tr>
 									<tr>
-										<td><b>Was correct medicine dispensed?</b></td>
-										<td>
-											<?php echo $result->correct_medicine; ?>
-
-										</td>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
 									</tr>
 									<tr>
-										<td><b>Was correct quantity dispensed?</b></td>
-										<td><?php echo $result->correct_quantity; ?></td>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
 									</tr>
 
 									<tr>
-										<td><b>Was medicine within its expiry date?</b></td>
-										<td><?php echo $result->medicine_expiry; ?></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
 									</tr>
+									<tr>
+										<td>Patient UHID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['department']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
+										<td>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Consultant Name</b></td>
+										<td>
+											<?php echo $param['consultant_name']; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Diagnosis</b></td>
+										<td>
+											<?php echo $param['diagnosis']; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Medicine Name</b></td>
+										<td>
+											<?php echo $param['medicinename']; ?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td colspan="2" style="background:#f5f5f5; font-weight:bold; padding:8px; border:1px solid #ddd;">
+											I. DOCTORS
+										</td>
+									</tr>
+
+									<tr>
+										<td colspan="2" style="background:#f5f5f5; font-weight:bold; padding:8px; border:1px solid #ddd;">
+											1. Incorrect Prescription
+										</td>
+									</tr>
+
+
+									<tr>
+										<td><b>a. Has the correct drug been selected for the patient's condition?</b></td>
+										<td>
+											<?php echo $param['correct_medicine']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_medicine_text']) ? $param['correct_medicine_text'] : '-'; ?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td><b>b. Has the appropriate dose been prescribed?</b></td>
+										<td>
+											<?php echo $param['correct_quantity']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_quantity_text']) ? $param['correct_quantity_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>c. Has the correct unit of measurement for the drug dose been used?</b></td>
+										<td>
+											<?php echo $param['medicine_expiry']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['medicine_expiry_text']) ? $param['medicine_expiry_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>d. Has the correct frequency of administration been specified?</b></td>
+										<td>
+											<?php echo $param['apron']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['apron_text']) ? $param['apron_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>e. Has the correct route of administration been mentioned?</b></td>
+										<td>
+											<?php echo $param['lead_apron']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['lead_apron_text']) ? $param['lead_apron_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>f. Has the correct drug concentration been prescribed?</b></td>
+										<td>
+											<?php echo $param['use_xray_barrior']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['use_xray_barrior_text']) ? $param['use_xray_barrior_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>g. Has the correct rate of administration been indicated?</b></td>
+										<td>
+											<?php echo $param['administration_rate']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['administration_rate_text']) ? $param['administration_rate_text'] : '-'; ?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td colspan="2" style="background:#f5f5f5; font-weight:bold; padding:8px; border:1px solid #ddd;">
+											2. Therapeutic Duplication
+										</td>
+									</tr>
+
+
+									<tr>
+										<td><b>a. Has the prescription been checked for therapeutic duplication?</b></td>
+										<td>
+											<?php echo $param['therapeutic_duplication']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['therapeutic_duplication_text']) ? $param['therapeutic_duplication_text'] : '-'; ?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td colspan="2" style="background:#f5f5f5; font-weight:bold; padding:8px; border:1px solid #ddd;">
+											3. Illegible Handwriting
+										</td>
+									</tr>
+
+
+									<tr>
+										<td><b>a. Is the handwriting legible and easily understandable?</b></td>
+										<td>
+											<?php echo $param['handwriting_legible']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['handwriting_legible_text']) ? $param['handwriting_legible_text'] : '-'; ?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td colspan="2" style="background:#f5f5f5; font-weight:bold; padding:8px; border:1px solid #ddd;">
+											4. Non-approved Abbreviations
+										</td>
+									</tr>
+
+
+									<tr>
+										<td><b>a. Have only approved medical abbreviations been used in the prescription?</b></td>
+										<td>
+											<?php echo $param['medical_abbreviations']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['medical_abbreviations_text']) ? $param['medical_abbreviations_text'] : '-'; ?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td colspan="2" style="background:#f5f5f5; font-weight:bold; padding:8px; border:1px solid #ddd;">
+											5. Non-usage of Capital Letters for Drug Names
+										</td>
+									</tr>
+
+
+									<tr>
+										<td><b>a. Have drug names been written using capital letters to avoid confusion?</b></td>
+										<td>
+											<?php echo $param['capital_letters']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['capital_letters_text']) ? $param['capital_letters_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>b. Has the drug been prescribed using its generic name?</b></td>
+										<td>
+											<?php echo $param['generic_name']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['generic_name_text']) ? $param['generic_name_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>c. Has the drug dose been modified considering potential drug-drug interactions?</b></td>
+										<td>
+											<?php echo $param['drug_interaction']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['drug_interaction_text']) ? $param['drug_interaction_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>d. Has the timing, dose, or choice of drug been adjusted considering food-drug interactions?</b></td>
+										<td>
+											<?php echo $param['food_drug']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['food_drug_text']) ? $param['food_drug_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>e. Has the correct drug been dispensed as per the prescription?</b></td>
+										<td>
+											<?php echo $param['drug_dispensed']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['drug_dispensed_text']) ? $param['drug_dispensed_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>f. Has the correct dose of the medication been dispensed?</b></td>
+										<td>
+											<?php echo $param['dose_dispensed']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['dose_dispensed_text']) ? $param['dose_dispensed_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>g. Has the correct formulation (e.g., tablet, syrup, injection) been dispensed?</b></td>
+										<td>
+											<?php echo $param['formulation_dispensed']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['formulation_dispensed_text']) ? $param['formulation_dispensed_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>h. Has the pharmacist ensured that expired or near-expiry drugs are not dispensed?</b></td>
+										<td>
+											<?php echo $param['expired_drungs']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['expired_drungs_text']) ? $param['expired_drungs_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>i. Has the medication been properly labeled with accurate patient and drug information?</b></td>
+										<td>
+											<?php echo $param['accurate_patient']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['accurate_patient_text']) ? $param['accurate_patient_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>j. Was the medication dispensed within the defined acceptable timeframe?</b></td>
+										<td>
+											<?php echo $param['medication_dispese']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['medication_dispese_text']) ? $param['medication_dispese_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>k. Has any generic or therapeutic substitution been done only after consulting the prescribing doctor?</b></td>
+										<td>
+											<?php echo $param['generic_substitution']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['generic_substitution_text']) ? $param['generic_substitution_text'] : '-'; ?>
+										</td>
+									</tr>
+
+
+									<tr>
+										<td colspan="2" style="background:#f5f5f5; font-weight:bold; padding:8px; border:1px solid #ddd;">
+											II. NURSES
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>a. Has the medication been administered to the correct patient?</b></td>
+										<td>
+											<?php echo $param['correct_patient']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_patient_text']) ? $param['correct_patient_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>b. Has any prescribed dose been unintentionally omitted?</b></td>
+										<td>
+											<?php echo $param['dose_omitted']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['dose_omitted_text']) ? $param['dose_omitted_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>c. Has the correct dose of the medication been administered?</b></td>
+										<td>
+											<?php echo $param['medication_dose']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['medication_dose_text']) ? $param['medication_dose_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>d. Has the correct drug been administered as per the prescription?</b></td>
+										<td>
+											<?php echo $param['drug_administered']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['drug_administered_text']) ? $param['drug_administered_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>e. Has the correct dosage form (e.g., tablet, injection, syrup) been used?</b></td>
+										<td>
+											<?php echo $param['correct_dosage']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_dosage_text']) ? $param['correct_dosage_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>f. Has the correct route of administration (e.g., oral, IV, IM) been followed?</b></td>
+										<td>
+											<?php echo $param['correct_route']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_route_text']) ? $param['correct_route_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>g. Has the medication been administered at the correct rate?</b></td>
+										<td>
+											<?php echo $param['correct_rate']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_rate_text']) ? $param['correct_rate_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>h. Has the medication been administered for the correct duration?</b></td>
+										<td>
+											<?php echo $param['correct_duration']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_duration_text']) ? $param['correct_duration_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>i. Has the medication been given at the correct time as prescribed?</b></td>
+										<td>
+											<?php echo $param['correct_time']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['correct_time_text']) ? $param['correct_time_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>j. Has the drug administration been properly documented?</b></td>
+										<td>
+											<?php echo $param['drug_administration']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['drug_administration_text']) ? $param['drug_administration_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>k. Has the documentation by nursing staff been complete and accurate?</b></td>
+										<td>
+											<?php echo $param['nursing_staff']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['nursing_staff_text']) ? $param['nursing_staff_text'] : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>l. Has there been any documentation without actual drug administration?</b></td>
+										<td>
+											<?php echo $param['documentation_drug']; ?>
+											<br>
+											Remarks: <?php echo !empty($param['documentation_drug_text']) ? $param['documentation_drug_text'] : '-'; ?>
+										</td>
+									</tr>
+
+
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
 									<tr>
 										<td><b>Additional comments</b></td>
-										<td><?php echo $result->comments; ?></td>
-									</tr>
-
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
-
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
+										<td><?php echo $param['dataAnalysis']; ?></td>
 									</tr>
 
 
-
+						
 								</table>
 
 

@@ -57,13 +57,13 @@
    "kpi_info": "22. PSQ3c - Waiting time for out-patient consultation for the month of ",
    "definition": "Definition: ",
    "kpi_def": "Waiting time is a length of time which one must wait in order for a specific action to occur, after that action is requested or mandated. Waiting time for outpatient consu- ltation is the time from which the patient has come to the concerned out- patient department(it may or may not be the same time as registration )till the time that the concerned consultant (not the junior doctor/resident) begins the assessment.",
-   "formula_para1": "Sum total patient-in time for consultation",   
+   "formula_para1": "Sum total patient-in time for consultation (Numerator)",   
    "hr_placeholder":"Hours",
    "min_placeholder": "Minutes",
    "sec_placeholder": "Seconds",
-   "formula_para2": "Total number of out-patients",
+   "formula_para2": "Total number of out-patients (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

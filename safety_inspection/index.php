@@ -12,7 +12,7 @@
 
 <head>
 
-  <title>Efeedor Feedback System</title>
+  <title>Quality Audit Management Software - Efeedor Healthcare Experience Management Platform</title>
 
   <meta charset="utf-8">
 
@@ -60,10 +60,10 @@
 
     <!-- Add a button to trigger the modal -->
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}}
-      <i class="fa fa-language" aria-hidden="true"></i>
-    </button>
-    <!-- dropdown for three language end -->
+      <!--  {{type2}}-->
+      <!--  <i class="fa fa-language" aria-hidden="true"></i>-->
+      <!--</button>-->
+      <!-- dropdown for three language end -->
 
   </nav>
 
@@ -194,7 +194,7 @@
                 <!-- PATIENT INFORMATION page start -->
                 <fieldset ng-show="step0 == true">
 
-                  <h4><strong>{{lang.patient_info}}</strong></h4>
+                  <h4 style="font-size: 22px;"><strong>{{lang.patient_info}}</strong></h4>
 
                   <!--<p>Fill all form field to go to next step</p>-->
                   <br>
@@ -202,32 +202,57 @@
 
                     <div class="row">
 
-                      <div class="col-xs-12 col-sm-12 col-md-12">
+                      <!-- Audit Type -->
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
+                        <!-- <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6> -->
                         <div class="form-group">
-                          <span class="addon" style="font-size: 16px;">Select Department</span>
+                          <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled/>
+                          </span>
+                        </div>
+
+
+
+                        <!-- Date of Audit -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
+                            {{lang.dtandtym}}<sup style="color:red">*</sup><br>
+                            <p style="font-size: 14px; margin: 4px 0 0 0; color:#6c757d;">
+                              {{lang.format}}
+                            </p>
+                          </span>
+
+                          <!-- Input -->
+                          <div style="position: relative; width: 100%;">
+                            <input class="form-control" ng-model="feedback.audit_date" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
+                              autocomplete="off" onclick="this.showPicker && this.showPicker()"
+                              onfocus="this.showPicker && this.showPicker()"
+                              style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
+                          </div>
+                        </div>
+
+
+
+                        <!-- Audit By -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
+                          </span>
+                        </div>
+
+                      </div>
+
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px;">
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px;;">Select Department</span>
                           <span class="has-float-label">
                             <select class="form-control" id="dep" ng-required="true" ng-model="feedback.dep" autocomplete="off" style="padding-top:0px;margin-top: 5px;">
-                              <option value="Select Department" disabled>Select Department</option>
-                              <option value="St.Thomas Ward">St. Thomas Ward</option>
-                              <option value="St.Alphonsa Ward">St. Alphonsa Ward</option>
-                              <option value="St.Martins Ward">St. Martins Ward</option>
-                              <option value="St.Anns Ward">St. Ann’s Ward</option>
-                              <option value="St.Antonys Ward">St. Antony’s Ward</option>
-                              <option value="Paediatric-Observation">Paediatric- Observation</option>
-                              <option value="OT">OT</option>
-                              <option value="CCU/ICU">CCU/ ICU</option>
-                              <option value="Casualty">Casualty</option>
-                              <option value="Dialysis">Dialysis</option>
-                              <option value="Injection Room">Injection Room</option>
-                              <option value="NICU">NICU</option>
-                              <option value="Laboratory">Laboratory</option>
-                              <option value="Basement-Common Area">Basement- Common Area</option>
-                              <option value="Ground Floor-Common Area">Ground Floor- Common Area</option>
-                              <option value="First Floor-Common Area">First Floor- Common Area</option>
-                              <option value="Bio-Medical Waste Storage Area">Bio-Medical Waste Storage Area</option>
-                              <option value="Water Storage">Water Storage</option>
-                              <option value="Electrical Room/Area">Electrical Room/Area</option>
-                              <option value="Oxygen Cylinder Storage Area">Oxygen Cylinder Storage Area</option>
+                              <option value="" disabled selected>Select Department</option>
+                              <option ng-repeat="x in safety_inseption.safety_inseption" ng-show="x.title != 'ALL'" value="{{x.title}}">{{x.title}}</option>
 
                             </select>
                             <label for="bed"></label>
@@ -243,7 +268,7 @@
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'STAIRWAYS'" />
 
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_stairways_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -260,7 +285,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.slippery}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.slippery}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['slippery' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -277,7 +302,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.rails}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.rails}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['rails' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -299,7 +324,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_corridor_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -316,7 +341,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -333,7 +358,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -350,7 +375,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -367,7 +392,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -389,7 +414,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -406,7 +431,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -423,7 +448,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -440,7 +465,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -462,7 +487,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -479,7 +504,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -496,7 +521,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -513,7 +538,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -530,7 +555,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -547,7 +572,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -569,7 +594,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">OXYGEN CYLINDERS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'OXYGEN CYLINDERS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.sufficient_oxygen}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.sufficient_oxygen}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['sufficient_oxygen' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -586,7 +611,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.ro_water}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.ro_water}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['ro_water' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -603,7 +628,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cylinder_chart}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cylinder_chart}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cylinder_chart' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -620,7 +645,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cylinder_stand}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cylinder_stand}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cylinder_stand' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -642,7 +667,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">BIO-MEDICAL WASTE</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'BIO-MEDICAL WASTE'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.containers_coded}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_coded}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -659,7 +684,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.containers_closed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_closed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -676,7 +701,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.biohazard}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.biohazard}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -693,7 +718,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.segregation}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.segregation}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -710,7 +735,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.containers_fill}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_fill}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -732,7 +757,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SPILL KIT</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SPILL KIT'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.kit_accessible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.kit_accessible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['kit_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -749,7 +774,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.items_present}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.items_present}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['items_present' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -766,7 +791,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.staff_knowledge}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_knowledge}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['staff_knowledge' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -788,7 +813,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">MULTI-DOSE VIALS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'MULTI-DOSE VIALS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vial_needle}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.vial_needle}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['vial_needle' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -805,7 +830,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.opening_date}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.opening_date}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['opening_date' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -822,7 +847,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.storage}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.storage}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['storage' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -839,7 +864,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vial_expire}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.vial_expire}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['vial_expire' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -861,7 +886,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">REFRIGERATOR</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'REFRIGERATOR'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;margin-left: -7px;">{{lang.temperature_chart}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;margin-left: -7px;">{{lang.temperature_chart}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['temperature_chart' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -878,7 +903,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.temperature_limits}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.temperature_limits}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['temperature_limits' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -895,7 +920,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.freezing_done}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.freezing_done}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['freezing_done' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -912,7 +937,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.medical_items}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.medical_items}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['medical_items' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -929,7 +954,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.expired_medicine}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.expired_medicine}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['expired_medicine' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -951,7 +976,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">EMERGENCY TRAY/CRASH CART</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'EMERGENCY TRAY/CRASH CART'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.medicines_avail}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.medicines_avail}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['medicines_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -968,7 +993,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.medicines_near_exp}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.medicines_near_exp}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['medicines_near_exp' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -985,7 +1010,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.overdated}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.overdated}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['overdated' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1002,7 +1027,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extra_medicines}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extra_medicines}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extra_medicines' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1024,7 +1049,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">HAZARDOUS SUBSTANCES</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'HAZARDOUS SUBSTANCES'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.hazardous_material}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.hazardous_material}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['hazardous_material' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1041,7 +1066,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.msds_sheet}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.msds_sheet}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['msds_sheet' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1058,7 +1083,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.workplace_storage}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.workplace_storage}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['workplace_storage' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1080,7 +1105,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1097,7 +1122,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1114,7 +1139,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1131,7 +1156,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1148,7 +1173,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1165,7 +1190,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1182,7 +1207,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1204,7 +1229,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">PERSONAL PROTECTIVE EQUIPMENT</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'PERSONAL PROTECTIVE EQUIPMENT'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.use_ppe}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.use_ppe}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1221,7 +1246,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.staff_trained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_trained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1238,7 +1263,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_devices}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_devices}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1260,7 +1285,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1277,7 +1302,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1294,7 +1319,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1311,7 +1336,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1328,7 +1353,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1350,7 +1375,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">EQUIPMENTS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'EQUIPMENTS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.equipment_numbered}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_numbered}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback.equipment_numbered" value="yes" />
@@ -1367,7 +1392,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.log_sheet}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.log_sheet}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback.log_sheet" value="yes" />
@@ -1384,7 +1409,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.equipment_maintain}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_maintain}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback.equipment_maintain" value="yes" />
@@ -1401,7 +1426,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.assets_numbered}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.assets_numbered}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback.assets_numbered" value="yes" />
@@ -1418,7 +1443,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.asset_register}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.asset_register}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback.asset_register" value="yes" />
@@ -1435,7 +1460,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.complaint_updated}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.complaint_updated}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback.complaint_updated" value="yes" />
@@ -1452,7 +1477,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.periodic_maintain}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.periodic_maintain}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback.periodic_maintain" value="yes" />
@@ -1474,7 +1499,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1491,7 +1516,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1508,7 +1533,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1529,13 +1554,13 @@
 
                       </div>
 
-                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Basement-Common Area'">
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Basement- Common Area'">
 
                         <div class="form-group" style="margin-top:-12px;">
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">STAIRWAYS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'STAIRWAYS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1552,7 +1577,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.slippery}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.slippery}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['slippery' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1569,7 +1594,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.rails}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.rails}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['rails' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1591,7 +1616,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1608,7 +1633,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1625,7 +1650,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1642,7 +1667,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1659,7 +1684,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1681,7 +1706,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1698,7 +1723,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1715,7 +1740,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1732,7 +1757,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1754,7 +1779,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1771,7 +1796,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1788,7 +1813,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1805,7 +1830,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1822,7 +1847,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1839,7 +1864,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1862,7 +1887,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1879,7 +1904,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1896,7 +1921,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1913,7 +1938,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1930,7 +1955,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1947,7 +1972,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1964,7 +1989,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -1987,7 +2012,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2004,7 +2029,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2021,7 +2046,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2038,7 +2063,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2055,7 +2080,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2078,7 +2103,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2095,7 +2120,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2112,7 +2137,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2133,13 +2158,13 @@
 
                       </div>
 
-                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Ground Floor-Common Area'">
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Ground Floor- Common Area'">
 
                         <div class="form-group" style="margin-top:-12px;">
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">STAIRWAYS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'STAIRWAYS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2156,7 +2181,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.slippery}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.slippery}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['slippery' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2173,7 +2198,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.rails}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.rails}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['rails' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2195,7 +2220,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2212,7 +2237,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2229,7 +2254,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2246,7 +2271,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2263,7 +2288,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2285,7 +2310,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2302,7 +2327,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2319,7 +2344,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2336,7 +2361,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2358,7 +2383,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2375,7 +2400,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2392,7 +2417,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2409,7 +2434,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2426,7 +2451,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2443,7 +2468,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2466,7 +2491,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2483,7 +2508,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2500,7 +2525,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2517,7 +2542,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2534,7 +2559,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2551,7 +2576,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2568,7 +2593,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2591,7 +2616,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2608,7 +2633,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2625,7 +2650,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2642,7 +2667,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2659,7 +2684,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2682,7 +2707,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2699,7 +2724,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2716,7 +2741,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2736,13 +2761,13 @@
                         </div>
                       </div>
 
-                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'First Floor-Common Area'">
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'First Floor- Common Area'">
 
                         <div class="form-group" style="margin-top:-12px;">
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">STAIRWAYS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'STAIRWAYS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2759,7 +2784,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.slippery}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.slippery}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['slippery' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2776,7 +2801,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.rails}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.rails}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['rails' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2798,7 +2823,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2815,7 +2840,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2832,7 +2857,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2849,7 +2874,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2866,7 +2891,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2888,7 +2913,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2905,7 +2930,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2922,7 +2947,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2939,7 +2964,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2961,7 +2986,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2978,7 +3003,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -2995,7 +3020,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3012,7 +3037,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3029,7 +3054,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3046,7 +3071,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3069,7 +3094,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3086,7 +3111,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3103,7 +3128,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3120,7 +3145,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3137,7 +3162,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3154,7 +3179,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3171,7 +3196,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3194,7 +3219,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3211,7 +3236,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3228,7 +3253,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3245,7 +3270,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3262,7 +3287,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3285,7 +3310,7 @@
                           <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
                           <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3302,7 +3327,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3319,7 +3344,7 @@
                             </div>
                           </div>
                           <div style="margin-top: 8px; text-align: left;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                               <label style="display: flex; align-items: center;">
                                 <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
@@ -3345,7 +3370,7 @@
                         <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">BIO-MEDICAL WASTE STORAGE AREA</h6>
                         <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'BIO-MEDICAL WASTE STORAGE AREA'" />
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.bm_waste_store}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.bm_waste_store}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.bm_waste_store" value="yes" />
@@ -3362,7 +3387,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.bm_waste_record}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.bm_waste_record}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.bm_waste_record" value="yes" />
@@ -3379,7 +3404,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.storage_area}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.storage_area}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.storage_area" value="yes" />
@@ -3397,11 +3422,12 @@
                         </div>
 
                       </div>
+
                       <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Water Storage'">
                         <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">WATER STORAGE</h6>
                         <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'WATER STORAGE'" />
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.enough_water}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.enough_water}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.enough_water" value="yes" />
@@ -3418,7 +3444,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.tank_cleaning}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.tank_cleaning}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.tank_cleaning" value="yes" />
@@ -3435,7 +3461,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.plant_maintain}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plant_maintain}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.plant_maintain" value="yes" />
@@ -3453,11 +3479,12 @@
                         </div>
 
                       </div>
+
                       <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Electrical Room/Area'">
                         <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL ROOM/AREA</h6>
                         <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL ROOM/AREA'" />
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.transformer_status}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.transformer_status}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.transformer_status" value="yes" />
@@ -3474,7 +3501,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.generators_status}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.generators_status}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.generators_status" value="yes" />
@@ -3491,7 +3518,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.electrical_areas}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.electrical_areas}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.electrical_areas" value="yes" />
@@ -3508,7 +3535,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.electrical_boxes}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.electrical_boxes}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.electrical_boxes" value="yes" />
@@ -3525,7 +3552,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.precautions_to_fire}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.precautions_to_fire}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.precautions_to_fire" value="yes" />
@@ -3543,11 +3570,12 @@
                         </div>
 
                       </div>
+
                       <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Oxygen Cylinder Storage Area'">
                         <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">OXYGEN CYLINDER STORAGE AREA</h6>
                         <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'OXYGEN CYLINDER STORAGE AREA'" />
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.cylinders_chained}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cylinders_chained}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.cylinders_chained" value="yes" />
@@ -3564,7 +3592,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.empty_cylinders}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.empty_cylinders}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.empty_cylinders" value="yes" />
@@ -3581,7 +3609,7 @@
                           </div>
                         </div>
                         <div style="margin-top: 8px; text-align: left;">
-                          <p style="font-size: 16px; margin-bottom: 6px;">{{lang.warning_signage}}</p>
+                          <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signage}}</p>
                           <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <label style="display: flex; align-items: center;">
                               <input type="radio" ng-model="feedback.warning_signage" value="yes" />
@@ -3600,10 +3628,4868 @@
 
                       </div>
 
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'X Ray'">
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SPILL KIT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SPILL KIT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.kit_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['kit_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['kit_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['kit_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.items_present}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['items_present' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['items_present' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['items_present' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_knowledge}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_knowledge' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_knowledge' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_knowledge' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">PERSONAL PROTECTIVE EQUIPMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'PERSONAL PROTECTIVE EQUIPMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.use_ppe}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_devices}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">EQUIPMENTS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'EQUIPMENTS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.log_sheet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.assets_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.asset_register}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.complaint_updated}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.periodic_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Ultrasound Scanning'">
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">BIO-MEDICAL WASTE</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'BIO-MEDICAL WASTE'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_coded}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_closed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.biohazard}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.segregation}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_fill}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SPILL KIT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SPILL KIT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.kit_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['kit_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['kit_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['kit_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.items_present}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['items_present' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['items_present' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['items_present' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_knowledge}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_knowledge' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_knowledge' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_knowledge' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">PERSONAL PROTECTIVE EQUIPMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'PERSONAL PROTECTIVE EQUIPMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.use_ppe}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_devices}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">EQUIPMENTS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'EQUIPMENTS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.log_sheet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.assets_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.asset_register}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.complaint_updated}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.periodic_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Procedure OPD'">
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">BIO-MEDICAL WASTE</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'BIO-MEDICAL WASTE'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_coded}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_closed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.biohazard}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.segregation}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_fill}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">MULTI-DOSE VIALS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'MULTI-DOSE VIALS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.vial_needle}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['vial_needle' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['vial_needle' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['vial_needle' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.opening_date}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['opening_date' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['opening_date' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['opening_date' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.storage}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['storage' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['storage' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['storage' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.vial_expire}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['vial_expire' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['vial_expire' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['vial_expire' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">HAZARDOUS SUBSTANCES</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'HAZARDOUS SUBSTANCES'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.hazardous_material}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['hazardous_material' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['hazardous_material' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['hazardous_material' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.msds_sheet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['msds_sheet' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['msds_sheet' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['msds_sheet' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.workplace_storage}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['workplace_storage' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['workplace_storage' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['workplace_storage' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">PERSONAL PROTECTIVE EQUIPMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'PERSONAL PROTECTIVE EQUIPMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.use_ppe}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_devices}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">EQUIPMENTS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'EQUIPMENTS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.log_sheet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.assets_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.asset_register}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.complaint_updated}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.periodic_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                      </div>
+
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Pharmacy'">
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">BIO-MEDICAL WASTE</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'BIO-MEDICAL WASTE'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_coded}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_closed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.biohazard}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.segregation}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_fill}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">REFRIGERATOR</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'REFRIGERATOR'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.temperature_chart}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['temperature_chart' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['temperature_chart' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['temperature_chart' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.temperature_limits}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['temperature_limits' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['temperature_limits' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['temperature_limits' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.freezing_done}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['freezing_done' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['freezing_done' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['freezing_done' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.medical_items}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['medical_items' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['medical_items' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['medical_items' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.expired_medicine}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['expired_medicine' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['expired_medicine' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['expired_medicine' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">PERSONAL PROTECTIVE EQUIPMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'PERSONAL PROTECTIVE EQUIPMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.use_ppe}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_devices}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">MEDICINE STORAGE</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'MEDICINE STORAGE'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.medicine_stored}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['medicine_stored' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['medicine_stored' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['medicine_stored' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.over_dated}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['over_dated' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['over_dated' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['over_dated' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.near_expiry}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['near_expiry' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['near_expiry' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['near_expiry' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.credit_note}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['credit_note' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['credit_note' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['credit_note' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Terrace'">
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.terrace_neat}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_neat' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_neat' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.terrace_restrict}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_restrict' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_restrict' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_restrict' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                      </div>
+
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Laundry'">
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">PERSONAL PROTECTIVE EQUIPMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'PERSONAL PROTECTIVE EQUIPMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.use_ppe}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_devices}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.terrace_neat}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_neat' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['terrace_neat' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.space_linen}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['space_linen' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['space_linen' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['space_linen' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">EQUIPMENTS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'EQUIPMENTS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.periodic_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">RECORDS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'RECORDS'" />
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_record}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_record' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_record' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_record' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">DISINFECTION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'DISINFECTION'" />
+
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.hypochlorite}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['hypochlorite' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['hypochlorite' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['hypochlorite' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+
+
+                      </div>
+
+                      <div class="form-group" style="margin-left: 19px;margin-top:-12px;" ng-show="feedback.dep === 'Other OPDs'">
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">CORRIDOR & FLOORS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'CORRIDOR & FLOORS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.obstruction}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['obstruction_' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.floors_slip}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['floors_slip' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.avoid_falls}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['avoid_falls' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.carpet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['carpet' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.warning_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['warning_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">LIGHTING ALL OVER THE AREA</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'LIGHTING ALL OVER THE AREA'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.natural_light}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['natural_light' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.illumination}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['illumination' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.glare}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['glare' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.night_lights}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['night_lights' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ELECTRICAL</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'ELECTRICAL'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.plug_points}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['plug_points' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_damaged}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_damaged' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cables_exposed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cables_exposed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_mats}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_mats' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_prevent}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_prevent' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cords_conditions}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cords_conditions' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">BIO-MEDICAL WASTE</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'BIO-MEDICAL WASTE'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_coded}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_coded' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_closed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_closed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.biohazard}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['biohazard' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.segregation}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['segregation' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.containers_fill}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['containers_fill' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">FIRE AND EVACUATION</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'FIRE AND EVACUATION'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_accessible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_accessible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_avail}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_avail' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_route}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_route' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.fire_doors}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['fire_doors' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.extinguishers_maintained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['extinguishers_maintained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.exit_signages}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['exit_signages' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">PERSONAL PROTECTIVE EQUIPMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'PERSONAL PROTECTIVE EQUIPMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.use_ppe}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['use_ppe' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.staff_trained}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['staff_trained' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.safety_devices}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['safety_devices' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">GENERAL CONDITION OF THE DEPARTMENT</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'GENERAL CONDITION OF THE DEPARTMENT'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.work_station_neat}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['work_station_neat' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.cleaning_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['cleaning_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_accidents}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['equipment_accidents' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washrooms_clean}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washrooms_clean' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.washroom_checklist}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['washroom_checklist' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">EQUIPMENTS</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'EQUIPMENTS'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.log_sheet}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.log_sheet" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.equipment_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.equipment_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.assets_numbered}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.assets_numbered" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.asset_register}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.asset_register" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.complaint_updated}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.complaint_updated" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.periodic_maintain}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback.periodic_maintain" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:-12px;">
+                          <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">SIGNAGES</h6>
+                          <input type="hidden" ng-model="feedback.location" ng-init="feedback.location = 'SIGNAGES'" />
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.patient_right_visible}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['patient_right_visible' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px; white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.signages_placed}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['signages_placed' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div style="margin-top: 8px; text-align: left;">
+                            <p style="font-size: 18px;; margin-bottom: 6px;">{{lang.mission}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="yes" />
+                                <span style="margin-left: 5px;">Yes</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="no" />
+                                <span style="margin-left: 5px;">No</span>
+                              </label>
+                              <label style="display: flex; align-items: center;">
+                                <input type="radio" ng-model="feedback['mission' + feedback.dep + '_' + feedback.location]" value="Not Applicable" />
+                                <span style="margin-left: 5px;white-space: nowrap;">Not Applicable</span>
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                      </div>
+
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 7px; margin-top: 0px;">
-                        <p style="font-size: 16px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
+                        <p style="font-size: 18px;; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
                         <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                         <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                      <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
+                        Upload file( Evidences, proofs, etc)
+                      </label>
+
+                      <!-- File Input for Document Upload -->
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple
+                        onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <br>
+
+                      <!-- Display the list of uploaded files -->
+                      <div ng-if="feedback.files_name && feedback.files_name.length > 0">
+                        <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
+                        <ul style="margin-left: 19px;">
+                          <li ng-repeat="files_name in feedback.files_name track by $index"
+                            style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank"
+                              style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;"
+                              ng-click="removeFile($index)">&#10060;</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                       </div>
 
                     </div>
@@ -3670,6 +8556,15 @@
 
                           {{lang.unhappythankyoumessage}}
                         </p>
+                        <div class="thankyou-buttons" style="margin-top: 40px;">
+                          <button type="button" class="btn btn-primary" ng-click="repeatAudit()">
+                            🔄 Repeat Audit
+                          </button>
+                          <a ng-href="/audit_forms?user_id={{user_id}}" class="btn btn-secondary"
+                            style="margin-left: 15px;">
+                            🏠 Audits Home Page
+                          </a>
+                        </div>
 
                       </div>
 

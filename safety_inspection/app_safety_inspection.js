@@ -14,6 +14,96 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.step1 = false;
 	$scope.step4 = false;
 
+	//show date and time in input field
+	let now = new Date();
+	now.setSeconds(0, 0);
+
+	$scope.feedback.audit_date = now;
+
+	// max (current date/time)
+	let maxDate = new Date();
+	maxDate.setSeconds(59, 999);
+
+	let year = maxDate.getFullYear();
+	let month = ('0' + (maxDate.getMonth() + 1)).slice(-2);
+	let day = ('0' + maxDate.getDate()).slice(-2);
+	let hours = ('0' + maxDate.getHours()).slice(-2);
+	let minutes = ('0' + maxDate.getMinutes()).slice(-2);
+	$scope.todayDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+	// min (7 days back)
+	let minDate = new Date();
+	minDate.setDate(minDate.getDate() - 7);
+
+	let minYear = minDate.getFullYear();
+	let minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+	let minDay = ('0' + minDate.getDate()).slice(-2);
+	let minHours = ('0' + minDate.getHours()).slice(-2);
+	let minMinutes = ('0' + minDate.getMinutes()).slice(-2);
+	$scope.minDateTime = `${minYear}-${minMonth}-${minDay}T${minHours}:${minMinutes}`;
+
+	$scope.encodeFiles = function (element) {
+		var files_name = Array.from(element.files);
+
+		files_name.forEach(function (file) {
+			var formData = new FormData();
+			formData.append('file', file);
+
+			$http.post($rootScope.baseurl_main + '/upload_file.php', formData, {
+				transformRequest: angular.identity,
+				headers: { 'Content-Type': undefined }
+			}).then(function (response) {
+				if (response.data.file_url) {
+					var fileUrl = response.data.file_url;
+					if (!fileUrl.startsWith('http')) {
+						fileUrl = $rootScope.baseurl_main + '/' + fileUrl;
+					}
+
+					// Ensure files_name is an array before pushing
+					if (!$scope.feedback.files_name) {
+						$scope.feedback.files_name = []; // Initialize if undefined
+					}
+
+					// Push file info to the array
+					$scope.feedback.files_name.push({
+						url: fileUrl,
+						name: file.name
+					});
+				}
+			}).catch(function (error) {
+				console.error('Error uploading file:', error);
+			});
+		});
+	};
+
+
+	$scope.removeFile = function (index) {
+		$scope.feedback.files_name.splice(index, 1);
+	};
+
+	$scope.repeatAudit = function () {
+		// keep the values you don’t want to reset
+		var keep = {
+			audit_by: $scope.feedback.audit_by,
+			audit_date: $scope.feedback.audit_date,
+			audit_type: $scope.feedback.audit_type
+		};
+
+		// reset everything else
+		$scope.feedback = {};
+
+		// restore the kept values
+		$scope.feedback.audit_by = keep.audit_by;
+		$scope.feedback.audit_date = keep.audit_date;
+		$scope.feedback.audit_type = keep.audit_type;
+
+		// reset steps
+		$scope.step0 = true;
+		$scope.step1 = $scope.step2 = $scope.step3 = $scope.step4 = false;
+		$scope.step = 0;
+	};
+
+
 
 	$rootScope.language = function (type) {
 		$scope.typel = type;
@@ -21,7 +111,9 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			$http.get('language/english.json').then(function (responsedata) {
 
 				$rootScope.lang = responsedata.data;
-				$scope.type2 = 'English'
+				$scope.type2 = 'English';
+				//load main heading
+				$scope.feedback.audit_type = $rootScope.lang.patient_info;
 			});
 		}
 		if (type == 'lang2') {
@@ -43,6 +135,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	}
+
 	$scope.language('english');
 	window.setTimeout(function () {
 		$(window).scrollTop(0);
@@ -56,6 +149,9 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
 
+		//load audit name
+		$scope.feedback.audit_by = $scope.loginname;
+		console.log($scope.feedback.audit_by);
 
 
 		console.log($scope.loginemail);
@@ -67,7 +163,12 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		// Handle if data doesn't exist
 		console.log('Data not found in local storage');
 	}
+
 	$scope.next1 = function () {
+		if (!$scope.feedback.audit_by || ($scope.feedback.audit_by + '').trim() === '') {
+			alert('Please enter audit by');
+			return;
+		}
 
 		$scope.step0 = false;
 		$scope.step1 = true;
@@ -75,16 +176,38 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 	}
 
+	$scope.setupapplication1 = function () {
+        //$rootScope.loader = true;
+        var url = window.location.href;
+        //console.log(url);
+        var id = url.substring(url.lastIndexOf('=') + 1);
+        //alert(id);
+        $http.get($rootScope.baseurl_main + '/audit_load_safety_department.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
+            $scope.safety_inseption = responsedata.data;
+            
+
+            console.log($scope.auditdept);
+        },
+            function myError(response) {
+                $rootScope.loader = false;
+
+            }
+        );
+
+    }
+
+	$scope.setupapplication1()
+
 	$scope.showDepartments = [
 		'Select Department',
-		'St.Thomas Ward',
-		'St.Alphonsa Ward',
-		'St.Martins Ward',
-		'St.Anns Ward',
-		'St.Antonys Ward',
-		'Paediatric-Observation',
+		'St. Thomas Ward',
+		'St. Alphonsa Ward',
+		'St. Martins Ward',
+		'St. Anns Ward',
+		'St. Antonys Ward',
+		'Paediatric- Observation',
 		'OT',
-		'CCU/ICU',
+		'CCU/ ICU',
 		'Casualty',
 		'Dialysis',
 		'Injection Room',
@@ -93,14 +216,6 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		
 	];
 	
-
-
-	$scope.feedback = {
-		location: 'STAIRWAYS',
-		dep: 'Select Department'
-	};
-
-
 
 
 	//Calculate function for initail assessment
@@ -222,11 +337,6 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	};
 
 
-
-
-
-
-
 	$scope.currentMonthYear = getCurrentMonthYear();
 
 
@@ -273,6 +383,10 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.savefeedback = function () {
 
 		function isFeedbackValid() {
+			if (!$scope.feedback.audit_by || ($scope.feedback.audit_by + '').trim() === '') {
+			alert('Please enter audit by');
+			return;
+		}
 			if ($scope.feedback.location == '' || $scope.feedback.location == undefined) {
 				alert("Please select location");
 				return false;
@@ -286,6 +400,23 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			return;
 		}
 
+		var formatDateToLocalString = function (date) {
+			if (!date) return "";
+			var d = new Date(date);
+
+			if (isNaN(d.getTime())) return "";
+
+			var year = d.getFullYear();
+			var month = ('0' + (d.getMonth() + 1)).slice(-2);
+			var day = ('0' + d.getDate()).slice(-2);
+			var hours = ('0' + d.getHours()).slice(-2);
+			var minutes = ('0' + d.getMinutes()).slice(-2);
+
+			return `${year}-${month}-${day} ${hours}:${minutes}`;
+		};
+
+		
+		$scope.feedback.audit_date = formatDateToLocalString($scope.feedback.audit_date);
 
 
 		$rootScope.loader = true;

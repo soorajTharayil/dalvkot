@@ -58,14 +58,14 @@
    "kpi_info": "32. PSQ3d - Compliance rate to medication prescription in capitals for the month of",
    "definition": "Definition:",
    "kpi_def": "A near miss is an unplanned event that did not result in injury, illness, or damage - but had the potential to do so. Errors that did not result in patient harm, but could have, can be categorized as near misses.",
-   "formula_para1": "Total no. of prescriptions in capital letters",   
+   "formula_para1": "Total no. of prescriptions in capital letters (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total no. of prescriptions",
+   "formula_para2": "Total no. of prescriptions (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

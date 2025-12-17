@@ -112,256 +112,709 @@ class Quality_model extends CI_Model
 	// }
 
 
-	public function update_feedback_1PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_1PSQ3a', $data);
-    }
-	public function update_feedback_2PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_2PSQ3a', $data);
-    }
-	public function update_feedback_3PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_3PSQ3a', $data);
-    }
-	public function update_feedback_4PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_4PSQ3a', $data);
-    }
-	public function update_feedback_5PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_5PSQ3a', $data);
-    }
-	public function update_feedback_6PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_6PSQ3a', $data);
-    }
-	public function update_feedback_7PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_7PSQ3a', $data);
-    }
-	public function update_feedback_8PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_8PSQ3a', $data);
-    }
-	public function update_feedback_9PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_9PSQ3a', $data);
-    }
-	public function update_feedback_10PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_10PSQ3a', $data);
-    }
-	public function update_feedback_11PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_11PSQ3a', $data);
-    }
-	public function update_feedback_12PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_12PSQ3a', $data);
-    }
+	public function update_feedback_1PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_1PSQ3a', $data);
+	}
+	public function update_feedback_2PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_2PSQ3a', $data);
+	}
+	public function update_feedback_3PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_3PSQ3a', $data);
+	}
+	public function update_feedback_4PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_4PSQ3a', $data);
+	}
+	public function update_feedback_5PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_5PSQ3a', $data);
+	}
+	public function update_feedback_6PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_6PSQ3a', $data);
+	}
+	public function update_feedback_7PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_7PSQ3a', $data);
+	}
+	public function update_feedback_8PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_8PSQ3a', $data);
+	}
+	public function update_feedback_9PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_9PSQ3a', $data);
+	}
+	public function update_feedback_10PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_10PSQ3a', $data);
+	}
+	public function update_feedback_11PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_11PSQ3a', $data);
+	}
+	public function update_feedback_12PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_12PSQ3a', $data);
+	}
 
-	public function update_feedback_13PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_13PSQ3b', $data);
-    }
-	public function update_feedback_14PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_14PSQ3b', $data);
-    }
-	public function update_feedback_15PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_15PSQ3b', $data);
-    }
-	public function update_feedback_16PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_16PSQ3b', $data);
-    }
-	public function update_feedback_17PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_17PSQ3b', $data);
-    }
+	public function update_feedback_13PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_13PSQ3b', $data);
+	}
+	public function update_feedback_14PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_14PSQ3b', $data);
+	}
+	public function update_feedback_15PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_15PSQ3b', $data);
+	}
+	public function update_feedback_16PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_16PSQ3b', $data);
+	}
+	public function update_feedback_17PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_17PSQ3b', $data);
+	}
 
 
-	public function update_feedback_18PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_18PSQ3b', $data);
-    }
-	public function update_feedback_19PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_19PSQ3c', $data);
-    }
-	public function update_feedback_20PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_20PSQ3c', $data);
-    }
-	public function update_feedback_21PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_21PSQ3c', $data);
-    }
-	public function update_feedback_21aPSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_21aPSQ3c', $data);
-    }
-	public function update_feedback_22PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_22PSQ3c', $data);
-    }
+	public function update_feedback_18PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_18PSQ3b', $data);
+	}
+	public function update_feedback_19PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_19PSQ3c', $data);
+	}
+	public function update_feedback_20PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_20PSQ3c', $data);
+	}
+	public function update_feedback_21PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_21PSQ3c', $data);
+	}
+	public function update_feedback_21aPSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_21aPSQ3c', $data);
+	}
+	public function update_feedback_22PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_22PSQ3c', $data);
+	}
 
-	public function update_feedback_23PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_23PSQ4c', $data);
-    }
-	public function update_feedback_23aPSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_23aPSQ4c', $data);
-    }
-	public function update_feedback_23bPSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_23bPSQ4c', $data);
-    }
-	public function update_feedback_23cPSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_23cPSQ4c', $data);
-    }
-	public function update_feedback_23dPSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('	bf_feedback_23dPSQ4c', $data);
-    }
+	public function update_feedback_23PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_23PSQ4c', $data);
+	}
+	public function update_feedback_23aPSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_23aPSQ4c', $data);
+	}
+	public function update_feedback_23bPSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_23bPSQ4c', $data);
+	}
+	public function update_feedback_23cPSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_23cPSQ4c', $data);
+	}
+	public function update_feedback_23dPSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('	bf_feedback_23dPSQ4c', $data);
+	}
 
+
+	public function update_feedback_24PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_24PSQ4c', $data);
+	}
+	public function update_feedback_25PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_25PSQ4c', $data);
+	}
+	public function update_feedback_26PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_26PSQ4c', $data);
+	}
+	public function update_feedback_27PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_27PSQ4d', $data);
+	}
+	public function update_feedback_28PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_28PSQ4d', $data);
+	}
+
+
+	public function update_feedback_29PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_29PSQ4d', $data);
+	}
+	public function update_feedback_30PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_30PSQ3d', $data);
+	}
+	public function update_feedback_31PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_31PSQ3d', $data);
+	}
+	public function update_feedback_32PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_32PSQ3d', $data);
+	}
+	public function update_feedback_PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_PSQ3a', $data);
+	}
+
+	public function update_feedback_33PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_33PSQ3a', $data);
+	}
+
+	public function update_feedback_34PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_34PSQ3a', $data);
+	}
+
+	public function update_feedback_35PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_35PSQ3a', $data);
+	}
+
+	public function update_feedback_36PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_36PSQ3a', $data);
+	}
+
+	public function update_feedback_37PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_37PSQ3a', $data);
+	}
+
+	public function update_feedback_38PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_38PSQ3a', $data);
+	}
+
+	public function update_feedback_39PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_39PSQ3a', $data);
+	}
+
+	public function update_feedback_40PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_40PSQ3a', $data);
+	}
+
+	public function update_feedback_41PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_41PSQ3a', $data);
+	}
+
+	public function update_feedback_42PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_42PSQ3a', $data);
+	}
+
+	public function update_feedback_43PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_43PSQ3a', $data);
+	}
+
+	public function update_feedback_44PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_44PSQ3a', $data);
+	}
+
+	public function update_feedback_45PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_45PSQ3a', $data);
+	}
+
+	public function update_feedback_46PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_46PSQ3a', $data);
+	}
+
+	public function update_feedback_47PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_47PSQ3a', $data);
+	}
+
+	public function update_feedback_48PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_48PSQ3a', $data);
+	}
+
+	public function update_feedback_49PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_49PSQ3a', $data);
+	}
+
+	public function update_feedback_50PSQ3a($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_50PSQ3a', $data);
+	}
+
+	//get function
+	// In Quality_model.php
 	
-	public function update_feedback_24PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_24PSQ4c', $data);
-    }
-	public function update_feedback_25PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_25PSQ4c', $data);
-    }
-	public function update_feedback_26PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_26PSQ4c', $data);
-    }
-	public function update_feedback_27PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_27PSQ4d', $data);
-    }
-	public function update_feedback_28PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_28PSQ4d', $data);
-    }
+public function get_feedback_1PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_1PSQ3a'); // table name
+    return $query->row(); // return single row as object
+}
 
-	
-	public function update_feedback_29PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_29PSQ4d', $data);
-    }
-	public function update_feedback_30PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_30PSQ3d', $data);
-    }
-	public function update_feedback_31PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_31PSQ3d', $data);
-    }
-	public function update_feedback_32PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_32PSQ3d', $data);
-    }
-	public function update_feedback_PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_PSQ3a', $data);
-    }
 
-	public function update_feedback_33PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_33PSQ3a', $data);
-    }
+public function get_feedback_2PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_2PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_34PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_34PSQ3a', $data);
-    }
+public function get_feedback_3PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_3PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_35PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_35PSQ3a', $data);
-    }
+public function get_feedback_4PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_4PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_36PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_36PSQ3a', $data);
-    }
+public function get_feedback_5PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_5PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_37PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_37PSQ3a', $data);
-    }
+public function get_feedback_6PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_6PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_38PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_38PSQ3a', $data);
-    }
+public function get_feedback_7PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_7PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_39PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_39PSQ3a', $data);
-    }
+public function get_feedback_8PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_8PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_40PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_40PSQ3a', $data);
-    }
+public function get_feedback_9PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_9PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_41PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_41PSQ3a', $data);
-    }
+public function get_feedback_10PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_10PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_42PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_42PSQ3a', $data);
-    }
+public function get_feedback_11PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_11PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_43PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_43PSQ3a', $data);
-    }
+public function get_feedback_12PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_12PSQ3a');
+    return $query->row();
+}
 
-	public function update_feedback_44PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_44PSQ3a', $data);
-    }
+public function get_feedback_13PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_13PSQ3b');
+    return $query->row();
+}
 
-	public function update_feedback_45PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_45PSQ3a', $data);
-    }
+public function get_feedback_14PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_14PSQ3b');
+    return $query->row();
+}
 
-	public function update_feedback_46PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_46PSQ3a', $data);
-    }
+public function get_feedback_15PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_15PSQ3b');
+    return $query->row();
+}
 
-	public function update_feedback_47PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_47PSQ3a', $data);
-    }
+public function get_feedback_16PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_16PSQ3b');
+    return $query->row();
+}
 
-	public function update_feedback_48PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_48PSQ3a', $data);
-    }
+public function get_feedback_17PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_17PSQ3b');
+    return $query->row();
+}
 
-	public function update_feedback_49PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_49PSQ3a', $data);
-    }
+public function get_feedback_18PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_18PSQ3b');
+    return $query->row();
+}
 
-	public function update_feedback_50PSQ3a($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_50PSQ3a', $data);
-    }
+public function get_feedback_19PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_19PSQ3c');
+    return $query->row();
+}
+
+public function get_feedback_20PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_20PSQ3c');
+    return $query->row();
+}
+
+public function get_feedback_21PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_21PSQ3c');
+    return $query->row();
+}
+
+public function get_feedback_21aPSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_21aPSQ3c');
+    return $query->row();
+}
+
+public function get_feedback_22PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_22PSQ3c');
+    return $query->row();
+}
+
+public function get_feedback_23PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_23PSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_23aPSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_23aPSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_23bPSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_23bPSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_23cPSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_23cPSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_23dPSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_23dPSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_24PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_24PSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_25PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_25PSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_26PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_26PSQ4c');
+    return $query->row();
+}
+
+public function get_feedback_27PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_27PSQ4d');
+    return $query->row();
+}
+
+public function get_feedback_28PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_28PSQ4d');
+    return $query->row();
+}
+
+public function get_feedback_29PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_29PSQ4d');
+    return $query->row();
+}
+
+public function get_feedback_30PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_30PSQ3d');
+    return $query->row();
+}
+
+public function get_feedback_31PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_31PSQ3d');
+    return $query->row();
+}
+
+public function get_feedback_32PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_32PSQ3d');
+    return $query->row();
+}
+
+public function get_feedback_PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_33PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_33PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_34PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_34PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_35PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_35PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_36PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_36PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_37PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_37PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_38PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_38PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_39PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_39PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_40PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_40PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_41PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_41PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_42PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_42PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_43PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_43PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_44PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_44PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_45PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_45PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_46PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_46PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_47PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_47PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_48PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_48PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_49PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_49PSQ3a');
+    return $query->row();
+}
+
+public function get_feedback_50PSQ3a_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_feedback_50PSQ3a');
+    return $query->row();
+}
+
 
 
 
@@ -408,7 +861,7 @@ class Quality_model extends CI_Model
 
 		foreach ($allfeeds as $row) {
 			$data = json_decode($row->dataset, true); // Decode the dataset JSON
-// asort($data); 
+			// asort($data); 
 			// Determine the month based on the date
 			if ($days > 10 && $days < 93) {
 				$desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
@@ -464,7 +917,7 @@ class Quality_model extends CI_Model
 					$dataexport[$mon][$k]['nps_promoters'] = isset($dataexport[$mon][$k]['promoters_count']) ? $dataexport[$mon][$k]['promoters_count'] : 0;
 					$dataexport[$mon][$k]['nps_detractors'] = isset($dataexport[$mon][$k]['detractor_count']) ? $dataexport[$mon][$k]['detractor_count'] : 0;
 					$dataexport[$mon][$k]['nps_passives'] = isset($dataexport[$mon][$k]['passives_count']) ? $dataexport[$mon][$k]['passives_count'] : 0;
-					
+
 
 					$dataexport[$mon][$k]['department_nps'] = round((($dataexport[$mon][$k]['nps_promoters'] - $dataexport[$mon][$k]['nps_detractors']) / $dataexport[$mon][$k]['check']) * 100) . '%';
 					$dataexport[$mon][$k]['count_rated_worst'] = isset($dataexport[$mon][$k]['worst']) ? $dataexport[$mon][$k]['worst'] : 0;
@@ -472,7 +925,7 @@ class Quality_model extends CI_Model
 					$dataexport[$mon][$k]['count_rated_average'] = isset($dataexport[$mon][$k]['average']) ? $dataexport[$mon][$k]['average'] : 0;
 					$dataexport[$mon][$k]['count_rated_good'] = isset($dataexport[$mon][$k]['good']) ? $dataexport[$mon][$k]['good'] : 0;
 					$dataexport[$mon][$k]['count_rated_excellent'] = isset($dataexport[$mon][$k]['excellent']) ? $dataexport[$mon][$k]['excellent'] : 0;
-					
+
 					foreach ($subarraydata as $subk => $vsubr) {
 						if (isset($data['reason'][$subk])) {
 							$count_this_re++; // Increment count_this_re for each negative feedback
@@ -517,58 +970,317 @@ class Quality_model extends CI_Model
 
 		//... [Your stopwords initialization code here, I'm skipping this for brevity] ...
 		$conjunctions = [
-			"and", "but", "or", "nor", "for", "so", "yet",
-			"although", "because", "since", "unless", "while",
-			"either...or", "neither...nor"
+			"and",
+			"but",
+			"or",
+			"nor",
+			"for",
+			"so",
+			"yet",
+			"although",
+			"because",
+			"since",
+			"unless",
+			"while",
+			"either...or",
+			"neither...nor"
 		];
 
 		$prepositions = [
-			"about", "above", "across", "after", "against", "along", "among",
-			"around", "at", "before", "behind", "below", "beneath", "beside",
-			"between", "beyond", "by", "down", "during", "for", "from", "in",
-			"inside", "into", "near", "of", "off", "on", "onto", "out",
-			"outside", "over", "through", "to", "under", "up", "with", "without"
+			"about",
+			"above",
+			"across",
+			"after",
+			"against",
+			"along",
+			"among",
+			"around",
+			"at",
+			"before",
+			"behind",
+			"below",
+			"beneath",
+			"beside",
+			"between",
+			"beyond",
+			"by",
+			"down",
+			"during",
+			"for",
+			"from",
+			"in",
+			"inside",
+			"into",
+			"near",
+			"of",
+			"off",
+			"on",
+			"onto",
+			"out",
+			"outside",
+			"over",
+			"through",
+			"to",
+			"under",
+			"up",
+			"with",
+			"without"
 		];
 
 		$interjections = [
-			"ah!", "aha!", "alas!", "ouch!", "hey!", "wow!", "oh!", "oops!",
-			"yikes!", "hmm...", "shh!"
+			"ah!",
+			"aha!",
+			"alas!",
+			"ouch!",
+			"hey!",
+			"wow!",
+			"oh!",
+			"oops!",
+			"yikes!",
+			"hmm...",
+			"shh!"
 		];
 
 		$pronouns = [
-			"I", "you", "he", "she", "it", "we", "they", "mine", "yours",
-			"his", "hers", "ours", "theirs", "myself", "yourself", "himself",
-			"herself", "itself", "ourselves", "yourselves", "themselves", "who",
-			"whom", "whose", "which", "that", "this", "that", "these", "those",
-			"who", "whom", "whose", "which", "what", "anybody", "anyone",
-			"something", "nothing", "everything", "all", "both", "few", "many",
-			"neither", "several", "some", "such"
+			"I",
+			"you",
+			"he",
+			"she",
+			"it",
+			"we",
+			"they",
+			"mine",
+			"yours",
+			"his",
+			"hers",
+			"ours",
+			"theirs",
+			"myself",
+			"yourself",
+			"himself",
+			"herself",
+			"itself",
+			"ourselves",
+			"yourselves",
+			"themselves",
+			"who",
+			"whom",
+			"whose",
+			"which",
+			"that",
+			"this",
+			"that",
+			"these",
+			"those",
+			"who",
+			"whom",
+			"whose",
+			"which",
+			"what",
+			"anybody",
+			"anyone",
+			"something",
+			"nothing",
+			"everything",
+			"all",
+			"both",
+			"few",
+			"many",
+			"neither",
+			"several",
+			"some",
+			"such"
 		];
 
 		$fillerWords = [
-			"um", "uh", "you know", "like", "basically", "actually",
-			"seriously", "literally", "just", "really"
+			"um",
+			"uh",
+			"you know",
+			"like",
+			"basically",
+			"actually",
+			"seriously",
+			"literally",
+			"just",
+			"really"
 		];
 
 		$articles = [
-			"the", "a", "an"
+			"the",
+			"a",
+			"an"
 		];
 
 		$others = [
-			"a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are",
-			"as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but",
-			"by", "can't", "cannot", "could", "did", "do", "does", "doing", "don't", "down", "during",
-			"each", "few", "for", "from", "further", "had", "has", "have", "having", "he", "he'd", "he'll",
-			"he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how", "how's", "i",
-			"i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "it", "it's", "its", "itself", "let's", "me",
-			"more", "most", "my", "myself", "nor", "of", "on", "once", "only", "or", "other", "ought", "our",
-			"ours", "ourselves", "out", "over", "own", "same", "she", "she'd", "she'll", "she's", "should", "so",
-			"some", "such", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then",
-			"there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those",
-			"through", "to", "too", "under", "until", "up", "very", "was", "we", "we'd", "we'll", "we're",
-			"we've", "were", "what", "what's", "when", "when's", "where", "where's", "which", "while", "who",
-			"who's", "whom", "why", "why's", "with", "would", "you", "you'd", "you'll", "you're", "you've",
-			"your", "yours", "yourself", "yourselves", "not", "can", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " "
+			"a",
+			"about",
+			"above",
+			"after",
+			"again",
+			"against",
+			"all",
+			"am",
+			"an",
+			"and",
+			"any",
+			"are",
+			"as",
+			"at",
+			"be",
+			"because",
+			"been",
+			"before",
+			"being",
+			"below",
+			"between",
+			"both",
+			"but",
+			"by",
+			"can't",
+			"cannot",
+			"could",
+			"did",
+			"do",
+			"does",
+			"doing",
+			"don't",
+			"down",
+			"during",
+			"each",
+			"few",
+			"for",
+			"from",
+			"further",
+			"had",
+			"has",
+			"have",
+			"having",
+			"he",
+			"he'd",
+			"he'll",
+			"he's",
+			"her",
+			"here",
+			"here's",
+			"hers",
+			"herself",
+			"him",
+			"himself",
+			"his",
+			"how",
+			"how's",
+			"i",
+			"i'd",
+			"i'll",
+			"i'm",
+			"i've",
+			"if",
+			"in",
+			"into",
+			"is",
+			"it",
+			"it's",
+			"its",
+			"itself",
+			"let's",
+			"me",
+			"more",
+			"most",
+			"my",
+			"myself",
+			"nor",
+			"of",
+			"on",
+			"once",
+			"only",
+			"or",
+			"other",
+			"ought",
+			"our",
+			"ours",
+			"ourselves",
+			"out",
+			"over",
+			"own",
+			"same",
+			"she",
+			"she'd",
+			"she'll",
+			"she's",
+			"should",
+			"so",
+			"some",
+			"such",
+			"than",
+			"that",
+			"that's",
+			"the",
+			"their",
+			"theirs",
+			"them",
+			"themselves",
+			"then",
+			"there",
+			"there's",
+			"these",
+			"they",
+			"they'd",
+			"they'll",
+			"they're",
+			"they've",
+			"this",
+			"those",
+			"through",
+			"to",
+			"too",
+			"under",
+			"until",
+			"up",
+			"very",
+			"was",
+			"we",
+			"we'd",
+			"we'll",
+			"we're",
+			"we've",
+			"were",
+			"what",
+			"what's",
+			"when",
+			"when's",
+			"where",
+			"where's",
+			"which",
+			"while",
+			"who",
+			"who's",
+			"whom",
+			"why",
+			"why's",
+			"with",
+			"would",
+			"you",
+			"you'd",
+			"you'll",
+			"you're",
+			"you've",
+			"your",
+			"yours",
+			"yourself",
+			"yourselves",
+			"not",
+			"can",
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9",
+			"0",
+			" "
 		];
 
 		$stopwords = array_merge($conjunctions, $prepositions, $interjections, $pronouns, $fillerWords, $articles, $others);
@@ -607,13 +1319,13 @@ class Quality_model extends CI_Model
 			if ($count > 3) {
 				// Generate random color for each word
 				$color = sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Random hex color
-				$wordCounts[] = [ $word,$count,$color];
+				$wordCounts[] = [$word, $count, $color];
 			}
 		}
 		usort($wordCounts, function ($a, $b) {
 			return $b['count'] - $a['count'];
 		});
-	
+
 		return $wordCounts;
 	}
 
@@ -1020,28 +1732,110 @@ class Quality_model extends CI_Model
 	//keep
 	public function patient_and_feedback($table_patient, $table_feedback, $sorttime)
 	{
-
-		$fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+		$fdate = date('Y-m-d', strtotime($_SESSION['from_date']) + 24 * 60 * 60);
 		$tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
-		$this->db->select($table_feedback . '.*');
-		$this->db->from($table_feedback);
-	
 
-		// Check if floorwise exists and is an object
-		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
-			// Use ward only if floorwise doesn't exist
-			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (count($this->session->userdata['floor_ward']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
+		$tables = [
+			'bf_feedback_1PSQ3a',
+			'bf_feedback_2PSQ3a',
+			'bf_feedback_3PSQ3a',
+			'bf_feedback_4PSQ3a',
+			'bf_feedback_5PSQ3a',
+			'bf_feedback_6PSQ3a',
+			'bf_feedback_7PSQ3a',
+			'bf_feedback_8PSQ3a',
+			'bf_feedback_9PSQ3a',
+			'bf_feedback_10PSQ3a',
+			'bf_feedback_11PSQ3a',
+			'bf_feedback_12PSQ3a',
+			'bf_feedback_13PSQ3b',
+			'bf_feedback_14PSQ3b',
+			'bf_feedback_15PSQ3b',
+			'bf_feedback_16PSQ3b',
+			'bf_feedback_17PSQ3b',
+			'bf_feedback_18PSQ3b',
+			'bf_feedback_19PSQ3c',
+			'bf_feedback_20PSQ3c',
+			'bf_feedback_21PSQ3c',
+			'bf_feedback_21aPSQ3c',
+			'bf_feedback_22PSQ3c',
+			'bf_feedback_23aPSQ4c',
+			'bf_feedback_23bPSQ4c',
+			'bf_feedback_23cPSQ4c',
+			'bf_feedback_23dPSQ4c',
+			'bf_feedback_24PSQ4c',
+			'bf_feedback_25PSQ4c',
+			'bf_feedback_26PSQ4c',
+			'bf_feedback_27PSQ4d',
+			'bf_feedback_28PSQ4d',
+			'bf_feedback_29PSQ4d',
+			'bf_feedback_30PSQ3d',
+			'bf_feedback_31PSQ3d',
+			'bf_feedback_32PSQ3d',
+			'bf_feedback_PSQ3a',
+			'bf_feedback_33PSQ3a',
+			'bf_feedback_34PSQ3a',
+			'bf_feedback_35PSQ3a',
+			'bf_feedback_36PSQ3a',
+			'bf_feedback_37PSQ3a',
+			'bf_feedback_38PSQ3a',
+			'bf_feedback_39PSQ3a',
+			'bf_feedback_40PSQ3a',
+			'bf_feedback_41PSQ3a',
+			'bf_feedback_42PSQ3a',
+			'bf_feedback_43PSQ3a',
+			'bf_feedback_44PSQ3a',
+			'bf_feedback_45PSQ3a',
+			'bf_feedback_46PSQ3a',
+			'bf_feedback_47PSQ3a',
+			'bf_feedback_48PSQ3a',
+			'bf_feedback_49PSQ3a',
+			'bf_feedback_50PSQ3a'
+
+
+		];
+
+		$kpi_feature_map = [];
+		foreach ($tables as $index => $tbl) {
+			$kpi_feature_map['QUALITY-KPI' . ($index + 1)] = $tbl;
 		}
 
-		$this->db->where($table_feedback . '.datet <=', $fdate);
-		$this->db->where($table_feedback . '.datet >=', $tdate);
+		$allowed = false;
+		if (isset($this->session->userdata['feature']) && is_array($this->session->userdata['feature'])) {
+			foreach ($this->session->userdata['feature'] as $key => $val) {
+				if ($val === true && isset($kpi_feature_map[$key]) && $kpi_feature_map[$key] === $table_feedback) {
+					$allowed = true;
+					break;
+				}
+			}
+		}
+
+		if (!$allowed) {
+			return [];
+		}
+
+		$this->db->select($table_feedback . '.*');
+		$this->db->from($table_feedback);
+
+		$this->db->where("(status IS NULL OR status != 'Deleted')", null, false);
+
+		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
+			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
+		} elseif (
+			isset($this->session->userdata['floor_ward']) &&
+			is_array($this->session->userdata['floor_ward']) &&
+			count($this->session->userdata['floor_ward']) > 0
+		) {
+			$this->db->where_in($table_feedback . '.ward', $this->session->userdata['floor_ward']);
+		}
+
+		$this->db->where($table_feedback . '.datetime <=', $fdate);
+		$this->db->where($table_feedback . '.datetime >=', $tdate);
 		$this->db->order_by('datetime', $sorttime);
 
 		$query = $this->db->get();
-		return $patientandfeedback = $query->result();
+		if (!$query) return [];
+		return $query->result();
 	}
 
 	public function patient_and_feedback_quality($table_feedback, $sorttime)

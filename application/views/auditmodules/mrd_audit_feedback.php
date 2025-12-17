@@ -12,6 +12,11 @@
 		if (count($results) >= 1) {
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
+
+				// echo '<pre>';
+				// print_r($param);
+				// echo '</pre>';
+				// exit;
 	?>
 				<div class="row">
 					<div class="col-lg-12">
@@ -33,76 +38,159 @@
 							<?php } ?>
 							<div class="panel-body" style="background: #fff;">
 								<table class="table table-striped table-bordered no-footer dtr-inline" style="font-size: 16px;">
+									<!-- Audit Details -->
 									<tr>
-										<td><b>Patient details</b></td>
-										<td style="overflow: clip;">
-											(<?php echo $result->patientid; ?>)
-											<br>
-											<?php echo $result->department; ?>
-											<br>
-											<?php echo $result->patient_category; ?>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
+
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+									<tr>
+										<td>Patient UHID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['department']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
+										<td>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
 										</td>
 									</tr>
+
+
 									<tr>
-										<td><b>Admitted time</b></td>
-										<td><?php echo $result->patient_got_admitted; ?></td>
+										<td><b>Patient arrived time</b></td>
+										<td><?php echo $param['initial_assessment_hr1']; ?></td>
 									</tr>
 									<tr>
-										<td><b>Initial assessment time</b></td>
-										<td><?php echo $result->doctor_completed_assessment; ?></td>
+										<td><b>Initial assessment completed time</b></td>
+										<td><?php echo $param['initial_assessment_hr2']; ?></td>
 									</tr>
 									<tr>
 										<td><b>Time taken for initial assessment</b></td>
-										<td><?php echo $result->initial_assessment; ?></td>
+										<td><?php echo date("H:i:s", strtotime($param['calculatedResult'])); ?></td>
 									</tr>
+
 									<tr>
 										<td><b>Consent verified</b></td>
-										<td><?php echo $result->consent_verified; ?></td>
+										<td>
+											<?php echo !empty($param['consent_verified']) ? ucfirst(htmlspecialchars($param['consent_verified'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['consent_verified_text']) ? htmlspecialchars($param['consent_verified_text']) : '-'; ?>
+										</td>
 									</tr>
+
 									<?php if ($param['consent_comment']) { ?>
-									<tr>
-										<td><b>Consent comment</b></td>
-										<td><?php echo $result->consent_comment; ?></td>
-									</tr>
+										<tr>
+											<td><b>Consent comment</b></td>
+											<td><?php echo $result->consent_comment; ?></td>
+										</tr>
 									<?php  } ?>
 									<tr>
 										<td><b>Discharge summary</b></td>
-										<td><?php echo $result->discharge_summary; ?></td>
+										<td>
+											<?php echo !empty($param['discharge_summary']) ? ucfirst(htmlspecialchars($param['discharge_summary'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['discharge_summary_text']) ? htmlspecialchars($param['discharge_summary_text']) : '-'; ?>
+										</td>
 									</tr>
+
 									<tr>
 										<td><b>Error prone abbreviation</b></td>
-										<td><?php echo $result->error_prone; ?></td>
+										<td>
+											<?php echo !empty($param['error_prone']) ? ucfirst(htmlspecialchars($param['error_prone'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['error_prone_text']) ? htmlspecialchars($param['error_prone_text']) : '-'; ?>
+										</td>
 									</tr>
+
 									<?php if ($param['error_prone_comment']) { ?>
-									<tr>
-										<td><b>Error prone comment</b></td>
-										<td><?php echo $result->error_prone_comment; ?></td>
-									</tr>
+										<tr>
+											<td><b>Error prone comment</b></td>
+											<td><?php echo $result->error_prone_comment; ?></td>
+										</tr>
 									<?php  } ?>
 									<tr>
 										<td><b>Discharge advice time</b></td>
-										<td><?php echo $result->doctor_adviced_discharge; ?></td>
+										<td><?php echo $param['initial_assessment_hr3']; ?></td>
 									</tr>
 									<tr>
 										<td><b>Billing time</b></td>
-										<td><?php echo $result->bill_paid_time; ?></td>
+										<td><?php echo $param['initial_assessment_hr4']; ?></td>
 									</tr>
 									<tr>
 										<td><b>Time taken for discharge</b></td>
-										<td><?php echo $result->time_taken_for_discharge; ?></td>
+										<td><?php echo date("H:i:s", strtotime($param['calculatedDoctorAdviceToBillPaid'])); ?></td>
+									</tr>
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
 									<tr>
 										<td><b>Additional comments</b></td>
-										<td><?php echo $result->comments; ?></td>
+										<td><?php echo $param['dataAnalysis']; ?></td>
 									</tr>
 									<tr>
 										<td><b>Data collected by</b></td>
-										<td><?php echo $result->name; ?></td>
+										<td><?php echo $param['audit_by']; ?></td>
 									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
+
+
+
+
 								</table>
 							</div>
 						</div>

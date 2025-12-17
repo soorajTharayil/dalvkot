@@ -199,6 +199,63 @@ class Analytics_audit_quality extends CI_Controller
     }
 
 
+    public function resposnsechart_lab_safety_audit()
+    {
+
+        $table_feedback = 'bf_feedback_lab_safety_audit';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+
     public function resposnsechart_consultation_time()
     {
 
@@ -1207,6 +1264,174 @@ class Analytics_audit_quality extends CI_Controller
         exit;
     }
 
+    public function resposnsechart_safety_inspection()
+    {
+
+        $table_feedback = 'bf_feedback_safety_inspection';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_mock_drill()
+    {
+
+        $table_feedback = 'bf_feedback_mock_drill';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_code_originals()
+    {
+
+        $table_feedback = 'bf_feedback_code_originals';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
 
     public function resposnsechart_vap_prevention()
     {
@@ -1782,7 +2007,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -1837,7 +2062,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -1892,7 +2117,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -1948,7 +2173,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2003,7 +2228,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2058,7 +2283,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2113,7 +2338,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2168,7 +2393,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2223,7 +2448,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2279,7 +2504,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2334,7 +2559,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2389,7 +2614,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2445,7 +2670,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2500,7 +2725,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2555,7 +2780,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2611,7 +2836,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2666,7 +2891,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2721,7 +2946,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2777,7 +3002,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2833,7 +3058,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2889,7 +3114,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -2945,7 +3170,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3001,7 +3226,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3057,7 +3282,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3113,7 +3338,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3169,7 +3394,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3225,7 +3450,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3284,7 +3509,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3339,7 +3564,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3395,7 +3620,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3451,7 +3676,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3507,7 +3732,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3563,7 +3788,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3619,7 +3844,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3675,7 +3900,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3731,7 +3956,7 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();
@@ -3787,7 +4012,1015 @@ class Analytics_audit_quality extends CI_Controller
         $asc = 'asc';
         $desc = 'desc';
         //$dates = get_from_to_date();
-        $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_34ps()
+    {
+
+        $table_feedback = 'bf_feedback_33PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_35ps()
+    {
+
+        $table_feedback = 'bf_feedback_34PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_36ps()
+    {
+
+        $table_feedback = 'bf_feedback_35PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_37ps()
+    {
+
+        $table_feedback = 'bf_feedback_36PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_38ps()
+    {
+
+        $table_feedback = 'bf_feedback_37PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_39ps()
+    {
+
+        $table_feedback = 'bf_feedback_38PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_40ps()
+    {
+
+        $table_feedback = 'bf_feedback_39PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_41ps()
+    {
+
+        $table_feedback = 'bf_feedback_40PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_42ps()
+    {
+
+        $table_feedback = 'bf_feedback_41PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_43ps()
+    {
+
+        $table_feedback = 'bf_feedback_42PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_44ps()
+    {
+
+        $table_feedback = 'bf_feedback_43PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_45ps()
+    {
+
+        $table_feedback = 'bf_feedback_44PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_46ps()
+    {
+
+        $table_feedback = 'bf_feedback_45PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_47ps()
+    {
+
+        $table_feedback = 'bf_feedback_46PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_48ps()
+    {
+
+        $table_feedback = 'bf_feedback_47PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_49ps()
+    {
+
+        $table_feedback = 'bf_feedback_48PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_50ps()
+    {
+
+        $table_feedback = 'bf_feedback_49PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
+        $days = $_SESSION['days'];
+        $set = array();
+        $report = array();
+        $y = date('Y');
+        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        foreach ($feedback_data as $row) {
+            if ($days > 10 && $days < 93) {
+                $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
+                $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
+            } elseif ($days <= 10) {
+                $mon = date("d", strtotime($row->datetime)) . '-' . date("F", strtotime($row->datetime));
+            } else {
+                $mon = date("F", strtotime($row->datetime));
+            }
+            // if ($days > 0) {
+            //     if ($days < 183 && $days > 10) {
+            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
+            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
+            //     }
+            // }
+            $param = json_decode($row->dataset);
+            if (!isset($report[$mon])) {
+                $report[$mon]['count'] = 0;
+            }
+            $avg = count($row);
+            if ($avg > 0) {
+                $report[$mon]['count'] = $report[$mon]['count'] + 1;
+            } else {
+                $report[$mon]['count'] = 0;
+            }
+            $report[$mon]['overall'] = count($feedback_data);
+        }
+        $response = array();
+        foreach ($report as $key => $row) {
+            $set = array();
+            $set['label_field'] = $key;
+            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
+            $set['all_detail'] = $report[$key];
+            $response[] = $set;
+        }
+        echo json_encode($response);
+        exit;
+    }
+
+    public function resposnsechart_51ps()
+    {
+
+        $table_feedback = 'bf_feedback_50PSQ3a';
+        $table_patients = 'bf_patients';
+        $sorttime = 'asc';
+        $setup = 'setup';
+        $asc = 'asc';
+        $desc = 'desc';
+        //$dates = get_from_to_date();
+        $feedback_data = $this->audit_model->kpi_feedback($table_patients, $table_feedback, $sorttime, $setup);
         $days = $_SESSION['days'];
         $set = array();
         $report = array();

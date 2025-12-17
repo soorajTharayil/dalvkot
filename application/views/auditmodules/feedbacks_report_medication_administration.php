@@ -31,13 +31,114 @@
 	?>
 
 		<div class="row">
+
+			<!-- Audit details -->
 			<div class="col-lg-12 col-sm-12">
 				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<strong>Audit Details</strong>
+					</div>
+
+					<div class="panel-body" style="font-size:14px; line-height:1.5;">
+
+						<?php
+						// Frequency (case-insensitive by title)
+						$auditTitle = 'Medication administration audit';
+						$norm = mb_strtolower($auditTitle, 'UTF-8');
+
+						$row = $this->db->select('frequency, target')
+							->from('bf_audit_frequency')
+							->where("LOWER(title) = " . $this->db->escape($norm), NULL, FALSE)
+							->limit(1)->get()->row();
+
+						$freq   = $row ? $row->frequency : 'N/A';
+
+
+						// Load all users
+						$users = $this->db->select('user.*, roles.role_id')
+							->join('roles', 'user.user_role = roles.role_id')
+							->order_by('roles.role_id', 'asc')
+							->get('user')->result();
+
+						// Per-user permission check (example feature: AUDIT-FORM1)
+						$custodian_names = [];
+						if (!empty($users)) {
+							foreach ($users as $user) {
+								$this->db->from('user_permissions as UP');
+								$this->db->select('F.feature_name');
+								$this->db->join('features as F', 'UP.feature_id = F.feature_id');
+								$this->db->where('UP.user_id', $user->user_id);
+								$this->db->where('UP.status', 1);
+								$perms = $this->db->get()->result();
+
+								foreach ($perms as $p) {
+									if (strcasecmp(trim($p->feature_name), 'AUDIT-FORM10') === 0) {
+										$custodian_names[] = htmlspecialchars($user->firstname, ENT_QUOTES, 'UTF-8');
+										break;
+									}
+								}
+							}
+						}
+						$custodian_names = array_unique($custodian_names);
+
+						// Last audit date (using your current array shape)
+						$lastDate = (!empty($feedbacktaken) && !empty($feedbacktaken[0]->datet))
+							? date('d-M-Y', strtotime($feedbacktaken[0]->datet))
+							: 'N/A';
+						?>
+
+						<table class="table table-bordered table-condensed" style="margin:0;">
+							<tbody>
+								<tr>
+									<th style="width:240px;">Audit Definition</th>
+									<td>Ensures safe, timely & accurate medication administration with patient rights, infection control & documentation checks as per NABH, JCI, CAHO & WHO safe medication standards.</td>
+								</tr>
+								<tr>
+									<th>Audit Frequency</th>
+									<td>
+										<?= htmlspecialchars($freq, ENT_QUOTES, 'UTF-8'); ?>
+
+									</td>
+								</tr>
+								<tr>
+									<th>Last Audit Date</th>
+									<td><?= $lastDate; ?></td>
+								</tr>
+								<tr>
+									<th>Audit Custodians</th>
+									<td><?= !empty($custodian_names) ? implode(', ', $custodian_names) : 'N/A'; ?></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-lg-12 col-sm-12">
+				<div class="panel panel-default">
+					<div style="float: right; margin-top: 10px; margin-right: 10px;">
+						<span style="font-size:17px"><strong>Download Chart:</strong></span>
+						<span style="margin-right: 10px;">
+							<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
+								onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
+						</span>
+						<span>
+							<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
+								onclick="downloadChartImage()" data-toggle="tooltip"
+								title="Download Chart as Image"></i>
+						</span>
+					</div>
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
 							<?php $text = "In the " .  $dates['pagetitle'] . "," . "a total of " . count($ip_feedbacks_count) . " audits were conducted." ?>
 							<span class="typing-text"></span>
-
+						</span>
+						<span id="audit-report-text" style="display: none;">
+							<?php echo "In the " . $dates['pagetitle'] . ", a total of " . count($ip_feedbacks_count) . " audits were conducted."; ?>
 						</span>
 					</div>
 					<div class="panel-body" style="height:250px;" id="bar">
@@ -50,51 +151,39 @@
 
 			</div>
 
+			<!-- Table start -->
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: right;">
-						<div class="btn-group">
-							<!-- <a class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_download_total_feedback_tooltip'); ?>" href="<?php echo base_url($this->uri->segment(1)) . '/overall_patient_excel' ?>">
+					<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+						<div>
+							<strong>MEDICATION ADMINISTRATION AUDIT - Audit Summary</strong>
+						</div>
+						<div>
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
+								title="Download detailed audit report"
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_administration_audit' ?>">
 								<i class="fa fa-download"></i>
-							</a> -->
+							</a>
 						</div>
 					</div>
 					<div class="panel-body">
 						<table class="medicationadministration table table-striped table-hover table-bordered" cellspacing="0" width="100%">
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
-								<th>Date</th>
+								<th>Audit by</th>
+								<th>Audit Date</th>
 
 								<?php if (allfeedbacks_page('feedback_id') == true) { ?>
 									<th style="white-space: nowrap;"><?php echo lang_loader('ip', 'ip_feedback_id'); ?></th>
 								<?php } ?>
 
+								<th style="white-space: nowrap;"><?php echo lang_loader('ip', 'ip_patient_details'); ?></th>
+								
+								<th>Area</th>
+								<th>Department</th>
+								<th>Attended Doctor</th>
 
-								<th>Patient UHID</th>
-								<th>Have you checked own medications and verified the medication order, including drug name, dose, route, time, and frequency?</th>
-								<th>Did you confirm that the prescribed medicine is written in the order?</th>
-								<th>Is the medication tray stocked with all required articles?</th>
-								<th>Did you perform handwashing or use hand rub before administering the medication to patient?</th>
-								<th>Did you greet and identify the patient using two identification methods?</th>
-								<th>Have you explained the procedure to the patient and verified their allergic status?</th>
-								<th>Did you check and ensure that all medications are present at the patient’s side with patient’s file?</th>
-								<th>Have you verified the medicine for its name, expiry date, color, and texture?</th>
-								<th>Did you explain the drug indication, expected action, reaction, and side effects to the patient or relatives?</th>
-								<th>Is all medicine available for use at the bedside on time?</th>
-								<th>For high-alert drugs, did you ensure verification by one staff nurse before administration?</th>
-								<th>Have you labeled the prepared medicine with the drug name and dilution?</th>
-								<th>Are you administering the medication as per approved techniques?</th>
-								<th>Did you provide privacy for the patient if needed?</th>
-								<th>For multi-dose vials, did you note the date and time of opening on the medicine?</th>
-								<th>Did you check the patency and status of the cannula, including the date and time of cannulation near the site?</th>
-								<th>After IV administration, did you flush the line with normal saline?</th>
-								<th>Are IV medications being run on time, and have they been discontinued or discarded appropriately?</th>
-								<th>After administering the medication, did you reassess the patient for any reactions and ensure their comfort?</th>
-								<th>For oral medications, have you ensured that the patient has taken the medications and that no medicine is left unattended?</th>
-								<th>Have you discarded waste and replaced used articles?</th>
-								<th>Did you perform handwashing or use hand rub after the procedure?</th>
-								<th>Have you recorded the procedure in the documents immediately after completing it?</th>
-								<th>Additional comments</th>
+								<th>View</th>
 
 							</thead>
 							<tbody>
@@ -103,6 +192,10 @@
 									// echo '<pre>';
 									// print_r($r);
 									$param = json_decode($r->dataset);
+
+									// echo '<pre>';
+									// print_r($param);
+									// exit;
 									$id = $r->id;
 									$check = true;
 
@@ -111,6 +204,7 @@
 
 									<tr class="<?php echo ($sl & 1) ? 'odd gradeX' : 'even gradeC'; ?>" onclick="window.location='<?php echo $medication_administration_feedback . $id; ?>';" style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
+										<td><?php echo $param->audit_by; ?></td>
 										<td style="white-space: nowrap;">
 											<?php if ($r->datetime) { ?>
 												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
@@ -123,31 +217,36 @@
 											</td>
 										<?php } ?>
 
-										<td style="overflow: clip;"><?php echo $r->patientid; ?></td>
-										<td><?php echo $r->triple_check; ?></td>
-										<td><?php echo $r->medicine_labelled; ?></td>
-										<td><?php echo $r->file_verified; ?></td>
-										<td><?php echo $r->six_rights; ?></td>
-										<td><?php echo $r->administration_documented; ?></td>
-										<td><?php echo $r->use_xray_barrior; ?></td>
-										<td><?php echo $r->patient_file; ?></td>
-										<td><?php echo $r->verified; ?></td>
-										<td><?php echo $r->indication; ?></td>
-										<td><?php echo $r->medicine; ?></td>
-										<td><?php echo $r->alert; ?></td>
-										<td><?php echo $r->dilution; ?></td>
-										<td><?php echo $r->administering; ?></td>
-										<td><?php echo $r->privacy; ?></td>
-										<td><?php echo $r->vials; ?></td>
-										<td><?php echo $r->cannula; ?></td>
-										<td><?php echo $r->flush; ?></td>
-										<td><?php echo $r->medications; ?></td>
-										<td><?php echo $r->reassess; ?></td>
-										<td><?php echo $r->oral; ?></td>
-										<td><?php echo $r->discarded; ?></td>
-										<td><?php echo $r->handwashing; ?></td>
-										<td><?php echo $r->procedures; ?></td>
-										<td><?php echo $r->comments; ?></td>
+										<td style="overflow: clip;">
+											<?php echo $param->patient_name; ?> (<?php echo $param->mid_no; ?>)
+											<br>
+											Age: <?php echo $param->patient_age; ?>
+											<br>
+											Gender: <?php echo $param->patient_gender; ?>
+										</td>
+
+										<td><?php echo $param->location; ?></td>
+										<td><?php echo $param->department; ?></td>
+										<td><?php echo $param->attended_doctor; ?></td>
+
+
+										<td>
+											<a href="<?php echo $medication_administration_feedback . $id; ?>"
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
+												View Details
+											</a>
+											<?php if (isfeature_active('DELETE-AUDIT') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this audit record?');"
+													title="Delete the audit record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
+										</td>
+
 
 										<?php /* if ($r->error_prone_comment) { ?>
 											<td><?php echo $r->error_prone_comment; ?></td>
@@ -388,4 +487,94 @@
 		resposnsechart(resposnseChart);
 	}, 1000);
 	/*patient_feedback_analysis*/
+</script>
+
+<script>
+	function printChart() {
+		const canvas = document.getElementById('resposnsechart');
+		const dataUrl = canvas.toDataURL();
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		const windowContent = `
+		<html>
+		<head>
+			<title>Print Chart</title>
+			<style>
+				body {
+					text-align: center;
+					margin: 0;
+					padding: 20px;
+					font-family: Arial;
+				}
+				h3, p {
+					margin-bottom: 10px;
+				}
+				img {
+					max-width: 100%;
+					height: auto;
+				}
+			</style>
+		</head>
+		<body>
+			<h3>MEDICATION ADMINISTRATION AUDIT REPORT</h3>
+			<p>${reportText}</p>
+			<img src="${dataUrl}" alt="Chart">
+		</body>
+		</html>
+	`;
+
+		const printWin = window.open('', '', 'width=800,height=600');
+		printWin.document.open();
+		printWin.document.write(windowContent);
+		printWin.document.close();
+		printWin.focus();
+
+		setTimeout(() => {
+			printWin.print();
+			printWin.close();
+		}, 500);
+	}
+</script>
+<script>
+	function downloadChartImage() {
+		const canvas = document.getElementById('resposnsechart');
+		const chartImage = canvas.toDataURL('image/png');
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		// Create new canvas
+		const newCanvas = document.createElement('canvas');
+		const ctx = newCanvas.getContext('2d');
+
+		const width = canvas.width;
+		const height = canvas.height;
+		const extraHeight = 60; // Space for text
+
+		newCanvas.width = width;
+		newCanvas.height = height + extraHeight;
+
+		// White background
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+		// Draw the report text
+		ctx.fillStyle = '#000';
+		ctx.font = '20px Arial';
+		ctx.fillText(reportText, 10, 30);
+
+		// Draw the chart image after it loads
+		const img = new Image();
+		img.onload = function() {
+			ctx.drawImage(img, 0, extraHeight);
+
+			// Create downloadable image
+			const finalImage = newCanvas.toDataURL('image/png');
+			const link = document.createElement('a');
+			link.href = finalImage;
+			link.download = 'MEDICATION ADMINISTRATION AUDIT REPORT.png';
+			link.click();
+		};
+		img.src = chartImage;
+	}
 </script>

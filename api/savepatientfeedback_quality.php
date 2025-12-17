@@ -10,6 +10,7 @@ $data = json_decode($d, true);
 if (count($data) > 1) {
     date_default_timezone_set('Asia/Kolkata');
     $data['name'] = strtoupper($data['name']);
+$today = date('Y-m-d');
     
     // Convert month name to number
     $monthNumber = date('m', strtotime($month));  // Converts "January" to "01", etc.
@@ -19,7 +20,7 @@ if (count($data) > 1) {
     $currentTime = date('H:i:s');  // Get the current time
     
     // Construct `datet` and `datetime`
-    $datet = $year . '-' . $monthNumber . '-'. $currentDay;  // Constructs the date as "YYYY-MM-01"
+    //$datet = $year . '-' . $monthNumber . '-'. $currentDay;  // Constructs the date as "YYYY-MM-01"
     $datetime = $year . '-' . $monthNumber . '-' . $currentDay . ' ' . $currentTime;  // Constructs the datetime as "YYYY-MM-DD HH:MM:SS"
     
 
@@ -41,7 +42,7 @@ if (count($data) > 1) {
 
 
    $query = 'INSERT INTO `bf_feedback_1PSQ3a` (`name`,`email`,`patientid`,`mobile`,`time_taken_initial_assessment`, `number_of_admission`, `average_time_taken_initial_assessment`, `bench_mark_time`, `data_analysis`,`corrective_action`,`preventive_action`, `dataset`,`datet`,`datetime`) 
-  VALUES ("' . $name . '","' . $email . '","' . $patientid . '","' . $contactnumber . '","' . $initial_assessment_total . '","' . $total_admission . '","' . $calculatedResult . '","' . $benchmark . '","' . $dataAnalysis . '","' . $correctiveAction . '","' . $preventiveAction . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $datet . '","' . $datetime . '")';
+  VALUES ("' . $name . '","' . $email . '","' . $patientid . '","' . $contactnumber . '","' . $initial_assessment_total . '","' . $total_admission . '","' . $calculatedResult . '","' . $benchmark . '","' . $dataAnalysis . '","' . $correctiveAction . '","' . $preventiveAction . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $today . '","' . $datetime . '")';
 
   $result = mysqli_query($con, $query);
   $fid = mysqli_insert_id($con);

@@ -116,93 +116,197 @@ $tables = [
 	'bf_feedback_30PSQ3d',
 	'bf_feedback_31PSQ3d',
 	'bf_feedback_32PSQ3d',
-	'bf_feedback_PSQ3a'
+	'bf_feedback_PSQ3a',
+	'bf_feedback_33PSQ3a',
+	'bf_feedback_34PSQ3a',
+	'bf_feedback_35PSQ3a',
+	'bf_feedback_36PSQ3a',
+	'bf_feedback_37PSQ3a',
+	'bf_feedback_38PSQ3a',
+	'bf_feedback_39PSQ3a',
+	'bf_feedback_40PSQ3a',
+	'bf_feedback_41PSQ3a',
+	'bf_feedback_42PSQ3a',
+	'bf_feedback_43PSQ3a',
+	'bf_feedback_44PSQ3a',
+	'bf_feedback_45PSQ3a',
+	'bf_feedback_46PSQ3a',
+	'bf_feedback_47PSQ3a',
+	'bf_feedback_48PSQ3a',
+	'bf_feedback_49PSQ3a',
+	'bf_feedback_50PSQ3a',
+
 
 ];
+
+$kpi_feature_map = [];
+foreach ($tables as $index => $tbl) {
+	$kpi_feature_map['QUALITY-KPI' . ($index + 1)] = $tbl;
+}
+
+
+$fdate = date('Y-m-d', strtotime($_SESSION['from_date']) + 24 * 60 * 60);
+$tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+
+
+$user_id = $this->session->userdata('user_id');
+$this->db->select('firstname');
+$this->db->from('user');
+$this->db->where('user_id', $user_id);
+$query = $this->db->get();
+$user = $query->row();
+$current_user_name = !empty($user) ? trim($user->firstname) : '';
+
+
+$feature = $this->session->userdata('feature');
+
 
 $kpi_conducted_count = 0;
 $total_kpis = 0;
 
-foreach ($tables as $table) {
-	// Check if the table exists
-	if ($this->db->table_exists($table)) {
-		$total_kpis++; // Increment total KPIs only if the table exists
 
-		// Count the rows in the existing table
-		$query = $this->db->query("SELECT COUNT(*) as row_count FROM $table");
-		$result = $query->row();
 
-		if ($result->row_count > 0) {
-			$kpi_conducted_count++;
+foreach ($feature as $key => $value) {
+	if (strpos($key, 'QUALITY-KPI') !== false && $value === true) {
+
+
+		if (isset($kpi_feature_map[$key])) {
+			$table_name = $kpi_feature_map[$key];
+
+			if ($this->db->table_exists($table_name)) {
+				$total_kpis++;
+
+				$this->db->from($table_name);
+				// $this->db->where('datetime >=', $tdate);
+				// $this->db->where('datetime <=', $fdate);
+
+
+				// if (!empty($current_user_name)) {
+				//     $this->db->where('name', $current_user_name);
+				// }
+
+				$row_count = $this->db->count_all_results();
+
+				if ($row_count > 0) {
+					$kpi_conducted_count++;
+				}
+			}
 		}
 	}
 }
 
-//$total_kpis =37;
+
 $remaining_kpi = $total_kpis - $kpi_conducted_count;
-$completion_rate = ($kpi_conducted_count / $total_kpis) * 100;
+$completion_rate = ($total_kpis > 0)
+	? round(($kpi_conducted_count / $total_kpis) * 100, 2)
+	: 0;
 
 ?>
 
 <?php
 
-$table2 = [
-	'bf_feedback_xray_wait_time',
-	'bf_feedback_vap_prevention',
-	'bf_feedback_usg_wait_time',
-	'bf_feedback_urinary_catheter',
-	'bf_feedback_toilet_cleaning',
-	'bf_feedback_tat_blood',
-	'bf_feedback_surgical_safety',
-	'bf_feedback_ssi_bundle',
-	'bf_feedback_safety_inspection',
-	'bf_feedback_room_cleaning',
-	'bf_feedback_return_to_icu',
-	'bf_feedback_return_to_i',
-	'bf_feedback_return_to_emr',
-	'bf_feedback_return_to_ed',
-	'bf_feedback_prescriptions',
-	'bf_feedback_ppe_audit',
-	'bf_feedback_other_area_cleaning',
-	'bf_feedback_nurse_patients_ratio_ward',
-	'bf_feedback_nurse_patients_ratio',
+$audit_array = [
 	'bf_feedback_mrd_audit',
-	'bf_feedback_mock_drill',
+	'bf_feedback_ppe_audit',
+	'bf_feedback_lab_safety_audit',
+	'bf_feedback_consultation_time',
+	'bf_feedback_lab_wait_time',
+	'bf_feedback_xray_wait_time',
+	'bf_feedback_usg_wait_time',
+	'bf_feedback_ctscan_time',
+	'bf_feedback_surgical_safety',
 	'bf_feedback_medicine_dispense',
 	'bf_feedback_medication_administration',
-	'bf_feedback_lab_wait_time',
-	'bf_feedback_hand_hygiene',
 	'bf_feedback_handover',
-	'bf_feedback_ctscan_time',
-	'bf_feedback_consultation_time',
+	'bf_feedback_prescriptions',
+	'bf_feedback_hand_hygiene',
+	'bf_feedback_tat_blood',
+	'bf_feedback_nurse_patients_ratio',
+	'bf_feedback_return_to_i',
+	'bf_feedback_return_to_icu',
+	'bf_feedback_return_to_ed',
+	'bf_feedback_return_to_emr',
+	'bf_feedback_mock_drill',
 	'bf_feedback_code_originals',
-	'bf_feedback_central_maintenance',
-	'bf_feedback_central_line_insert',
+	'bf_feedback_safety_inspection',
+	'bf_feedback_nurse_patients_ratio_ward',
+	'bf_feedback_vap_prevention',
 	'bf_feedback_catheter_insert',
+	'bf_feedback_ssi_bundle',
+	'bf_feedback_urinary_catheter',
+	'bf_feedback_central_line_insert',
+	'bf_feedback_central_maintenance',
+	'bf_feedback_room_cleaning',
+	'bf_feedback_other_area_cleaning',
+	'bf_feedback_toilet_cleaning',
 	'bf_feedback_canteen_audit',
+
 ];
+
+// Mapping
+$audit_feature_map = [];
+foreach ($audit_array as $index => $table_name) {
+	$audit_feature_map['AUDIT-FORM' . ($index + 1)] = $table_name;
+}
+
+
+$fdate = date('Y-m-d', strtotime($_SESSION['from_date']) + 24 * 60 * 60);
+$tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+
+//Get current user firstname from DB
+$user_id = $this->session->userdata('user_id');
+$this->db->select('firstname');
+$this->db->from('user');
+$this->db->where('user_id', $user_id);
+$query = $this->db->get();
+$user = $query->row();
+
+$current_user_name = '';
+if (!empty($user)) {
+	$current_user_name = trim($user->firstname);
+}
+
+
+$feature = $this->session->userdata('feature');
+
 
 $audit_conducted_count = 0;
 $total_audits = 0;
 
-foreach ($table2 as $table) {
-	// Check if the table exists
-	if ($this->db->table_exists($table)) {
-		$total_audits++; // Increment total KPIs only if the table exists
+//Loop only permitted audits
+foreach ($feature as $key => $value) {
+	if (strpos($key, 'AUDIT-FORM') !== false && $value === true) {
 
-		// Count the rows in the existing table
-		$query = $this->db->query("SELECT COUNT(*) as row_count FROM $table");
-		$result = $query->row();
+		if (isset($audit_feature_map[$key])) {
+			$table_name = $audit_feature_map[$key];
 
-		if ($result->row_count > 0) {
-			$audit_conducted_count++;
+			if ($this->db->table_exists($table_name)) {
+				$total_audits++;
+
+				$this->db->from($table_name);
+				$this->db->where('datetime >=', $tdate);
+				$this->db->where('datetime <=', $fdate);
+
+				//Match dataset.audit_by = user's firstname
+				// if (!empty($current_user_name)) {
+				//     $this->db->where("JSON_UNQUOTE(JSON_EXTRACT(dataset, '$.audit_by')) =", $current_user_name);
+				// }
+
+				$row_count = $this->db->count_all_results();
+
+				if ($row_count > 0) {
+					$audit_conducted_count++;
+				}
+			}
 		}
 	}
 }
 
-//$total_kpis =37;
+// ✅ Step 7: Calculate summary
 $remaining_audit = $total_audits - $audit_conducted_count;
-$completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
+$completion_audit_rate = ($total_audits > 0)
+	? round(($audit_conducted_count / $total_audits) * 100, 2)
+	: 0;
 
 ?>
 
@@ -257,8 +361,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
 												</div>
-												<div class="icon">
-													<i class="fa fa-comments-o"></i>
+												<div class="icon" style="margin-top:7px;">
+													<i class="fa fa-comments fa-3x"></i>
 												</div>
 												<a href="<?php echo $adf_link_feedback_report; ?>"
 													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
@@ -279,7 +383,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_psat'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-star-half-o"></i>
 												</div>
 												<a href="<?php echo $adf_link_psat_page; ?>"
@@ -302,7 +406,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_nps'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-tachometer"></i>
 												</div>
 												<a href="<?php echo $adf_link_nps_page; ?>"
@@ -324,7 +428,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $adf_link_ticket_dashboard; ?>"
@@ -376,8 +480,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
 												</div>
-												<div class="icon">
-													<i class="fa fa-comments-o"></i>
+												<div class="icon" style="margin-top:7px;">
+													<i class="fa fa-comments"></i>
 												</div>
 												<a href="<?php echo $ip_link_feedback_report; ?>"
 													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
@@ -399,7 +503,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_psat'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-star-half-o"></i>
 												</div>
 												<a href="<?php echo $ip_link_psat_page; ?>"
@@ -422,7 +526,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_nps'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-tachometer"></i>
 												</div>
 												<a href="<?php echo $ip_link_nps_page; ?>"
@@ -439,12 +543,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											title="<?php echo $ip_tickets_tool; ?>">
 											<div class="statistic-box">
 												<h2><span class="count-number">
-														<?php echo count($ip_tickets_count); ?>
+														<?php echo $ip_department['alltickets']; ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $ip_link_ticket_dashboard; ?>"
@@ -497,7 +601,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $int_link_alltickets; ?>"
@@ -519,7 +623,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $int_link_opentickets; ?>"
@@ -542,8 +646,9 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">
-													<?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
-												<div class="icon">
+													<?php echo lang_loader('global', 'global_addressed_complaints'); ?>
+												</div>
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $int_link_addressedtickets; ?>"
@@ -566,7 +671,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $int_link_closedtickets; ?>"
@@ -616,8 +721,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
 												</div>
-												<div class="icon">
-													<i class="fa fa-comments-o"></i>
+												<div class="icon" style="margin-top:7px;">
+													<i class="fa fa-comments fa-3x"></i>
 												</div>
 												<a href="<?php echo $pdf_link_feedback_report; ?>"
 													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
@@ -639,7 +744,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_psat'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-star-half-o"></i>
 												</div>
 												<a href="<?php echo $pdf_link_psat_page; ?>"
@@ -662,7 +767,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_nps'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-tachometer"></i>
 												</div>
 												<a href="<?php echo $pdf_link_nps_page; ?>"
@@ -684,7 +789,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $pdf_link_ticket_dashboard; ?>"
@@ -735,8 +840,8 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_feedbacks'); ?>
 												</div>
-												<div class="icon">
-													<i class="fa fa-comments-o"></i>
+												<div class="icon" style="margin-top:7px;">
+													<i class="fa fa-comments fa-3x"></i>
 												</div>
 												<a href="<?php echo $op_link_feedback_report; ?>"
 													style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a>
@@ -756,7 +861,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_psat'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-star-half-o"></i>
 												</div>
 												<a href="<?php echo $op_link_psat_page; ?>"
@@ -777,7 +882,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_nps'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-tachometer"></i>
 												</div>
 												<a href="<?php echo $op_link_nps_page; ?>"
@@ -800,7 +905,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $op_link_ticket_dashboard; ?>"
@@ -834,15 +939,16 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<?php if (ismodule_active('ISR') === true && (isfeature_active('ISR-REQUESTS-DASHBOARD') === true || isfeature_active('REQUESTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
 											<a class="btn btn-success btn-sm" target="_blank"
-												style="margin-right: 10px; background: #62c52d; border:none; border-radius: 4px; font-size: 13px;"
-												data-placement="bottom" data-toggle="tooltip" title="Raise requests" href=""
-												style="margin-right: 10px;">
+												style="margin-right: 10px; background: #62c52d; border: none; border-radius: 4px; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Raise requests"
+												href="<?php echo base_url('isrf?user_id=' . $this->session->userdata['user_id']); ?>">
 												Raise requests
 											</a>
+
+
 											<a href="<?php echo base_url(); ?>isr/ticket_dashboard" class="btn btn-primary btn-sm"
 												style="font-size:13px; float: right; margin-right: 4px; margin-top: 1px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a>
 										</div>
-
 									<?php } ?>
 								</span>
 						</div>
@@ -862,7 +968,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $esr_link_alltickets; ?>"
@@ -884,7 +990,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $esr_link_opentickets; ?>"
@@ -907,7 +1013,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $esr_link_addressedtickets; ?>"
@@ -930,7 +1036,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $esr_link_closedtickets; ?>"
@@ -960,15 +1066,17 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								title="Click here for detailed analysis of incidents" style="color: inherit;"
 								href="<?php echo base_url(); ?>incident/ticket_dashboard">
 								<span>
-									<h3>INCIDENTS</h3>
+									<h3>INCIDENT MANAGER</h3>
 									<?php if (ismodule_active('INCIDENT') === true && (isfeature_active('INC-INCIDENTS-DASHBOARD') === true || isfeature_active('INCIDENTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
 											<a class="btn btn-success btn-sm" target="_blank"
-												style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;"
-												data-placement="bottom" data-toggle="tooltip" title="Report incidents" href=""
-												style="margin-right: 10px;">
+												style="margin-right: 10px; background: #62c52d; border-radius: 4px; border: none; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Report incidents"
+												href="<?php echo base_url('inn?user_id=' . $this->session->userdata['user_id']); ?>">
 												Report incidents
 											</a>
+
+
 											<a href="<?php echo base_url(); ?>incident/ticket_dashboard"
 												class="btn btn-primary btn-sm"
 												style="font-size:13px; float: right; margin-right: 4px; margin-top: 1px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a>
@@ -989,7 +1097,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_inc'); ?></div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $incident_link_alltickets; ?>"
@@ -1010,7 +1118,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_inc'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $incident_link_opentickets; ?>"
@@ -1022,7 +1130,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 								</div>
 							<?php } ?>
 
-							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('ADDRESSED-INCIDENTS') === true) { ?>
+							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('DESCRIBING-INCIDENTS') === true) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;" data-placement="top" data-toggle="tooltip"
@@ -1032,7 +1140,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<?php echo count($incident_addressed_tickets); ?>
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
-												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?>
+												<div class="small">Described Incidents
 												</div>
 												<div class="icon">
 													<i class="fa fa-reply"></i>
@@ -1056,7 +1164,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_inc'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $incident_link_closedtickets; ?>"
@@ -1109,7 +1217,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $grievance_link_alltickets; ?>"
@@ -1131,7 +1239,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $grievance_link_opentickets; ?>"
@@ -1153,8 +1261,9 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">
-													<?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
-												<div class="icon">
+													<?php echo lang_loader('global', 'global_addressed_grievance'); ?>
+												</div>
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $grievance_link_addressedtickets; ?>"
@@ -1177,7 +1286,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $grievance_link_closedtickets; ?>"
@@ -1227,7 +1336,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">Total KPIs</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-tachometer"></i>
 												</div>
 												<a href="<?php echo base_url(); ?>quality/quality_welcome_page"
@@ -1250,7 +1359,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">Total KPIs Recorded</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-square-o"></i>
 												</div>
 												<!-- <a href="<?php echo $ip_link_psat_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
@@ -1273,7 +1382,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">Total KPIs Pending</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-hourglass-o"></i>
 												</div>
 												<!-- <a href="<?php echo $ip_link_psat_page; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
@@ -1295,7 +1404,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">KPI Recording Rate</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-line-chart"></i>
 												</div>
 												<!-- <a href="<?php echo $ip_link_ticket_dashboard; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
@@ -1345,7 +1454,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">Total Audits</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-list-alt"></i>
 												</div>
 												<a href="<?php echo base_url(); ?>audit/audit_welcome_page"
@@ -1369,7 +1478,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">Total Audits Initiated</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle"></i>
 												</div>
 
@@ -1392,7 +1501,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">Total Audits Pending</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-hourglass-o"></i>
 												</div>
 
@@ -1415,7 +1524,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">Audit Initiation Ratio</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-line-chart"></i>
 												</div>
 
@@ -1485,7 +1594,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<i class="fa fa-info-circle" aria-hidden="true"></i>
 													</a> -->
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-hospital-o"></i>
 												</div>
 												<a href="<?php echo base_url(); ?>asset/alltickets"
@@ -1563,7 +1672,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<i class="fa fa-info-circle" aria-hidden="true"></i>
 													</a> -->
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-calendar-check-o"></i>
 												</div>
 
@@ -1640,7 +1749,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</a> -->
 												</div>
 
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-calendar-check-o"></i>
 												</div>
 												<!-- <a href="<?php echo base_url(); ?>asset/asset_warranty_reports?status=Warranty+Active" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
@@ -1715,7 +1824,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<i class="fa fa-info-circle" aria-hidden="true"></i>
 													</a> -->
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-calendar-check-o"></i>
 												</div>
 												<!-- <a href="<?php echo base_url(); ?>asset/asset_contract_reports?status=Contract+Active&amc_status=all" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
@@ -1773,10 +1882,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $adf_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $adf_link_alltickets; ?>"
@@ -1793,13 +1903,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $adf_department['opentickets']; ?></span>
+												<h2><span class="count-number"><?php echo $adf_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $adf_link_opentickets; ?>"
@@ -1818,10 +1928,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $adf_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $adf_link_addressedtickets; ?>"
@@ -1840,9 +1951,10 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $adf_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $adf_link_closedtickets; ?>"
@@ -1892,10 +2004,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $ip_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $ip_link_alltickets; ?>"
@@ -1913,10 +2026,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $ip_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $ip_link_opentickets; ?>"
@@ -1936,10 +2050,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $ip_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $ip_link_addressedtickets; ?>"
@@ -1956,12 +2071,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $ip_department['closedtickets']; ?></span>
+												<h2><span class="count-number"><?php echo $ip_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $ip_link_closedtickets; ?>"
@@ -2008,10 +2123,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $int_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $int_link_alltickets; ?>"
@@ -2029,13 +2145,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $int_department['opentickets']; ?></span>
+												<h2><span class="count-number"><?php echo $int_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $int_link_opentickets; ?>"
@@ -2056,10 +2172,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $int_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small">
-													<?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
-												<div class="icon">
+													<?php echo lang_loader('global', 'global_addressed_complaints'); ?>
+												</div>
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $int_link_addressedtickets; ?>"
@@ -2078,10 +2196,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $int_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $int_link_closedtickets; ?>"
@@ -2131,10 +2250,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $pdf_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $pdf_link_alltickets; ?>"
@@ -2150,13 +2270,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $pdf_department['opentickets']; ?></span>
+												<h2><span class="count-number"><?php echo $pdf_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $pdf_link_opentickets; ?>"
@@ -2176,10 +2296,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $pdf_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $pdf_link_addressedtickets; ?>"
@@ -2199,9 +2320,10 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $pdf_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $pdf_link_closedtickets; ?>"
@@ -2247,10 +2369,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $op_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $op_link_alltickets; ?>"
@@ -2268,10 +2391,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $op_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $op_link_opentickets; ?>"
@@ -2291,10 +2415,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $op_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $op_link_addressedtickets; ?>"
@@ -2312,12 +2437,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $op_department['closedtickets']; ?></span>
+												<h2><span class="count-number"><?php echo $op_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $op_link_closedtickets; ?>"
@@ -2352,11 +2477,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<?php if (ismodule_active('ISR') === true && (isfeature_active('ISR-REQUESTS-DASHBOARD') === true || isfeature_active('REQUESTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
 											<a class="btn btn-success btn-sm" target="_blank"
-												style="margin-right: 10px; background: #62c52d; border:none; border-radius: 4px; font-size: 13px;"
-												data-placement="bottom" data-toggle="tooltip" title="Raise requests" href=""
-												style="margin-right: 10px;">
+												style="margin-right: 10px; background: #62c52d; border: none; border-radius: 4px; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Raise requests"
+												href="<?php echo base_url('isrf?user_id=' . $this->session->userdata['user_id']); ?>">
 												Raise requests
 											</a>
+
+
 											<?php if (ismodule_active('ISR') === true && isfeature_active('REQUESTS-DASHBOARD') === true) { ?><a
 													href="<?php echo base_url(); ?>isr/department_tickets"
 													style="float: right;margin-top: 0px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
@@ -2373,10 +2500,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $esr_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $esr_link_alltickets; ?>"
@@ -2393,13 +2521,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $esr_department['opentickets']; ?></span>
+												<h2><span class="count-number"><?php echo $esr_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $esr_link_opentickets; ?>"
@@ -2419,10 +2547,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $esr_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $esr_link_addressedtickets; ?>"
@@ -2444,10 +2573,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $esr_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $esr_link_closedtickets; ?>"
@@ -2474,27 +2604,27 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="overflow:auto;">
 						<div class="panel-heading">
-
 							<a data-toggle="tooltip" data-placement="bottom"
 								title="Click here for detailed analysis of incidents" style="color: inherit;"
-								href="<?php echo base_url(); ?>incident/department_tickets">
+								href="<?php echo base_url(); ?>incident/ticket_dashboard">
 								<span>
-									<h3><?php echo lang_loader('global', 'global_inc'); ?></h3>
+									<h3>INCIDENT MANAGER</h3>
 									<?php if (ismodule_active('INCIDENT') === true && (isfeature_active('INC-INCIDENTS-DASHBOARD') === true || isfeature_active('INCIDENTS-DASHBOARD') === true)) { ?>
 										<div style="float: right; margin-top: -26px">
 											<a class="btn btn-success btn-sm" target="_blank"
-												style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;"
-												data-placement="bottom" data-toggle="tooltip" title="Report incidents" href=""
-												style="margin-right: 10px;">
+												style="margin-right: 10px; background: #62c52d; border-radius: 4px; border: none; font-size: 13px;"
+												data-placement="bottom" data-toggle="tooltip" title="Report incidents"
+												href="<?php echo base_url('inn?user_id=' . $this->session->userdata['user_id']); ?>">
 												Report incidents
 											</a>
-											<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?><a
-													href="<?php echo base_url(); ?>incident/department_tickets"
-													style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+
+
+											<a href="<?php echo base_url(); ?>incident/ticket_dashboard"
+												class="btn btn-primary btn-sm"
+												style="font-size:13px; float: right; margin-right: 4px; margin-top: 1px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a>
 										</div>
 									<?php } ?>
 								</span>
-							</a>
 						</div>
 						<div class="panel-body" style="height:120px; max-height:120px;">
 							<?php if (ismodule_active('INCIDENT') === true && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
@@ -2509,7 +2639,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_inc'); ?></div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $incident_link_alltickets; ?>"
@@ -2530,7 +2660,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_inc'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $incident_link_opentickets; ?>"
@@ -2556,7 +2686,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $incident_link_addressedtickets; ?>"
@@ -2578,7 +2708,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_inc'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $incident_link_closedtickets; ?>"
@@ -2631,7 +2761,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $grievance_link_alltickets; ?>"
@@ -2653,7 +2783,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $grievance_link_opentickets; ?>"
@@ -2677,8 +2807,9 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">
-													<?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
-												<div class="icon">
+													<?php echo lang_loader('global', 'global_addressed_grievance'); ?>
+												</div>
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $grievance_link_addressedtickets; ?>"
@@ -2701,7 +2832,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $grievance_link_closedtickets; ?>"
@@ -2770,7 +2901,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<i class="fa fa-info-circle" aria-hidden="true"></i>
 													</a> -->
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-hospital-o"></i>
 												</div>
 												<a href="<?php echo base_url(); ?>asset/alltickets"
@@ -2846,7 +2977,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<i class="fa fa-info-circle" aria-hidden="true"></i>
 													</a> -->
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-calendar-check-o"></i>
 												</div>
 
@@ -2920,7 +3051,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</a> -->
 												</div>
 
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-calendar-check-o"></i>
 												</div>
 												<!-- <a href="<?php echo base_url(); ?>asset/asset_warranty_reports?status=Warranty+Active" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
@@ -2992,7 +3123,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														<i class="fa fa-info-circle" aria-hidden="true"></i>
 													</a> -->
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-calendar-check-o"></i>
 												</div>
 												<!-- <a href="<?php echo base_url(); ?>asset/asset_contract_reports?status=Contract+Active&amc_status=all" style="float: right;    margin-top: -9px;"><?php echo lang_loader('global', 'global_view_list'); ?></a> -->
@@ -3042,10 +3173,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $adf_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $adf_link_alltickets; ?>"
@@ -3062,13 +3194,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $adf_department['opentickets']; ?></span>
+												<h2><span class="count-number"><?php echo $adf_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $adf_link_opentickets; ?>"
@@ -3087,10 +3219,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $adf_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $adf_link_addressedtickets; ?>"
@@ -3109,9 +3242,10 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $adf_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $adf_link_closedtickets; ?>"
@@ -3161,10 +3295,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $ip_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $ip_link_alltickets; ?>"
@@ -3182,10 +3317,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $ip_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $ip_link_opentickets; ?>"
@@ -3205,10 +3341,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $ip_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $ip_link_addressedtickets; ?>"
@@ -3225,12 +3362,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $ip_department['closedtickets']; ?></span>
+												<h2><span class="count-number"><?php echo $ip_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $ip_link_closedtickets; ?>"
@@ -3277,10 +3414,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $int_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $int_link_alltickets; ?>"
@@ -3298,13 +3436,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $int_department['opentickets']; ?></span>
+												<h2><span class="count-number"><?php echo $int_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $int_link_opentickets; ?>"
@@ -3325,10 +3463,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $int_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small">
-													<?php echo lang_loader('global', 'global_addressed_complaints'); ?> </div>
-												<div class="icon">
+													<?php echo lang_loader('global', 'global_addressed_complaints'); ?>
+												</div>
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $int_link_addressedtickets; ?>"
@@ -3347,10 +3487,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $int_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_complaints'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $int_link_closedtickets; ?>"
@@ -3400,10 +3541,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $pdf_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $pdf_link_alltickets; ?>"
@@ -3419,13 +3561,13 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $pdf_department['opentickets']; ?></span>
+												<h2><span class="count-number"><?php echo $pdf_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $pdf_link_opentickets; ?>"
@@ -3445,10 +3587,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $pdf_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $pdf_link_addressedtickets; ?>"
@@ -3468,9 +3611,10 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $pdf_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $pdf_link_closedtickets; ?>"
@@ -3516,10 +3660,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $op_department['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $op_link_alltickets; ?>"
@@ -3537,10 +3682,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 											<div class="statistic-box">
 												<h2><span class="count-number"><?php echo $op_department['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $op_link_opentickets; ?>"
@@ -3560,10 +3706,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $op_department['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_tickets'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $op_link_addressedtickets; ?>"
@@ -3581,12 +3728,12 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 									<div class="panel panel-bd">
 										<div class="panel-body" style="height: 100px;">
 											<div class="statistic-box">
-												<h2><span
-														class="count-number"><?php echo $op_department['closedtickets']; ?></span>
+												<h2><span class="count-number"><?php echo $op_department['closedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'Closed Tickets'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $op_link_closedtickets; ?>"
@@ -3635,10 +3782,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $isr_department_head_user_count['alltickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $esr_link_alltickets; ?>"
@@ -3658,9 +3806,10 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $isr_department_head_user_count['opentickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small">Assigned Requests </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $esr_link_opentickets; ?>"
@@ -3680,10 +3829,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $isr_department_head_user_count['addressedtickets']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $esr_link_addressedtickets; ?>"
@@ -3705,10 +3855,11 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 												<h2><span
 														class="count-number"><?php echo $isr_department_head_user_count['closedticket']; ?></span>
 													<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-														</i></span></h2>
+														</i></span>
+												</h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_requests'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $esr_link_closedtickets; ?>"
@@ -3769,7 +3920,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_inc'); ?></div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $incident_link_alltickets; ?>"
@@ -3790,7 +3941,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_inc'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $incident_link_opentickets; ?>"
@@ -3816,7 +3967,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_addressed_inc'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $incident_link_addressedtickets; ?>"
@@ -3838,7 +3989,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_inc'); ?> </div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $incident_link_closedtickets; ?>"
@@ -3891,7 +4042,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_total_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-ticket"></i>
 												</div>
 												<a href="<?php echo $grievance_link_alltickets; ?>"
@@ -3913,7 +4064,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_open_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-plus"></i>
 												</div>
 												<a href="<?php echo $grievance_link_opentickets; ?>"
@@ -3937,8 +4088,9 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 													</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 														</i></span></h2>
 												<div class="small">
-													<?php echo lang_loader('global', 'global_addressed_grievance'); ?> </div>
-												<div class="icon">
+													<?php echo lang_loader('global', 'global_addressed_grievance'); ?>
+												</div>
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-reply"></i>
 												</div>
 												<a href="<?php echo $grievance_link_addressedtickets; ?>"
@@ -3961,7 +4113,7 @@ $completion_audit_rate = ($audit_conducted_count / $total_audits) * 100;
 														</i></span></h2>
 												<div class="small"><?php echo lang_loader('global', 'global_closed_grievance'); ?>
 												</div>
-												<div class="icon">
+												<div class="icon" style="margin-top:7px;">
 													<i class="fa fa-check-circle-o"></i>
 												</div>
 												<a href="<?php echo $grievance_link_closedtickets; ?>"

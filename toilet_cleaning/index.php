@@ -12,7 +12,7 @@
 
 <head>
 
-  <title>Efeedor Feedback System</title>
+  <title>Quality Audit Management Software - Efeedor Healthcare Experience Management Platform</title>
 
   <meta charset="utf-8">
 
@@ -60,9 +60,9 @@
 
     <!-- Add a button to trigger the modal -->
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}}
-      <i class="fa fa-language" aria-hidden="true"></i>
-    </button>
+    <!--  {{type2}}-->
+    <!--  <i class="fa fa-language" aria-hidden="true"></i>-->
+    <!--</button>-->
     <!-- dropdown for three language end -->
 
   </nav>
@@ -192,7 +192,114 @@
               <form id="msform">
 
                 <!-- PATIENT INFORMATION page start -->
+
                 <fieldset ng-show="step0 == true">
+
+                  <!--<h4><strong>AUDIT & PATIENT INFORMATION</strong></h4>-->
+                  <h4 style="font-size:22px;"><strong>{{lang.patient_info}}</strong></h4>
+
+                  <!--<p>Fill all form field to go to next step</p>-->
+                  <br>
+                  <div class="form-card">
+
+                    <div class="row">
+
+                      <!-- Audit Type -->
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
+                        <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6>
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled/>
+                          </span>
+                        </div>
+
+
+
+                        <!-- Date of Audit -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
+                            {{lang.dtandtym}}<sup style="color:red">*</sup><br>
+                            <p style="font-size: 14px; margin: 4px 0 0 0; color:#6c757d;">
+                              {{lang.format}}
+                            </p>
+                          </span>
+
+                          <!-- Input -->
+                          <div style="position: relative; width: 100%;">
+                            <input class="form-control" ng-model="feedback.audit_date" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
+                              autocomplete="off" onclick="this.showPicker && this.showPicker()"
+                              onfocus="this.showPicker && this.showPicker()"
+                              style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
+                          </div>
+                        </div>
+
+
+
+                        <!-- Audit Short Name -->
+
+                        <!--<div class="form-group">-->
+                        <!--  <span class="addon" style="font-size: 18px; margin-bottom: 6px;">{{lang.stname}}</span>-->
+                        <!--  <span class="has-float-label" style="margin-top: 8px;">-->
+                        <!--    <input class="form-control" type="text" ng-model="feedback.audit_shortname" placeholder="Enter short name" maxlength="30" autocomplete="off" />-->
+                        <!--  </span>-->
+                        <!--</div>-->
+
+                        <!-- Audit By -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
+                          </span>
+                        </div>
+                        <!-- Location -->
+                        <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
+                          click-outside="locationOpen=false">
+
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup
+                              style="color: red;">*</sup></span>
+
+                          <div style="margin-top:8px; position:relative;">
+                            <!-- Trigger -->
+                            <div class="form-control" ng-click="locationOpen=!locationOpen">
+                              {{ feedback.location || 'Select Area' }}
+                            </div>
+
+                            <!-- Dropdown panel -->
+                            <div ng-show="locationOpen"
+                              style="position:absolute; z-index:1000; left:0; right:0; margin-top:4px; background:#fff; border:1px solid #ced4da; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
+                              <input class="form-control" placeholder="Search Area" ng-model="locationSearch"
+                                style="margin-bottom:8px;" autofocus />
+
+                              <div style="max-height:200px; overflow:auto;">
+                                <div ng-repeat="x in area | filter:locationSearch"
+                                  ng-if="x.title !== 'ALL'"
+                                  ng-click="selectLocation(x.title)"
+                                  style="padding:8px; cursor:pointer;">
+                                  {{x.title}}
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        
+
+
+                        <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
+
+                        <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
+
+                </fieldset>
+
+
+                
+                <fieldset ng-show="step1 == true">
 
                   <h4><strong>{{lang.patient_info}}</strong></h4>
 
@@ -204,22 +311,6 @@
 
 
                     <div class="col-xs-12 col-sm-12 col-md-12">
-
-                        <div class="form-group">
-
-                          <span class="addon" style="font-size: 16px;">{{lang.area}}<sup style="color:red">*</sup></span>
-
-                          <span class="has-float-label">
-
-                            <input class="form-control" placeholder="{{lang.area_tool}}" maxlength="20" type="text" id="contactnumber" ng-required="true" ng-model="feedback.area" autocomplete="off" style="padding-top:0px;" />
-
-                            <label for="contactnumber"></label>
-
-                          </span>
-
-                        </div>
-
-                      </div>
 
 
                       <!-- <p>&nbsp;</p> -->
@@ -243,6 +334,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.identification_details_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vital_signs}}</p>
@@ -260,6 +355,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.vital_signs_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.surgery}}</p>
@@ -277,6 +376,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.surgery_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.complaints_communicated}}</p>
@@ -294,6 +397,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.complaints_communicated_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                             <p style="font-size: 16px; margin-bottom: 6px;">{{lang.intake}}</p>
@@ -311,6 +418,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.intake_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -329,6 +440,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.output_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -347,6 +462,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.allergies_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -365,6 +484,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.medication_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -383,6 +506,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.diagnostic_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -401,6 +528,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.lab_results_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -419,6 +550,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.pending_investigation_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                           <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
@@ -437,6 +572,10 @@
                                 <span style="margin-left: 5px;">N/A</span>
                               </label>
                             </div>
+                            <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.medicine_order_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                           </div>
 
                          
@@ -470,6 +609,30 @@
                       <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: -15px;">
                         <p style="font-size: 16px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
                         <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                        <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                      <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
+                        Upload file( Evidences, proofs, etc)
+                      </label>
+
+                      <!-- File Input for Document Upload -->
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple
+                        onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <br>
+
+                      <!-- Display the list of uploaded files -->
+                      <div ng-if="feedback.files_name && feedback.files_name.length > 0">
+                        <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
+                        <ul style="margin-left: 19px;">
+                          <li ng-repeat="files_name in feedback.files_name track by $index"
+                            style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank"
+                              style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;"
+                              ng-click="removeFile($index)">&#10060;</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                       </div>
 
 
@@ -479,7 +642,7 @@
                   </div>
 
                   <!-- submit button -->
-                  <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:12px;margin-top:35px;" ng-click="prev()" value="{{lang.previous}}" />
+                  <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:12px;margin-top:35px;" ng-click="prev1()" value="{{lang.previous}}" />
 
                   <div>
                     <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:12px;margin-top:35px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
@@ -538,11 +701,19 @@
 
                           {{lang.unhappythankyoumessage}}
                         </p>
+                        <div class="thankyou-buttons" style="margin-top: 40px;">
+                          <button type="button" class="btn btn-primary" ng-click="repeatAudit()">
+                            🔄 Repeat Audit
+                          </button>
+                          <a ng-href="/audit_forms?user_id={{user_id}}" class="btn btn-secondary"
+                            style="margin-left: 15px;">
+                            🏠 Audits Home Page
+                          </a>
+                        </div>
 
                       </div>
 
                     </div>
-
                     <!-- unhappy customer code end		 -->
 
                   </div>

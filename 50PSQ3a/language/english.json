@@ -58,14 +58,14 @@
    "kpi_info": "50. PSQ3a Percentage of patients undergoing dialysis who are able to achieve target hemoglobin levels for the month of",
    "definition": "Definition:",
    "kpi_def": "",
-   "formula_para1": "Number of patients undergoing dialysis who are able to achieve target hemoglobin levels",   
+   "formula_para1": "Number of patients undergoing dialysis who are able to achieve target hemoglobin levels (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total number of patients undergoing dialysis",
+   "formula_para2": "Total number of patients undergoing dialysis (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

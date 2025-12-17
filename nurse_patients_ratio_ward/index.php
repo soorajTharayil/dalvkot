@@ -12,7 +12,7 @@
 
 <head>
 
-  <title>Efeedor Feedback System</title>
+  <title>Quality Audit Management Software - Efeedor Healthcare Experience Management Platform</title>
 
   <meta charset="utf-8">
 
@@ -60,10 +60,10 @@
 
     <!-- Add a button to trigger the modal -->
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}}
-      <i class="fa fa-language" aria-hidden="true"></i>
-    </button>
-    <!-- dropdown for three language end -->
+      <!--  {{type2}}-->
+      <!--  <i class="fa fa-language" aria-hidden="true"></i>-->
+      <!--</button>-->
+      <!-- dropdown for three language end -->
 
   </nav>
 
@@ -194,7 +194,7 @@
                 <!-- PATIENT INFORMATION page start -->
                 <fieldset ng-show="step0 == true">
 
-                  <h4><strong>{{lang.patient_info}}</strong></h4>
+                  <h4 style="font-size: 22px;"><strong>{{lang.patient_info}}</strong></h4>
 
                   <!--<p>Fill all form field to go to next step</p>-->
                   <br>
@@ -203,15 +203,58 @@
                     <div class="row">
 
 
-
-                      <div class="col-xs-12 col-sm-12 col-md-12">
+                      <!-- Audit Type -->
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
+                        <!-- <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6> -->
                         <div class="form-group">
-                          <span class="addon" style="font-size: 16px;">{{lang.site}}<sup style="color:red">*</sup></span>
+                          <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled/>
+                          </span>
+                        </div>
+
+
+
+                        <!-- Date of Audit -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
+                            {{lang.dtandtym}}<sup style="color:red">*</sup><br>
+                            <p style="font-size: 14px; margin: 4px 0 0 0; color:#6c757d;">
+                              {{lang.format}}
+                            </p>
+                          </span>
+
+                          <!-- Input -->
+                          <div style="position: relative; width: 100%;">
+                            <input class="form-control" ng-model="feedback.audit_date" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
+                              autocomplete="off" onclick="this.showPicker && this.showPicker()"
+                              onfocus="this.showPicker && this.showPicker()"
+                              style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
+                          </div>
+                        </div>
+
+
+
+                        <!-- Audit By -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
+                          </span>
+                        </div>
+
+                      </div>
+
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px;">
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px;">Site<sup style="color:red">*</sup></span>
                           <span class="has-float-label">
                             <select class="form-control" id="department" ng-required="true" ng-model="feedback.site" ng-init="feedback.site='Ward'" ng-change="resetSelection()" autocomplete="off" style="padding-top:0px;margin-top:5px;padding-left:0px;">
-                              
+
                               <option value="Ward" selected>Ward</option>
-                              
+
                               <!-- Add more options for additional -->
                             </select>
                             <label for="bednumber"></label>
@@ -219,52 +262,13 @@
                         </div>
                       </div>
 
-                      <div class="col-xs-12 col-sm-12 col-md-12" ng-show="feedback.site === 'Ward'">
+                      <div class="col-xs-12 col-sm-12 col-md-12" ng-show="feedback.site === 'Ward'" style="margin-top: -10px;">
                         <div class="form-group">
-                          <span class="addon" style="font-size: 16px;">{{lang.ward}}<sup style="color:red">*</sup></span>
+                          <span class="addon" style="font-size: 18px;">{{lang.ward}}<sup style="color:red">*</sup></span>
                           <span class="has-float-label">
-                            <select class="form-control" id="department" ng-required="true" ng-model="feedback.ward"  autocomplete="off" style="padding-top:0px;margin-top:5px;padding-left:0px;">
-                              <option value="Select Ward" disabled>Select Ward</option>
-                              <option value="St. Thomas Ward">St. Thomas Ward</option>
-                              <option value="St. Alphonsa Ward">St. Alphonsa Ward</option>
-                              <option value="St. Martins Ward">St. Martins Ward</option>
-                              <option value="St. Ann’s Ward">St. Ann’s Ward</option>
-                              <option value="St. Antony’s Ward">St. Antony’s Ward</option>
-
-                            </select>
-                            <label for="bednumber"></label>
-                          </span>
-                        </div>
-                      </div>
-
-                      <div class="col-xs-12 col-sm-12 col-md-12" ng-show="feedback.site === 'ICU'">
-                        <div class="form-group">
-                          <span class="addon" style="font-size: 16px;">{{lang.icu}}<sup style="color:red">*</sup></span>
-                          <span class="has-float-label">
-                            <select class="form-control" id="department" ng-required="true" ng-model="feedback.icu" autocomplete="off" style="padding-top:0px;margin-top:5px;padding-left:0px;">
-                              <option value="Select ICU" selected>Select ICU</option>
-                              <option value="MICU">MICU</option>
-                              <option value="SICU">SICU</option>
-                              <option value="CICU">CICU</option>
-                              <option value="NICU">NICU</option>
-                              <option value="CCU">CCU</option>
-
-                            </select>
-                            <label for="bednumber"></label>
-                          </span>
-                        </div>
-                      </div>
-
-
-                      <div class="col-xs-12 col-sm-12 col-md-12" ng-show="feedback.site === 'ICU'">
-                        <div class="form-group">
-                          <span class="addon" style="font-size: 16px;">{{lang.department}}<sup style="color:red">*</sup></span>
-                          <span class="has-float-label">
-                            <select class="form-control" id="department" ng-required="true" ng-model="feedback.department" ng-init="feedback.department='Select Patient Status'" autocomplete="off" style="padding-top:0px;margin-top:5px;padding-left:0px;">
-                              <option value="Select Patient Status" selected>Select Patient Status</option>
-                              <option value="Ventilated">Ventilated</option>
-                              <option value="Non-Ventilated">Non-Ventilated</option>
-                              <!-- Add more options for additional -->
+                            <select class="form-control" id="department" ng-required="true" ng-model="feedback.ward" autocomplete="off" style="padding-top:0px;margin-top:5px;padding-left:0px;">
+                              <option value="" disabled selected>Select Ward</option>
+                              <option ng-repeat="x in ratio_ward.ratio_ward" ng-show="x.title != 'ALL'" value="{{x.title}}">{{x.title}}</option>
                             </select>
                             <label for="bednumber"></label>
                           </span>
@@ -276,7 +280,7 @@
 
                         <div class="form-group">
 
-                          <span class="addon" style="font-size: 16px;">{{lang.staffname}}<sup style="color:red">*</sup></span>
+                          <span class="addon" style="font-size: 18px;">{{lang.staffname}}<sup style="color:red">*</sup></span>
 
                           <span class="has-float-label">
 
@@ -294,7 +298,7 @@
 
                         <div class="form-group">
 
-                          <span class="addon" style="font-size: 16px;">{{lang.op_number}}<sup style="color:red">*</sup></span>
+                          <span class="addon" style="font-size: 18px;">{{lang.op_number}}<sup style="color:red">*</sup></span>
 
                           <span class="has-float-label">
 
@@ -309,8 +313,32 @@
                       </div>
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: -15px;">
-                        <p style="font-size: 16px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
+                        <p style="font-size: 18px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
                         <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                        <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                      <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
+                        Upload file( Evidences, proofs, etc)
+                      </label>
+
+                      <!-- File Input for Document Upload -->
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple
+                        onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <br>
+
+                      <!-- Display the list of uploaded files -->
+                      <div ng-if="feedback.files_name && feedback.files_name.length > 0">
+                        <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
+                        <ul style="margin-left: 19px;">
+                          <li ng-repeat="files_name in feedback.files_name track by $index"
+                            style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank"
+                              style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;"
+                              ng-click="removeFile($index)">&#10060;</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                       </div>
 
                       <!-- <p>&nbsp;</p> -->
@@ -380,6 +408,15 @@
 
                           {{lang.unhappythankyoumessage}}
                         </p>
+                        <div class="thankyou-buttons" style="margin-top: 40px;">
+                          <button type="button" class="btn btn-primary" ng-click="repeatAudit()">
+                            🔄 Repeat Audit
+                          </button>
+                          <a ng-href="/audit_forms?user_id={{user_id}}" class="btn btn-secondary"
+                            style="margin-left: 15px;">
+                            🏠 Audits Home Page
+                          </a>
+                        </div>
 
                       </div>
 

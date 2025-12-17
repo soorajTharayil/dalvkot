@@ -13,6 +13,7 @@ $data = json_decode($d, true);
 if (count($data) > 1) {
 	date_default_timezone_set('Asia/Kolkata');
 	$data['name'] = strtoupper($data['name']);
+$today = date('Y-m-d');
 
 	// Convert month name to number
 	$monthNumber = date('m', strtotime($month));  // Converts "January" to "01", etc.
@@ -22,7 +23,7 @@ if (count($data) > 1) {
 	$currentTime = date('H:i:s');  // Get the current time
 
 	// Construct `datet` and `datetime`
-	$datet = $year . '-' . $monthNumber . '-' . $currentDay;  // Constructs the date as "YYYY-MM-01"
+	//$datet = $year . '-' . $monthNumber . '-' . $currentDay;  // Constructs the date as "YYYY-MM-01"
 	$datetime = $year . '-' . $monthNumber . '-' . $currentDay . ' ' . $currentTime;  // Constructs the datetime as "YYYY-MM-DD HH:MM:SS"
 
 
@@ -60,7 +61,7 @@ if (count($data) > 1) {
 
 
 	$query = 'INSERT INTO `bf_feedback_24PSQ4c` (`name`, `email`, `patientid`, `mobile`, `sum_of_discharge_time`, `no_of_patients_discharged`, `avg_discharge_time`, `bench_mark_time`, `excess_time_taken`, `sum_of_discharge_time_ins`, `no_of_patients_discharged_ins`, `avg_discharge_time_ins`, `bench_mark_time_ins`, `excess_time_taken_ins`, `sum_of_discharge_time_cop`, `no_of_patients_discharged_cop`, `avg_discharge_time_cop`, `bench_mark_time_cop`, `excess_time_taken_cop`, `data_analysis`, `corrective_action`, `preventive_action`, `dataset`, `datet`, `datetime`) 
-	VALUES ("' . $name . '", "' . $email . '", "' . $patientid . '", "' . $contactnumber . '", "' . $sum_of_discharge_time . '", "' . $no_of_patients_discharged . '", "' . $calculatedResult . '", "' . $benchmark . '", "' . $excessTimeTaken . '", "' . $sum_of_discharge_time_ins . '", "' . $no_of_patients_discharged_ins . '", "' . $calculatedResult_ins . '", "' . $benchmark_ins . '", "' . $excessTimeTaken_ins . '", "' . $sum_of_discharge_time_cop . '", "' . $no_of_patients_discharged_cop . '", "' . $calculatedResult_cop . '", "' . $benchmark_cop . '", "' . $excessTimeTaken_cop . '", "' . $dataAnalysis . '", "' . $correctiveAction . '", "' . $preventiveAction . '", "' . mysqli_real_escape_string($con, json_encode($data)) . '", "' . $datet . '", "' . $datetime . '");';
+	VALUES ("' . $name . '", "' . $email . '", "' . $patientid . '", "' . $contactnumber . '", "' . $sum_of_discharge_time . '", "' . $no_of_patients_discharged . '", "' . $calculatedResult . '", "' . $benchmark . '", "' . $excessTimeTaken . '", "' . $sum_of_discharge_time_ins . '", "' . $no_of_patients_discharged_ins . '", "' . $calculatedResult_ins . '", "' . $benchmark_ins . '", "' . $excessTimeTaken_ins . '", "' . $sum_of_discharge_time_cop . '", "' . $no_of_patients_discharged_cop . '", "' . $calculatedResult_cop . '", "' . $benchmark_cop . '", "' . $excessTimeTaken_cop . '", "' . $dataAnalysis . '", "' . $correctiveAction . '", "' . $preventiveAction . '", "' . mysqli_real_escape_string($con, json_encode($data)) . '", "' . $today . '", "' . $datetime . '");';
 	
 	$result = mysqli_query($con, $query);
 	$fid = mysqli_insert_id($con);

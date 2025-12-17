@@ -58,14 +58,14 @@
    "kpi_info": "40. PSQ3a - Percentage of POCT results which led to a clinical intervention for the month of",
    "definition": "Definition:",
    "kpi_def": "Point of care testing is defined as laboratory testing conducted close to the site of patient care, typically by non-lab personnel e.g. nurses, blood gases, electrolytes, troponin, and blood glucose..",
-   "formula_para1": "Number of POCT tests which resulted in a clinical intervention where indicated",   
+   "formula_para1": "Number of POCT tests which resulted in a clinical intervention where indicated (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of POCT tests where clinical intervention was deemed necessary.",
+   "formula_para2": "Number of POCT tests where clinical intervention was deemed necessary (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

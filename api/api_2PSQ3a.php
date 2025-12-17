@@ -49,7 +49,7 @@ if ($num1 > 0) {
         $incidentMonth = date('m', strtotime($row->datetime));
 
         // Check if the incident belongs to the current month and the category is either "Diagnostic Errors" or "Reporting Errors"
-        if (($category === 'Diagnostic Errors' || $category === 'Reporting Error in Lab' || $category === 'Reporting Error in Radiology' || $category === 'Reporting Error in CT' || $category === 'Reporting Error in X-Ray' || $category === 'Reporting Error in Ultrasound') && $incidentMonth === $currentMonth) {
+        if (($category === 'Diagnostic Errors') && $incidentMonth === $selectedMonth) {
             $errorsCount++;
 		
         }

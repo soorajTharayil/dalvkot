@@ -35,109 +35,210 @@
 							<div class="panel-body" style="background: #fff;">
 
 
+
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
+
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+
+
 
 
 									<tr>
-										<td><b>Room/ Area</b></td>
+										<td><b>Is trash removed and properly disposed of?</b></td>
 										<td>
-											<?php echo $result->area; ?>
+											<?php echo !empty($param['identification_details']) ? ucfirst(htmlspecialchars($param['identification_details'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are bed linens changed every day?</b></td>
+										<td>
+											<?php echo !empty($param['vital_signs']) ? ucfirst(htmlspecialchars($param['vital_signs'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are high-touch surfaces disinfected regularly?</b></td>
+										<td>
+											<?php echo !empty($param['surgery']) ? ucfirst(htmlspecialchars($param['surgery'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['surgery_text']) ? htmlspecialchars($param['surgery_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are bedrails cleaned and disinfected?</b></td>
+										<td>
+											<?php echo !empty($param['complaints_communicated']) ? ucfirst(htmlspecialchars($param['complaints_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are bedside tables wiped down?</b></td>
+										<td>
+											<?php echo !empty($param['intake']) ? ucfirst(htmlspecialchars($param['intake'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['intake_text']) ? htmlspecialchars($param['intake_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are remote accessories and switches cleaned?</b></td>
+										<td>
+											<?php echo !empty($param['output']) ? ucfirst(htmlspecialchars($param['output'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['output_text']) ? htmlspecialchars($param['output_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are windows and curtains cleaned?</b></td>
+										<td>
+											<?php echo !empty($param['allergies']) ? ucfirst(htmlspecialchars($param['allergies'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['allergies_text']) ? htmlspecialchars($param['allergies_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the floor mopped regularly?</b></td>
+										<td>
+											<?php echo !empty($param['medication']) ? ucfirst(htmlspecialchars($param['medication'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medication_text']) ? htmlspecialchars($param['medication_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are furniture and fixtures dusted?</b></td>
+										<td>
+											<?php echo !empty($param['diagnostic']) ? ucfirst(htmlspecialchars($param['diagnostic'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the fan cleaned properly?</b></td>
+										<td>
+											<?php echo !empty($param['lab_results']) ? ucfirst(htmlspecialchars($param['lab_results'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are all spills cleaned and disinfected immediately?</b></td>
+										<td>
+											<?php echo !empty($param['pending_investigation']) ? ucfirst(htmlspecialchars($param['pending_investigation'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['pending_investigation_text']) ? htmlspecialchars($param['pending_investigation_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are items labeled properly?</b></td>
+										<td>
+											<?php echo !empty($param['medicine_order']) ? ucfirst(htmlspecialchars($param['medicine_order'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the three-step Water-Disinfectant-Plain water cleaning method used?</b></td>
+										<td>
+											<?php echo !empty($param['facility_communicated']) ? ucfirst(htmlspecialchars($param['facility_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['facility_communicated_text']) ? htmlspecialchars($param['facility_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the room maintained with a fresh smell?</b></td>
+										<td>
+											<?php echo !empty($param['health_education']) ? ucfirst(htmlspecialchars($param['health_education'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['health_education_text']) ? htmlspecialchars($param['health_education_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are toilets and washbasins cleaned properly?</b></td>
+										<td>
+											<?php echo !empty($param['risk_assessment']) ? ucfirst(htmlspecialchars($param['risk_assessment'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['risk_assessment_text']) ? htmlspecialchars($param['risk_assessment_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are floor mats clean and properly placed?</b></td>
+										<td>
+											<?php echo !empty($param['urethral']) ? ucfirst(htmlspecialchars($param['urethral'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urethral_text']) ? htmlspecialchars($param['urethral_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Are housekeeping equipment arranged in their designated spaces?</b></td>
+										<td>
+											<?php echo !empty($param['urine_sample']) ? ucfirst(htmlspecialchars($param['urine_sample'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urine_sample_text']) ? htmlspecialchars($param['urine_sample_text']) : '-'; ?>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Is the cleaning checklist properly filled out and signed?</b></td>
+										<td>
+											<?php echo !empty($param['bystander']) ? ucfirst(htmlspecialchars($param['bystander'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['bystander_text']) ? htmlspecialchars($param['bystander_text']) : '-'; ?>
 										</td>
 									</tr>
 									<tr>
-										<td><b>Is trash removed and properly disposed of?</b></td>
-										<td><?php echo $result->identification_details; ?></td>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
-									<tr>
-										<td><b>Are bed linens changed every day?</b></td>
-										<td><?php echo $result->vital_signs; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are high-touch surfaces disinfected regularly?</b></td>
-										<td><?php echo $result->surgery; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are bedrails cleaned and disinfected?</b></td>
-										<td><?php echo $result->complaints_communicated; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are bedside tables wiped down?</b></td>
-										<td><?php echo $result->intake; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are remote accessories and switches cleaned?</b></td>
-										<td><?php echo $result->output; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are windows and curtains cleaned?</b></td>
-										<td><?php echo $result->allergies; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the floor mopped regularly?</b></td>
-										<td><?php echo $result->medication; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are furniture and fixtures dusted?</b></td>
-										<td><?php echo $result->diagnostic; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the fan cleaned properly?</b></td>
-										<td><?php echo $result->lab_results; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are all spills cleaned and disinfected immediately?</b></td>
-										<td><?php echo $result->pending_investigation; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are items labeled properly?</b></td>
-										<td><?php echo $result->medicine_order; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the three-step Water-Disinfectant-Plain water cleaning method used?</b></td>
-										<td><?php echo $result->facility_communicated; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the room maintained with a fresh smell?</b></td>
-										<td><?php echo $result->health_education; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are toilets and washbasins cleaned properly?</b></td>
-										<td><?php echo $result->risk_assessment; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are floor mats clean and properly placed?</b></td>
-										<td><?php echo $result->urethral; ?></td>
-									</tr>
-									<tr>
-										<td><b>Are housekeeping equipment arranged in their designated spaces?</b></td>
-										<td><?php echo $result->urine_sample; ?></td>
-									</tr>
-									<tr>
-										<td><b>Is the cleaning checklist properly filled out and signed?</b></td>
-										<td><?php echo $result->bystander; ?></td>
-									</tr>
-
 
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
-
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
-
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
-
-
 
 								</table>
 

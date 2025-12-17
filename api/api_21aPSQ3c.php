@@ -29,7 +29,7 @@ $selectedMonth = mysqli_real_escape_string($con, $selectedMonth);
 $selectedYear = mysqli_real_escape_string($con, $selectedYear);
 
 // Construct the SQL query to retrieve beds and nurses for the ICU ratio table
-$sql1 = "SELECT beds, nurses FROM `bf_feedback_nurse_patients_ratio_ward` WHERE YEAR(datet) = $selectedYear AND MONTH(datet) = $selectedMonth";
+$sql1 = "SELECT * FROM `bf_feedback_nurse_patients_ratio_ward` WHERE YEAR(datet) = $selectedYear AND MONTH(datet) = $selectedMonth";
 $result1 = mysqli_query($con, $sql1);
 
 $totalBeds = 0;
@@ -38,12 +38,15 @@ $num1 = 0;
 
 if ($result1) {
     // Fetch the result as an associative array
-    while ($row = mysqli_fetch_assoc($result1)) {
+    while ($row = mysqli_fetch_object($result1)) {
+
+        $dataset = json_decode($row->dataset);
+
         // Accumulate the count of beds and nurses
-        $totalBeds += isset($row['beds']) ? (int)$row['beds'] : 0;
-        $totalNurses += isset($row['nurses']) ? (int)$row['nurses'] : 0;
+        $totalBeds   += isset($dataset->beds) ? (int)$dataset->beds : 0;
+        $totalNurses += isset($dataset->nurses) ? (int)$dataset->nurses : 0;
     }
-    
+
     // Count the number of rows retrieved
     $num1 += mysqli_num_rows($result1);
 }
@@ -58,4 +61,3 @@ echo json_encode($data);
 
 // Close the database connection
 mysqli_close($con);
-?>

@@ -18,7 +18,7 @@ $param = json_decode($row->dataset, true);
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;PPE audit - <?php echo $row->id; ?></h3>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Radiology Safety audit - <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -27,6 +27,27 @@ $param = json_decode($row->dataset, true);
 
                     <?php echo form_open_multipart('audit/edit_ppe_audit_byid/' . $this->uri->segment(3), 'class="form-inner"') ?>
                     <table class="table table-striped table-bordered  no-footer dtr-inline collapsed">
+                        <tr>
+                            <td>
+                                <b>Audit Details</b>
+                            </td>
+                            <td style="overflow: clip;">
+                                Audit Name: <?php echo $param['audit_type']; ?>
+                                <br>
+                                Date & Time of Audit: <?php echo date('Y-m-d H:i', strtotime($row->datetime)); ?>
+                                <br>
+                                Audit by: <?php echo $param['audit_by']; ?>
+
+                                <!-- Hidden inputs -->
+                                <input class="form-control" type="hidden" name="audit_type"
+                                    value="<?php echo $param['audit_type']; ?>" />
+                                <input class="form-control" type="hidden" name="datetime"
+                                    value="<?php echo $row->datetime; ?>" />
+                                <input class="form-control" type="hidden" name="audit_by"
+                                    value="<?php echo $param['audit_by']; ?>" />
+                            </td>
+                        </tr>
+
 
                     </table>
 
@@ -48,71 +69,241 @@ $param = json_decode($row->dataset, true);
                             </tr>
                         <?php } ?>
                         <?php if ($row->comment) { ?>
+                            <tr>
+                                <td><b>Staff engaged in</b></td>
+                                <td>
+                                    <input class="form-control" type="text" name="comment_l" value="<?php echo $param['comment_l']; ?>">
+                                </td>
+                            </tr>
+                        <?php } ?>
+
                         <tr>
-                            <td><b>Staff engaged in</b></td>
+                            <td><b>Is personal protective equipment (LED apron, thyroid shield, gonad shield, LED goggles, LED gloves) being used appropriately?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="comment_l" value="<?php echo $param['comment_l']; ?>">
+                                <input class="form-control" type="text" name="gloves"
+                                    value="<?php echo htmlspecialchars($param['gloves'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="gloves_text"
+                                        value="<?php echo isset($param['gloves_text']) ? htmlspecialchars($param['gloves_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
                             </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['gloves']) { ?>
+
+
                         <tr>
-                            <td><b>Is the staff wearing gloves?</b></td>
+                            <td><b>Is the TLD badge being used correctly by staff?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="gloves" value="<?php echo $param['gloves']; ?>">
+                                <input class="form-control" type="text" name="mask"
+                                    value="<?= htmlspecialchars($param['mask'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="mask_text"
+                                        value="<?= htmlspecialchars($param['mask_text'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                        placeholder="Remarks">
+                                </div>
                             </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['mask']) { ?>
+
                         <tr>
-                            <td><b>Is the staff wearing mask?</b></td>
-                            <td><input class="form-control" type="text" name="mask" value="<?php echo $param['mask']; ?>"></td>
+                            <td><b>Is the patient identification policy followed by staff to performing tests?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="cap"
+                                    value="<?= htmlspecialchars($param['cap'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="cap_text"
+                                        value="<?= htmlspecialchars($param['cap_text'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['cap']) { ?>
+
                         <tr>
-                            <td><b>Is the staff wearing cap?</b></td>
-                            <td><input class="form-control" type="text" name="cap" value="<?php echo $param['cap']; ?>"></td>
+                            <td><b>Is the staff following the hand hygiene policy as required?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="apron"
+                                    value="<?= htmlspecialchars($param['apron'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="apron_text"
+                                        value="<?= htmlspecialchars($param['apron_text'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['apron']) { ?>
+
                         <tr>
-                            <td><b>Is the staff wearing apron?</b></td>
-                            <td><input class="form-control" type="text" name="apron" value="<?php echo $param['apron']; ?>"></td>
+                            <td><b>Do staff demonstrate knowledge of the ALARA Principle in their daily practices?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="leadApron"
+                                    value="<?= htmlspecialchars($param['leadApron'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="leadApron_text"
+                                        value="<?= htmlspecialchars($param['leadApron_text'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['leadApron']) { ?>
+
                         <tr>
-                            <td><b>Is the staff wearing lead apron?</b></td>
-                            <td><input class="form-control" type="text" name="leadApron" value="<?php echo $param['leadApron']; ?>"></td>
+                            <td><b>Is the radiation warning light activated by staff prior to conducting tests?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="xrayBarrior"
+                                    value="<?= htmlspecialchars($param['xrayBarrior'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="xrayBarrior_text"
+                                        value="<?= htmlspecialchars($param['xrayBarrior_text'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['xrayBarrior']) { ?>
+
                         <tr>
-                            <td><b>Is X-ray barrier used?</b></td>
-                            <td><input class="form-control" type="text" name="xrayBarrior" value="<?php echo $param['xrayBarrior']; ?>"></td>
+                            <td><b>Do staff adequately screen female patients prior to performing tests?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="tld"
+                                    value="<?= htmlspecialchars($param['tld'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="tld_text"
+                                        value="<?= htmlspecialchars($param['tld_text'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['tld']) { ?>
+
                         <tr>
-                            <td><b>Is TLD badge used?</b></td>
-                            <td><input class="form-control" type="text" name="tld" value="<?php echo $param['tld']; ?>"></td>
+                            <td><b>Do staff provide adequate PPE to patients to minimize radiation exposure before the procedure?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="ppe_to_patients"
+                                    value="<?= htmlspecialchars($param['ppe_to_patients'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="margin-top: 5px;">
+                                    Remarks:
+                                    <input class="form-control" type="text" name="ppe_to_patients_text"
+                                        value="<?= htmlspecialchars($param['ppe_to_patients_text'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <?php if ($param['general_comment']) { ?>
+
+
+
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="general_comment" value="<?php echo $param['general_comment']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
-                        <?php } ?>
+
+
                         <tr>
-                            <td><b>Data collected by</b></td>
-                            <td><input class="form-control" type="text" name="name" value="<?php echo $param['name']; ?>"></td>
+                            <td><b>Uploaded Files</b></td>
+                            <td>
+                                <?php
+                                // $param = json_decode($record->dataset, true);
+                                $existingFiles = !empty($param['files_name']) ? $param['files_name'] : [];
+                                ?>
+
+                                <!-- 🗂 Existing Files Section -->
+                                <div id="existing-files">
+                                    <?php if (!empty($existingFiles)) { ?>
+                                        <!-- <label><b>Current Files:</b></label> -->
+                                        <ul id="file-list" style="list-style-type:none; padding-left:0;">
+                                            <?php foreach ($existingFiles as $index => $file) { ?>
+                                                <li data-index="<?php echo $index; ?>"
+                                                    style="margin-bottom:6px; background:#f8f9fa; padding:6px 10px; border-radius:6px; display:flex; align-items:center; justify-content:space-between;">
+                                                    <a href="<?php echo htmlspecialchars($file['url']); ?>" target="_blank"
+                                                        style="text-decoration:none; color:#007bff;">
+                                                        <?php echo htmlspecialchars($file['name']); ?>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-danger remove-file"
+                                                        style="margin-left:10px; padding:2px 6px; font-size:12px;">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <p id="no-files">No files uploaded</p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- 📤 Dynamic Upload Inputs -->
+                                <div class="form-group" id="upload-container" style="margin-top:10px;">
+                                    <label><b>Add New Files:</b></label>
+                                    <div class="upload-row"
+                                        style="display:flex; align-items:center; margin-bottom:6px;">
+                                        <input type="file" name="uploaded_files[]" class="form-control upload-input"
+                                            style="flex:1; margin-right:10px;">
+                                        <button type="button" class="btn btn-danger btn-sm remove-upload"
+                                            style="display:none;">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- ➕ Add More Files Button -->
+                                <button type="button" id="add-more-files" class="btn btn-sm btn-success"
+                                    style="margin-top:5px;">
+                                    <i class="fa fa-plus"></i> Add More Files
+                                </button>
+
+                                <!-- Hidden input for removed old files -->
+                                <input type="hidden" name="remove_files_json" id="remove_files_json" value="">
+                            </td>
                         </tr>
-                        <tr>
-                            <td><b>Data collected on</b></td>
-                            <td><input  class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
-                        </tr>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+
+                                // 🗑️ Handle removing existing old files
+                                const removeInput = document.getElementById("remove_files_json");
+                                let removedIndexes = [];
+
+                                document.querySelectorAll(".remove-file").forEach(btn => {
+                                    btn.addEventListener("click", function() {
+                                        const li = this.closest("li");
+                                        const index = li.getAttribute("data-index");
+                                        removedIndexes.push(index);
+                                        removeInput.value = JSON.stringify(removedIndexes);
+                                        li.remove();
+                                        if (document.querySelectorAll("#file-list li").length === 0) {
+                                            document.getElementById("existing-files").innerHTML = "<p id='no-files'>No files uploaded</p>";
+                                        }
+                                    });
+                                });
+
+                                // ➕ Dynamic "Add More Files"
+                                const addMoreBtn = document.getElementById("add-more-files");
+                                const uploadContainer = document.getElementById("upload-container");
+
+                                addMoreBtn.addEventListener("click", function() {
+                                    const newRow = document.createElement("div");
+                                    newRow.className = "upload-row";
+                                    newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
+
+                                    const input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "uploaded_files[]";
+                                    input.className = "form-control upload-input";
+                                    input.style.cssText = "flex:1; margin-right:10px;";
+
+                                    const removeBtn = document.createElement("button");
+                                    removeBtn.type = "button";
+                                    removeBtn.className = "btn btn-danger btn-sm remove-upload";
+                                    removeBtn.innerHTML = '<i class="fa fa-times"></i>';
+                                    removeBtn.addEventListener("click", function() {
+                                        newRow.remove();
+                                    });
+                                    removeBtn.style.display = "inline-block";
+
+                                    newRow.appendChild(input);
+                                    newRow.appendChild(removeBtn);
+                                    uploadContainer.appendChild(newRow);
+                                });
+                            });
+                        </script>
                         <tr>
                             <td colspan="2">
                                 <div class="col-sm-offset-3 col-sm-6">

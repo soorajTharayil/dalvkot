@@ -43,6 +43,9 @@ $totalNoCount_NA = 0;
 // Check if there are any results
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_object($result)) {
+
+        $dataset = json_decode($row->dataset);
+
         // Loop through the relevant columns and count 'no'
         $columnsToCheck = [
             'identification_details', 
@@ -64,12 +67,12 @@ if (mysqli_num_rows($result) > 0) {
         ];
 
         foreach ($columnsToCheck as $column) {
-            if ($row->$column === 'no') {
+            if ($dataset->$column === 'no') {
                 $totalNoCount++;
             }
         }
         foreach ($columnsToCheck as $column) {
-            if ($row->$column === 'N/A') {
+            if ($dataset->$column === 'N/A') {
                 $totalNoCount_NA++;
             }
         }

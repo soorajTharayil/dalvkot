@@ -31,13 +31,114 @@
 	?>
 
 		<div class="row">
+
+			<!-- Audit details -->
 			<div class="col-lg-12 col-sm-12">
 				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<strong>Audit Details</strong>
+					</div>
+
+					<div class="panel-body" style="font-size:14px; line-height:1.5;">
+
+						<?php
+						// Frequency (case-insensitive by title)
+						$auditTitle = 'Other Area Cleaning Checklist';
+						$norm = mb_strtolower($auditTitle, 'UTF-8');
+
+						$row = $this->db->select('frequency, target')
+							->from('bf_audit_frequency')
+							->where("LOWER(title) = " . $this->db->escape($norm), NULL, FALSE)
+							->limit(1)->get()->row();
+
+						$freq   = $row ? $row->frequency : 'N/A';
+
+
+						// Load all users
+						$users = $this->db->select('user.*, roles.role_id')
+							->join('roles', 'user.user_role = roles.role_id')
+							->order_by('roles.role_id', 'asc')
+							->get('user')->result();
+
+						// Per-user permission check (example feature: AUDIT-FORM1)
+						$custodian_names = [];
+						if (!empty($users)) {
+							foreach ($users as $user) {
+								$this->db->from('user_permissions as UP');
+								$this->db->select('F.feature_name');
+								$this->db->join('features as F', 'UP.feature_id = F.feature_id');
+								$this->db->where('UP.user_id', $user->user_id);
+								$this->db->where('UP.status', 1);
+								$perms = $this->db->get()->result();
+
+								foreach ($perms as $p) {
+									if (strcasecmp(trim($p->feature_name), 'AUDIT-FORM31') === 0) {
+										$custodian_names[] = htmlspecialchars($user->firstname, ENT_QUOTES, 'UTF-8');
+										break;
+									}
+								}
+							}
+						}
+						$custodian_names = array_unique($custodian_names);
+
+						// Last audit date (using your current array shape)
+						$lastDate = (!empty($feedbacktaken) && !empty($feedbacktaken[0]->datet))
+							? date('d-M-Y', strtotime($feedbacktaken[0]->datet))
+							: 'N/A';
+						?>
+
+						<table class="table table-bordered table-condensed" style="margin:0;">
+							<tbody>
+								<tr>
+									<th style="width:240px;">Audit Definition</th>
+									<td>Audits cleaning of non-patient areas—trash, surfaces, floors, fixtures, toilets & equipment—ensuring hygiene as per NABH, JCI, CAHO & Indian hospital housekeeping and infection control standards.</td>
+								</tr>
+								<tr>
+									<th>Audit Frequency</th>
+									<td>
+										<?= htmlspecialchars($freq, ENT_QUOTES, 'UTF-8'); ?>
+
+									</td>
+								</tr>
+								<tr>
+									<th>Last Audit Date</th>
+									<td><?= $lastDate; ?></td>
+								</tr>
+								<tr>
+									<th>Audit Custodians</th>
+									<td><?= !empty($custodian_names) ? implode(', ', $custodian_names) : 'N/A'; ?></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-lg-12 col-sm-12">
+				<div class="panel panel-default">
+					<div style="float: right; margin-top: 10px; margin-right: 10px;">
+						<span style="font-size:17px"><strong>Download Chart:</strong></span>
+						<span style="margin-right: 10px;">
+							<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
+								onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
+						</span>
+						<span>
+							<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
+								onclick="downloadChartImage()" data-toggle="tooltip"
+								title="Download Chart as Image"></i>
+						</span>
+					</div>
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
 							<?php $text = "In the " .  $dates['pagetitle'] . "," . "a total of " . count($ip_feedbacks_count) . " audits were conducted." ?>
 							<span class="typing-text"></span>
-
+						</span>
+						<span id="audit-report-text" style="display: none;">
+							<?php echo "In the " . $dates['pagetitle'] . ", a total of " . count($ip_feedbacks_count) . " audits were conducted."; ?>
 						</span>
 					</div>
 					<div class="panel-body" style="height:250px;" id="bar">
@@ -50,38 +151,30 @@
 
 			</div>
 
+			<!-- Table start -->
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: right;">
-						<div class="btn-group">
-							<!-- <a class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_download_total_feedback_tooltip'); ?>" href="<?php echo base_url($this->uri->segment(1)) . '/overall_patient_excel' ?>">
+					<div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+						<div>
+							<strong>OTHER AREA CLEANING CHECKLIST - Audit Summary</strong>
+						</div>
+						<div>
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
+								title="Download detailed audit report"
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_other_cleaning_audit' ?>">
 								<i class="fa fa-download"></i>
-							</a> -->
+							</a>
 						</div>
 					</div>
 					<div class="panel-body">
-						<table class="area table table-striped table-hover table-bordered" cellspacing="0" width="100%">
+						<table class="activecasesmrd table table-striped table-hover table-bordered" cellspacing="0" width="100%">
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
-								<th>Date</th>
-								<th>Room/ Area</th>
-								<th>Is trash removed and properly disposed of?</th>
-								<th>Are high-touch surfaces disinfected regularly?</th>
-								<th>Are tables wiped down thoroughly?</th>
-								<th>Are remote accessories and switches cleaned?</th>
-								<th>Are windows and curtains cleaned properly?</th>
-								<th>Is the floor mopped regularly?</th>
-								<th>Are furniture and fixtures dusted?</th>
-								<th>Is the fan cleaned properly?</th>
-								<th>Are all spills cleaned and disinfected immediately?</th>
-								<th>Are items labeled properly?</th>
-								<th>Is the three-step Water-Disinfectant-Plain water cleaning method used?</th>
-								<th>Is the room/area maintained with a fresh smell?</th>
-								<th>Are toilets and washbasins cleaned thoroughly?</th>
-								<th>Are floor mats clean and properly placed?</th>
-								<th>Are housekeeping equipment arranged in their designated spaces?</th>
-								<th>Is the cleaning checklist properly filled out and signed?</th>
-								<th>Additional comments</th>
+								<th>Audit by</th>
+								<th>Audit Date</th>
+								<th>Area</th>
+
+								<th>View</th>
 
 							</thead>
 							<tbody>
@@ -94,10 +187,18 @@
 									$check = true;
 
 
+									// echo '<pre>';
+									// print_r($param);
+									// echo '</pre>';
+									// exit;
+
+
 								?>
 
 									<tr class="<?php echo ($sl & 1) ? 'odd gradeX' : 'even gradeC'; ?>" onclick="window.location='<?php echo $other_cleaning_feedback . $id; ?>';" style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
+										<td><?php echo $param->audit_by; ?></td>
+
 										<td style="white-space: nowrap;">
 											<?php if ($r->datetime) { ?>
 												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
@@ -105,24 +206,25 @@
 											<?php } ?>
 										</td>
 
-										<td><?php echo $r->area; ?></td>
-										<td><?php echo $r->identification_details; ?></td>
-										<td><?php echo $r->vital_signs; ?></td>
-										<td><?php echo $r->surgery; ?></td>
-										<td><?php echo $r->complaints_communicated; ?></td>
-										<td><?php echo $r->intake; ?></td>
-										<td><?php echo $r->output; ?></td>
-										<td><?php echo $r->allergies; ?></td>
-										<td><?php echo $r->medication; ?></td>
-										<td><?php echo $r->diagnostic; ?></td>
-										<td><?php echo $r->lab_results; ?></td>
-										<td><?php echo $r->pending_investigation; ?></td>
-										<td><?php echo $r->medicine_order; ?></td>
-										<td><?php echo $r->facility_communicated; ?></td>
-										<td><?php echo $r->health_education; ?></td>
-										<td><?php echo $r->risk_assessment; ?></td>
-										<td><?php echo $r->urethral; ?></td>
-										<td><?php echo $r->comments; ?></td>
+										<td><?php echo $param->location; ?></td>
+
+										<td>
+											<a href="<?php echo $other_cleaning_feedback . $id; ?>"
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
+												View Details
+											</a>
+											<?php if (isfeature_active('DELETE-AUDIT') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this audit record?');"
+													title="Delete the audit record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
+										</td>
+
 
 									</tr>
 									<?php $sl++; ?>
@@ -357,4 +459,94 @@
 		resposnsechart(resposnseChart);
 	}, 1000);
 	/*patient_feedback_analysis*/
+</script>
+
+<script>
+	function printChart() {
+		const canvas = document.getElementById('resposnsechart');
+		const dataUrl = canvas.toDataURL();
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		const windowContent = `
+		<html>
+		<head>
+			<title>Print Chart</title>
+			<style>
+				body {
+					text-align: center;
+					margin: 0;
+					padding: 20px;
+					font-family: Arial;
+				}
+				h3, p {
+					margin-bottom: 10px;
+				}
+				img {
+					max-width: 100%;
+					height: auto;
+				}
+			</style>
+		</head>
+		<body>
+			<h3>OTHER AREA CLEANING CHECKLIST</h3>
+			<p>${reportText}</p>
+			<img src="${dataUrl}" alt="Chart">
+		</body>
+		</html>
+	`;
+
+		const printWin = window.open('', '', 'width=800,height=600');
+		printWin.document.open();
+		printWin.document.write(windowContent);
+		printWin.document.close();
+		printWin.focus();
+
+		setTimeout(() => {
+			printWin.print();
+			printWin.close();
+		}, 500);
+	}
+</script>
+<script>
+	function downloadChartImage() {
+		const canvas = document.getElementById('resposnsechart');
+		const chartImage = canvas.toDataURL('image/png');
+
+		const reportText = document.getElementById('audit-report-text').innerText;
+
+		// Create new canvas
+		const newCanvas = document.createElement('canvas');
+		const ctx = newCanvas.getContext('2d');
+
+		const width = canvas.width;
+		const height = canvas.height;
+		const extraHeight = 60; // Space for text
+
+		newCanvas.width = width;
+		newCanvas.height = height + extraHeight;
+
+		// White background
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+		// Draw the report text
+		ctx.fillStyle = '#000';
+		ctx.font = '20px Arial';
+		ctx.fillText(reportText, 10, 30);
+
+		// Draw the chart image after it loads
+		const img = new Image();
+		img.onload = function() {
+			ctx.drawImage(img, 0, extraHeight);
+
+			// Create downloadable image
+			const finalImage = newCanvas.toDataURL('image/png');
+			const link = document.createElement('a');
+			link.href = finalImage;
+			link.download = 'OTHER AREA CLEANING CHECKLIST.png';
+			link.click();
+		};
+		img.src = chartImage;
+	}
 </script>

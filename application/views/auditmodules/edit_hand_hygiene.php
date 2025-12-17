@@ -27,6 +27,27 @@ $param = json_decode($row->dataset, true);
 
                     <?php echo form_open_multipart('audit/edit_feedback_hand_hygiene_byid/' . $this->uri->segment(3), 'class="form-inner"') ?>
                     <table class="table table-striped table-bordered  no-footer dtr-inline collapsed">
+                        <tr>
+                            <td>
+                                <b>Audit Details</b>
+                            </td>
+                            <td style="overflow: clip;">
+                                Audit Name: <?php echo $param['audit_type']; ?>
+                                <br>
+                                Date & Time of Audit: <?php echo date('Y-m-d H:i', strtotime($row->datetime)); ?>
+                                <br>
+                                Audit by: <?php echo $param['audit_by']; ?>
+
+                                <!-- Hidden inputs -->
+                                <input class="form-control" type="hidden" name="audit_type"
+                                    value="<?php echo $param['audit_type']; ?>" />
+                                <input class="form-control" type="hidden" name="datetime"
+                                    value="<?php echo $row->datetime; ?>" />
+                                <input class="form-control" type="hidden" name="audit_by"
+                                    value="<?php echo $param['audit_by']; ?>" />
+                            </td>
+                        </tr>
+
 
                     </table>
 
@@ -71,14 +92,114 @@ $param = json_decode($row->dataset, true);
                             <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
                         
+                        
+                        
                         <tr>
-                            <td><b>Data collected by</b></td>
-                            <td><input class="form-control" type="text" name="name" value="<?php echo $param['name']; ?>"></td>
+                            <td><b>Uploaded Files</b></td>
+                            <td>
+                                <?php
+                                // $param = json_decode($record->dataset, true);
+                                $existingFiles = !empty($param['files_name']) ? $param['files_name'] : [];
+                                ?>
+
+                                <!-- 🗂 Existing Files Section -->
+                                <div id="existing-files">
+                                    <?php if (!empty($existingFiles)) { ?>
+                                        <!-- <label><b>Current Files:</b></label> -->
+                                        <ul id="file-list" style="list-style-type:none; padding-left:0;">
+                                            <?php foreach ($existingFiles as $index => $file) { ?>
+                                                <li data-index="<?php echo $index; ?>"
+                                                    style="margin-bottom:6px; background:#f8f9fa; padding:6px 10px; border-radius:6px; display:flex; align-items:center; justify-content:space-between;">
+                                                    <a href="<?php echo htmlspecialchars($file['url']); ?>" target="_blank"
+                                                        style="text-decoration:none; color:#007bff;">
+                                                        <?php echo htmlspecialchars($file['name']); ?>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-danger remove-file"
+                                                        style="margin-left:10px; padding:2px 6px; font-size:12px;">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <p id="no-files">No files uploaded</p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- 📤 Dynamic Upload Inputs -->
+                                <div class="form-group" id="upload-container" style="margin-top:10px;">
+                                    <label><b>Add New Files:</b></label>
+                                    <div class="upload-row"
+                                        style="display:flex; align-items:center; margin-bottom:6px;">
+                                        <input type="file" name="uploaded_files[]" class="form-control upload-input"
+                                            style="flex:1; margin-right:10px;">
+                                        <button type="button" class="btn btn-danger btn-sm remove-upload"
+                                            style="display:none;">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- ➕ Add More Files Button -->
+                                <button type="button" id="add-more-files" class="btn btn-sm btn-success"
+                                    style="margin-top:5px;">
+                                    <i class="fa fa-plus"></i> Add More Files
+                                </button>
+
+                                <!-- Hidden input for removed old files -->
+                                <input type="hidden" name="remove_files_json" id="remove_files_json" value="">
+                            </td>
                         </tr>
-                        <tr>
-                            <td><b>Data collected on</b></td>
-                            <td><input  class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
-                        </tr>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+
+                                // 🗑️ Handle removing existing old files
+                                const removeInput = document.getElementById("remove_files_json");
+                                let removedIndexes = [];
+
+                                document.querySelectorAll(".remove-file").forEach(btn => {
+                                    btn.addEventListener("click", function () {
+                                        const li = this.closest("li");
+                                        const index = li.getAttribute("data-index");
+                                        removedIndexes.push(index);
+                                        removeInput.value = JSON.stringify(removedIndexes);
+                                        li.remove();
+                                        if (document.querySelectorAll("#file-list li").length === 0) {
+                                            document.getElementById("existing-files").innerHTML = "<p id='no-files'>No files uploaded</p>";
+                                        }
+                                    });
+                                });
+
+                                // ➕ Dynamic "Add More Files"
+                                const addMoreBtn = document.getElementById("add-more-files");
+                                const uploadContainer = document.getElementById("upload-container");
+
+                                addMoreBtn.addEventListener("click", function () {
+                                    const newRow = document.createElement("div");
+                                    newRow.className = "upload-row";
+                                    newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
+
+                                    const input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "uploaded_files[]";
+                                    input.className = "form-control upload-input";
+                                    input.style.cssText = "flex:1; margin-right:10px;";
+
+                                    const removeBtn = document.createElement("button");
+                                    removeBtn.type = "button";
+                                    removeBtn.className = "btn btn-danger btn-sm remove-upload";
+                                    removeBtn.innerHTML = '<i class="fa fa-times"></i>';
+                                    removeBtn.addEventListener("click", function () {
+                                        newRow.remove();
+                                    });
+                                    removeBtn.style.display = "inline-block";
+
+                                    newRow.appendChild(input);
+                                    newRow.appendChild(removeBtn);
+                                    uploadContainer.appendChild(newRow);
+                                });
+                            });
+                        </script>
                         
                         
                         <tr>

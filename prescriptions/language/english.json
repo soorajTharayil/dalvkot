@@ -1,76 +1,75 @@
 {
+  "patient_info": "PRESCRIPTIONS AUDIT",
 
+  "patientid": "Patient UHID",
+  "patient_name_placeholder": "Enter UHID",
 
-   
-   "patient_info":"PRESCRIPTIONS AUDIT FORM",
-   
-   "patientid":"Patient UHID",
-   "patient_name_placeholder":"Enter UHID",
+  "test_name": "Ward",
+  "test_name_placeholder": "Enter the ward",
+  "department": "Department",
+  "data_analysis": "Additional comments:",
 
-   "test_name": "Ward",
-   "test_name_placeholder":"Enter the ward",
-   "department":"Department",
-   "data_analysis":"Additional comments:",
+  "staffname": "Name of the Consultant",
+  "staff_name_placeholder": "Enter consultant name",
 
+  "audited_by": "Doctor's name",
+  "audited_by_placeholder": "Enter the name",
 
-   "staffname":"Name of the Consultant",
-   "staff_name_placeholder":"Enter consultant name",
+  "name": "Audit Name",
+  "dtandtym": "Date & Time of Audit",
+  "stname": "Audit Short Name",
+  "dep": "Department",
+  "seldep": "Select Department",
+  "audby": "Audit by",
+  "patname": "Patient Name",
+  "patage": "Patient Age",
+  "patgen": "Patient Gender",
+  "location": "Area",
+  "selgen": "Select Gender",
+  "atdoc": "Attended Doctor",
+  "seldoc": "Select Doctor",
+  "admidat": "Admission / Visit Date & Time",
+  "discha": "Discharge Date & Time",
 
-   "audited_by":"Doctor's name",
-   "audited_by_placeholder":"Enter the name",
+  "pagetitle": "IP DISCHARGE FEEDBACK FORM",
+  "gustname": "Dear ",
+  "gustmessage": "Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
+  "excellent": "Excellent",
+  "good": "Good",
+  "average": "Average",
+  "poor": "Poor",
+  "worst": "Worst",
+  "badreviewtitle": "Tell us what went wrong",
+  "previous": "Back",
+  "next": "Next",
+  "optional": "Please describe :",
+  "telluswrong": "Tell us what went wrong",
+  "detractor": "Please describe reason for low rating",
 
-   "pagetitle":"IP DISCHARGE FEEDBACK FORM",
-   "gustname":"Dear ",
-   "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
-   "excellent":"Excellent",
-   "good":"Good",
-   "average":"Average",
-   "poor":"Poor",
-   "worst":"Worst",
-   "badreviewtitle":"Tell us what went wrong",
-   "previous":"Back",
-   "next":"Next",
-   "optional":"Please describe :",
-   "telluswrong":"Tell us what went wrong",
-   "detractor" : "Please describe reason for low rating",
+  "feedbacksuggestion": "Other feedbacks/suggestions:",
 
-   "feedbacksuggestion": "Other feedbacks/suggestions:",
+  "submit": "Submit",
+  "thankyou": "Thank you!",
+  "happythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
+  "unhappythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
 
-   "submit":"Submit",
-   "thankyou":"Thank you!",
-   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
-   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+  "formula_para1": "Date of surgery",
 
+  "identification_details": "Is the prescription written in capital letters?",
+  "vital_signs": "Is the route of administration mentioned?",
+  "surgery": "Is the dose mentioned?",
+  "complaints_communicated": "Is the frequency mentioned?",
+  "intake": "Is the patient identification present?",
+  "output": "Does the prescription use any non-standard abbreviations?",
 
-   "formula_para1": "Date of surgery",   
-   
-
-   "identification_details": "Is the prescription written in capital letters?",
-   "vital_signs": "Is the route of administration mentioned?",
-   "surgery": "Is the dose mentioned?",
-   "complaints_communicated": "Is the frequency mentioned?",
-   "intake":"Is the patient identification present?",
-   "output":"Does the prescription use any non-standard abbreviations?",
-   
-   "allergies":"Were any allergies communicated?",
-   "medication":"Was the medication administered communicated?",
-   "diagnostic":"Were any significant diagnostic results communicated?",
-   "lab_results":"Were any pending lab results communicated?",
-   "pending_investigation":"Were any pending investigations communicated?",
-   "medicine_order":"Were any new medicine orders communicated?",
-   "facility_communicated":"Was the transfer of the patient to/from another department/facility communicated?",
-   "health_education":"Was health education given and communicated?",
-   "risk_assessment":"Was a risk assessment communicated?",
-   "relevant_details":"Were any other relevant details communicated?"
-
-
-
-
-
-
-
-   
-
-
-   
+  "allergies": "Were any allergies communicated?",
+  "medication": "Was the medication administered communicated?",
+  "diagnostic": "Were any significant diagnostic results communicated?",
+  "lab_results": "Were any pending lab results communicated?",
+  "pending_investigation": "Were any pending investigations communicated?",
+  "medicine_order": "Were any new medicine orders communicated?",
+  "facility_communicated": "Was the transfer of the patient to/from another department/facility communicated?",
+  "health_education": "Was health education given and communicated?",
+  "risk_assessment": "Was a risk assessment communicated?",
+  "relevant_details": "Were any other relevant details communicated?"
 }

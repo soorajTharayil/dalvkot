@@ -43,8 +43,12 @@ $totalSeconds = 0;
 
 if ($num1 > 0) {
     while ($row = mysqli_fetch_object($result)) {
+
+
+        $dataset = json_decode($row->dataset);
+
         // Extract datetime from initial_assessment
-        $time = $row->ctscan_wait_time;
+        $time = $dataset->calculatedResultTime;
 
         list($hours, $minutes, $seconds) = explode(':', $time);
 

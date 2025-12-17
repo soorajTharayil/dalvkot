@@ -2,6 +2,7 @@
 include('db.php');
 
 $patinet_id = $_GET['patient_id'];
+
 $d = file_get_contents('php://input');
 
 $data = json_decode($d, true);
@@ -13,43 +14,34 @@ if (count($data) > 1) {
 
 
 
+
 	$name =	$data['name'];
 	$patientid =	$data['patientid'];
+	$department =	$data['department'];
+	$patient_category =	$data['patient_category'];
 	$email =	$data['email'];
 	$contactnumber =	$data['contactnumber'];
-
-	$triple_check = $data['gloves'];
-	$medicine_labelled = $data['mask'];
-	$file_verified = $data['cap'];
-	$six_rights = $data['apron'];
-	$administration_documented = $data['lead_apron'];
-
-	$use_xray_barrior = $data['use_xray_barrior'];
-	$patient_file = $data['patient_file'];
-	$verified = $data['verified'];
-	$indication = $data['indication'];
-	$medicine = $data['medicine'];
-	$alert = $data['alert'];
-	$dilution = $data['dilution'];
-	$administering = $data['administering'];
-	$privacy = $data['privacy'];
-	$vials = $data['vials'];
-	$cannula = $data['cannula'];
-	$flush = $data['flush'];
-	$medications = $data['medications'];
-	$reassess = $data['reassess'];
-	$oral = $data['oral'];
-	$discarded = $data['discarded'];
-	$handwashing = $data['handwashing'];
-	$procedures = $data['procedures'];
-
-
+	$patient_got_admitted =	$data['initial_assessment_hr1'];
+	$doctor_completed_assessment =	$data['initial_assessment_hr2'];
+	
+	$initial_assessment =	$data['calculatedResult'];
+	$consent_verified =	$data['consent_verified'];
+	$consent_verified_comment = $data['consent_comment'];
+	$discharge_summary =	$data['discharge_summary'];
+	$error_prone =	$data['error_prone'];
+	$error_prone_comment =	$data['error_prone_comment'];
+	$doctor_adviced_discharge =	$data['initial_assessment_hr3'];
+	$bill_paid_time =	$data['initial_assessment_hr4'];
+	$time_taken_for_discharge =	$data['calculatedDoctorAdviceToBillPaid'];
 	$comments = $data['dataAnalysis'];
 
 
 
-	$query = 'INSERT INTO `bf_feedback_medication_administration` (`name`, `patientid`, `mobile`, `email`, `datetime`, `datet`, `triple_check`, `medicine_labelled`, `file_verified`, `six_rights`, `administration_documented`, `use_xray_barrior`, `patient_file`, `verified`, `indication`, `medicine`, `alert`, `dilution`, `administering`, `privacy`, `vials`, `cannula`, `flush`, `medications`, `reassess`, `oral`, `discarded`, `handwashing`, `procedures`, `comments`, `dataset`) 
-	VALUES ("' . $name . '", "' . $patientid . '", "' . $contactnumber . '", "' . $email . '", "' . date('Y-m-d H:i:s') . '", "' . $today . '", "' . $triple_check . '", "' . $medicine_labelled . '", "' . $file_verified . '", "' . $six_rights . '", "' . $administration_documented . '", "' . $use_xray_barrior . '", "' . $patient_file . '", "' . $verified . '", "' . $indication . '", "' . $medicine . '", "' . $alert . '", "' . $dilution . '", "' . $administering . '", "' . $privacy . '", "' . $vials . '", "' . $cannula . '", "' . $flush . '", "' . $medications . '", "' . $reassess . '", "' . $oral . '", "' . $discarded . '", "' . $handwashing . '", "' . $procedures . '", "' . $comments . '", "' . mysqli_real_escape_string($con, json_encode($data)) . '")';
+
+
+
+	$query = 'INSERT INTO `bf_feedback_medication_administration` (`name`,`patientid`,`department`,`patient_category`,`mobile`,`email`,`datetime`,`datet`,`patient_got_admitted`, `doctor_completed_assessment`, `initial_assessment`, `consent_verified`,`consent_comment`, `discharge_summary`,`error_prone`,`error_prone_comment`,`doctor_adviced_discharge`, `bill_paid_time`, `time_taken_for_discharge`,`comments`, `dataset`) 
+   VALUES ("' . $name . '","' . $patientid . '","' . $department . '","' . $patient_category . '","' . $contactnumber . '","' . $email . '","' . date('Y-m-d H:i:s') . '","' . $today . '","' . $patient_got_admitted . '","' . $doctor_completed_assessment . '","' . $initial_assessment . '","' . $consent_verified . '","' . $consent_verified_comment . '","' . $discharge_summary . '","' . $error_prone . '","' . $error_prone_comment . '","' . $doctor_adviced_discharge . '","' . $bill_paid_time . '","' . $time_taken_for_discharge . '","' . $comments . '","' . mysqli_real_escape_string($con, json_encode($data)) . '")';
 
 	$result = mysqli_query($con, $query);
 	$fid = mysqli_insert_id($con);

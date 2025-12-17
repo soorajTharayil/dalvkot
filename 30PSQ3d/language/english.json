@@ -58,14 +58,14 @@
    "kpi_info": "30. PSQ3d - Incidence of needle stick injuries for the month of",
    "definition": "Definition:",
    "kpi_def": "Needle stick injury is a penetrating stab wound from a needle (or other sharp object) that may result in exposure to blood or other body fluids. Needle stick injuries are wounds caused by needles that accidentally puncture the skin.",
-   "formula_para1": "Number of parenteral exposures",   
+   "formula_para1": "Number of parenteral exposures (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of in-patient days",
+   "formula_para2": "Number of in-patient days (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

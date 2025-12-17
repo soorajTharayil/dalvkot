@@ -28,80 +28,258 @@ $param = json_decode($row->dataset, true);
                     <?php echo form_open_multipart('audit/edit_other_cleaning_insert_byid/' . $this->uri->segment(3), 'class="form-inner"') ?>
                     <table class="table table-striped table-bordered  no-footer dtr-inline collapsed">
 
+                        <tr>
+                            <td>
+                                <b>Audit Details</b>
+                            </td>
+                            <td style="overflow: clip;">
+                                Audit Name: <?php echo $param['audit_type']; ?>
+                                <br>
+                                Date & Time of Audit: <?php echo date('Y-m-d H:i', strtotime($row->datetime)); ?>
+                                <br>
+                                Audit by: <?php echo $param['audit_by']; ?>
+
+                                <!-- Hidden inputs -->
+                                <input class="form-control" type="hidden" name="audit_type"
+                                    value="<?php echo $param['audit_type']; ?>" />
+                                <input class="form-control" type="hidden" name="datetime"
+                                    value="<?php echo $row->datetime; ?>" />
+                                <input class="form-control" type="hidden" name="audit_by"
+                                    value="<?php echo $param['audit_by']; ?>" />
+                            </td>
+                        </tr>
+
+
                     </table>
 
                     <table class="table table-striped table-bordered no-footer dtr-inline collapsed">
+                        
 
                         <tr>
-                            <td><b>Room/ Area</b></td>
+                            <td><b>Area</b></td>
                             <td>
-                                <input class="form-control" type="text" name="area" value="<?php echo $param['area']; ?>">
+                                <select class="form-control" name="location">
+                                    <option value="">Select Area</option>
+                                    <?php
+                                    $areas = $this->db->get('bf_audit_area')->result_array();
+                                    foreach ($areas as $a) {
+                                        $selected = ($param['location'] == $a['title']) ? 'selected' : '';
+                                        echo "<option value='{$a['title']}' $selected>{$a['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </td>
                         </tr>
+
+                        
                         <tr>
-                            <td><b>Is trash removed and properly disposed of?</b></td>
-                            <td><input class="form-control" type="text" name="identification_details" value="<?php echo $param['identification_details']; ?>"></td>
-                        </tr>
+                        <td><b>Is trash removed and properly disposed of?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="trash_removed"
+                                value="<?php echo isset($param['identification_details']) ? htmlspecialchars($param['identification_details'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="trash_removed_text"
+                                    value="<?php echo isset($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are bed linens changed every day?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="bed_linens_changed"
+                                value="<?php echo isset($param['vital_signs']) ? htmlspecialchars($param['vital_signs'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="bed_linens_changed_text"
+                                    value="<?php echo isset($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are high-touch surfaces disinfected regularly?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="high_touch_disinfected"
+                                value="<?php echo isset($param['surgery']) ? htmlspecialchars($param['surgery'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="high_touch_disinfected_text"
+                                    value="<?php echo isset($param['surgery_text']) ? htmlspecialchars($param['surgery_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are bedrails cleaned and disinfected?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="bedrails_cleaned"
+                                value="<?php echo isset($param['complaints_communicated']) ? htmlspecialchars($param['complaints_communicated'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="bedrails_cleaned_text"
+                                    value="<?php echo isset($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are bedside tables wiped down?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="bedside_tables_wiped"
+                                value="<?php echo isset($param['intake']) ? htmlspecialchars($param['intake'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="bedside_tables_wiped_text"
+                                    value="<?php echo isset($param['intake_text']) ? htmlspecialchars($param['intake_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are remote accessories and switches cleaned?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="remote_accessories_cleaned"
+                                value="<?php echo isset($param['output']) ? htmlspecialchars($param['output'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="remote_accessories_cleaned_text"
+                                    value="<?php echo isset($param['output_text']) ? htmlspecialchars($param['output_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are windows and curtains cleaned?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="windows_curtains_cleaned"
+                                value="<?php echo isset($param['allergies']) ? htmlspecialchars($param['allergies'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="windows_curtains_cleaned_text"
+                                    value="<?php echo isset($param['allergies_text']) ? htmlspecialchars($param['allergies_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Is the floor mopped regularly?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="floor_mopped"
+                                value="<?php echo isset($param['medication']) ? htmlspecialchars($param['medication'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="floor_mopped_text"
+                                    value="<?php echo isset($param['medication_text']) ? htmlspecialchars($param['medication_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
                         <tr>
-                            <td><b>Are high-touch surfaces disinfected regularly?</b></td>
-                            <td><input class="form-control" type="text" name="vital_signs" value="<?php echo $param['vital_signs']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are tables wiped down thoroughly?</b></td>
-                            <td><input class="form-control" type="text" name="surgery" value="<?php echo $param['surgery']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are remote accessories and switches cleaned?</b></td>
-                            <td><input class="form-control" type="text" name="complaints_communicated" value="<?php echo $param['complaints_communicated']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are windows and curtains cleaned properly?</b></td>
-                            <td><input class="form-control" type="text" name="intake" value="<?php echo $param['intake']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Is the floor mopped regularly?</b></td>
-                            <td><input class="form-control" type="text" name="output" value="<?php echo $param['output']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are furniture and fixtures dusted?</b></td>
-                            <td><input class="form-control" type="text" name="allergies" value="<?php echo $param['allergies']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Is the fan cleaned properly?</b></td>
-                            <td><input class="form-control" type="text" name="medication" value="<?php echo $param['medication']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are all spills cleaned and disinfected immediately?</b></td>
-                            <td><input class="form-control" type="text" name="diagnostic" value="<?php echo $param['diagnostic']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are items labeled properly?</b></td>
-                            <td><input class="form-control" type="text" name="lab_results" value="<?php echo $param['lab_results']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Is the three-step Water-Disinfectant-Plain water cleaning method used?</b></td>
-                            <td><input class="form-control" type="text" name="pending_investigation" value="<?php echo $param['pending_investigation']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Is the room/area maintained with a fresh smell?</b></td>
-                            <td><input class="form-control" type="text" name="medicine_order" value="<?php echo $param['medicine_order']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are toilets and washbasins cleaned thoroughly?</b></td>
-                            <td><input class="form-control" type="text" name="facility_communicated" value="<?php echo $param['facility_communicated']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are floor mats clean and properly placed?</b></td>
-                            <td><input class="form-control" type="text" name="health_education" value="<?php echo $param['health_education']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Are housekeeping equipment arranged in their designated spaces?</b></td>
-                            <td><input class="form-control" type="text" name="risk_assessment" value="<?php echo $param['risk_assessment']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><b>Is the cleaning checklist properly filled out and signed?</b></td>
-                            <td><input class="form-control" type="text" name="urethral" value="<?php echo $param['urethral']; ?>"></td>
-                        </tr>
+                        <td><b>Are all spills cleaned and disinfected immediately?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="spills_cleaned"
+                                value="<?php echo isset($param['diagnostic']) ? htmlspecialchars($param['diagnostic'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="spills_cleaned_text"
+                                    value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are items labeled properly?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="items_labeled"
+                                value="<?php echo isset($param['lab_results']) ? htmlspecialchars($param['lab_results'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="items_labeled_text"
+                                    value="<?php echo isset($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Is the three-step Water-Disinfectant-Plain water cleaning method used?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="three_step_cleaning"
+                                value="<?php echo isset($param['pending_investigation']) ? htmlspecialchars($param['pending_investigation'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="three_step_cleaning_text"
+                                    value="<?php echo isset($param['pending_investigation_text']) ? htmlspecialchars($param['pending_investigation_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Is the room/area maintained with a fresh smell?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="room_fresh_smell"
+                                value="<?php echo isset($param['medicine_order']) ? htmlspecialchars($param['medicine_order'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="room_fresh_smell_text"
+                                    value="<?php echo isset($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are toilets and washbasins cleaned thoroughly?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="toilets_cleaned"
+                                value="<?php echo isset($param['facility_communicated']) ? htmlspecialchars($param['facility_communicated'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="toilets_cleaned_text"
+                                    value="<?php echo isset($param['facility_communicated_text']) ? htmlspecialchars($param['facility_communicated_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are floor mats clean and properly placed?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="floor_mats_clean"
+                                value="<?php echo isset($param['health_education']) ? htmlspecialchars($param['health_education'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="floor_mats_clean_text"
+                                    value="<?php echo isset($param['health_education_text']) ? htmlspecialchars($param['health_education_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Are housekeeping equipment arranged in their designated spaces?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="equipment_arranged"
+                                value="<?php echo isset($param['risk_assessment']) ? htmlspecialchars($param['risk_assessment'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="equipment_arranged_text"
+                                    value="<?php echo isset($param['risk_assessment_text']) ? htmlspecialchars($param['risk_assessment_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Is the cleaning checklist properly filled out and signed?</b></td>
+                        <td>
+                            <input class="form-control" type="text" name="cleaning_checklist_signed"
+                                value="<?php echo isset($param['urethral']) ? htmlspecialchars($param['urethral'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                            <div style="margin-top:5px;">
+                                Remarks: <input class="form-control" type="text" name="cleaning_checklist_signed_text"
+                                    value="<?php echo isset($param['urethral_text']) ? htmlspecialchars($param['urethral_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    placeholder="Remarks">
+                            </div>
+                        </td>
+                    </tr>
+
 
                         
                         <tr>
@@ -109,14 +287,114 @@ $param = json_decode($row->dataset, true);
                             <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
 
+                        
+                        
                         <tr>
-                            <td><b>Data collected by</b></td>
-                            <td><input class="form-control" type="text" name="name" value="<?php echo $param['name']; ?>"></td>
+                            <td><b>Uploaded Files</b></td>
+                            <td>
+                                <?php
+                                // $param = json_decode($record->dataset, true);
+                                $existingFiles = !empty($param['files_name']) ? $param['files_name'] : [];
+                                ?>
+
+                                <!-- 🗂 Existing Files Section -->
+                                <div id="existing-files">
+                                    <?php if (!empty($existingFiles)) { ?>
+                                        <!-- <label><b>Current Files:</b></label> -->
+                                        <ul id="file-list" style="list-style-type:none; padding-left:0;">
+                                            <?php foreach ($existingFiles as $index => $file) { ?>
+                                                <li data-index="<?php echo $index; ?>"
+                                                    style="margin-bottom:6px; background:#f8f9fa; padding:6px 10px; border-radius:6px; display:flex; align-items:center; justify-content:space-between;">
+                                                    <a href="<?php echo htmlspecialchars($file['url']); ?>" target="_blank"
+                                                        style="text-decoration:none; color:#007bff;">
+                                                        <?php echo htmlspecialchars($file['name']); ?>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-danger remove-file"
+                                                        style="margin-left:10px; padding:2px 6px; font-size:12px;">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <p id="no-files">No files uploaded</p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- 📤 Dynamic Upload Inputs -->
+                                <div class="form-group" id="upload-container" style="margin-top:10px;">
+                                    <label><b>Add New Files:</b></label>
+                                    <div class="upload-row"
+                                        style="display:flex; align-items:center; margin-bottom:6px;">
+                                        <input type="file" name="uploaded_files[]" class="form-control upload-input"
+                                            style="flex:1; margin-right:10px;">
+                                        <button type="button" class="btn btn-danger btn-sm remove-upload"
+                                            style="display:none;">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- ➕ Add More Files Button -->
+                                <button type="button" id="add-more-files" class="btn btn-sm btn-success"
+                                    style="margin-top:5px;">
+                                    <i class="fa fa-plus"></i> Add More Files
+                                </button>
+
+                                <!-- Hidden input for removed old files -->
+                                <input type="hidden" name="remove_files_json" id="remove_files_json" value="">
+                            </td>
                         </tr>
-                        <tr>
-                            <td><b>Data collected on</b></td>
-                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
-                        </tr>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+
+                                // 🗑️ Handle removing existing old files
+                                const removeInput = document.getElementById("remove_files_json");
+                                let removedIndexes = [];
+
+                                document.querySelectorAll(".remove-file").forEach(btn => {
+                                    btn.addEventListener("click", function () {
+                                        const li = this.closest("li");
+                                        const index = li.getAttribute("data-index");
+                                        removedIndexes.push(index);
+                                        removeInput.value = JSON.stringify(removedIndexes);
+                                        li.remove();
+                                        if (document.querySelectorAll("#file-list li").length === 0) {
+                                            document.getElementById("existing-files").innerHTML = "<p id='no-files'>No files uploaded</p>";
+                                        }
+                                    });
+                                });
+
+                                // ➕ Dynamic "Add More Files"
+                                const addMoreBtn = document.getElementById("add-more-files");
+                                const uploadContainer = document.getElementById("upload-container");
+
+                                addMoreBtn.addEventListener("click", function () {
+                                    const newRow = document.createElement("div");
+                                    newRow.className = "upload-row";
+                                    newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
+
+                                    const input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "uploaded_files[]";
+                                    input.className = "form-control upload-input";
+                                    input.style.cssText = "flex:1; margin-right:10px;";
+
+                                    const removeBtn = document.createElement("button");
+                                    removeBtn.type = "button";
+                                    removeBtn.className = "btn btn-danger btn-sm remove-upload";
+                                    removeBtn.innerHTML = '<i class="fa fa-times"></i>';
+                                    removeBtn.addEventListener("click", function () {
+                                        newRow.remove();
+                                    });
+                                    removeBtn.style.display = "inline-block";
+
+                                    newRow.appendChild(input);
+                                    newRow.appendChild(removeBtn);
+                                    uploadContainer.appendChild(newRow);
+                                });
+                            });
+                        </script>
 
 
                         <tr>

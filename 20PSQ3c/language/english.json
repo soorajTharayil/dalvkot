@@ -57,13 +57,13 @@
    "kpi_info": "20. PSQ3c - Turnaround time for issue of blood and blood components for the month of ",
    "definition": "Definition: ",
    "kpi_def": "Time taken to be calculated from the time the request is received in the blood bank till the blood is cross matched/reserved and available for transfusion.",
-   "formula_para1": "Sum of time taken",   
+   "formula_para1": "Sum of time taken (Numerator)",   
    "hr_placeholder":"Hours",
    "min_placeholder": "Minutes",
    "sec_placeholder": "Seconds",
-   "formula_para2": "Total no. of blood and blood components crossmatched/reserved",
+   "formula_para2": "Total no. of blood and blood components crossmatched/reserved (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

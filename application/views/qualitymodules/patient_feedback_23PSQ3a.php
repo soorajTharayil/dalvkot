@@ -99,6 +99,22 @@
 										<td><b>Data collection on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
 									</tr>
+									<tr>
+										<td>Uploaded files:</td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
+
 
 
 

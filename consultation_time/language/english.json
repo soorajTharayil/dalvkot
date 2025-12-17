@@ -25,6 +25,23 @@
    "department":"Department",
    "patient_category": "Patient Category",
 
+   "name": "Audit Name",
+   "dtandtym": "Date & Time of Audit",
+   "stname": "Audit Short Name",
+   "dep": "Department",
+   "seldep": "Select Department",
+   "audby": "Audit by",
+   
+   "patname": "Patient Name",
+   "patage": "Patient Age",
+   "patgen": "Patient Gender",
+   "location": "Area",
+   "selgen": "Select Gender",
+   "atdoc": "Attended Doctor",
+   "seldoc": "Select Doctor",
+   "admidat": "Admission / Visit Date & Time",
+   "discha": "Discharge Date & Time",
+
    "pagetitle":"IP DISCHARGE FEEDBACK FORM",
    "gustname":"Dear ",
    "gustmessage":"Thank you for choosing our hospital for your healthcare needs. We constantly work to improve and meet your expectations. To serve our patients better, kindly spare a few minutes to fill out this feedback form. Your opinion is of immense value to us.",
@@ -42,7 +59,7 @@
 
    "recommendationmessage":"On a scale from 0-10, how likely are you to recommend this hospital to your friends or family members?",
    "yourreason":"Your reason for selecting our hospital",
-   "location":"Location/Proximity",
+  
    "specificservices":"Specific services offered",
    "referredbydoc":"Referred by doctor",
    "friendfamily":"Friend/Family recommendation",

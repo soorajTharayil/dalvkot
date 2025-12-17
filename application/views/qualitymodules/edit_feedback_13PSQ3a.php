@@ -1,4 +1,3 @@
-
 <?php
 $id = $this->uri->segment(3);
 $this->db->where('id', $id);
@@ -13,7 +12,7 @@ $param = json_decode($row->dataset, true);
     <div class="row">
 
         <div class="col-lg-12">
-          
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_tooltip'); ?>">
@@ -49,7 +48,7 @@ $param = json_decode($row->dataset, true);
                             <td>
                                 <div style="display: flex; flex-direction: row; align-items: center;">
                                     <span class="has-float-label">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_hr']; ?>"  name="initial_assessment_hr"  oninput="restrictToNumerals(event); calculateCAUTIRate();" type="number" id="formula_para1_hr" style="padding-top: 2px; padding-left: 6px; margin-top: 9px; width: 90%;" />
+                                        <input class="form-control" value="<?php echo $param['initial_assessment_hr']; ?>" name="initial_assessment_hr" oninput="restrictToNumerals(event); calculateCAUTIRate();" type="number" id="formula_para1_hr" style="padding-top: 2px; padding-left: 6px; margin-top: 9px; width: 90%;" />
                                         <input class="form-control" style="display:none" name="initial_assessment_min" value="<?php echo $param['initial_assessment_min']; ?>" />
                                         <input class="form-control" style="display:none" name="initial_assessment_sec" value="<?php echo $param['initial_assessment_sec']; ?>" />
                                         <input class="form-control" style="display:none" name="name" value="<?php echo $param['name']; ?>" />
@@ -69,6 +68,8 @@ $param = json_decode($row->dataset, true);
                                 <br>
                                 <button type="button" class="btn btn-primary" onclick="calculateCAUTIRate()">
                                     <input type="hidden" id="formattedTime" name="formattedTime" value="">
+
+
                                     Calculate urinary tract infection
                                 </button>
                             </td>
@@ -76,25 +77,137 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Catheter associated Urinary tract infection rate (per 1000 urinary catheter days)</b></td>
                             <td>
-                                <input class="form-control" type="text" id="calculatedResult" name="calculatedResult" value="<?php echo $param['calculatedResult']; ?>">
+                                <input class="form-control" type="text" id="calculatedResult" name="calculatedResult"
+                                    value="<?php echo $param['calculatedResult']; ?>" readonly>
+
+
                             </td>
                         </tr>
                         <tr>
                             <td><b>Data analysis</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>" required></td>
                         </tr>
                         <tr>
                             <td><b>Corrective action</b></td>
-                            <td><input class="form-control" type="text" name="correctiveAction" value="<?php echo $param['correctiveAction']; ?>"></td>
+                            <td><input class="form-control" type="text" name="correctiveAction" value="<?php echo $param['correctiveAction']; ?>" required></td>
                         </tr>
                         <tr>
                             <td><b>Preventive action</b></td>
-                            <td><input class="form-control" type="text" name="preventiveAction" value="<?php echo $param['preventiveAction']; ?>"></td>
+                            <td><input class="form-control" type="text" name="preventiveAction" value="<?php echo $param['preventiveAction']; ?>" required></td>
                         </tr>
+
+
+
                         <tr>
                             <td><b>Data collected on</b></td>
-                            <td><input  class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
+                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
                         </tr>
+                        <tr>
+                            <td><b>Uploaded Files</b></td>
+                            <td>
+                                <?php
+                                // $param = json_decode($record->dataset, true);
+                                $existingFiles = !empty($param['files_name']) ? $param['files_name'] : [];
+                                ?>
+
+                                <!-- 🗂 Existing Files Section -->
+                                <div id="existing-files">
+                                    <?php if (!empty($existingFiles)) { ?>
+                                        <!-- <label><b>Current Files:</b></label> -->
+                                        <ul id="file-list" style="list-style-type:none; padding-left:0;">
+                                            <?php foreach ($existingFiles as $index => $file) { ?>
+                                                <li data-index="<?php echo $index; ?>"
+                                                    style="margin-bottom:6px; background:#f8f9fa; padding:6px 10px; border-radius:6px; display:flex; align-items:center; justify-content:space-between;">
+                                                    <a href="<?php echo htmlspecialchars($file['url']); ?>" target="_blank"
+                                                        style="text-decoration:none; color:#007bff;">
+                                                        <?php echo htmlspecialchars($file['name']); ?>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-danger remove-file"
+                                                        style="margin-left:10px; padding:2px 6px; font-size:12px;">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <p id="no-files">No files uploaded</p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- 📤 Dynamic Upload Inputs -->
+                                <div class="form-group" id="upload-container" style="margin-top:10px;">
+                                    <label><b>Add New Files:</b></label>
+                                    <div class="upload-row"
+                                        style="display:flex; align-items:center; margin-bottom:6px;">
+                                        <input type="file" name="uploaded_files[]" class="form-control upload-input"
+                                            style="flex:1; margin-right:10px;">
+                                        <button type="button" class="btn btn-danger btn-sm remove-upload"
+                                            style="display:none;">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- ➕ Add More Files Button -->
+                                <button type="button" id="add-more-files" class="btn btn-sm btn-success"
+                                    style="margin-top:5px;">
+                                    <i class="fa fa-plus"></i> Add More Files
+                                </button>
+
+                                <!-- Hidden input for removed old files -->
+                                <input type="hidden" name="remove_files_json" id="remove_files_json" value="">
+                            </td>
+                        </tr>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+
+                                // 🗑️ Handle removing existing old files
+                                const removeInput = document.getElementById("remove_files_json");
+                                let removedIndexes = [];
+
+                                document.querySelectorAll(".remove-file").forEach(btn => {
+                                    btn.addEventListener("click", function() {
+                                        const li = this.closest("li");
+                                        const index = li.getAttribute("data-index");
+                                        removedIndexes.push(index);
+                                        removeInput.value = JSON.stringify(removedIndexes);
+                                        li.remove();
+                                        if (document.querySelectorAll("#file-list li").length === 0) {
+                                            document.getElementById("existing-files").innerHTML = "<p id='no-files'>No files uploaded</p>";
+                                        }
+                                    });
+                                });
+
+                                // ➕ Dynamic "Add More Files"
+                                const addMoreBtn = document.getElementById("add-more-files");
+                                const uploadContainer = document.getElementById("upload-container");
+
+                                addMoreBtn.addEventListener("click", function() {
+                                    const newRow = document.createElement("div");
+                                    newRow.className = "upload-row";
+                                    newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
+
+                                    const input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "uploaded_files[]";
+                                    input.className = "form-control upload-input";
+                                    input.style.cssText = "flex:1; margin-right:10px;";
+
+                                    const removeBtn = document.createElement("button");
+                                    removeBtn.type = "button";
+                                    removeBtn.className = "btn btn-danger btn-sm remove-upload";
+                                    removeBtn.innerHTML = '<i class="fa fa-times"></i>';
+                                    removeBtn.addEventListener("click", function() {
+                                        newRow.remove();
+                                    });
+                                    removeBtn.style.display = "inline-block";
+
+                                    newRow.appendChild(input);
+                                    newRow.appendChild(removeBtn);
+                                    uploadContainer.appendChild(newRow);
+                                });
+                            });
+                        </script>
                         <tr>
                             <td colspan="2">
                                 <div class="col-sm-offset-3 col-sm-6">
@@ -120,7 +233,6 @@ $param = json_decode($row->dataset, true);
     </div>
 </div>
 <script>
-
     // Initialize flags to track if values have been edited and if calculation is done
     var valuesEdited = false;
     var calculationDone = false;
@@ -165,36 +277,60 @@ $param = json_decode($row->dataset, true);
         document.querySelector('input[name="initial_assessment_hr"]').value = urinaryCatheterUTIs;
         document.querySelector('input[name="total_admission"]').value = urinaryCatheterDays;
 
+        // Validate numerator
+        if (isNaN(urinaryCatheterUTIs) || urinaryCatheterUTIs < 0) {
+            alert("Enter the number of urinary catheter associated UTIs in a month.");
+            return;
+        }
 
-        // Validate inputs for urinaryCatheterUTIs and urinaryCatheterDays
-		if (isNaN(urinaryCatheterUTIs) || urinaryCatheterUTIs < 0) {
-			alert("Enter the number of urinary catheter associated UTIs in a month.");
-			return;
-		}
-	
-		if (isNaN(urinaryCatheterDays) || urinaryCatheterDays <= 0) {
-			alert("Enter the number of urinary catheter days in that month.");
-			return;
-		}
-	
-		// Check if the number of urinary catheter associated UTIs exceeds the number of urinary catheter days
-		if (urinaryCatheterUTIs > urinaryCatheterDays) {
-			alert("Number of urinary catheter associated UTIs must be less than number of urinary catheter days.");
-			return;
-		}
-	
+        // Validate denominator (allow zero now)
+        if (isNaN(urinaryCatheterDays) || urinaryCatheterDays < 0) {
+            alert("Enter the number of urinary catheter days in that month.");
+            return;
+        }
+
+        // Check numerator > denominator (only if denominator > 0)
+        if (urinaryCatheterDays > 0 && urinaryCatheterUTIs > urinaryCatheterDays) {
+            alert("Number of urinary catheter associated UTIs must be less than number of urinary catheter days.");
+            return;
+        }
+
         var calculatedResult;
-		if (urinaryCatheterUTIs === 0 && urinaryCatheterDays === 0) {
-			calculatedResult = 0;
-		} else {
-			// Calculate the CAUTI rate
-			calculatedResult = Math.round((urinaryCatheterUTIs / urinaryCatheterDays) * 1000);
-		}
-	
+
+        // If denominator is zero → result = 0 (safe)
+        if (urinaryCatheterDays === 0) {
+            calculatedResult = 0;
+        } else {
+            calculatedResult = Math.round((urinaryCatheterUTIs / urinaryCatheterDays) * 1000);
+        }
+
         document.getElementById('calculatedResult').value = calculatedResult;
 
         console.log("Calculated result:", calculatedResult);
         calculationDone = true;
+    }
+    // ✅ Restrict input to numerals with decimals
+    function restrictToNumerals(event) {
+        const inputElement = event.target;
+        const cursorPos = inputElement.selectionStart;
+        const currentValue = inputElement.value;
 
+        // Allow only digits and a single decimal point
+        let filteredValue = currentValue
+            .replace(/[^0-9.]/g, '') // Remove non-numeric except '.'
+            .replace(/(\..*?)\./g, '$1'); // Keep only first '.'
+
+        // Prevent multiple leading zeros unless it's "0." pattern
+        filteredValue = filteredValue.replace(/^0{2,}/, '0');
+        if (filteredValue.startsWith('0') && !filteredValue.startsWith('0.')) {
+            filteredValue = filteredValue.replace(/^0+/, '0');
+        }
+
+        // Update the field without moving cursor
+        if (filteredValue !== currentValue) {
+            const diff = currentValue.length - filteredValue.length;
+            inputElement.value = filteredValue;
+            inputElement.setSelectionRange(cursorPos - diff, cursorPos - diff);
+        }
     }
 </script>

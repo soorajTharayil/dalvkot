@@ -17,6 +17,14 @@
    "data_analysis":"Additional comments:",
 
 
+   "name": "Audit Name",
+   "dtandtym": "Date & Time of Audit",
+   "stname": "Audit Short Name",
+   "dep": "Department",
+   "seldep": "Select Department",
+   "audby": "Audit by",
+
+
    "staffname":"Number of Occupied Beds",
    "staff_name_placeholder":"Your inputs here",
 

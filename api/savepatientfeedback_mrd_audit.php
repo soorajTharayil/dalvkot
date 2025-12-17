@@ -2,6 +2,7 @@
 include('db.php');
 
 $patinet_id = $_GET['patient_id'];
+
 $d = file_get_contents('php://input');
 
 $data = json_decode($d, true);
@@ -10,6 +11,7 @@ if (count($data) > 1) {
 	date_default_timezone_set('Asia/Kolkata');
 	$data['name'] = strtoupper($data['name']);
 	$today = date('Y-m-d');
+
 
 
 	

@@ -13,6 +13,7 @@ $data = json_decode($d, true);
 if (count($data) > 1) {
 	date_default_timezone_set('Asia/Kolkata');
 	$data['name'] = strtoupper($data['name']);
+$today = date('Y-m-d');
 	
 
 	// Convert month name to number
@@ -23,7 +24,7 @@ if (count($data) > 1) {
 	$currentTime = date('H:i:s');  // Get the current time
 
 	// Construct `datet` and `datetime`
-	$datet = $year . '-' . $monthNumber . '-' . $currentDay;  // Constructs the date as "YYYY-MM-01"
+	//$datet = $year . '-' . $monthNumber . '-' . $currentDay;  // Constructs the date as "YYYY-MM-01"
 	$datetime = $year . '-' . $monthNumber . '-' . $currentDay . ' ' . $currentTime;  // Constructs the datetime as "YYYY-MM-DD HH:MM:SS"
 
 
@@ -54,7 +55,7 @@ if (count($data) > 1) {
 		"' . $patientid . '", 
 		"' . $contactnumber . '", 
 		"' . $datetime . '", 
-		"' . $datet . '", 
+		"' . $today . '", 
 		"' . $no_staff_adher_safety . '", 
 		"' . $no_staff_audited . '", 
 		"' . $calculatedResult . '", 

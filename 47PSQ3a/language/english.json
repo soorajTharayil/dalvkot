@@ -58,14 +58,14 @@
    "kpi_info": "47. PSQ3a Percentage of adverse reaction to radiopharmaceutical for the month of",
    "definition": "Definition:",
    "kpi_def": "",
-   "formula_para1": "Total number of patients who developed adverse reaction(s) to radiopharmaceutical",   
+   "formula_para1": "Total number of patients who developed adverse reaction(s) to radiopharmaceutical (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total number of patients receiving the radiopharmaceutical",
+   "formula_para2": "Total number of patients receiving the radiopharmaceutical (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

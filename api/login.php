@@ -33,6 +33,27 @@ if ($result) {
     $response['SHARE-LINKS'] = get_user_by_access('SHARE-LINKS', $con, $result->user_id, $result->user_role);
     $response['QR-CODES'] = get_user_by_access('QR-CODES', $con, $result->user_id, $result->user_role);
 
+    $response['PREMS-MODULE'] = get_user_by_access('PREMS-MODULE', $con, $result->user_id, $result->user_role);
+    $response['PREMS1']  = get_user_by_access('PREMS-FORM1',  $con, $result->user_id, $result->user_role);
+    $response['PREMS2']  = get_user_by_access('PREMS-FORM2',  $con, $result->user_id, $result->user_role);
+    $response['PREMS3']  = get_user_by_access('PREMS-FORM3',  $con, $result->user_id, $result->user_role);
+    $response['PREMS4']  = get_user_by_access('PREMS-FORM4',  $con, $result->user_id, $result->user_role);
+    $response['PREMS5']  = get_user_by_access('PREMS-FORM5',  $con, $result->user_id, $result->user_role);
+    $response['PREMS6']  = get_user_by_access('PREMS-FORM6',  $con, $result->user_id, $result->user_role);
+    $response['PREMS7']  = get_user_by_access('PREMS-FORM7',  $con, $result->user_id, $result->user_role);
+    $response['PREMS8']  = get_user_by_access('PREMS-FORM8',  $con, $result->user_id, $result->user_role);
+    $response['PREMS9']  = get_user_by_access('PREMS-FORM9',  $con, $result->user_id, $result->user_role);
+    $response['PREMS10'] = get_user_by_access('PREMS-FORM10', $con, $result->user_id, $result->user_role);
+    $response['PREMS11'] = get_user_by_access('PREMS-FORM11', $con, $result->user_id, $result->user_role);
+    $response['PREMS12'] = get_user_by_access('PREMS-FORM12', $con, $result->user_id, $result->user_role);
+    $response['PREMS13'] = get_user_by_access('PREMS-FORM13', $con, $result->user_id, $result->user_role);
+    $response['PREMS14'] = get_user_by_access('PREMS-FORM14', $con, $result->user_id, $result->user_role);
+    $response['PREMS15'] = get_user_by_access('PREMS-FORM15', $con, $result->user_id, $result->user_role);
+    $response['PREMS16'] = get_user_by_access('PREMS-FORM16', $con, $result->user_id, $result->user_role);
+    $response['PREMS17'] = get_user_by_access('PREMS-FORM17', $con, $result->user_id, $result->user_role);
+
+
+
     $response['IP-TICKETS-DASHBOARD'] = get_user_by_access('IP-TICKETS-DASHBOARD', $con, $result->user_id, $result->user_role);
     $response['IP-TOTAL-TICKETS'] = get_user_by_access('IP-TOTAL-TICKETS', $con, $result->user_id, $result->user_role);
     $response['IP-OPEN-TICKETS'] = get_user_by_access('IP-OPEN-TICKETS', $con, $result->user_id, $result->user_role);
@@ -127,26 +148,24 @@ if ($result) {
     $response['KPI32'] = get_user_by_access('QUALITY-KPI32', $con, $result->user_id, $result->user_role);
     $response['KPI33'] = get_user_by_access('QUALITY-KPI33', $con, $result->user_id, $result->user_role);
 
-       
-            $response['KPI34'] = get_user_by_access('QUALITY-KPI34', $con, $result->user_id, $result->user_role);
-            $response['KPI35'] = get_user_by_access('QUALITY-KPI35', $con, $result->user_id, $result->user_role);
-            $response['KPI36'] = get_user_by_access('QUALITY-KPI36', $con, $result->user_id, $result->user_role);
-            $response['KPI37'] = get_user_by_access('QUALITY-KPI37', $con, $result->user_id, $result->user_role);
-            $response['KPI38'] = get_user_by_access('QUALITY-KPI38', $con, $result->user_id, $result->user_role);
-            $response['KPI39'] = get_user_by_access('QUALITY-KPI39', $con, $result->user_id, $result->user_role);
-            $response['KPI40'] = get_user_by_access('QUALITY-KPI40', $con, $result->user_id, $result->user_role);
-            $response['KPI41'] = get_user_by_access('QUALITY-KPI41', $con, $result->user_id, $result->user_role);
-            $response['KPI42'] = get_user_by_access('QUALITY-KPI42', $con, $result->user_id, $result->user_role);
-            $response['KPI43'] = get_user_by_access('QUALITY-KPI43', $con, $result->user_id, $result->user_role);
-            $response['KPI44'] = get_user_by_access('QUALITY-KPI44', $con, $result->user_id, $result->user_role);
-            $response['KPI45'] = get_user_by_access('QUALITY-KPI45', $con, $result->user_id, $result->user_role);
-            $response['KPI46'] = get_user_by_access('QUALITY-KPI46', $con, $result->user_id, $result->user_role);
-            $response['KPI47'] = get_user_by_access('QUALITY-KPI47', $con, $result->user_id, $result->user_role);
-            $response['KPI48'] = get_user_by_access('QUALITY-KPI48', $con, $result->user_id, $result->user_role);
-            $response['KPI49'] = get_user_by_access('QUALITY-KPI49', $con, $result->user_id, $result->user_role);
-            $response['KPI50'] = get_user_by_access('QUALITY-KPI50', $con, $result->user_id, $result->user_role);
-            $response['KPI51'] = get_user_by_access('QUALITY-KPI51', $con, $result->user_id, $result->user_role);
-            
+    $response['KPI34'] = get_user_by_access('QUALITY-KPI34', $con, $result->user_id, $result->user_role);
+    $response['KPI35'] = get_user_by_access('QUALITY-KPI35', $con, $result->user_id, $result->user_role);
+    $response['KPI36'] = get_user_by_access('QUALITY-KPI36', $con, $result->user_id, $result->user_role);
+    $response['KPI37'] = get_user_by_access('QUALITY-KPI37', $con, $result->user_id, $result->user_role);
+    $response['KPI38'] = get_user_by_access('QUALITY-KPI38', $con, $result->user_id, $result->user_role);
+    $response['KPI39'] = get_user_by_access('QUALITY-KPI39', $con, $result->user_id, $result->user_role);
+    $response['KPI40'] = get_user_by_access('QUALITY-KPI40', $con, $result->user_id, $result->user_role);
+    $response['KPI41'] = get_user_by_access('QUALITY-KPI41', $con, $result->user_id, $result->user_role);
+    $response['KPI42'] = get_user_by_access('QUALITY-KPI42', $con, $result->user_id, $result->user_role);
+    $response['KPI43'] = get_user_by_access('QUALITY-KPI43', $con, $result->user_id, $result->user_role);
+    $response['KPI44'] = get_user_by_access('QUALITY-KPI44', $con, $result->user_id, $result->user_role);
+    $response['KPI45'] = get_user_by_access('QUALITY-KPI45', $con, $result->user_id, $result->user_role);
+    $response['KPI46'] = get_user_by_access('QUALITY-KPI46', $con, $result->user_id, $result->user_role);
+    $response['KPI47'] = get_user_by_access('QUALITY-KPI47', $con, $result->user_id, $result->user_role);
+    $response['KPI48'] = get_user_by_access('QUALITY-KPI48', $con, $result->user_id, $result->user_role);
+    $response['KPI49'] = get_user_by_access('QUALITY-KPI49', $con, $result->user_id, $result->user_role);
+    $response['KPI50'] = get_user_by_access('QUALITY-KPI50', $con, $result->user_id, $result->user_role);
+    $response['KPI51'] = get_user_by_access('QUALITY-KPI51', $con, $result->user_id, $result->user_role);
 
     $response['AUDIT1'] = get_user_by_access('AUDIT-FORM1', $con, $result->user_id, $result->user_role);
     $response['AUDIT2'] = get_user_by_access('AUDIT-FORM2', $con, $result->user_id, $result->user_role);
@@ -181,6 +200,8 @@ if ($result) {
     $response['AUDIT31'] = get_user_by_access('AUDIT-FORM31', $con, $result->user_id, $result->user_role);
     $response['AUDIT32'] = get_user_by_access('AUDIT-FORM32', $con, $result->user_id, $result->user_role);
     $response['AUDIT33'] = get_user_by_access('AUDIT-FORM33', $con, $result->user_id, $result->user_role);
+    $response['AUDIT34'] = get_user_by_access('AUDIT-FORM34', $con, $result->user_id, $result->user_role);
+
 
 
     $response['ASSET-DASHBOARD'] = get_user_by_access('ASSET-DASHBOARD', $con, $result->user_id, $result->user_role);
@@ -195,7 +216,6 @@ if ($result) {
     $response['REGISTER-ASSET-FORM'] = get_user_by_access('REGISTER-ASSET-FORM', $con, $result->user_id, $result->user_role);
     $response['WARRANTY-FORM'] = get_user_by_access('WARRANTY-FORM', $con, $result->user_id, $result->user_role);
     $response['AMC-CMC-FORM'] = get_user_by_access('AMC-CMC-FORM', $con, $result->user_id, $result->user_role);
-    
 } else {
     $response['status'] = 'fail';
     $response['message'] = 'Invalid Email Id / Mobile Number / Password';

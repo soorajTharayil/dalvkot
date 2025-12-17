@@ -43,10 +43,13 @@ $result = mysqli_query($con, $sql);
 // Check if there are any results
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_object($result)) {
+
+        $dataset = json_decode($row->dataset);
+
         // Extract necessary information
         $opportunitiesCount++;
 
-        if ($row->compliance === 'Gloves/Complied') {
+        if (isset($dataset->compliance) && $dataset->compliance === 'Gloves/Complied') {
             $hygieneCount++;
         }
     }
@@ -61,4 +64,3 @@ echo json_encode($data);
 
 // Close database connection
 mysqli_close($con);
-?>

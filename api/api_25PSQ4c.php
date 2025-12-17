@@ -20,8 +20,10 @@ if (mysqli_num_rows($result) > 0) {
         // Extract necessary information
         $chartsReviewedCount++;
 
+        $dataset = json_decode($row->dataset);
+
         // Assuming the column name for abbreviation error flag is 'error_prone'
-        if ($row->consent_verified === 'no') {
+        if ($dataset->consent_verified === 'no') {
             $consentVerifiedCount++;
         }
     }

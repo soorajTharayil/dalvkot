@@ -58,14 +58,14 @@
    "kpi_info": "42. PSQ3a - Percentage of sepsis patients who receive care as per the Hour-1 sepsis bundle for the month of",
    "definition": "Definition:",
    "kpi_def": "",
-   "formula_para1": "Number of sepsis patients who receive care as per the Hour-1 sepsis bundle",   
+   "formula_para1": "Number of sepsis patients who receive care as per the Hour-1 sepsis bundle (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total number of sepsis cases",
+   "formula_para2": "Total number of sepsis cases (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

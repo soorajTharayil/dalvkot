@@ -58,14 +58,14 @@
    "kpi_info": "34. PSQ3a - Percentage of patients with myocardial infarction for whom door to balloon time of 90 minutes is achieved for the month of",
    "definition": "Definition:",
    "kpi_def": "Proportion of patients with congestive heart failure for whom it is indicated beta blocker prescription at the time of discharge.",
-   "formula_para1": "Number of acute myocardial infarction (AMI) patients undergoing primary angioplasty for whom door to balloon time of 90 minutes is achieved",   
+   "formula_para1": "Number of acute myocardial infarction (AMI) patients undergoing primary angioplasty for whom door to balloon time of 90 minutes is achieved (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Total number of AMI patients undergoing primary angioplasty",
+   "formula_para2": "Total number of AMI patients undergoing primary angioplasty (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

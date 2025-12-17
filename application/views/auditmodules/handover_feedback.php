@@ -18,6 +18,11 @@
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
 
+				// echo '<pre>';
+				// print_r($param);
+				// echo '</pre>';
+				// exit;
+
 
 	?>
 
@@ -36,146 +41,243 @@
 
 
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
+									<!-- Audit Details -->
+									<tr>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Audit Details</th>
+									</tr>
+									<tr>
+										<td>Audit Name</td>
+										<td><?php echo $param['audit_type']; ?></td>
+									</tr>
+									<tr>
+										<td>Date & Time of Audit</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($result->datetime)); ?></td>
+									</tr>
+									<tr>
+										<td>Audit by</td>
+										<td><?php echo $param['audit_by']; ?></td>
+									</tr>
 
 									<tr>
-										<td><b>Patient UHID</b></td>
+										<th colspan="2" style="background-color: #f5f5f5; text-align: left;">Patient Information</th>
+									</tr>
+									<tr>
+										<td>Patient UHID</td>
+										<td><?php echo $param['mid_no']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Name</td>
+										<td><?php echo $param['patient_name']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Age</td>
+										<td><?php echo $param['patient_age']; ?></td>
+									</tr>
+									<tr>
+										<td>Patient Gender</td>
+										<td><?php echo $param['patient_gender']; ?></td>
+									</tr>
+									<tr>
+										<td>Area</td>
+										<td><?php echo $param['location']; ?></td>
+									</tr>
+									<tr>
+										<td>Department</td>
+										<td><?php echo $param['dep']; ?></td>
+									</tr>
+									<tr>
+										<td>Attended Doctor</td>
+										<td><?php echo $param['attended_doctor']; ?></td>
+									</tr>
+									<tr>
+										<td>Admission / Visit Date & Time</td>
+										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
+									</tr>
+									<tr>
+										<td>Discharge Date & Time</td>
 										<td>
-											<?php echo $result->patientid; ?>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Ward</b></td>
 										<td>
-											<?php echo $result->ward; ?>
+											<?php echo $param['ward']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Designation</b></td>
 										<td>
-											<?php echo $result->designation; ?>
+											<?php echo $param['department']; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Staff name</b></td>
 										<td>
-											<?php echo $result->staffname; ?>
+											<?php echo $param['staffname']; ?>
 										</td>
 									</tr>
+
+									<tr>
 									<tr>
 										<td><b>Were patient identification details communicated?</b></td>
 										<td>
-											<?php echo $result->identification_details; ?>
+											<?php echo !empty($param['identification_details']) ? ucfirst(htmlspecialchars($param['identification_details'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were patient's vital signs communicated?</b></td>
 										<td>
-											<?php echo $result->vital_signs; ?>
+											<?php echo !empty($param['vital_signs']) ? ucfirst(htmlspecialchars($param['vital_signs'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Was admitting diagnosis communicated?</b></td>
 										<td>
-											<?php echo $result->surgery; ?>
+											<?php echo !empty($param['surgery']) ? ucfirst(htmlspecialchars($param['surgery'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['surgery_text']) ? htmlspecialchars($param['surgery_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were presenting complaints communicated?</b></td>
 										<td>
-											<?php echo $result->complaints_communicated; ?>
+											<?php echo !empty($param['complaints_communicated']) ? ucfirst(htmlspecialchars($param['complaints_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Was patient's intake communicated?</b></td>
 										<td>
-											<?php echo $result->intake; ?>
+											<?php echo !empty($param['intake']) ? ucfirst(htmlspecialchars($param['intake'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['intake_text']) ? htmlspecialchars($param['intake_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Was patient's output communicated?</b></td>
 										<td>
-											<?php echo $result->output; ?>
+											<?php echo !empty($param['output']) ? ucfirst(htmlspecialchars($param['output'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['output_text']) ? htmlspecialchars($param['output_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were any allergies communicated?</b></td>
 										<td>
-											<?php echo $result->allergies; ?>
+											<?php echo !empty($param['allergies']) ? ucfirst(htmlspecialchars($param['allergies'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['allergies_text']) ? htmlspecialchars($param['allergies_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Was medication administered communicated?</b></td>
 										<td>
-											<?php echo $result->medication; ?>
+											<?php echo !empty($param['medication']) ? ucfirst(htmlspecialchars($param['medication'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medication_text']) ? htmlspecialchars($param['medication_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were diagnostic results communicated?</b></td>
 										<td>
-											<?php echo $result->diagnostic; ?>
+											<?php echo !empty($param['diagnostic']) ? ucfirst(htmlspecialchars($param['diagnostic'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were pending lab results communicated?</b></td>
 										<td>
-											<?php echo $result->lab_results; ?>
+											<?php echo !empty($param['lab_results']) ? ucfirst(htmlspecialchars($param['lab_results'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were pending investigations communicated?</b></td>
 										<td>
-											<?php echo $result->pending_investigation; ?>
+											<?php echo !empty($param['pending_investigation']) ? ucfirst(htmlspecialchars($param['pending_investigation'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['pending_investigation_text']) ? htmlspecialchars($param['pending_investigation_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were new medicine orders communicated?</b></td>
 										<td>
-											<?php echo $result->medicine_order; ?>
+											<?php echo !empty($param['medicine_order']) ? ucfirst(htmlspecialchars($param['medicine_order'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Was transfer of patient communicated?</b></td>
 										<td>
-											<?php echo $result->facility_communicated; ?>
+											<?php echo !empty($param['facility_communicated']) ? ucfirst(htmlspecialchars($param['facility_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['facility_communicated_text']) ? htmlspecialchars($param['facility_communicated_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Was health education given?</b></td>
 										<td>
-											<?php echo $result->health_education; ?>
+											<?php echo !empty($param['health_education']) ? ucfirst(htmlspecialchars($param['health_education'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['health_education_text']) ? htmlspecialchars($param['health_education_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Was risk assessment communicated?</b></td>
 										<td>
-											<?php echo $result->risk_assessment; ?>
+											<?php echo !empty($param['risk_assessment']) ? ucfirst(htmlspecialchars($param['risk_assessment'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['risk_assessment_text']) ? htmlspecialchars($param['risk_assessment_text']) : '-'; ?>
 										</td>
 									</tr>
+
 									<tr>
 										<td><b>Were any other details communicated?</b></td>
 										<td>
-											<?php echo $result->relevant_details; ?>
+											<?php echo !empty($param['relevant_details']) ? ucfirst(htmlspecialchars($param['relevant_details'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['relevant_details_text']) ? htmlspecialchars($param['relevant_details_text']) : '-'; ?>
 										</td>
 									</tr>
+
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">' . htmlspecialchars($file['name']) . '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
 									<tr>
 										<td><b>Additional comments</b></td>
 										<td>
-											<?php echo $result->comments; ?>
+											<?php echo $param['dataAnalysis']; ?>
 										</td>
 									</tr>
-
-									<tr>
-										<td><b>Data collected by</b></td>
-										<td>
-											<?php echo $result->name; ?>
-
-										</td>
-									</tr>
-									<tr>
-										<td><b>Data collection on</b></td>
-										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
-									</tr>
-
 
 
 								</table>

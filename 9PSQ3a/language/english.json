@@ -58,14 +58,14 @@
    "kpi_info": "9. PSQ3a - Percentage of transfusion reactions for the month of",
    "definition": "Definition:",
    "kpi_def": "Any adverse reaction to the transfusion of blood or blood components shall be considered as transfusion reaction. It may range from a mild allergic reaction (including chills/rigors) to life-threatening complications like TRALI and GraftVersus-Host Disease.",
-   "formula_para1": "Number of transfusion reactions",   
+   "formula_para1": "Number of transfusion reactions (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of units transfused (in Units)",
+   "formula_para2": "Number of units transfused (in Units) (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

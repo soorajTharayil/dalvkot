@@ -58,14 +58,14 @@
    "kpi_info": "6. PSQ3a - Percentage of in-patients developing adverse drug reaction(s) for the month of",
    "definition": "Definition:",
    "kpi_def": "Adverse Drug reaction is a response to a drug which is noxious and unintended and which occurs at doses normally used in man for prophylaxis, diagnosis, or therapy of disease or for the modification of physiologic function.",
-   "formula_para1": "Number of patients developing adverse drug reactions",   
+   "formula_para1": "Number of patients developing adverse drug reactions (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of in-patients",
+   "formula_para2": "Number of in-patients (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 

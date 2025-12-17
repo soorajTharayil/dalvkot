@@ -58,14 +58,14 @@
    "kpi_info": "46. PSQ3a Percentage of oncology patients who had treatment initiated following Multidisciplinary meeting (Tumour board) for the month of",
    "definition": "Definition:",
    "kpi_def": "",
-   "formula_para1": "Number of new oncology patients who had treatment initiated following multidisciplinary meeting (tumour board)",   
+   "formula_para1": "Number of new oncology patients who had treatment initiated following multidisciplinary meeting (tumour board) (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "Number of new oncology cases (all disciplines) treated in the month",
+   "formula_para2": "Number of new oncology cases (all disciplines) treated in the month (Denominator)",
    "formula_para2_placeholder": "Your input",
-   "data_analysis": "Data analysis",
+   "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",
    "preventive_action": "Preventive action"
 
