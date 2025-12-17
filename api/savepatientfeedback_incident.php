@@ -37,7 +37,7 @@ if (count($data) > 1) {
     // $query = 'SELECT * FROM  `bf_employees_incident` WHERE  mobile="' . $data['contactnumber'] . '"';
     // $res = mysqli_query($con, $query);
     //if ($res->num_rows == 0) {
-    $query = 'INSERT INTO `bf_employees_incident` (`guid`, `name`, `patient_id`, `mobile`, `email`,`admited_date`,`ward`,`bed_no`) VALUES ("' . time() . '","' . $data['name'] . '","' . $data['patientid'] . '","' . $data['contactnumber'] . '","' . $data['email'] . '","' . date('Y-m-d H:i:s') . '","' . $wardd->title . '","' . $bed . '")';
+  echo  $query = 'INSERT INTO `bf_employees_incident` (`guid`, `name`, `patient_id`, `mobile`, `email`,`admited_date`,`ward`,`bed_no`) VALUES ("' . time() . '","' . $data['name'] . '","' . $data['patientid'] . '","' . $data['contactnumber'] . '","' . $data['email'] . '","' . date('Y-m-d H:i:s') . '","' . $wardd->title . '","' . $bed . '")';
     $result = mysqli_query($con, $query);
     $rid = mysqli_insert_id($con);
     // } else {
@@ -104,7 +104,7 @@ if (count($data) > 1) {
 
 
 
-  $query = 'INSERT INTO `bf_feedback_incident`(`datetime`,`datet`,`remarks`, `nurseid`, `patientid`, `dataset`, `source`,`ward`,`bed_no`,`pid`,`image`,`file`) 
+ echo $query = 'INSERT INTO `bf_feedback_incident`(`datetime`,`datet`,`remarks`, `nurseid`, `patientid`, `dataset`, `source`,`ward`,`bed_no`,`pid`,`image`,`file`) 
   VALUES ("' . date('Y-m-d H:i:s') . '","' . $today . '","' . $data['remarks'] . '","' . $_GET['administratorId'] . '","' . $patinet_id . '","' . mysqli_real_escape_string($con, json_encode($data)) . '","' . $source . '","' . $wardd->title . '","' . $bed . '","' . $rid . '","' . $image . '","' . $escaped_files_name . '")';
 
 
