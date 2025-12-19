@@ -313,7 +313,6 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         foreach ($user_list as $row) {
             $floor_wards = json_decode($row->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
-            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
                 $users_dept = get_user_by_sms_activity('OP-EMAIL-DEPTHEAD', $con);
                 if (!empty($users_dept)) {
                     $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
@@ -322,7 +321,7 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
                     // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($ticketsop_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
                     // $conn_g->query($query2);
                 }
-            }
+            
         }
     }
 
