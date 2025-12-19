@@ -110,7 +110,146 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     mysqli_query($con, $query);
 }
 
+//email to department head(interim) when ticket is OPEN  
 
+$Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
+$feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE departmenthead_emailstatus = 0';
+$feedback_int_result = mysqli_query($con, $feedback_int_query);
+
+while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
+    $param_int = json_decode($feedback_int_object->dataset);
+    $ward_floor = $param_int->ward;
+
+    $tickets_int_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' GROUP BY  department.description';
+    $tickets_int_result = mysqli_query($con, $tickets_int_query);
+    $tickets_int_rowcount = mysqli_num_rows($tickets_int_result);
+    $tickets_int_generate = false;
+    $total_int_ticket = 0;
+    $department = '';
+    $message = '';
+    while ($tickets_int_object = mysqli_fetch_object($tickets_int_result)) {
+
+        $tickets_int_generate = true;
+        $number = $tickets_int_object->mobile;
+        $department = $tickets_int_object->description;
+        $department_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' AND department.description="' . $tickets_int_object->description . '"';
+        $department_result = mysqli_query($con, $department_query);
+        $department_rowcount = mysqli_num_rows($department_result);
+        $department_object = mysqli_fetch_object($department_result);
+        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        if ($department_rowcount > 1) {
+            $k = 1;
+        } else {
+            $k = '';
+        }
+
+
+        $TID = $department_object->id;
+        $department_head_link = $config_set['BASE_URL'] . 'pc/track/' . $TID;   //pointing to public_html/ticket
+        $keys = array();
+        $res = array();
+        $titles = array();
+        $zz = array();
+        $message1 = 'Dear Team, <br /><br />';
+        $message1 .= 'We would like to bring to your attention a recent complaint reported by an inpatient at ' . $hospitalname . '. Below are the ticket details: <br /><br />';
+
+        $message1 .= '
+        <table border="1" cellpadding="5">
+            <tr>
+              <td colspan="2" style="text-align:center;"><b>Complaint reported on</b></td>
+           </tr>
+            <tr>
+              <td width="80%">Time & Date</td>
+              <td width="20%">' . $created_on . '</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Complaint details</b></td>
+            </tr>
+           
+            <tr>
+                <td width="80%">Category</td>
+                <td width="20%">' . $department . '</td>
+            </tr>
+            <tr>
+                <td width="80%">Complaint</td>
+                <td width="20%">' . $department_object->name . '</td>
+            </tr>';
+
+
+        if ($param_int->other) {
+            $message1 .= '
+            <tr>
+                <td width="80%">Description</td>
+                <td width="20%">' . $param_int->other . '</td>
+            </tr>';
+        }
+
+        $message1 .= '
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Complaint raised in </b></td>
+            </tr>
+            <tr>
+                <td width="80%">Floor/Ward</td>
+                <td width="20%">' . $feedback_int_object->ward . '</td>
+            </tr>
+            <tr>
+                <td width="80%">Site</td>
+                <td width="20%">' . $feedback_int_object->bed_no . '</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Complaint raised by</b></td>
+            </tr>
+            <tr>
+                <td width="80%">Patient name</td>
+                <td width="20%">' . $param_int->name . '</td>
+            </tr>
+              <tr>
+                <td width="80%">Source</td>
+                <td width="20%">' . $feedback_int_object->source . '</td>
+            </tr>
+            <tr>
+                <td width="80%">Patient UHID</td>
+                <td width="20%">' . $param_int->patientid . '</td>
+            </tr>
+          
+            <tr>
+                <td width="80%">Mobile number</td>
+                <td width="20%">' . $param_int->contactnumber . '</td>
+            </tr>
+            
+            <tr>
+                <td width="80%">Assigned to</td>
+                <td width="20%">' . $department_object->pname . '</td>
+            </tr>';
+
+
+
+        $message1 .= '</table>';
+
+
+        $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+        $user_list = get_user_by_question($tickets_int_object->slug, $con);
+        foreach ($user_list as $row) {
+            $floor_wards = json_decode($row->floor_ward, true);
+            // Check if $patient_ward matches any value in $floor_wards
+            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
+                $users_dept = get_user_by_sms_activity('PCF-EMAIL-DEPTHEAD', $con);
+                if (!empty($users_dept)) {
+                    $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                    $conn_g->query($query1);
+
+                    // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_int_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                    // $conn_g->query($query2);
+                }
+            }
+        }
+    }
+
+    $update_query = 'Update bf_feedback_int set departmenthead_emailstatus = 1 WHERE id=' . $feedback_int_object->id;
+    mysqli_query($con, $update_query);
+}
 
 //email to department head(ip) when ticket is OPEN  
 
@@ -329,146 +468,7 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
     mysqli_query($con, $update_query);
 }
 
-//email to department head(interim) when ticket is OPEN  
 
-$Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
-$feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE departmenthead_emailstatus = 0';
-$feedback_int_result = mysqli_query($con, $feedback_int_query);
-
-while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
-    $param_int = json_decode($feedback_int_object->dataset);
-    $ward_floor = $param_int->ward;
-
-    $tickets_int_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' GROUP BY  department.description';
-    $tickets_int_result = mysqli_query($con, $tickets_int_query);
-    $tickets_int_rowcount = mysqli_num_rows($tickets_int_result);
-    $tickets_int_generate = false;
-    $total_int_ticket = 0;
-    $department = '';
-    $message = '';
-    while ($tickets_int_object = mysqli_fetch_object($tickets_int_result)) {
-
-        $tickets_int_generate = true;
-        $number = $tickets_int_object->mobile;
-        $department = $tickets_int_object->description;
-        $department_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' AND department.description="' . $tickets_int_object->description . '"';
-        $department_result = mysqli_query($con, $department_query);
-        $department_rowcount = mysqli_num_rows($department_result);
-        $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
-        if ($department_rowcount > 1) {
-            $k = 1;
-        } else {
-            $k = '';
-        }
-
-
-        $TID = $department_object->id;
-        $department_head_link = $config_set['BASE_URL'] . 'pc/track/' . $TID;   //pointing to public_html/ticket
-        $keys = array();
-        $res = array();
-        $titles = array();
-        $zz = array();
-        $message1 = 'Dear Team, <br /><br />';
-        $message1 .= 'We would like to bring to your attention a recent complaint reported by an inpatient at ' . $hospitalname . '. Below are the ticket details: <br /><br />';
-
-        $message1 .= '
-        <table border="1" cellpadding="5">
-            <tr>
-              <td colspan="2" style="text-align:center;"><b>Complaint reported on</b></td>
-           </tr>
-            <tr>
-              <td width="80%">Time & Date</td>
-              <td width="20%">' . $created_on . '</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Complaint details</b></td>
-            </tr>
-           
-            <tr>
-                <td width="80%">Category</td>
-                <td width="20%">' . $department . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Complaint</td>
-                <td width="20%">' . $department_object->name . '</td>
-            </tr>';
-
-
-        if ($param_int->other) {
-            $message1 .= '
-            <tr>
-                <td width="80%">Description</td>
-                <td width="20%">' . $param_int->other . '</td>
-            </tr>';
-        }
-
-        $message1 .= '
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Complaint raised in </b></td>
-            </tr>
-            <tr>
-                <td width="80%">Floor/Ward</td>
-                <td width="20%">' . $feedback_int_object->ward . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Site</td>
-                <td width="20%">' . $feedback_int_object->bed_no . '</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Complaint raised by</b></td>
-            </tr>
-            <tr>
-                <td width="80%">Patient name</td>
-                <td width="20%">' . $param_int->name . '</td>
-            </tr>
-              <tr>
-                <td width="80%">Source</td>
-                <td width="20%">' . $feedback_int_object->source . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Patient UHID</td>
-                <td width="20%">' . $param_int->patientid . '</td>
-            </tr>
-          
-            <tr>
-                <td width="80%">Mobile number</td>
-                <td width="20%">' . $param_int->contactnumber . '</td>
-            </tr>
-            
-            <tr>
-                <td width="80%">Assigned to</td>
-                <td width="20%">' . $department_object->pname . '</td>
-            </tr>';
-
-
-
-        $message1 .= '</table>';
-
-
-        $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
-        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
-        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
-        $user_list = get_user_by_question($tickets_int_object->slug, $con);
-        foreach ($user_list as $row) {
-            $floor_wards = json_decode($row->floor_ward, true);
-            // Check if $patient_ward matches any value in $floor_wards
-            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
-                $users_dept = get_user_by_sms_activity('PCF-EMAIL-DEPTHEAD', $con);
-                if (!empty($users_dept)) {
-                    $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    $conn_g->query($query1);
-
-                    // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_int_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    // $conn_g->query($query2);
-                }
-            }
-        }
-    }
-
-    $update_query = 'Update bf_feedback_int set departmenthead_emailstatus = 1 WHERE id=' . $feedback_int_object->id;
-    mysqli_query($con, $update_query);
-}
 
 //email to department head(isr) when ticket is OPEN  
 
@@ -788,146 +788,6 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
     mysqli_query($con, $update_query);
 }
 
-//email to department head(grievance) when ticket is OPEN  
-
-$Subject = 'Urgent: Grievance reported by an Employee at ' . $hospitalname . ' - Action Required';
-$feedback_grievance_query = 'SELECT * FROM  bf_feedback_grievance  WHERE departmenthead_emailstatus = 0';
-$feedback_grievance_result = mysqli_query($con, $feedback_grievance_query);
-
-while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_result)) {
-
-    $param_grievance = json_decode($feedback_grievance_object->dataset);
-    $ward_floor = $param_grievance->ward;
-
-    $tickets_grievance_query = 'SELECT * FROM  tickets_grievance  inner JOIN department ON department.dprt_id = tickets_grievance.departmentid   WHERE  feedbackid = ' . $feedback_grievance_object->id . ' GROUP BY  department.description';
-    $tickets_grievance_result = mysqli_query($con, $tickets_grievance_query);
-    $tickets_grievance_rowcount = mysqli_num_rows($tickets_grievance_result);
-    $tickets_grievance_generate = false;
-    $total_grievance_ticket = 0;
-    $department = '';
-    $message = '';
-    while ($tickets_grievance_object = mysqli_fetch_object($tickets_grievance_result)) {
-
-        $tickets_grievance_generate = true;
-        $number = $tickets_grievance_object->mobile;
-        $department = $tickets_grievance_object->description;
-        $department_query = 'SELECT * FROM  tickets_grievance  inner JOIN department ON department.dprt_id = tickets_grievance.departmentid   WHERE  feedbackid = ' . $feedback_grievance_object->id . ' AND department.description="' . $tickets_grievance_object->description . '"';
-        $department_result = mysqli_query($con, $department_query);
-        $department_rowcount = mysqli_num_rows($department_result);
-        $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
-        if ($department_rowcount > 1) {
-            $k = 1;
-        } else {
-            $k = '';
-        }
-
-
-        $TID = $department_object->id;
-        $department_head_link = $config_set['BASE_URL'] . 'grievance/track/' . $TID;   //pointing to public_html/ticket
-        $keys = array();
-        $res = array();
-        $titles = array();
-        $zz = array();
-        $message1 = 'Dear Team, <br /><br />';
-        $message1 .= 'We would like to bring to your attention a recent grievance reported by an employee at ' . $hospitalname . '. Below are the grievance details: <br /><br />';
-
-
-        $message1 .= '
-        <table border="1" cellpadding="5">
-            <tr>
-              <td colspan="2" style="text-align:center;"><b>Grievance reported on</b></td>
-           </tr>
-           <tr>
-               <td width="80%">Time & Date</td>
-               <td width="20%">' . $created_on . '</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Grievance details</b></td>
-            </tr>
-        
-            <tr>
-                <td width="80%">Category</td>
-                <td width="20%">' . $department . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Grievance</td>
-                <td width="20%">' . $department_object->name . '</td>
-            </tr>';
-
-
-        if ($param_grievance->other) {
-            $message1 .= '
-            <tr>
-                <td width="80%">Description</td>
-                <td width="20%">' . $param_grievance->other . '</td>
-            </tr>';
-        }
-
-        $message1 .= '
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Grievance reported in</b></td>
-            </tr>
-            <tr>
-                <td width="80%">Floor/Ward</td>
-                <td width="20%">' . $feedback_grievance_object->ward . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Site</td>
-                <td width="20%">' . $feedback_grievance_object->bed_no . '</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Grievance reported by</b></td>
-            </tr>
-            <tr>
-                <td width="80%">Employee name</td>
-                <td width="20%">' . $param_grievance->name . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Employee ID</td>
-                <td width="20%">' . $param_grievance->patientid . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Employee role</td>
-                <td width="20%">' . $param_grievance->role . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Mobile number</td>
-                <td width="20%">' . $param_grievance->contactnumber . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Email ID</td>
-                <td width="20%">' . $param_grievance->email . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Assigned to</td>
-                <td width="20%">' . $department_object->pname . '</td>
-            </tr>';
-
-
-
-        $message1 .= '</table>';
-
-        $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
-        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
-        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
-        $user_list = get_user_by_question($tickets_grievance_object->slug, $con);
-        foreach ($user_list as $row) {
-            $floor_wards = json_decode($row->floor_ward_esr, true);
-            // Check if $patient_ward matches any value in $floor_wards
-            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
-                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                $conn_g->query($query1);
-
-                // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_grievance_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                // $conn_g->query($query2);
-            }
-        }
-    }
-
-    $update_query = 'Update bf_feedback_grievance set departmenthead_emailstatus = 1 WHERE id=' . $feedback_grievance_object->id;
-    mysqli_query($con, $update_query);
-}
 
 //Email for assigned user for incident
 $feedback_incident_query = "SELECT * FROM tickets_incident WHERE status = 'Assigned' AND assigned_email = 0";
