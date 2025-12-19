@@ -3,13 +3,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include('db.php');
-if (!isset($_GET['administratorId']) || $_GET['administratorId'] === 'undefined' || $_GET['administratorId'] === '') {
-    echo json_encode([
-        'status' => 'fail',
-        'message' => 'administratorId missing'
-    ]);
-    exit;
-}
+// if (!isset($_GET['administratorId']) || $_GET['administratorId'] === 'undefined' || $_GET['administratorId'] === '') {
+//     echo json_encode([
+//         'status' => 'fail',
+//         'message' => 'administratorId missing'
+//     ]);
+//     exit;
+// }
 
 
 $patinet_id = $_GET['patient_id'];
