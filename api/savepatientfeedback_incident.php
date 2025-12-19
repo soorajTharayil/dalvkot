@@ -1,4 +1,4 @@
-<?php
+<?php<br/><b>Notice</b>:  Undefined index: level in <b>/var/www/html/api/savepatientfeedback_incident.php</b> on line <b>20</b><br/><br/><b>Fatal error</b>:  DateTime::__construct(): Timezone database is corrupt - this should *never* happen! in <b>/var/www/html/api/savepatientfeedback_incident.php</b> on line <b>24</b><br/>
 include('db.php');
 // if (!isset($_GET['administratorId']) || $_GET['administratorId'] === 'undefined' || $_GET['administratorId'] === '') {
 //     echo json_encode([
@@ -17,17 +17,22 @@ $data = json_decode($d, true);
 if (count($data) > 1) {
 
 
+   $risk_matrix = null;
+if (isset($data['risk_matrix']['level'])) {
     $risk_matrix = $data['risk_matrix']['level'];
-    $incident_occured_in_raw = $data['incident_occured_in']; // e.g. "2025-09-10T03:36:00.000Z"
+}
 
-    // Convert to DateTime and localize to IST
-    $dt = new DateTime($incident_occured_in_raw);
-    $dt->setTimezone(new DateTimeZone('Asia/Kolkata'));
+$incident_occured_in = null;
+if (!empty($data['incident_occured_in'])) {
+    try {
+        $dt = new DateTime($data['incident_occured_in'], new DateTimeZone('UTC'));
+        $dt->setTimezone(new DateTimeZone('Asia/Kolkata'));
+        $incident_occured_in = $dt->format('d M, Y - g:i A');
+    } catch (Exception $e) {
+        $incident_occured_in = null;
+    }
+}
 
-    // Format as "22 Sep, 2025 - 1:37 PM"
-    $incident_occured_in = $dt->format('d M, Y - g:i A');
-
-    $incident_occured_in;
 
 
     date_default_timezone_set('Asia/Kolkata');
