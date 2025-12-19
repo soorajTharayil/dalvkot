@@ -152,7 +152,10 @@ echo 'jiiiikii';
         $res = array();
         $titles = array();
         $zz = array();
+        echo 'la';
         $message1 = 'Dear Team, <br /><br />';
+        echo 'ba';
+
         $message1 .= 'We would like to bring to your attention a recent complaint reported by an inpatient at ' . $hospitalname . '. Below are the ticket details: <br /><br />';
 
         $message1 .= '
