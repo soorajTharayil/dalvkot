@@ -111,7 +111,7 @@ while ($user_object = mysqli_fetch_object($user_result)) {
 }
 
 //email to department head(interim) when ticket is OPEN  
-
+echo 'hi';
 $Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
 $feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE departmenthead_emailstatus = 0';
 $feedback_int_result = mysqli_query($con, $feedback_int_query);
