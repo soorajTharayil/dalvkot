@@ -133,6 +133,7 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
         $tickets_int_generate = true;
         $number = $tickets_int_object->mobile;
         $department = $tickets_int_object->description;
+        echo 'nn';
         $department_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' AND department.description="' . $tickets_int_object->description . '"';
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
