@@ -1,4 +1,4 @@
-<?php<br/><b>Notice</b>:  Undefined index: level in <b>/var/www/html/api/savepatientfeedback_incident.php</b> on line <b>20</b><br/><br/><b>Fatal error</b>:  DateTime::__construct(): Timezone database is corrupt - this should *never* happen! in <b>/var/www/html/api/savepatientfeedback_incident.php</b> on line <b>24</b><br/>
+<?php
 include('db.php');
 // if (!isset($_GET['administratorId']) || $_GET['administratorId'] === 'undefined' || $_GET['administratorId'] === '') {
 //     echo json_encode([
