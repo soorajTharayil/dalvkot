@@ -233,6 +233,7 @@ echo 'jiiiikii';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
         $user_list = get_user_by_question($tickets_int_object->slug, $con);
+        echo 'mooo';
         foreach ($user_list as $row) {
             $floor_wards = json_decode($row->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
@@ -247,7 +248,10 @@ echo 'jiiiikii';
                 }
             }
         }
+        echo 'naa';
     }
+
+    echo 'bo';
 
     $update_query = 'Update bf_feedback_int set departmenthead_emailstatus = 1 WHERE id=' . $feedback_int_object->id;
     mysqli_query($con, $update_query);
