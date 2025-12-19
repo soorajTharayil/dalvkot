@@ -129,7 +129,6 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
     $department = '';
     $message = '';
     while ($tickets_int_object = mysqli_fetch_object($tickets_int_result)) {
-echo 'jiiiikii';
 
         $tickets_int_generate = true;
         $number = $tickets_int_object->mobile;
