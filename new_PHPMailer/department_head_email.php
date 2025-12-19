@@ -117,6 +117,8 @@ $feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE departmenthead_emai
 $feedback_int_result = mysqli_query($con, $feedback_int_query);
 
 while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
+echo 'jiiiikii';
+
     $param_int = json_decode($feedback_int_object->dataset);
     $ward_floor = $param_int->ward;
 
