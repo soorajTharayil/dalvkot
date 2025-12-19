@@ -1,7 +1,5 @@
 <?php
 include("../env.php");
-
-
 header('content-type: application/json; charset=utf-8');
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
@@ -23,17 +21,17 @@ $baseurl = $config_set['BASE_URL'];
 /* End of file database.php */
 /* Location: ./application/config/database.php */
 $con = mysqli_connect($db['hostname'], $db['username'], $db['password'], $db['database'])
-					or die ('Could not connect to the database server' . mysqli_connect_error());
+	or die('Could not connect to the database server' . mysqli_connect_error());
 
-					mysqli_query($con, 'SET character_set_results=utf8');
-					mysqli_query($con, 'SET names=utf8');
-					mysqli_query($con, 'SET character_set_client=utf8');
-					mysqli_query($con, 'SET character_set_connection=utf8');
-					mysqli_query($con, 'SET character_set_results=utf8');
-					mysqli_query($con, 'SET collation_connection=utf8_general_ci');
-					
-$sql = 'SELECT * FROM `setting` WHERE 1' ;			
-$result = mysqli_query($con,$sql);
+mysqli_query($con, 'SET character_set_results=utf8');
+mysqli_query($con, 'SET names=utf8');
+mysqli_query($con, 'SET character_set_client=utf8');
+mysqli_query($con, 'SET character_set_connection=utf8');
+mysqli_query($con, 'SET character_set_results=utf8');
+mysqli_query($con, 'SET collation_connection=utf8_general_ci');
+
+$sql = 'SELECT * FROM `setting` WHERE 1';
+$result = mysqli_query($con, $sql);
 $reviewlink = mysqli_fetch_object($result);
 $slink = $reviewlink->google_review_link;
 $hospitalname = $reviewlink->title;
