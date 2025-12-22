@@ -733,7 +733,6 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
@@ -1076,7 +1075,6 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
