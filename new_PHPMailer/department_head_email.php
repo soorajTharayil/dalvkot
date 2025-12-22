@@ -152,11 +152,7 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
         $department_object = mysqli_fetch_object($department_result);
         echo 'rr';
 
-        if (!empty($department_object->created_on) && strtotime($department_object->created_on) !== false) {
-            $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
-        } else {
-            $created_on = '-';
-        }
+      
         echo 'vv';
 
         if ($department_rowcount > 1) {
