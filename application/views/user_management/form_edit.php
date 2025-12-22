@@ -161,7 +161,7 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 								<div class="ui buttons">
 									<button type="reset" class="ui button"><?php echo 'Reset'; ?></button>
 									<div class="or"></div>
-									<button class="ui positive button"><?php echo display('save') ?></button>
+									<button class="ui positive button"><?php echo 'Save'; ?></button>
 								</div>
 							</div>
 

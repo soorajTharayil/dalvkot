@@ -130,8 +130,7 @@
                                 <div class="ui buttons">
                                     <button type="reset" class="ui button"><?php echo 'Reset'; ?></button>
                                     <div class="or"></div>
-                                    <button class="ui positive button"
-                                        id="submitdata"><?php echo display('save') ?></button>
+                                    <button class="ui positive button" id="submitdata"><?php echo 'Save'; ?></button>
                                 </div>
                             </div>
                         </div>
@@ -210,79 +209,79 @@
 
 
 <?php /* if ($patient->id != null) { ?>
-                       <div class="form-group row" style="display:none;">
-                           <label for="date_of_birth" class="col-xs-3 col-form-label">Discharged Date <i class="text-danger">*</i></label>
-                           <div class="col-xs-9">
-                               <input name="discharged_date" class="datetimepicker form-control" type="text" placeholder="" id="discharged_date" value="<?php echo $patient->discharged_date ?>">
-                           </div>
-                       </div>
-                                       <input name="discharged_date" class="datetimepicker form-control" type="text" placeholder="" id="discharged_date" value="<?php echo date('g:i a, d-M-Y', strtotime($patient->discharged_date)); ?>" required readonly>
+                  <div class="form-group row" style="display:none;">
+                      <label for="date_of_birth" class="col-xs-3 col-form-label">Discharged Date <i class="text-danger">*</i></label>
+                      <div class="col-xs-9">
+                          <input name="discharged_date" class="datetimepicker form-control" type="text" placeholder="" id="discharged_date" value="<?php echo $patient->discharged_date ?>">
+                      </div>
+                  </div>
+                                  <input name="discharged_date" class="datetimepicker form-control" type="text" placeholder="" id="discharged_date" value="<?php echo date('g:i a, d-M-Y', strtotime($patient->discharged_date)); ?>" required readonly>
 
-                   <?php } 
+              <?php } 
 
-                                           <div class="form-group row">
-                           <label for="firstname" class="col-xs-3 col-form-label">Hospital UID <i class="text-danger">*</i></label>
-                           <div class="col-xs-9">
-                               <input name="hospital_id" type="text" class="form-control" id="hospital_id" placeholder="Hospital UID" value="<?php echo $patient->hospital_id ?>" <?php if ($patient->id) {
-                                                                                                                                                                                       echo 'readonly';
-                                                                                                                                                                                   } ?> required>
-                           </div>
-                       </div>
+                                      <div class="form-group row">
+                      <label for="firstname" class="col-xs-3 col-form-label">Hospital UID <i class="text-danger">*</i></label>
+                      <div class="col-xs-9">
+                          <input name="hospital_id" type="text" class="form-control" id="hospital_id" placeholder="Hospital UID" value="<?php echo $patient->hospital_id ?>" <?php if ($patient->id) {
+                                                                                                                                                                                  echo 'readonly';
+                                                                                                                                                                              } ?> required>
+                      </div>
+                  </div>
 
-                     <div class="form-group row">
-                       <label for="firstname" class="col-xs-3 col-form-label">Age </label>
-                       <div class="col-xs-9">
-                           <input name="age" type="text" class="form-control" id="age" placeholder="Age" value="<?php echo $patient->age ?>">
-                       </div>
-                   </div>
-                                           <div class="form-group row">
-                       <label for="firstname" class="col-xs-3 col-form-label">Email </label>
-                       <div class="col-xs-9">
-                           <input name="email" type="email" class="form-control" id="admitedfor" value="<?php echo $patient->email ?>">
-                       </div>
-                   </div>
+                <div class="form-group row">
+                  <label for="firstname" class="col-xs-3 col-form-label">Age </label>
+                  <div class="col-xs-9">
+                      <input name="age" type="text" class="form-control" id="age" placeholder="Age" value="<?php echo $patient->age ?>">
+                  </div>
+              </div>
+                                      <div class="form-group row">
+                  <label for="firstname" class="col-xs-3 col-form-label">Email </label>
+                  <div class="col-xs-9">
+                      <input name="email" type="email" class="form-control" id="admitedfor" value="<?php echo $patient->email ?>">
+                  </div>
+              </div>
 
 
 
-                                           <div class="form-group row">
-                       <label class="col-sm-3"><?php echo display('sex') ?> <i class="text-danger">*</i></label>
-                       <div class="col-xs-9">
-                           <div class="form-check">
-                               <label class="radio-inline">
-                                   <input type="radio" name="gender" value="Male" <?php if ($patient->gender == "Male") echo 'checked'; ?>><?php echo display('male') ?>
-                               </label>
-                               <label class="radio-inline">
-                                   <input type="radio" name="gender" value="Female" <?php if ($patient->gender == "Female") echo 'checked'; ?>><?php echo display('female') ?>
-                               </label>
-                               <label class="radio-inline">
-                                   <input type="radio" name="gender" value="Other" <?php if ($patient->gender == "Other") echo 'checked'; ?>><?php echo display('other') ?>
-                               </label>
-                           </div>
-                       </div>
-                   </div>
+                                      <div class="form-group row">
+                  <label class="col-sm-3"><?php echo display('sex') ?> <i class="text-danger">*</i></label>
+                  <div class="col-xs-9">
+                      <div class="form-check">
+                          <label class="radio-inline">
+                              <input type="radio" name="gender" value="Male" <?php if ($patient->gender == "Male") echo 'checked'; ?>><?php echo display('male') ?>
+                          </label>
+                          <label class="radio-inline">
+                              <input type="radio" name="gender" value="Female" <?php if ($patient->gender == "Female") echo 'checked'; ?>><?php echo display('female') ?>
+                          </label>
+                          <label class="radio-inline">
+                              <input type="radio" name="gender" value="Other" <?php if ($patient->gender == "Other") echo 'checked'; ?>><?php echo display('other') ?>
+                          </label>
+                      </div>
+                  </div>
+              </div>
 
-                                           <div class="form-group row">
-                           <label for="firstname" class="col-xs-3 col-form-label">Alternet Contact No. </label>
-                           <div class="col-xs-9">
-                               <input name="mobile2" type="text" class="form-control" id="admitedfor"  value="<?php echo $patient->mobile2 ?>" >
-                           </div>
-                       </div>
+                                      <div class="form-group row">
+                      <label for="firstname" class="col-xs-3 col-form-label">Alternet Contact No. </label>
+                      <div class="col-xs-9">
+                          <input name="mobile2" type="text" class="form-control" id="admitedfor"  value="<?php echo $patient->mobile2 ?>" >
+                      </div>
+                  </div>
 
-                       <div class="form-group row">
-                           <label for="firstname" class="col-xs-3 col-form-label">Diagnosed for </label>
-                           <div class="col-xs-9">
-                               <input name="admitedfor" type="text" class="form-control" id="admitedfor" placeholder="Diagnosed for" value="<?php echo $patient->admitedfor ?>" >
-                           </div>
-                       </div>
+                  <div class="form-group row">
+                      <label for="firstname" class="col-xs-3 col-form-label">Diagnosed for </label>
+                      <div class="col-xs-9">
+                          <input name="admitedfor" type="text" class="form-control" id="admitedfor" placeholder="Diagnosed for" value="<?php echo $patient->admitedfor ?>" >
+                      </div>
+                  </div>
 
-                                               <div class="form-group row">
-                       <label for="firstname" class="col-xs-3 col-form-label">Consultant </label>
-                       <div class="col-xs-9">
-                           <input name="consultant" type="text" class="form-control" id="admitedfor" placeholder="Consultant" value="<?php echo $patient->consultant; ?>">
-                       </div>
-                   </div>
+                                          <div class="form-group row">
+                  <label for="firstname" class="col-xs-3 col-form-label">Consultant </label>
+                  <div class="col-xs-9">
+                      <input name="consultant" type="text" class="form-control" id="admitedfor" placeholder="Consultant" value="<?php echo $patient->consultant; ?>">
+                  </div>
+              </div>
 
-                   */
+              */
 
 
 

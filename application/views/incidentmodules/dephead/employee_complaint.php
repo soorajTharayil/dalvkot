@@ -91,20 +91,24 @@
 					}
 				}
 
-			?>
+				?>
 
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="INCIDENT- <ID> "><i class="fa fa-question-circle" aria-hidden="true"></i></a><?php echo lang_loader('inc', 'inc_inc'); ?><?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="INCIDENT- <ID> "><i
+											class="fa fa-question-circle"
+											aria-hidden="true"></i></a><?php echo lang_loader('inc', 'inc_inc'); ?><?php echo $result->id; ?>
+								</h3>
 							</div>
 							<div class="panel-body" style="background: #fff;">
 								<table class=" table table-striped table-bordered  no-footer dtr-inline ">
 									<?php $department = $patients[0]; ?>
 									<table class=" table table-striped table-bordered  no-footer dtr-inline ">
 										<tr>
-											<td colspan="2"><strong><?php echo lang_loader('inc', 'inc_incident_report'); ?></strong> </td>
+											<td colspan="2">
+												<strong><?php echo lang_loader('inc', 'inc_incident_report'); ?></strong> </td>
 										</tr>
 										<tr>
 											<td><?php echo lang_loader('inc', 'inc_reported_on'); ?></td>
@@ -125,7 +129,8 @@
 
 													<!-- Save button -->
 													<span style="margin-left: 20px;">
-														<button id="save_button" type="submit" class="ui positive button"><?php echo display('save') ?></button>
+														<button id="save_button" type="submit"
+															class="ui positive button"><?php echo 'Save'; ?></button>
 													</span>
 
 													<!-- Hidden input to pass other parameters if needed -->
@@ -143,11 +148,11 @@
 
 										<tr>
 											<td><?php echo lang_loader('inc', 'inc_category'); ?></td>
-											<td><?php echo  $cresult1[0]->title; ?></td>
+											<td><?php echo $cresult1[0]->title; ?></td>
 										</tr>
 										<tr>
 											<td><?php echo lang_loader('inc', 'inc_incident'); ?></td>
-											<td><?php echo  $cresult1[0]->shortname; ?></td>
+											<td><?php echo $cresult1[0]->shortname; ?></td>
 										</tr>
 										<tr>
 											<td><?php echo lang_loader('inc', 'inc_priority'); ?></td>
@@ -177,7 +182,8 @@
 
 													<!-- Save button -->
 													<span style="margin-left: 20px;">
-														<button id="save_button" type="submit" class="ui positive button"><?php echo display('save') ?></button>
+														<button id="save_button" type="submit"
+															class="ui positive button"><?php echo 'Save'; ?></button>
 													</span>
 
 													<!-- Hidden input to pass other parameters if needed -->
@@ -197,16 +203,20 @@
 										<?php if ($param['other']) { ?>
 											<tr>
 												<td><?php echo lang_loader('inc', 'inc_description'); ?></td>
-												<td><span style="overflow: clip; word-break: break-all;">"<?php echo $param['other']; ?>"</span></td>
+												<td><span
+														style="overflow: clip; word-break: break-all;">"<?php echo $param['other']; ?>"</span>
+												</td>
 											</tr>
 										<?php } ?>
 
 										<?php
 										if ($param['image'] != '' && $param['image'] != NULL) {
-											$encodedImage = $param['image'];  ?>
+											$encodedImage = $param['image']; ?>
 											<tr>
 												<td><?php echo lang_loader('inc', 'inc_attached_image'); ?></td>
-												<td><img src="<?php echo $encodedImage; ?>" width="100%" height="300px" alt="Rendered Image" onclick="openImageInNewTab('<?php echo $encodedImage; ?>')"></td>
+												<td><img src="<?php echo $encodedImage; ?>" width="100%" height="300px"
+														alt="Rendered Image"
+														onclick="openImageInNewTab('<?php echo $encodedImage; ?>')"></td>
 											</tr>
 										<?php } ?>
 										<tr>
@@ -227,10 +237,14 @@
 											<tr>
 												<td><?php echo lang_loader('inc', 'inc_patient_details'); ?></td>
 												<td>
-													<?php echo lang_loader('inc', 'inc_patient_type'); ?> <?php echo $param['tag_patient_type']; ?> <br>
-													<?php echo lang_loader('inc', 'inc_patient_id'); ?> <?php echo $param['tag_patientid']; ?> <br>
-													<?php echo lang_loader('inc', 'inc_patient_name'); ?> <?php echo $param['tag_name']; ?> <br>
-													<?php echo lang_loader('inc', 'inc_primary_consultant'); ?> <?php echo $param['tag_consultant']; ?> <br>
+													<?php echo lang_loader('inc', 'inc_patient_type'); ?>
+													<?php echo $param['tag_patient_type']; ?> <br>
+													<?php echo lang_loader('inc', 'inc_patient_id'); ?>
+													<?php echo $param['tag_patientid']; ?> <br>
+													<?php echo lang_loader('inc', 'inc_patient_name'); ?>
+													<?php echo $param['tag_name']; ?> <br>
+													<?php echo lang_loader('inc', 'inc_primary_consultant'); ?>
+													<?php echo $param['tag_consultant']; ?> <br>
 												</td>
 											</tr>
 										<?php } ?>
@@ -240,12 +254,12 @@
 											<tr>
 												<td><?php echo lang_loader('inc', 'inc_source'); ?></td>
 												<td><?php if ($result->source == 'APP') {
-														echo 'Mobile Application.';
-													} elseif ($result->source == 'Link') {
-														echo 'Default Feedback Link.';
-													} else {
-														echo $result->source;
-													} ?></td>
+													echo 'Mobile Application.';
+												} elseif ($result->source == 'Link') {
+													echo 'Default Feedback Link.';
+												} else {
+													echo $result->source;
+												} ?></td>
 											</tr>
 										<?php } ?>
 										<!-- done -->
@@ -258,14 +272,16 @@
 				<hr />
 			<?php } ?>
 
-		<?php } else {  ?>
+		<?php } else { ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="panel panel-default thumbnail">
 						<div class="panel-heading">
-							<h3 style="text-align: center; color:tomato;"><?php echo lang_loader('inc', 'inc_no_record_found'); ?> <br>
+							<h3 style="text-align: center; color:tomato;">
+								<?php echo lang_loader('inc', 'inc_no_record_found'); ?> <br>
 								<a href="<?php echo base_url(uri_string(1)); ?>">
-									<button type="button" href="javascript:void()" data-toggle="tooltip" title="Back" class="btn btn-sm btn-success" style="text-align: center;">
+									<button type="button" href="javascript:void()" data-toggle="tooltip" title="Back"
+										class="btn btn-sm btn-success" style="text-align: center;">
 										<i class="fa fa-arrow-left"></i>
 									</button>
 
@@ -275,7 +291,7 @@
 					</div>
 				</div>
 			</div>
-		<?php }  ?>
+		<?php } ?>
 	<?php } ?>
 	<?php if ($hide == false) { ?>
 		<div class="row">
@@ -286,12 +302,16 @@
 						<?php echo form_open(); ?>
 						<table class="table">
 							<tr>
-								<th class="" style="border:none !important;vertical-align: middle; text-align:right;"><?php echo lang_loader('inc', 'inc_find_by_employee_id'); ?></th>
+								<th class="" style="border:none !important;vertical-align: middle; text-align:right;">
+									<?php echo lang_loader('inc', 'inc_find_by_employee_id'); ?></th>
 								<td class="" style="border:none !important;">
-									<input type="text" class="form-control" placeholder="Enter Employee ID" maxlength="15" size="10" name="empid">
+									<input type="text" class="form-control" placeholder="Enter Employee ID" maxlength="15"
+										size="10" name="empid">
 								</td>
 								<th class="" style="text-align:left;">
-									<p style="text-align:left;"><a href="javascript:void()" data-toggle="tooltip" title="Search"><button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button></a>
+									<p style="text-align:left;"><a href="javascript:void()" data-toggle="tooltip"
+											title="Search"><button type="submit" class="btn btn-success"><i
+													class="fa fa-search"></i></button></a>
 
 								</th>
 							</tr>

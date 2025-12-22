@@ -8,7 +8,7 @@
                 <div class="panel-heading no-print">
                     <div class="btn-group">
                         <a class="btn btn-success" href="<?php echo base_url("dashboard/profile") ?>"> <i
-                                class="fa fa-list"></i> <?php echo display('profile') ?> </a>
+                                class="fa fa-list"></i> <?php echo 'Profile' ; ?> </a>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
                                         class="text-danger">*</i></label>
                                 <div class="col-xs-9">
                                     <input name="firstname" type="text" class="form-control" maxlength="25"
-                                        id="firstname" placeholder="<?php echo display('first_name') ?>"
+                                        id="firstname" placeholder="<?php echo 'First Name'; ?>"
                                         value="<?php echo $doctor->firstname ?>">
                                 </div>
                             </div>
@@ -36,21 +36,21 @@
 
 
                             <div class="form-group row">
-                                <label for="email" class="col-xs-3 col-form-label"><?php echo display('email') ?> <i
+                                <label for="email" class="col-xs-3 col-form-label"><?php echo 'Email Address'; ?> <i
                                         class="text-danger">*</i></label>
                                 <div class="col-xs-9">
                                     <input name="email" class="form-control" type="text"
-                                        placeholder="<?php echo display('email') ?>" id="email"
+                                        placeholder="<?php echo 'Email Address';  ?>" id="email"
                                         value="<?php echo $doctor->email ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group row" id="show_hide_password">
-                                <label for="password" class="col-xs-3 col-form-label"><?php echo display('password') ?>
+                                <label for="password" class="col-xs-3 col-form-label"><?php echo 'Password'; ?>
                                     <i class="text-danger">*</i></label>
                                 <div class="col-xs-9">
                                     <input name="password" class="form-control" type="password"
-                                        placeholder="<?php echo display('password') ?>" id="password">
+                                        placeholder="<?php echo 'Password'; ?>" id="password">
                                     <div class="input-group-addon changepassword">
                                         <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                     </div>
@@ -59,11 +59,11 @@
 
 
                             <div class="form-group row">
-                                <label for="mobile" class="col-xs-3 col-form-label"><?php echo display('mobile') ?> <i
+                                <label for="mobile" class="col-xs-3 col-form-label"><?php echo 'Mobile Number'; ?> <i
                                         class="text-danger">*</i></label>
                                 <div class="col-xs-9">
                                     <input name="mobile" type="text" pattern="\d*" maxlength="10" class="form-control"
-                                        type="text" placeholder="<?php echo display('mobile') ?>" id="mobile"
+                                        type="text" placeholder="<?php echo 'Mobile Number'; ?>" id="mobile"
                                         value="<?php echo $doctor->mobile ?>">
                                 </div>
                             </div>

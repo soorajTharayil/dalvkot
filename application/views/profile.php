@@ -45,19 +45,19 @@
                                     <tbody>
                                         <?php if (!empty($user->email)) { ?>
                                             <tr>
-                                                <th><?php echo display('email') ?></th>
+                                                <th><?php echo 'Email Address'; ?></th>
                                                 <td><?php echo $user->email ?></td>
                                             </tr>
                                         <?php } ?>
                                         <?php if (!empty($user->designation)) { ?>
                                             <tr>
-                                                <th><?php echo display('designation') ?></th>
+                                                <th><?php echo 'Designation'; ?></th>
                                                 <td><?php echo $user->designation ?></td>
                                             </tr>
                                         <?php } ?>
                                         <?php if (!empty($user->mobile)) { ?>
                                             <tr>
-                                                <th><?php echo display('mobile') ?></th>
+                                                <th><?php echo 'Mobile Number'; ?></th>
                                                 <td><?php echo $user->mobile ?></td>
                                             </tr>
                                         <?php } ?>
@@ -69,7 +69,7 @@
                                         <?php } ?>
                                         <?php if (!empty($user->create_date)) { ?>
                                             <tr>
-                                                <th><?php echo display('create_date') ?></th>
+                                                <th><?php echo 'Create Date'; ?></th>
                                                 <td><?php echo $user->create_date ?></td>
                                             </tr>
                                         <?php } ?>
@@ -81,7 +81,7 @@
                                         <?php } ?>
                                         <?php if (!empty($user->status)) { ?>
                                             <tr>
-                                                <th><?php echo display('status') ?></th>
+                                                <th><?php echo 'Status'; ?></th>
                                                 <td>
                                                     <span class="badge badge-<?php echo ($user->status ? 'success' : 'danger'); ?>">
                                                         <?php echo ($user->status ? display('active') : display('inactive')) ?>

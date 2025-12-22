@@ -20,7 +20,8 @@ $param = json_decode($row->dataset, true);
                     <h3><a href="javascript:void()" data-toggle="tooltip"
                             title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;CT scan waiting time -
-                        <?php echo $row->id; ?></h3>
+                        <?php echo $row->id; ?>
+                    </h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -370,7 +371,7 @@ $param = json_decode($row->dataset, true);
                                         <div class="or"></div>
                                         <button type="submit" id="saveButton" class="ui positive button"
                                             style="text-align: left;">
-                                            <?php echo display('save') ?>
+                                            <?php echo 'Save'; ?>
                                         </button>
                                     </div>
                                 </div>

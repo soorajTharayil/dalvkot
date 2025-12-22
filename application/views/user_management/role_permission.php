@@ -177,7 +177,7 @@ $rolename = $role->role_name;
 
             <div class="or"></div>
 
-            <button type="submit" class="ui positive button"><?php echo display('save') ?></button>
+            <button type="submit" class="ui positive button"><?php echo 'Save'; ?></button>
 
         </div>
 

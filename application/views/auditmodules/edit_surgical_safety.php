@@ -614,7 +614,7 @@ $param = json_decode($row->dataset, true);
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">
-                                            <?php echo display('save') ?>
+                                            <?php echo 'Save'; ?>
                                         </button>
                                     </div>
                                 </div>
