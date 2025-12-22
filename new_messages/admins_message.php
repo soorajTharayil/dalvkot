@@ -212,66 +212,6 @@ function pdf_admins_tracking_link_UniqueId()
     return $id;
 }
 
-$feedback_pdf_query = 'SELECT * FROM  bf_feedback_pdf  WHERE admins_messagestatus = 0';
-$feedback_pdf_result = mysqli_query($con, $feedback_pdf_query);
-
-while ($feedback_pdf_object = mysqli_fetch_object($feedback_pdf_result)) {
-   
-    $TID = $feedback_pdf_object->id ;
-    $parameter = json_decode($feedback_pdf_object->dataset);
-
-    $patient_name = $parameter->name;
-    $patient_uhid = $parameter->patientid;
-
-
-    function classifyScore($score)
-    {
-        if ($score >= 0 && $score <= 3) {
-            return 'Detractor';
-        } elseif ($score > 3 && $score < 4.5) {
-            return 'Passive';
-        } elseif ($score >= 4.5 && $score <= 5) {
-            return 'Promoter';
-        } else {
-            return 'Invalid Score'; // in case of unexpected input
-        }
-    }
-
-
-    // Usage
-    $nps = $parameter->recommend1Score;
-    $compassion = $parameter->recommend2Score;
-
-    $npsCategory = classifyScore($nps);
-    $compassionCategory = classifyScore($compassion);
-
-
-    $admins_link_whatsapp = $config_set['BASE_URL'] . 'post/patient_feedback?id=' . $TID;
-
-
-
-    $users_whatsapp = get_user_by_sms_activity('PDF-WHATSAPP', $con);
-
-    foreach ($users_whatsapp as $users_whatsapp_object) {
-        // Check if $patient_ward matches any value in $floor_wards
-        $number = $users_whatsapp_object->mobile;
-        $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-         VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalert_postdischarge_krr', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $npsCategory, $compassionCategory, $admins_link_whatsapp]) . "', 
-         'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
-
-        // Execute the second query
-        if ($conn_g->query($insert_notification_query) === TRUE) {
-            echo "Data inserted into notifications table successfully.<br>";
-        } else {
-            echo "Error: " . $con->error . "<br>";
-        }
-
-    }
-
-    $update_query = 'Update bf_feedback_pdf set admins_messagestatus = 1 WHERE id=' . $feedback_pdf_object->id;
-    mysqli_query($con, $update_query);
-}
-
 
 
 
@@ -385,7 +325,7 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
             if (is_null($floor_wards) || empty($floor_wards) || in_array($patient_ward, $floor_wards)) {
                 $number = $users_whatsapp_object->mobile;
                 $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsms_alert_inpatientcomplaint', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $patient_bedno, $Concern_Category, $Concern_Area, $admins_link_whatsapp]) . "', 
+             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsms_alert_for_inpatientcomplaint', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $patient_bedno, $Concern_Category, $Concern_Area, $admins_link_whatsapp]) . "', 
              'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                 // Execute the second query
