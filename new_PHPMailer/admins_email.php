@@ -1194,7 +1194,6 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
     mysqli_query($con, $update_query);
 }
 echo 'jjjjjjjjjj';
-exit;
 
 
 //escalation level 1 and level 2 email to  admins(interim) when ticket is OPEN  
