@@ -17,8 +17,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Central Line maintenance checklist - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Central Line maintenance
+                        checklist - <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -212,146 +214,157 @@ $param = json_decode($row->dataset, true);
                             }
                         </style>
 
-                        
+
                         <tr>
-                        <td><b>Are hand hygiene requirements being complied with?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="hand_hygiene_complied"
-                                value="<?php echo isset($param['identification_details']) ? htmlspecialchars($param['identification_details'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="hand_hygiene_complied_text"
-                                    value="<?php echo isset($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                            <td><b>Are hand hygiene requirements being complied with?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="hand_hygiene_complied"
+                                    value="<?php echo isset($param['identification_details']) ? htmlspecialchars($param['identification_details'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text" name="hand_hygiene_complied_text"
+                                        value="<?php echo isset($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Are patients bathed daily with a chlorhexidine preparation?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="patients_bathed_chlorhexidine"
-                                value="<?php echo isset($param['vital_signs']) ? htmlspecialchars($param['vital_signs'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="patients_bathed_chlorhexidine_text"
-                                    value="<?php echo isset($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Are patients bathed daily with a chlorhexidine preparation?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="patients_bathed_chlorhexidine"
+                                    value="<?php echo isset($param['vital_signs']) ? htmlspecialchars($param['vital_signs'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="patients_bathed_chlorhexidine_text"
+                                        value="<?php echo isset($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Is the access port or hub scrubbed with friction immediately prior to each use with an appropriate antiseptic (chlorhexidine, povidone-iodine, iodophor, or 70% alcohol)?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="access_port_scrubbed"
-                                value="<?php echo isset($param['surgery']) ? htmlspecialchars($param['surgery'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="access_port_scrubbed_text"
-                                    value="<?php echo isset($param['surgery_text']) ? htmlspecialchars($param['surgery_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Is the access port or hub scrubbed with friction immediately prior to each use with
+                                    an appropriate antiseptic (chlorhexidine, povidone-iodine, iodophor, or 70%
+                                    alcohol)?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="access_port_scrubbed"
+                                    value="<?php echo isset($param['surgery']) ? htmlspecialchars($param['surgery'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text" name="access_port_scrubbed_text"
+                                        value="<?php echo isset($param['surgery_text']) ? htmlspecialchars($param['surgery_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Are only sterile devices used to access catheters?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="sterile_devices_used"
-                                value="<?php echo isset($param['complaints_communicated']) ? htmlspecialchars($param['complaints_communicated'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="sterile_devices_used_text"
-                                    value="<?php echo isset($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Are only sterile devices used to access catheters?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="sterile_devices_used"
+                                    value="<?php echo isset($param['complaints_communicated']) ? htmlspecialchars($param['complaints_communicated'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text" name="sterile_devices_used_text"
+                                        value="<?php echo isset($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Are dressings that are wet, soiled, or dislodged immediately replaced?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="wet_dressings_replaced"
-                                value="<?php echo isset($param['intake']) ? htmlspecialchars($param['intake'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="wet_dressings_replaced_text"
-                                    value="<?php echo isset($param['intake_text']) ? htmlspecialchars($param['intake_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Are dressings that are wet, soiled, or dislodged immediately replaced?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="wet_dressings_replaced"
+                                    value="<?php echo isset($param['intake']) ? htmlspecialchars($param['intake'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text" name="wet_dressings_replaced_text"
+                                        value="<?php echo isset($param['intake_text']) ? htmlspecialchars($param['intake_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Are routine dressing changes performed using aseptic technique with clean or sterile gloves?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="routine_dressing_changes"
-                                value="<?php echo isset($param['output']) ? htmlspecialchars($param['output'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="routine_dressing_changes_text"
-                                    value="<?php echo isset($param['output_text']) ? htmlspecialchars($param['output_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Are routine dressing changes performed using aseptic technique with clean or sterile
+                                    gloves?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="routine_dressing_changes"
+                                    value="<?php echo isset($param['output']) ? htmlspecialchars($param['output'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="routine_dressing_changes_text"
+                                        value="<?php echo isset($param['output_text']) ? htmlspecialchars($param['output_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Are administration sets for continuous infusions changed at the frequency set by the hospital?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="infusion_sets_changed"
-                                value="<?php echo isset($param['allergies']) ? htmlspecialchars($param['allergies'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="infusion_sets_changed_text"
-                                    value="<?php echo isset($param['allergies_text']) ? htmlspecialchars($param['allergies_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Are administration sets for continuous infusions changed at the frequency set by the
+                                    hospital?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="infusion_sets_changed"
+                                    value="<?php echo isset($param['allergies']) ? htmlspecialchars($param['allergies'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text" name="infusion_sets_changed_text"
+                                        value="<?php echo isset($param['allergies_text']) ? htmlspecialchars($param['allergies_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Is the need for each central line assessed daily?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="central_line_need_assessed"
-                                value="<?php echo isset($param['medication']) ? htmlspecialchars($param['medication'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="central_line_need_assessed_text"
-                                    value="<?php echo isset($param['medication_text']) ? htmlspecialchars($param['medication_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Is the need for each central line assessed daily?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="central_line_need_assessed"
+                                    value="<?php echo isset($param['medication']) ? htmlspecialchars($param['medication'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="central_line_need_assessed_text"
+                                        value="<?php echo isset($param['medication_text']) ? htmlspecialchars($param['medication_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Is the site inspected for redness, irritation, or infection, and is this inspection documented?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="site_inspected_documented"
-                                value="<?php echo isset($param['diagnostic']) ? htmlspecialchars($param['diagnostic'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="site_inspected_documented_text"
-                                    value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Is the site inspected for redness, irritation, or infection, and is this inspection
+                                    documented?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="site_inspected_documented"
+                                    value="<?php echo isset($param['diagnostic']) ? htmlspecialchars($param['diagnostic'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="site_inspected_documented_text"
+                                        value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><b>Is hand hygiene performed before and after each contact?</b></td>
-                        <td>
-                            <input class="form-control" type="text" name="hand_hygiene_before_after"
-                                value="<?php echo isset($param['lab_results']) ? htmlspecialchars($param['lab_results'], ENT_QUOTES, 'UTF-8') : ''; ?>">
-                            <div style="margin-top:5px;">
-                                Remarks: <input class="form-control" type="text" name="hand_hygiene_before_after_text"
-                                    value="<?php echo isset($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><b>Is hand hygiene performed before and after each contact?</b></td>
+                            <td>
+                                <input class="form-control" type="text" name="hand_hygiene_before_after"
+                                    value="<?php echo isset($param['lab_results']) ? htmlspecialchars($param['lab_results'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                <div style="margin-top:5px;">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="hand_hygiene_before_after_text"
+                                        value="<?php echo isset($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
 
 
 
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
 
-                        
-                        
+
+
                         <tr>
                             <td><b>Uploaded Files</b></td>
                             <td>
@@ -465,7 +478,7 @@ $param = json_decode($row->dataset, true);
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">

@@ -55,7 +55,8 @@ foreach ($users as $user) {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3><a href="javascript:void()" data-toggle="tooltip" title="INCIDENTS- <INCIDENTS ID> ">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;INC-<?php echo $department->id; ?></h3>
+                            <i class="fa fa-question-circle"
+                                aria-hidden="true"></i></a>&nbsp;INC-<?php echo $department->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -81,7 +82,7 @@ foreach ($users as $user) {
                                             $this->db->where('shortkey', $key);
                                             $query = $this->db->get('setup_incident');
                                             $cresult = $query->result();
-                                        ?>
+                                            ?>
                                             <?php if (count($cresult) != 0) { ?>
                                                 <?php echo $cresult[0]->shortname; ?>
 
@@ -89,8 +90,8 @@ foreach ($users as $user) {
                                         <?php } ?>
                                     <?php } ?>
                                 <?php } else {
-                                    echo  $departments[0]->department->name;
-                                }  ?>
+                                    echo $departments[0]->department->name;
+                                } ?>
 
 
                                 <?php foreach ($param['comment'] as $key => $value) { ?>
@@ -121,7 +122,7 @@ foreach ($users as $user) {
                                         <?php foreach ($validImages as $index => $encodedImage) {
                                             // Generate unique filename based on current timestamp and index
                                             $filename = 'attachment_' . time() . '_' . ($index + 1) . '.jpg';
-                                        ?>
+                                            ?>
                                             <div style="margin-bottom: 8px; display: block;">
                                                 <a href="javascript:void(0);"
                                                     onclick="previewImage('<?php echo $encodedImage; ?>', '<?php echo $filename; ?>')"
@@ -136,7 +137,7 @@ foreach ($users as $user) {
                                         <?php } ?>
                                     </td>
                                 </tr>
-                        <?php }
+                            <?php }
                         }
                         ?>
 
@@ -195,28 +196,29 @@ foreach ($users as $user) {
                             $fileInfo = pathinfo($encodedFile);
                             $fileExtension = strtolower($fileInfo['extension']);
                             $fileName = $fileInfo['basename']; // Get the file name with extension
-
+                        
                             // List of image extensions
                             $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
                             // Check if file is an image
                             if (in_array($fileExtension, $imageExtensions)) { ?>
-                                <tr>
-                                    <td><strong><?php echo lang_loader('inc', 'inc_attached_image'); ?></strong></td>
-                                    <td>
-                                        <img src="<?php echo $encodedFile; ?>" width="100%" height="300px" alt="Rendered Image" onclick="openImageInNewTab('<?php echo $encodedFile; ?>')">
-                                    </td>
-                                </tr>
-                            <?php } else { // Handle non-image files 
-                            ?>
-                                <tr>
-                                    <td><strong><?php echo lang_loader('inc', 'inc_attached_file'); ?></strong></td>
-                                    <td>
-                                        <a href="<?php echo $encodedFile; ?>" download="<?php echo $fileName; ?>">
-                                            <?php echo basename($encodedFile); ?>
-                                        </a> <!-- Link to download the file -->
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td><strong><?php echo lang_loader('inc', 'inc_attached_image'); ?></strong></td>
+                            <td>
+                                <img src="<?php echo $encodedFile; ?>" width="100%" height="300px" alt="Rendered Image"
+                                    onclick="openImageInNewTab('<?php echo $encodedFile; ?>')">
+                            </td>
+                        </tr>
+                        <?php } else { // Handle non-image files 
+                                ?>
+                        <tr>
+                            <td><strong><?php echo lang_loader('inc', 'inc_attached_file'); ?></strong></td>
+                            <td>
+                                <a href="<?php echo $encodedFile; ?>" download="<?php echo $fileName; ?>">
+                                    <?php echo basename($encodedFile); ?>
+                                </a> <!-- Link to download the file -->
+                            </td>
+                        </tr>
                         <?php }
                         }
                         ?>
@@ -224,40 +226,40 @@ foreach ($users as $user) {
 
                         <tr>
                             <?php if ($param['priority'] != '' || $param['priority']) { ?>
-                                <td>
-                                    <strong><?php echo lang_loader('inc', 'inc_priority'); ?></strong>
-                                </td>
-                                <td>
-                                    <?php if ($param['priority'] == 'Medium') {
-                                        //warning
-                                        $color = '#f0ad4e';
-                                    }
-                                    if ($param['priority'] == 'High') {
-                                        //danger
-                                        $color = '#d9534f';
-                                    }
-                                    if ($param['priority'] == 'Low') {
-                                        //info
-                                        $color = '#5bc0de';
-                                    }
+                            <td>
+                                <strong><?php echo lang_loader('inc', 'inc_priority'); ?></strong>
+                            </td>
+                            <td>
+                                <?php if ($param['priority'] == 'Medium') {
+                                    //warning
+                                    $color = '#f0ad4e';
+                                }
+                                if ($param['priority'] == 'High') {
+                                    //danger
+                                    $color = '#d9534f';
+                                }
+                                if ($param['priority'] == 'Low') {
+                                    //info
+                                    $color = '#5bc0de';
+                                }
 
-                                    ?>
-                                    <span style="color: <?php echo $color; ?>;">
-                                        <strong> <?php echo $param['priority']; ?></strong>
-                                    </span>
-                                </td>
+                                ?>
+                                <span style="color: <?php echo $color; ?>;">
+                                    <strong> <?php echo $param['priority']; ?></strong>
+                                </span>
+                            </td>
                             <?php } ?>
                         </tr>
                         <tr>
                             <td><strong><?php echo lang_loader('inc', 'inc_incident_reported_in'); ?></strong></td>
                             <td><?php if ($param['ward'] != '') { ?>
-                                    <?php echo 'Floor/Ward: '; ?>
-                                    <?php echo ($param['ward']); ?>
+                                <?php echo 'Floor/Ward: '; ?>
+                                <?php echo ($param['ward']); ?>
                                 <?php } ?>
                                 <br>
                                 <?php if ($param['bedno']) { ?>
-                                    <?php echo 'Site: '; ?>
-                                    <?php echo $param['bedno']; ?>
+                                <?php echo 'Site: '; ?>
+                                <?php echo $param['bedno']; ?>
                                 <?php } ?>
 
                             </td>
@@ -265,154 +267,176 @@ foreach ($users as $user) {
                         <?php $ip_link_patient_feedback = base_url($this->uri->segment(1) . '/employee_complaint?empid=');
                         ?>
                         <?php if ($param['tag_patient_type'] && $param['tag_patientid'] && $param['tag_name'] && $param['tag_consultant']) { ?>
-                            <tr>
-                                <td><strong><?php echo lang_loader('inc', 'inc_patient_details'); ?></strong></td>
-                                <td>
-                                    <?php echo lang_loader('inc', 'inc_patient_type'); ?> <?php echo $param['tag_patient_type']; ?> <br>
-                                    <?php echo lang_loader('inc', 'inc_patient_id'); ?> <?php echo $param['tag_patientid']; ?> <br>
-                                    <?php echo lang_loader('inc', 'inc_patient_name'); ?> <?php echo $param['tag_name']; ?> <br>
-                                    <?php echo lang_loader('inc', 'inc_primary_consultant'); ?> <?php echo $param['tag_consultant']; ?> <br>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td><strong><?php echo lang_loader('inc', 'inc_patient_details'); ?></strong></td>
+                            <td>
+                                <?php echo lang_loader('inc', 'inc_patient_type'); ?>
+                                <?php echo $param['tag_patient_type']; ?> <br>
+                                <?php echo lang_loader('inc', 'inc_patient_id'); ?>
+                                <?php echo $param['tag_patientid']; ?> <br>
+                                <?php echo lang_loader('inc', 'inc_patient_name'); ?> <?php echo $param['tag_name']; ?>
+                                <br>
+                                <?php echo lang_loader('inc', 'inc_primary_consultant'); ?>
+                                <?php echo $param['tag_consultant']; ?> <br>
+                            </td>
+                        </tr>
                         <?php } ?>
 
                         <tr>
                             <td><strong><?php echo lang_loader('inc', 'inc_incident_reported_by'); ?></strong></td>
                             <td>
                                 <?php echo $param['name']; ?>
-                                (<a href="<?php echo $ip_link_patient_feedback . $department->id; ?>"><?php echo $param['patientid']; ?></a>)
+                                (<a
+                                    href="<?php echo $ip_link_patient_feedback . $department->id; ?>"><?php echo $param['patientid']; ?></a>)
 
                                 <!-- <br>
                                 <?php echo $param['role']; ?> -->
                                 <br>
                                 <?php if ($param['contactnumber'] != '') { ?>
-                                    <i class="fa fa-phone"></i> <?php echo $param['contactnumber']; ?>
+                                <i class="fa fa-phone"></i> <?php echo $param['contactnumber']; ?>
                                 <?php } ?>
                                 <br>
                                 <?php if ($param['email'] != '') { ?>
-                                    <i class="fa fa-envelope-o"></i> <?php echo $param['email']; ?>
+                                <i class="fa fa-envelope-o"></i> <?php echo $param['email']; ?>
                                 <?php } ?>
                             </td>
                             <?php if (!empty($department_users[$department->department->type][$department->department->setkey][$department->department->slug])) { ?>
 
                         <tr>
                             <td><strong><?php echo lang_loader('inc', 'inc_incident_assigned_to'); ?></strong></td>
-                            <td><?php echo implode(',', $department_users[$department->department->type][$department->department->setkey][$department->department->slug]); ?></td>
+                            <td><?php echo implode(',', $department_users[$department->department->type][$department->department->setkey][$department->department->slug]); ?>
+                            </td>
 
                         </tr>
-                    <?php } ?>
-                    <tr>
-                        <td><strong><?php echo lang_loader('inc', 'inc_reported_on'); ?></strong></td>
-                        <td><?php echo date('g:i A, d-m-y', strtotime($department->created_on)); ?></td>
-                    </tr>
-                    <?php if (isr_tat('department_link') === true) { ?>
+                        <?php } ?>
+                        <tr>
+                            <td><strong><?php echo lang_loader('inc', 'inc_reported_on'); ?></strong></td>
+                            <td><?php echo date('g:i A, d-m-y', strtotime($department->created_on)); ?></td>
+                        </tr>
+                        <?php if (isr_tat('department_link') === true) { ?>
                         <?php if ($department->status != 'Closed' && $department->status != 'Reopen') { ?>
-                            <tr>
-                                <td><strong><?php echo lang_loader('inc', 'inc_tat_status'); ?></strong></td>
-                                <td>
-                                    <?
-                                    $currentTime = time();
-                                    $start_time = 0;
-                                    $end_time = 1;
-                                    $closeTime = $department->department->close_time;
-                                    $createdOn1 = strtotime($department->created_on);
-                                    $underrange = $createdOn1 + ($closeTime);
-                                    $uprange = $createdOn1 + ($end_time * $closeTime);
-                                    $lastModified1 = strtotime($department->last_modified) - 5;
-                                    $lastModified2 = strtotime($department->last_modified);
-                                    $countexc = 0;
-                                    $time_rem = $createdOn1  + $closeTime;
-                                    // $timeDifferenceInSeconds = $currentTime - $time_rem;
-                                    $timeDifferenceInSeconds =  $time_rem - $currentTime;
-                                    $value = $this->updated_model->convertSecondsToTime($timeDifferenceInSeconds);
+                        <tr>
+                            <td><strong><?php echo lang_loader('inc', 'inc_tat_status'); ?></strong></td>
+                            <td>
+                                <?
+                                $currentTime = time();
+                                $start_time = 0;
+                                $end_time = 1;
+                                $closeTime = $department->department->close_time;
+                                $createdOn1 = strtotime($department->created_on);
+                                $underrange = $createdOn1 + ($closeTime);
+                                $uprange = $createdOn1 + ($end_time * $closeTime);
+                                $lastModified1 = strtotime($department->last_modified) - 5;
+                                $lastModified2 = strtotime($department->last_modified);
+                                $countexc = 0;
+                                $time_rem = $createdOn1 + $closeTime;
+                                // $timeDifferenceInSeconds = $currentTime - $time_rem;
+                                $timeDifferenceInSeconds = $time_rem - $currentTime;
+                                $value = $this->updated_model->convertSecondsToTime($timeDifferenceInSeconds);
 
-                                    if ($value['isNegative'] == false) {
-                                        echo '<b><span style="color:green;">Within TAT<span></b>';
-                                        echo '<br>';
-                                        echo 'TAT exceeding in ';
-                                        if ($value['days'] != 0) echo $value['days'] . ' days, ';
-                                        if ($value['hours'] != 0) echo $value['hours'] . ' hrs, ';
-                                        if ($value['minutes'] != 0) echo $value['minutes'] . ' mins,';
-                                        if ($value['seconds'] <= 60) echo  $value['seconds'] . ' seconds';
-                                    } else {
-                                        echo '<b><span style="color:red;">Exceeded TAT<span></b>';
-                                        echo '<br>';
-                                        echo 'TAT exceeded ';
-                                        if ($value['days'] != 0) echo $value['days'] . ' days, ';
-                                        if ($value['hours'] != 0) echo $value['hours'] . ' hrs, ';
-                                        if ($value['minutes'] != 0) echo $value['minutes'] . ' mins,';
-                                        if ($value['seconds'] <= 60) echo  $value['seconds'] . ' seconds';
-                                        echo ' ago. ';
-                                    } ?>
+                                if ($value['isNegative'] == false) {
+                                    echo '<b><span style="color:green;">Within TAT<span></b>';
+                                    echo '<br>';
+                                    echo 'TAT exceeding in ';
+                                    if ($value['days'] != 0)
+                                        echo $value['days'] . ' days, ';
+                                    if ($value['hours'] != 0)
+                                        echo $value['hours'] . ' hrs, ';
+                                    if ($value['minutes'] != 0)
+                                        echo $value['minutes'] . ' mins,';
+                                    if ($value['seconds'] <= 60)
+                                        echo $value['seconds'] . ' seconds';
+                                } else {
+                                    echo '<b><span style="color:red;">Exceeded TAT<span></b>';
+                                    echo '<br>';
+                                    echo 'TAT exceeded ';
+                                    if ($value['days'] != 0)
+                                        echo $value['days'] . ' days, ';
+                                    if ($value['hours'] != 0)
+                                        echo $value['hours'] . ' hrs, ';
+                                    if ($value['minutes'] != 0)
+                                        echo $value['minutes'] . ' mins,';
+                                    if ($value['seconds'] <= 60)
+                                        echo $value['seconds'] . ' seconds';
+                                    echo ' ago. ';
+                                } ?>
 
-                                </td>
-                            </tr>
-                        <?php    } ?>
-                    <?php    } ?>
-                    <tr>
-                        <td><strong><?php echo lang_loader('inc', 'inc_incident_status'); ?></strong> </td>
-                        <td> <?php if ($this->session->userdata['isLogIn'] == false) { ?>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                        <?php } ?>
+                        <tr>
+                            <td><strong><?php echo lang_loader('inc', 'inc_incident_status'); ?></strong> </td>
+                            <td> <?php if ($this->session->userdata['isLogIn'] == false) { ?>
                                 <?php if ($department->status == 'Closed') { ?>
-                                    <span style="color:  #198754;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    <?php echo 'Closed'; ?>
+                                <span style="color:  #198754;font-weight: bold; display: inline-block;"><i
+                                        class="fa fa-circle" aria-hidden="true"></i></span>
+                                <?php echo 'Closed'; ?>
                                 <?php } ?>
                                 <?php if ($department->status == 'Addressed' || $department->status == 'Reopen' || $department->status == 'Transfered') { ?>
-                                    <span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    <?php echo 'Inprogress'; ?>
+                                <span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i
+                                        class="fa fa-circle" aria-hidden="true"></i></span>
+                                <?php echo 'Inprogress'; ?>
                                 <?php } ?>
                                 <?php if ($department->status == 'Open') { ?>
-                                    <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    <?php echo 'Pending'; ?>
-                                <?php }  ?>
+                                <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i
+                                        class="fa fa-circle" aria-hidden="true"></i></span>
+                                <?php echo 'Pending'; ?>
+                                <?php } ?>
                                 <?php if ($department->status == 'Assigned') { ?>
-                                    <span style="color: #f09a22;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    <?php echo 'Assigned'; ?>
-                                <?php }  ?>
+                                <span style="color: #f09a22;font-weight: bold; display: inline-block;"><i
+                                        class="fa fa-circle" aria-hidden="true"></i></span>
+                                <?php echo 'Assigned'; ?>
+                                <?php } ?>
                                 <?php if ($department->status == 'Re-assigned') { ?>
-                                    <span style="color: #f09a22;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    <?php echo 'Re-assigned'; ?>
-                                <?php }  ?>
+                                <span style="color: #f09a22;font-weight: bold; display: inline-block;"><i
+                                        class="fa fa-circle" aria-hidden="true"></i></span>
+                                <?php echo 'Re-assigned'; ?>
+                                <?php } ?>
                                 <?php if ($department->status == 'Described') { ?>
-                                    <span style="color: #f09a22;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    <?php echo 'Described'; ?>
-                                <?php }  ?>
-                            <?php } ?>
-                            <?php if ($this->session->userdata['isLogIn'] == true) { ?>
+                                <span style="color: #f09a22;font-weight: bold; display: inline-block;"><i
+                                        class="fa fa-circle" aria-hidden="true"></i></span>
+                                <?php echo 'Described'; ?>
+                                <?php } ?>
+                                <?php } ?>
+                                <?php if ($this->session->userdata['isLogIn'] == true) { ?>
                                 <?php //if (($this->session->userdata['user_role'] == 4 && $this->session->userdata['email'] == $department->department->email) || $this->session->userdata['user_role'] <= 3) { 
-                                ?>
-                                <select class="form-control" onchange="ticket_options(this.value)" style="max-width: 300px;" required>
-                                    <option value="<?php echo $department->status; ?>" selected><?php echo $department->status; ?></option>
+                                    ?>
+                                <select class="form-control" onchange="ticket_options(this.value)"
+                                    style="max-width: 300px;" required>
+                                    <option value="<?php echo $department->status; ?>" selected>
+                                        <?php echo $department->status; ?></option>
                                     <?php if ($department->status != 'Assigned' && $department->status != 'Rejected' && $department->status != 'Described' && $department->status != 'Closed' && $department->status != 'Re-assigned') { ?>
-                                        <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('IN-ASSIGNED-INCIDENTS') === true) { ?>
-                                            <option value="assignuser">Accept & Assign</option>
-                                        <?php } ?>
+                                    <?php if (ismodule_active('INCIDENT') === true && isfeature_active('IN-ASSIGNED-INCIDENTS') === true) { ?>
+                                    <option value="assignuser">Accept & Assign</option>
+                                    <?php } ?>
                                     <?php } ?>
                                     <?php if ($department->status != 'Closed' && $department->status != 'Open') { ?>
-                                        <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('IN-REASSIGNED-INCIDENTS') === true) { ?>
-                                            <option value="reassign">Re-assign</option>
-                                        <?php } ?>
+                                    <?php if (ismodule_active('INCIDENT') === true && isfeature_active('IN-REASSIGNED-INCIDENTS') === true) { ?>
+                                    <option value="reassign">Re-assign</option>
                                     <?php } ?>
-                                    <?php if ($department->status != 'Rejected'  &&  $department->status != 'Assigned' && $department->status != 'Described' && $department->status != 'Closed') { ?>
-                                        <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('IN-REJECTED-INCIDENTS') === true) { ?>
+                                    <?php } ?>
+                                    <?php if ($department->status != 'Rejected' && $department->status != 'Assigned' && $department->status != 'Described' && $department->status != 'Closed') { ?>
+                                    <?php if (ismodule_active('INCIDENT') === true && isfeature_active('IN-REJECTED-INCIDENTS') === true) { ?>
 
-                                            <option value="reject">Reject</option>
-                                        <?php } ?>
+                                    <option value="reject">Reject</option>
                                     <?php } ?>
-                                    <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('DESCRIBING-INCIDENTS') === true) { ?>
-                                        <?php if ($department->status != 'Closed' && $department->status != 'Open') { ?>
-                                            <option value="describe">Describe</option>
-                                        <?php } ?>
+                                    <?php } ?>
+                                    <?php if (ismodule_active('INCIDENT') === true && isfeature_active('DESCRIBING-INCIDENTS') === true) { ?>
+                                    <?php if ($department->status != 'Closed' && $department->status != 'Open') { ?>
+                                    <option value="describe">Describe</option>
+                                    <?php } ?>
                                     <?php } ?>
                                     <?php if ($department->status != 'Closed') {
                                         $open = true; ?>
 
 
 
-                                        <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('CLOSING-INCIDENTS') === true) { ?>
-                                            <?php if ($department->status != 'Rejected') { ?>
-                                                <option value="capa"><?php echo lang_loader('inc', 'inc_close'); ?></option>
-                                            <?php } ?>
-                                        <?php } ?>
+                                    <?php if (ismodule_active('INCIDENT') === true && isfeature_active('CLOSING-INCIDENTS') === true) { ?>
+                                    <?php if ($department->status != 'Rejected') { ?>
+                                    <option value="capa"><?php echo lang_loader('inc', 'inc_close'); ?></option>
+                                    <?php } ?>
+                                    <?php } ?>
 
 
 
@@ -422,60 +446,61 @@ foreach ($users as $user) {
                                     <?php if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
 
                                         $closed = true; ?>
-                                        <?php if ($department->status == 'Closed' || $department->status == 'Rejected') { ?>
+                                    <?php if ($department->status == 'Closed' || $department->status == 'Rejected') { ?>
 
-                                            <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('IN-REOPEN-INCIDENTS') === true) { ?>
-                                                <option value="reopen"><?php echo lang_loader('inc', 'inc_reopen'); ?></option>
+                                    <?php if (ismodule_active('INCIDENT') === true && isfeature_active('IN-REOPEN-INCIDENTS') === true) { ?>
+                                    <option value="reopen"><?php echo lang_loader('inc', 'inc_reopen'); ?></option>
 
-                                            <?php } ?>
-                                        <?php } ?>
+                                    <?php } ?>
+                                    <?php } ?>
                                     <?php } ?>
                                     <?php if ($department->status == 'Closed') { ?>
 
-                                        <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('IN-VERIFY-INCIDENTS') === true) { ?>
-                                            <option value="verify">Verify</option>
+                                    <?php if (ismodule_active('INCIDENT') === true && isfeature_active('IN-VERIFY-INCIDENTS') === true) { ?>
+                                    <option value="verify">Verify</option>
 
-                                        <?php } ?>
+                                    <?php } ?>
                                     <?php } ?>
 
                                 </select>
-                                <span> <i class="fa fa-hand-o-left" aria-hidden="true" style="font-size: 20px; padding-left: 50px;"></i></span>
+                                <span> <i class="fa fa-hand-o-left" aria-hidden="true"
+                                        style="font-size: 20px; padding-left: 50px;"></i></span>
                                 <span style="padding-left: 10px;">Take Action here</span>
 
-                            <?php } ?>
-                            <?php //} 
-                            ?>
-                        </td>
-                    </tr>
-                    <?php if ($department->last_modified > $department->created_on) { ?>
+                                <?php } ?>
+                                <?php //} 
+                                ?>
+                            </td>
+                        </tr>
+                        <?php if ($department->last_modified > $department->created_on) { ?>
                         <tr>
                             <td><strong><?php echo lang_loader('inc', 'inc_last_updated_on'); ?></strong> </td>
                             <td><?php echo date('g:i A, d-m-y', strtotime($department->last_modified)); ?></td>
                         </tr>
-                    <?php } ?>
-                    <?php if (isr_tat('department_link') === true) { ?>
-                        <?php if ($department->status == 'Closed') { ?>
-                            <tr>
-                                <td><strong><?php echo lang_loader('inc', 'inc_turn_around_time'); ?></strong> </td>
-                                <td><?php
-                                    $createdOn = strtotime($department->created_on);
-                                    $lastModified = strtotime($department->last_modified);
-                                    $timeDifferenceInSeconds = $lastModified - $createdOn;
-                                    $value = $this->updated_model->convertSecondsToTime($timeDifferenceInSeconds);
-
-                                    if ($value['days'] != 0) {
-                                        echo $value['days'] . ' days, ';
-                                    }
-                                    if ($value['hours'] != 0) {
-                                        echo  $value['hours'] . ' hrs, ';
-                                    }
-                                    if ($value['minutes'] != 0) {
-                                        echo  $value['minutes'] . ' mins.';
-                                    }
-                                    ?></td>
-                            </tr>
                         <?php } ?>
-                    <?php } ?>
+                        <?php if (isr_tat('department_link') === true) { ?>
+                        <?php if ($department->status == 'Closed') { ?>
+                        <tr>
+                            <td><strong><?php echo lang_loader('inc', 'inc_turn_around_time'); ?></strong> </td>
+                            <td><?php
+                            $createdOn = strtotime($department->created_on);
+                            $lastModified = strtotime($department->last_modified);
+                            $timeDifferenceInSeconds = $lastModified - $createdOn;
+                            $value = $this->updated_model->convertSecondsToTime($timeDifferenceInSeconds);
+
+                            if ($value['days'] != 0) {
+                                echo $value['days'] . ' days, ';
+                            }
+                            if ($value['hours'] != 0) {
+                                echo $value['hours'] . ' hrs, ';
+                            }
+                            if ($value['minutes'] != 0) {
+                                echo $value['minutes'] . ' mins.';
+                            }
+                            ?></td>
+                        </tr>
+                        <?php } ?>
+                        <?php } ?>
                     </table>
                 </div>
             </div>
@@ -484,451 +509,499 @@ foreach ($users as $user) {
 
         <?php if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true && ($department->status == 'Closed')) {
 
-            if ($closed == true) {  ?>
+            if ($closed == true) { ?>
 
 
-                <?php if (($department->status != 'Open')) { ?>
-                    <div class="col-sm-12" id="reopen" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3><?php echo lang_loader('inc', 'inc_reopen_this_incident'); ?></h3>
-                            </div>
-                            <div class="col-sm-12" style="overflow:auto;">
-                                <!-- <div class="col-md-12 col-sm-12"> -->
-                                <br />
-                                <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?>
-                                <div class="form-group row">
-                                    <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
-                                    <!-- <div class="col-xs-9"> -->
-                                    <input type="hidden" name="status" value="Reopen">
-                                    <!-- </div> -->
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply" placeholder="Reason to reopen incident" required></textarea>
-                                        <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="status" value="Reopen">
-                                    </div>
-                                </div>
-
-
-                                <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
-                            </div>
-                            <!-- </div> -->
+        <?php if (($department->status != 'Open')) { ?>
+        <div class="col-sm-12" id="reopen" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3><?php echo lang_loader('inc', 'inc_reopen_this_incident'); ?></h3>
+                </div>
+                <div class="col-sm-12" style="overflow:auto;">
+                    <!-- <div class="col-md-12 col-sm-12"> -->
+                    <br />
+                    <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+                    <div class="form-group row">
+                        <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
+                        <!-- <div class="col-xs-9"> -->
+                        <input type="hidden" name="status" value="Reopen">
+                        <!-- </div> -->
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply"
+                                placeholder="Reason to reopen incident" required></textarea>
+                            <input type="hidden" name="reply_by" value="Admin">
+                            <input type="hidden" name="status" value="Reopen">
                         </div>
                     </div>
 
-                    <!-- Verify code  -->
-                    <div class="col-sm-12" id="verify" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Verify Incident</h3>
-                            </div>
-                            <div class="col-sm-12" style="overflow:auto;">
-                                <!-- <div class="col-md-12 col-sm-12"> -->
-                                <br />
-                                <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?>
-                                <div class="form-group row">
-                                    <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
-                                    <!-- <div class="col-xs-9"> -->
-                                    <input type="hidden" name="status" value="Verified">
-                                    <!-- </div> -->
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply" placeholder="Reason for verifying incident" required></textarea>
-                                        <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="status" value="Verified">
-                                    </div>
-                                </div>
 
-
-                                <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
+                    <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
                             </div>
-                            <!-- </div> -->
+                        </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <!-- Verify code  -->
+        <div class="col-sm-12" id="verify" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Verify Incident</h3>
+                </div>
+                <div class="col-sm-12" style="overflow:auto;">
+                    <!-- <div class="col-md-12 col-sm-12"> -->
+                    <br />
+                    <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+                    <div class="form-group row">
+                        <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
+                        <!-- <div class="col-xs-9"> -->
+                        <input type="hidden" name="status" value="Verified">
+                        <!-- </div> -->
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply"
+                                placeholder="Reason for verifying incident" required></textarea>
+                            <input type="hidden" name="reply_by" value="Admin">
+                            <input type="hidden" name="status" value="Verified">
                         </div>
                     </div>
 
-                <?php } ?>
-            <?php } ?>
 
-
-        <?php } else {  ?>
-            <?php if ($open == true) {  ?>
-                <?php if (($department->status != 'Closed')) { ?>
-                    <div class="col-sm-12" id="address" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3><?php echo lang_loader('inc', 'inc_address_this_incident'); ?> </h3>
+                    <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
                             </div>
-                            <div class="col-sm-12" style="overflow:auto;">
-                                <!-- <div class="col-md-12 col-sm-12"> -->
-                                <br />
-                                <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?>
-                                <div class="form-group row">
-                                    <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
-                                    <!-- <div class="col-xs-9"> -->
-                                    <input type="hidden" name="addressed" <?php if ($department->addressed == 1) {
-                                                                                echo 'checked disabled';
-                                                                            } ?>>
-                                    <!-- </div> -->
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply" placeholder="Please enter your initial response message" required></textarea>
-                                        <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="status" value="Addressed">
-                                    </div>
-                                </div>
-
-
-                                <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
-                            </div>
-                            <!-- </div> -->
                         </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <?php } ?>
+        <?php } ?>
+
+
+        <?php } else { ?>
+        <?php if ($open == true) { ?>
+        <?php if (($department->status != 'Closed')) { ?>
+        <div class="col-sm-12" id="address" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3><?php echo lang_loader('inc', 'inc_address_this_incident'); ?> </h3>
+                </div>
+                <div class="col-sm-12" style="overflow:auto;">
+                    <!-- <div class="col-md-12 col-sm-12"> -->
+                    <br />
+                    <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+                    <div class="form-group row">
+                        <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
+                        <!-- <div class="col-xs-9"> -->
+                        <input type="hidden" name="addressed" <?php if ($department->addressed == 1) {
+                            echo 'checked disabled';
+                        } ?>>
+                        <!-- </div> -->
                     </div>
-                    <div class="col-sm-12" id="reject" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Enter the reason for rejecting this incident </h3>
-                            </div>
-                            <div class="col-sm-12" style="overflow:auto;">
-                                <!-- <div class="col-md-12 col-sm-12"> -->
-                                <br />
-                                <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?>
-                                <div class="form-group row">
-                                    <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
-                                    <!-- <div class="col-xs-9"> -->
-                                    <input type="hidden" name="addressed" <?php if ($department->addressed == 1) {
-                                                                                echo 'checked disabled';
-                                                                            } ?>>
-                                    <!-- </div> -->
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply" placeholder="Please enter your input here" required></textarea>
-                                        <input type="hidden" name="rejected_by" value="Admin">
-                                        <input type="hidden" name="status" value="Rejected">
-                                    </div>
-                                </div>
-
-
-                                <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
-                            </div>
-                            <!-- </div> -->
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply"
+                                placeholder="Please enter your initial response message" required></textarea>
+                            <input type="hidden" name="reply_by" value="Admin">
+                            <input type="hidden" name="status" value="Addressed">
                         </div>
                     </div>
 
-                    <div class="col-sm-12" id="capa" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Enter RCA, CAPA, and Resolution Comment to Close the Incident</h3>
+
+                    <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
                             </div>
-                            <?php echo form_open('ticketsincident/create', array('class' => 'form-inner', 'enctype' => 'multipart/form-data')); ?>
+                        </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="col-sm-12" id="reject" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Enter the reason for rejecting this incident </h3>
+                </div>
+                <div class="col-sm-12" style="overflow:auto;">
+                    <!-- <div class="col-md-12 col-sm-12"> -->
+                    <br />
+                    <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+                    <div class="form-group row">
+                        <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
+                        <!-- <div class="col-xs-9"> -->
+                        <input type="hidden" name="addressed" <?php if ($department->addressed == 1) {
+                            echo 'checked disabled';
+                        } ?>>
+                        <!-- </div> -->
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply"
+                                placeholder="Please enter your input here" required></textarea>
+                            <input type="hidden" name="rejected_by" value="Admin">
+                            <input type="hidden" name="status" value="Rejected">
+                        </div>
+                    </div>
 
-                            <?php echo form_hidden('id', $department->id) ?>
-                            <div class="col-sm-12" style="overflow:auto;">
-                                <script>
-                                    function showbox() {
-                                        //$('#preventiveid').show();
-                                        $('#correctiveid').show();
-                                        //$("#preventive").attr("required", "true");
-                                        $("#corrective").attr("required", "true");
-                                    }
 
-                                    function hidebox() {
-                                        //$('#preventiveid').hide();
-                                        $('#correctiveid').hide();
-                                        //$("#preventive").removeAttr("required");
-                                        $("#corrective").removeAttr("required");
-                                    }
-                                </script>
-                                <div class="form-group row" style="display:none;">
-                                    <label class="col-sm-3"><?php echo display('status') ?></label>
-                                    <div class="col-xs-9">
-                                        <div class="form-check">
-                                            <label class="radio-inline"><input type="radio" name="status" value="Open" onclick="hidebox()"><?php echo lang_loader('inc', 'inc_open'); ?></label>
-                                            <label class="radio-inline"><input type="radio" name="status" value="Closed" onclick="showbox()" checked="true"><?php echo lang_loader('inc', 'inc_close'); ?></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
+                    <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
+                            </div>
+                        </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <div class="col-sm-12" id="capa" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Enter RCA, CAPA, and Resolution Comment to Close the Incident</h3>
+                </div>
+                <?php echo form_open('ticketsincident/create', array('class' => 'form-inner', 'enctype' => 'multipart/form-data')); ?>
+
+                <?php echo form_hidden('id', $department->id) ?>
+                <div class="col-sm-12" style="overflow:auto;">
+                    <script>
+                        function showbox() {
+                            //$('#preventiveid').show();
+                            $('#correctiveid').show();
+                            //$("#preventive").attr("required", "true");
+                            $("#corrective").attr("required", "true");
+                        }
+
+                        function hidebox() {
+                            //$('#preventiveid').hide();
+                            $('#correctiveid').hide();
+                            //$("#preventive").removeAttr("required");
+                            $("#corrective").removeAttr("required");
+                        }
+                    </script>
+                    <div class="form-group row" style="display:none;">
+                        <label class="col-sm-3"><?php echo display('status') ?></label>
+                        <div class="col-xs-9">
+                            <div class="form-check">
+                                <label class="radio-inline"><input type="radio" name="status" value="Open"
+                                        onclick="hidebox()"><?php echo lang_loader('inc', 'inc_open'); ?></label>
+                                <label class="radio-inline"><input type="radio" name="status" value="Closed"
+                                        onclick="showbox()"
+                                        checked="true"><?php echo lang_loader('inc', 'inc_close'); ?></label>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
 
 
-                                <!-- <h3>Writing CAPA to close this ticket:<i class="text-danger">*</i></h3> -->
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <textarea class="form-control" rows="5" minlength="25" id="rootcause" name="rootcause" placeholder="Enter the Root Cause Analysis( RCA)" required></textarea>
-                                    </div>
-                                </div>
+                    <!-- <h3>Writing CAPA to close this ticket:<i class="text-danger">*</i></h3> -->
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <textarea class="form-control" rows="5" minlength="25" id="rootcause" name="rootcause"
+                                placeholder="Enter the Root Cause Analysis( RCA)" required></textarea>
+                        </div>
+                    </div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group row" id="correctiveid">
-                                        <textarea class="form-control" rows="5" minlength="25" id="corrective" name="corrective" placeholder="Enter CAPA(Corrective Action and Preventive Action)" required></textarea>
-                                        <input type="hidden" name="preventive">
-                                    </div>
-                                </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row" id="correctiveid">
+                            <textarea class="form-control" rows="5" minlength="25" id="corrective" name="corrective"
+                                placeholder="Enter CAPA(Corrective Action and Preventive Action)" required></textarea>
+                            <input type="hidden" name="preventive">
+                        </div>
+                    </div>
 
-                                <!-- <div class="col-sm-12">
+                    <!-- <div class="col-sm-12">
                                     <div class="form-group row" id="correctiveid">
                                         <textarea class="form-control" rows="5" id="preventive" name="preventive" placeholder="Enter the Preventive Action and Measures" required></textarea>
                                     </div>
                                 </div> -->
 
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <textarea class="form-control" rows="5" minlength="25" id="note" name="resolution_note" placeholder="Enter your resolution comment (visible to the user who raised the issue)" required></textarea>
-                                    </div>
-                                </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <textarea class="form-control" rows="5" minlength="25" id="note" name="resolution_note"
+                                placeholder="Enter your resolution comment (visible to the user who raised the issue)"
+                                required></textarea>
+                        </div>
+                    </div>
 
-                                <div class="form-group row">
-                                    <label for="picture" class="col-xs-3 col-form-label">Upload supporting file (Max limit 10MB)</label><br>
-                                    <div class="col-sm-12">
-                                        <input type="file" name="picture" id="picture">
-                                        <input type="hidden" name="old_picture">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-offset-3 col-sm-6">
-                                    <div class="ui buttons">
-                                        <!-- <button type="reset" class="ui button">
-                                        <?php // echo display('reset') 
-                                        ?></button>
+                    <div class="form-group row">
+                        <label for="picture" class="col-xs-3 col-form-label">Upload supporting file (Max limit
+                            10MB)</label><br>
+                        <div class="col-sm-12">
+                            <input type="file" name="picture" id="picture">
+                            <input type="hidden" name="old_picture">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-offset-3 col-sm-6">
+                        <div class="ui buttons">
+                            <!-- <button type="reset" class="ui button">
+                                        <?php // echo 'Reset' ; 
+                                                    ?></button>
                                     <div class="or"></div> -->
-                                        <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php echo form_close() ?>
-                    </div>
-                    <div class="col-sm-12" id="move" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3><?php echo lang_loader('inc', 'inc_transfering_incident_to_category'); ?></h3>
-                            </div>
-                            <div class="col-md-12 col-sm-12">
-                                <br />
-                                <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?> <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('inc', 'inc_category'); ?></label>
-                                    <div class="col-xs-9">
-                                        <select class="form-control" id="sel1" name="deparment" required aria-required="true">
-                                            <?php echo '<option value="">--Change Department--</option>';
-                                            $this->db->order_by('slug', 'asc');
-                                            $this->db->where('type', 'incident');
-                                            $query = $this->db->get('department');
-                                            $data = $query->result();
-                                            $result_department = array();
-                                            foreach ($data as $element) {
-                                                if (!isset($result_department[$element->description])) {
-                                                    $result_department[$element->description] = $element;
-                                                }
-                                            }
-                                            foreach ($result_department as $r) {
-                                                if ($department->department->description != $r->description) {
-                                                    echo '<option value="' . $r->dprt_id . '">' . $r->description . '</option>';
-                                                }
-                                            }                                   ?> </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('inc', 'inc_comment'); ?></label>
-                                    <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply" placeholder="Enter the reason for incident transfer" required></textarea>
-                                        <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                    </div>
-                                </div> <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
-                            </div>
+                            <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
                         </div>
                     </div>
-                    <div class="col-sm-12" id="assign" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Assign incident to respective users</h3>
-
+                </div>
+            </div>
+            <?php echo form_close() ?>
+        </div>
+        <div class="col-sm-12" id="move" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3><?php echo lang_loader('inc', 'inc_transfering_incident_to_category'); ?></h3>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <br />
+                    <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+                    <div class="form-group row">
+                        <label for="name"
+                            class="col-xs-3 col-form-label"><?php echo lang_loader('inc', 'inc_category'); ?></label>
+                        <div class="col-xs-9">
+                            <select class="form-control" id="sel1" name="deparment" required aria-required="true">
+                                <?php echo '<option value="">--Change Department--</option>';
+                                $this->db->order_by('slug', 'asc');
+                                $this->db->where('type', 'incident');
+                                $query = $this->db->get('department');
+                                $data = $query->result();
+                                $result_department = array();
+                                foreach ($data as $element) {
+                                    if (!isset($result_department[$element->description])) {
+                                        $result_department[$element->description] = $element;
+                                    }
+                                }
+                                foreach ($result_department as $r) {
+                                    if ($department->department->description != $r->description) {
+                                        echo '<option value="' . $r->dprt_id . '">' . $r->description . '</option>';
+                                    }
+                                } ?> </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name"
+                            class="col-xs-3 col-form-label"><?php echo lang_loader('inc', 'inc_comment'); ?></label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply"
+                                placeholder="Enter the reason for incident transfer" required></textarea>
+                            <input type="hidden" name="reply_by" value="Admin">
+                            <input type="hidden" name="reply_departmen"
+                                value="<?php echo $department->department->description; ?>">
+                        </div>
+                    </div> <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
                             </div>
-                            <div class="col-lg-12 col-md-12">
-                                <br />
-                                <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?>
+                        </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" id="assign" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Assign incident to respective users</h3>
 
-                                <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label">Select users from the list</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" id="userSearch" class="form-control" placeholder="Search for names..">
-                                        <div class="checkbox-container" id="userList">
-                                            <?php foreach ($users as $user) : ?>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" name="users[]" value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" checked>
-                                                    <label for="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
-                                                        <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
-                                                    </label>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <br />
+                    <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-xs-3 col-form-label">Select users from the list</label>
+                        <div class="col-xs-9">
+                            <input type="text" id="userSearch" class="form-control" placeholder="Search for names..">
+                            <div class="checkbox-container" id="userList">
+                                <?php foreach ($users as $user): ?>
+                                <div class="checkbox">
+                                    <input type="checkbox"
+                                        id="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                        name="users[]"
+                                        value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                        checked>
+                                    <label
+                                        for="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                        <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                    </label>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
-                                    <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Your inputs here"></textarea>
-                                        <input type="hidden" name="status" value="Assigned">
-
-                                    </div>
-                                </div> <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('isr', 'isr_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-12" id="reassign" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Re-assign incident to respective users</h3>
+                    <div class="form-group row">
+                        <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control" rows="5" id="comment" name="reply"
+                                placeholder="Your inputs here"></textarea>
+                            <input type="hidden" name="status" value="Assigned">
 
+                        </div>
+                    </div> <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('isr', 'isr_submit'); ?></button>
                             </div>
-                            <div class="col-lg-12 col-md-12">
-                                <br />
-                                <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?>
+                        </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+            </div>
+        </div>
 
-                                <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label">Select users from the list</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" id="userSearch_reassign" class="form-control" placeholder="Search for names..">
-                                        <div class="checkbox-container" id="userList_reassign">
-                                            <?php foreach ($users as $user) : ?>
-                                                <?php if ($user->firstname !== 'Developer') : ?>
-                                                    <div class="checkbox">
-                                                        <input type="checkbox" id="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" name="users_reassign[]" value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" checked>
-                                                        <label for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
-                                                            <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
-                                                        </label>
-                                                    </div>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
+        <div class="col-sm-12" id="reassign" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Re-assign incident to respective users</h3>
+
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <br />
+                    <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-xs-3 col-form-label">Select users from the list</label>
+                        <div class="col-xs-9">
+                            <input type="text" id="userSearch_reassign" class="form-control"
+                                placeholder="Search for names..">
+                            <div class="checkbox-container" id="userList_reassign">
+                                <?php foreach ($users as $user): ?>
+                                <?php if ($user->firstname !== 'Developer'): ?>
+                                <div class="checkbox">
+                                    <input type="checkbox"
+                                        id="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                        name="users_reassign[]"
+                                        value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                        checked>
+                                    <label
+                                        for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                        <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                    </label>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
-                                    <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Your inputs here"></textarea>
-                                        <input type="hidden" name="status" value="Re-assigned">
-
-                                    </div>
-                                </div> <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('isr', 'isr_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-12" id="describe" style="overflow:auto;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Describe the Incident in detail: </h3>
+                    <div class="form-group row">
+                        <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control" rows="5" id="comment" name="reply"
+                                placeholder="Your inputs here"></textarea>
+                            <input type="hidden" name="status" value="Re-assigned">
+
+                        </div>
+                    </div> <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('isr', 'isr_submit'); ?></button>
                             </div>
-                            <div class="col-sm-12" style="overflow:auto;">
-                                <!-- <div class="col-md-12 col-sm-12"> -->
-                                <br />
-                                <?php echo form_open('ticketsincident/create', array('class' => 'form-inner', 'enctype' => 'multipart/form-data')); ?>
-                                <?php echo form_hidden('id', $department->id) ?>
-                                <div class="form-group row">
-                                    <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
-                                    <!-- <div class="col-xs-9"> -->
-                                    <input type="hidden" name="describe" <?php if ($department->addressed == 1) {
-                                                                                echo 'checked disabled';
-                                                                            } ?>>
-                                    <!-- </div> -->
-                                </div>
-                                <p style="font-weight: bold;font-size:15px;">Incident description submitted in the form:</p>
+                        </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+            </div>
+        </div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <p style="font-size: 14px;">
-                                            <?php
-                                            echo isset($comm) && !empty($comm) ? $comm : 'No description was received';
+        <div class="col-sm-12" id="describe" style="overflow:auto;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Describe the Incident in detail: </h3>
+                </div>
+                <div class="col-sm-12" style="overflow:auto;">
+                    <!-- <div class="col-md-12 col-sm-12"> -->
+                    <br />
+                    <?php echo form_open('ticketsincident/create', array('class' => 'form-inner', 'enctype' => 'multipart/form-data')); ?>
+                    <?php echo form_hidden('id', $department->id) ?>
+                    <div class="form-group row">
+                        <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
+                        <!-- <div class="col-xs-9"> -->
+                        <input type="hidden" name="describe" <?php if ($department->addressed == 1) {
+                            echo 'checked disabled';
+                        } ?>>
+                        <!-- </div> -->
+                    </div>
+                    <p style="font-weight: bold;font-size:15px;">Incident description submitted in the form:</p>
 
-                                            ?>
-                                        </p>
-                                    </div>
-                                </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <p style="font-size: 14px;">
+                                <?php
+                                echo isset($comm) && !empty($comm) ? $comm : 'No description was received';
 
-
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply" placeholder="Add your description here" required></textarea>
-                                        <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="status" value="Described">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="describe_picture" class="col-xs-3 col-form-label">Upload supporting file (Max limit 10MB)</label><br>
-                                    <div class="col-sm-12">
-                                        <input type="file" name="describe_picture" id="describe_picture">
-
-                                    </div>
-                                </div>
-
-
-
-                                <!--Radio-->
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button> </div>
-                                    </div>
-                                </div> <?php echo form_close() ?>
-                            </div>
-                            <!-- </div> -->
+                                ?>
+                            </p>
                         </div>
                     </div>
 
-                <?php } ?>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <textarea class="form-control" rows="5" minlength="25" id="comment" name="reply"
+                                placeholder="Add your description here" required></textarea>
+                            <input type="hidden" name="reply_by" value="Admin">
+                            <input type="hidden" name="status" value="Described">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="describe_picture" class="col-xs-3 col-form-label">Upload supporting file (Max limit
+                            10MB)</label><br>
+                        <div class="col-sm-12">
+                            <input type="file" name="describe_picture" id="describe_picture">
+
+                        </div>
+                    </div>
 
 
-            <?php  } ?>
+
+                    <!--Radio-->
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="ui buttons"> <button
+                                    class="ui positive button"><?php echo lang_loader('inc', 'inc_submit'); ?></button>
+                            </div>
+                        </div>
+                    </div> <?php echo form_close() ?>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <?php } ?>
+
+
+        <?php } ?>
         <?php } ?>
 
 
@@ -937,10 +1010,10 @@ foreach ($users as $user) {
         <?php // include 'feed.php';
         ?>
         <?php if ($this->session->userdata('isLogIn') == true) { ?>
-            <?php if ($department->status == 'Closed' || $department->status == 'Reopen' || $department->status == 'Addressed' || $department->status == 'Transfered' || $department->status == 'Rejected' || $department->status == 'Assigned' || $department->status == 'Described' || $department->status == 'Verified' || $department->status == 'Re-assigned') { ?>
-                <?php include 'ticket_convo.php'; ?>
+        <?php if ($department->status == 'Closed' || $department->status == 'Reopen' || $department->status == 'Addressed' || $department->status == 'Transfered' || $department->status == 'Rejected' || $department->status == 'Assigned' || $department->status == 'Described' || $department->status == 'Verified' || $department->status == 'Re-assigned') { ?>
+        <?php include 'ticket_convo.php'; ?>
 
-            <?php } ?>
+        <?php } ?>
         <?php } ?>
 
     </div>
@@ -1026,7 +1099,7 @@ foreach ($users as $user) {
     }
 </style>
 <script>
-    document.getElementById('userSearch').addEventListener('keyup', function() {
+    document.getElementById('userSearch').addEventListener('keyup', function () {
         var filter = this.value.toLowerCase();
         var checkboxes = document.getElementById('userList').getElementsByClassName('checkbox');
 
@@ -1043,7 +1116,7 @@ foreach ($users as $user) {
     });
 </script>
 <script>
-    document.getElementById('userSearch_reassign').addEventListener('keyup', function() {
+    document.getElementById('userSearch_reassign').addEventListener('keyup', function () {
         var filter = this.value.toLowerCase();
         var checkboxes = document.getElementById('userList_reassign').getElementsByClassName('checkbox');
 

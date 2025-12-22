@@ -6,7 +6,9 @@
 
                 <div class="panel-heading no-print">
                     <div class="btn-group">
-                        <a class="btn btn-success" href="<?php echo base_url("audit_np_ratio_icu") ?>"> <i class="fa fa-list"></i> List </a>
+                        <a class="btn btn-success" href="<?php echo base_url("audit_np_ratio_icu") ?>"> <i
+                           
+                                    class="fa fa-list"></i> List </a>
                     </div>
                 </div>
 
@@ -19,9 +21,13 @@
                             <?php echo form_hidden('guid', $department->guid) ?>
 
                             <div class="form-group row">
-                                <label for="name" class="col-xs-3 col-form-label">ICU Type<i class="text-danger">*</i></label>
-                                <div class="col-xs-9">
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Enter different ICU" value="<?php echo $department->title ?>">
+
+                                                                       <label for="name" class="col-xs-3 col-form-label">ICU Type<i
+                                        class="text-danger">*</i></label>
+
+                                                                       <div class="col-xs-9">
+                                    <input name="name" type="text" class="form-control" id="name"
+                                        placeholder="Enter different ICU" value="<?php echo $department->title ?>">
                                 </div>
                             </div>
 
@@ -34,9 +40,9 @@
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button type="reset" class="ui button"><?php echo display('reset') ?></button>
+                                        <button type="reset" class="ui button"><?php echo 'Reset'; ?></button>
                                         <div class="or"></div>
-                                        <button class="ui positive button"><?php echo display('save') ?></button>
+                                        <button class="ui positive button"><?php echo 'Save'; ?></button>
                                     </div>
                                 </div>
                             </div>

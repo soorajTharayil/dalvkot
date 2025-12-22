@@ -17,8 +17,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Return to Emergency within 72 hours - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Return to Emergency within
+                        72 hours - <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -213,25 +215,31 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Initial consultation date</b></td>
                             <td>
-                                <input class="form-control" type="text" id="formula_para1_hr" name="initial_assessment_hr1" value="<?php echo $param['initial_assessment_hr1']; ?>">
+                                <input class="form-control" type="text" id="formula_para1_hr"
+                                    name="initial_assessment_hr1"
+                                    value="<?php echo $param['initial_assessment_hr1']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Complaint at the time of consultation</b></td>
                             <td>
-                                <input class="form-control" type="text" name="complaintAdmit" value="<?php echo $param['complaintAdmit']; ?>">
+                                <input class="form-control" type="text" name="complaintAdmit"
+                                    value="<?php echo $param['complaintAdmit']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Treatment given at the time of consultation</b></td>
                             <td>
-                                <input class="form-control" type="text" name="treatment_name" value="<?php echo $param['treatment_name']; ?>">
+                                <input class="form-control" type="text" name="treatment_name"
+                                    value="<?php echo $param['treatment_name']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Patient revisit date</b></td>
-                            <td><input class="form-control" type="text" id="formula_para1_min" name="initial_assessment_hr2" value="<?php echo $param['initial_assessment_hr2']; ?>">
+                            <td><input class="form-control" type="text" id="formula_para1_min"
+                                    name="initial_assessment_hr2"
+                                    value="<?php echo $param['initial_assessment_hr2']; ?>">
                                 <br>
                                 <button type="button" class="btn btn-primary" onclick="calculateTimeFormat()">
                                     <input type="hidden" id="formattedTime" name="formattedTime" value="">
@@ -241,19 +249,22 @@ $param = json_decode($row->dataset, true);
                         </tr>
                         <tr>
                             <td><b>Duration between initial consultation and revisit time</b></td>
-                            <td><input class="form-control" type="text" name="calculatedResultTime" value="<?php echo $param['calculatedResultTime']; ?>"></td>
+                            <td><input class="form-control" type="text" name="calculatedResultTime"
+                                    value="<?php echo $param['calculatedResultTime']; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Complaint at the time of re-consultation</b></td>
-                            <td><input class="form-control" type="text" name="complaint" value="<?php echo $param['complaint']; ?>"></td>
+                            <td><input class="form-control" type="text" name="complaint"
+                                    value="<?php echo $param['complaint']; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
 
-                        
-                        
+
+
                         <tr>
                             <td><b>Uploaded Files</b></td>
                             <td>
@@ -360,17 +371,18 @@ $param = json_decode($row->dataset, true);
                                 });
                             });
                         </script>
-                        
+
 
                         <tr>
                             <td colspan="2">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
-                                        <button type="submit" id="saveButton" class="ui positive button" style="text-align: left;">
+                                        <button type="submit" id="saveButton" class="ui positive button"
+                                            style="text-align: left;">
                                             <?php echo display('save') ?>
                                         </button>
                                     </div>
@@ -400,7 +412,7 @@ $param = json_decode($row->dataset, true);
     // Add event listeners to input elements to call the onValuesEdited function
     document.getElementById('formula_para1_hr').addEventListener('input', onValuesEdited);
     document.getElementById('formula_para1_min').addEventListener('input', onValuesEdited);
-    
+
 
 
     // Function to check if values have been edited before form submission
@@ -415,7 +427,7 @@ $param = json_decode($row->dataset, true);
 
 
     // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function() {
+    document.getElementById('saveButton').addEventListener('click', function () {
 
         if (checkValuesBeforeSubmit()) {
             // Proceed with save action

@@ -17,8 +17,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;SSI Bundle care policy - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;SSI Bundle care policy -
+                        <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -79,14 +81,14 @@ $param = json_decode($row->dataset, true);
                             <td>
                                 <select class="form-control" name="patient_gender">
                                     <option value="" <?php if (empty($param['patient_gender']))
-                                                            echo 'selected'; ?>>
+                                        echo 'selected'; ?>>
                                     </option>
                                     <option value="Male" <?php if ($param['patient_gender'] == 'Male')
-                                                                echo 'selected'; ?>>Male</option>
+                                        echo 'selected'; ?>>Male</option>
                                     <option value="Female" <?php if ($param['patient_gender'] == 'Female')
-                                                                echo 'selected'; ?>>Female</option>
+                                        echo 'selected'; ?>>Female</option>
                                     <option value="Other" <?php if ($param['patient_gender'] == 'Other')
-                                                                echo 'selected'; ?>>Other</option>
+                                        echo 'selected'; ?>>Other</option>
                                 </select>
                             </td>
                         </tr>
@@ -180,16 +182,16 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
                                 // Select all datetime pickers
                                 const pickers = document.querySelectorAll(".datetime-picker");
 
-                                pickers.forEach(function(input) {
+                                pickers.forEach(function (input) {
                                     // Dynamically restrict to current date/time as maximum
                                     input.max = new Date().toISOString().slice(0, 16);
 
                                     // Auto-open picker on click (modern browsers)
-                                    input.addEventListener("click", function() {
+                                    input.addEventListener("click", function () {
                                         if (this.showPicker) this.showPicker();
                                     });
                                 });
@@ -200,8 +202,8 @@ $param = json_decode($row->dataset, true);
 
                         <script>
                             // Force open calendar picker when clicking anywhere in the input box
-                            document.querySelectorAll('.datetime-picker').forEach(function(input) {
-                                input.addEventListener('click', function() {
+                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
+                                input.addEventListener('click', function () {
                                     this.showPicker(); // Opens the native calendar/clock popup
                                 });
                             });
@@ -254,7 +256,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Has the patient been scrubbed or bathed with an antiseptic solution prior to surgery?</b></td>
+                            <td><b>Has the patient been scrubbed or bathed with an antiseptic solution prior to
+                                    surgery?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="complaints_communicated"
                                     value="<?php echo isset($param['complaints_communicated']) ? htmlspecialchars($param['complaints_communicated'], ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -293,7 +296,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are prophylactic antibiotics administered within 60 minutes before the incision?</b></td>
+                            <td><b>Are prophylactic antibiotics administered within 60 minutes before the incision?</b>
+                            </td>
                             <td>
                                 <input class="form-control" type="text" name="allergies"
                                     value="<?php echo isset($param['allergies']) ? htmlspecialchars($param['allergies'], ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -384,7 +388,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are the patient details, surgery, site, and procedures read before the incision?</b></td>
+                            <td><b>Are the patient details, surgery, site, and procedures read before the incision?</b>
+                            </td>
                             <td>
                                 <input class="form-control" type="text" name="health_education"
                                     value="<?php echo isset($param['health_education']) ? htmlspecialchars($param['health_education'], ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -397,7 +402,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are the counts of instruments and consumables listed out before the procedure?</b></td>
+                            <td><b>Are the counts of instruments and consumables listed out before the procedure?</b>
+                            </td>
                             <td>
                                 <input class="form-control" type="text" name="risk_assessment"
                                     value="<?php echo isset($param['risk_assessment']) ? htmlspecialchars($param['risk_assessment'], ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -514,7 +520,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are pre-operative, intra-operative, and post-operative notes and advice documented?</b></td>
+                            <td><b>Are pre-operative, intra-operative, and post-operative notes and advice
+                                    documented?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="documented"
                                     value="<?php echo isset($param['documented']) ? htmlspecialchars($param['documented'], ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -530,10 +537,11 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
 
-                        
+
                         <tr>
                             <td><b>Uploaded Files</b></td>
                             <td>
@@ -591,14 +599,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function() {
+                                    btn.addEventListener("click", function () {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -614,7 +622,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function() {
+                                addMoreBtn.addEventListener("click", function () {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -629,7 +637,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function() {
+                                    removeBtn.addEventListener("click", function () {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -647,7 +655,7 @@ $param = json_decode($row->dataset, true);
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">

@@ -6,7 +6,8 @@
 
                 <div class="panel-heading no-print">
                     <div class="btn-group">
-                        <a class="btn btn-success" href="<?php echo base_url("audit_frequency") ?>"> <i class="fa fa-list"></i> Audit List </a>
+                        <a class="btn btn-success" href="<?php echo base_url("audit_frequency") ?>"> <i
+                                class="fa fa-list"></i> Audit List </a>
                     </div>
                 </div>
 
@@ -19,18 +20,22 @@
                             <?php echo form_hidden('guid', $department->guid) ?>
 
                             <div class="form-group row">
-                                <label for="name" class="col-xs-3 col-form-label">Audit Name<i class="text-danger">*</i></label>
+                                <label for="name" class="col-xs-3 col-form-label">Audit Name<i
+                                        class="text-danger">*</i></label>
                                 <div class="col-xs-9">
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Enter audit" value="<?php echo $department->title ?>" readonly>
+                                    <input name="name" type="text" class="form-control" id="name"
+                                        placeholder="Enter audit" value="<?php echo $department->title ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="audit_type" class="col-xs-3 col-form-label">Audit Type</label>
                                 <div class="col-xs-9">
-                                    <select name="audit_type" id="audit_type" class="form-control" onchange="setAuditType(this.value)">
+                                    <select name="audit_type" id="audit_type" class="form-control"
+                                        onchange="setAuditType(this.value)">
                                         <option value="">-- Select audit type--</option>
-                                        <option value="Random Audit" <?php echo (empty($department->audit_type) || $department->audit_type == 'Random Audit') ? 'selected' : ''; ?>>Random Audit</option>
+                                        <option value="Random Audit" <?php echo (empty($department->audit_type) || $department->audit_type == 'Random Audit') ? 'selected' : ''; ?>>Random Audit
+                                        </option>
                                         <option value="Scheduled Audit" <?php echo ($department->audit_type == 'Scheduled Audit') ? 'selected' : ''; ?>>Scheduled Audit</option>
                                     </select>
 
@@ -41,7 +46,8 @@
                             <div class="form-group row">
                                 <label for="frequency" class="col-xs-3 col-form-label">Set Audit Frequency</label>
                                 <div class="col-xs-9">
-                                    <select name="frequency" id="frequency" class="form-control" onchange="setTargetByFrequency(this.value)" style="width: 100%;">
+                                    <select name="frequency" id="frequency" class="form-control"
+                                        onchange="setTargetByFrequency(this.value)" style="width: 100%;">
                                         <option value="">-- Select Frequency --</option>
                                         <option value="Daily" <?php echo ($department->frequency == 'Daily') ? 'selected' : ''; ?>>Daily</option>
                                         <option value="Twice a Week" <?php echo ($department->frequency == 'Twice a Week') ? 'selected' : ''; ?>>Twice a Week</option>
@@ -56,12 +62,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="target" class="col-xs-3 col-form-label">Target Sample Size(minimum per month)</label>
+                                <label for="target" class="col-xs-3 col-form-label">Target Sample Size(minimum per
+                                    month)</label>
                                 <div class="col-xs-9">
                                     <input type="text" min="0" step="1" name="target" id="target" class="form-control"
                                         placeholder="Auto set by frequency"
-                                        value="<?php echo isset($department->target) ? (int)$department->target : ''; ?>">
-                                    <small id="freq_help" class="form-text text-muted" style="display:block;margin-top:6px;"></small>
+                                        value="<?php echo isset($department->target) ? (int) $department->target : ''; ?>">
+                                    <small id="freq_help" class="form-text text-muted"
+                                        style="display:block;margin-top:6px;"></small>
                                 </div>
                             </div>
 
@@ -140,10 +148,10 @@
                                 'Other area cleaning checklist' => 'AUDIT-FORM31',
                                 'Toilet Cleaning Checklist' => 'AUDIT-FORM32',
                                 'Canteen Audit Checklist' => 'AUDIT-FORM33',
-                                
+
                             ];
 
-                            
+
                             $current_feature = isset($title_to_feature[$department->title]) ? $title_to_feature[$department->title] : '';
 
                             // Show only custodians for the current audit
@@ -170,7 +178,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button type="reset" class="ui button"><?php echo display('reset') ?></button>
+                                        <button type="reset" class="ui button"><?php echo 'Reset'; ?></button>
                                         <div class="or"></div>
                                         <button class="ui positive button"><?php echo display('save') ?></button>
                                     </div>
@@ -258,7 +266,7 @@
         }
     }
 
-    (function() {
+    (function () {
         var selType = document.getElementById('audit_type');
         var selFreq = document.getElementById('frequency');
         if (selType && selType.value === 'Random Audit') {

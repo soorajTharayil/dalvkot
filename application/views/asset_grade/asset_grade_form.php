@@ -40,9 +40,9 @@
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button type="reset" class="ui button"><?php echo display('reset') ?></button>
+                                        <button type="reset" class="ui button"><?php echo 'Reset' ; ?></button>
                                         <div class="or"></div>
-                                        <button class="ui positive button"><?php echo display('save') ?></button>
+                                        <button class="ui positive button"><?php echo 'Save' ; ?></button>
                                     </div>
                                 </div>
                             </div>

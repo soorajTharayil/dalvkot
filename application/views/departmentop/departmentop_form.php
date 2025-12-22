@@ -6,7 +6,8 @@
 
                 <div class="panel-heading no-print">
                     <div class="btn-group">
-                        <a class="btn btn-success" href="<?php echo base_url("departmentop") ?>"> <i class="fa fa-list"></i> List </a>
+                        <a class="btn btn-success" href="<?php echo base_url("departmentop") ?>"> <i
+                                class="fa fa-list"></i> List </a>
                     </div>
                 </div>
 
@@ -19,22 +20,26 @@
                             <?php echo form_hidden('guid', $department->guid) ?>
 
                             <div class="form-group row">
-                                <label for="name" class="col-xs-3 col-form-label">Speciality Name <i class="text-danger">*</i></label>
+                                <label for="name" class="col-xs-3 col-form-label">Speciality Name <i
+                                        class="text-danger">*</i></label>
                                 <div class="col-xs-9">
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Speciality Name" value="<?php echo $department->title ?>">
+                                    <input name="name" type="text" class="form-control" id="name"
+                                        placeholder="Speciality Name" value="<?php echo $department->title ?>">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="description" class="col-xs-3 col-form-label">Doctors</label>
                                 <div class="col-xs-9">
-                                    <textarea name="description" class="form-control" placeholder="List of Doctors(Separate using Comma ',')" rows="7"><?php echo $department->bed_no ?></textarea>
+                                    <textarea name="description" class="form-control"
+                                        placeholder="List of Doctors(Separate using Comma ',')"
+                                        rows="7"><?php echo $department->bed_no ?></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button type="reset" class="ui button"><?php echo display('reset') ?></button>
+                                        <button type="reset" class="ui button"><?php echo 'Reset'; ?></button>
                                         <div class="or"></div>
                                         <button class="ui positive button"><?php echo display('save') ?></button>
                                     </div>

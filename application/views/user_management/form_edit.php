@@ -15,7 +15,8 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 				<!-- user list button start-->
 				<div class="panel-heading no-print">
 					<div class="btn-group">
-						<a class="btn btn-success" href="<?php echo base_url("UserManagement") ?>"> <i class="fa fa-list"></i> <?php echo lang_loader('global', 'global_user_list'); ?> </a>
+						<a class="btn btn-success" href="<?php echo base_url("UserManagement") ?>"> <i
+								class="fa fa-list"></i> <?php echo lang_loader('global', 'global_user_list'); ?> </a>
 					</div>
 				</div>
 				<!-- user list button end-->
@@ -29,22 +30,29 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 							<?php $permission = json_decode($department->departmentpermission, true); ?>
 							<!-- Name start-->
 							<div class="form-group row">
-								<label for="name" class="col-xs-3 col-form-label">Employee Name <i class="text-danger">*</i></label>
+								<label for="name" class="col-xs-3 col-form-label">Employee Name <i
+										class="text-danger">*</i></label>
 								<div class="col-xs-9">
-									<input name="name" type="text" class="form-control" id="name" autocomplete="off" placeholder="Name" value="<?php echo $department->firstname; ?>" required>
+									<input name="name" type="text" class="form-control" id="name" autocomplete="off"
+										placeholder="Name" value="<?php echo $department->firstname; ?>" required>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="name" class="col-xs-3 col-form-label">Designation  <i class="text-danger">*</i></label>
+								<label for="name" class="col-xs-3 col-form-label">Designation <i
+										class="text-danger">*</i></label>
 								<div class="col-xs-9">
-									<input name="designation" type="text" class="form-control" id="designation" autocomplete="off" placeholder="Designation" value="<?php echo $department->designation; ?>" required>
+									<input name="designation" type="text" class="form-control" id="designation"
+										autocomplete="off" placeholder="Designation"
+										value="<?php echo $department->designation; ?>" required>
 								</div>
 							</div>
 							<!-- Name end-->
 							<div class="form-group row" id="empid">
-								<label for="email" class="col-xs-3 col-form-label">Employee Id <i class="text-danger">*</i></label>
+								<label for="email" class="col-xs-3 col-form-label">Employee Id <i
+										class="text-danger">*</i></label>
 								<div class="col-xs-9">
-									<input name="empid" type="text" class="form-control" id="empid" placeholder="Enter Employee Id" value="<?php echo $department->emp_id ?>">
+									<input name="empid" type="text" class="form-control" id="empid"
+										placeholder="Enter Employee Id" value="<?php echo $department->emp_id ?>">
 								</div>
 							</div>
 
@@ -53,9 +61,12 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 
 							<!-- Email start-->
 							<div class="form-group row">
-								<label for="email" class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_email'); ?> <i class="text-danger">*</i></label>
+								<label for="email"
+									class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_email'); ?>
+									<i class="text-danger">*</i></label>
 								<div class="col-xs-9">
-									<input name="email" type="email" class="form-control" id="email"  placeholder="Email" value="<?php echo $department->email ?>" autocomplete="off" >
+									<input name="email" type="email" class="form-control" id="email" placeholder="Email"
+										value="<?php echo $department->email ?>" autocomplete="off">
 								</div>
 							</div>
 							<!-- Email end-->
@@ -71,11 +82,14 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 
 							<!-- Phone Number start -->
 							<div class="form-group row">
-								<label for="mobile" class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_mobile'); ?> <i class="text-danger">*</i> </label>
+								<label for="mobile"
+									class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_mobile'); ?>
+									<i class="text-danger">*</i> </label>
 								<div class="col-xs-9">
-									<input type="number" class="form-control" id="mobile" name="mobile"  value="<?php echo $department->mobile; ?>" autocomplete="off" 	maxlength="10"
-										pattern="\d{10}"
-										placeholder="Mobile Number" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);">
+									<input type="number" class="form-control" id="mobile" name="mobile"
+										value="<?php echo $department->mobile; ?>" autocomplete="off" maxlength="10"
+										pattern="\d{10}" placeholder="Mobile Number"
+										oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);">
 								</div>
 							</div>
 							<!-- Phone Number end -->
@@ -93,9 +107,13 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 
 							<!-- Password start -->
 							<div class="form-group row" id="show_hide_password">
-								<label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_password'); ?> <i class="text-danger">*</i></label>
+								<label for="name"
+									class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_password'); ?>
+									<i class="text-danger">*</i></label>
 								<div class="col-xs-9">
-									<input name="password" type="password" class="form-control" id="password" placeholder="Password" value="<?php echo $permission['password']; ?>" autocomplete="new-password" required>
+									<input name="password" type="password" class="form-control" id="password"
+										placeholder="Password" value="<?php echo $permission['password']; ?>"
+										autocomplete="new-password" required>
 									<div class="input-group-addon changepassword">
 										<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
 									</div>
@@ -105,10 +123,14 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 
 							<!-- user role start -->
 							<div class="form-group row">
-								<label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_user_role'); ?> <i class="text-danger">*</i></label>
+								<label for="name"
+									class="col-xs-3 col-form-label"><?php echo lang_loader('global', 'global_user_role'); ?>
+									<i class="text-danger">*</i></label>
 								<div class="col-xs-9">
-									<select class="form-control" id="sel1" name="userrole" style="border-radius: 0px;" required>
-										<option value=""><?php echo lang_loader('global', 'global_select_role'); ?></option>
+									<select class="form-control" id="sel1" name="userrole" style="border-radius: 0px;"
+										required>
+										<option value=""><?php echo lang_loader('global', 'global_select_role'); ?>
+										</option>
 										<?php
 										foreach ($roles as $role) {
 											if ($role->role_name != 'DEVELOPER') {
@@ -137,7 +159,7 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 
 							<div class="col-sm-offset-3 col-sm-6">
 								<div class="ui buttons">
-									<button type="reset" class="ui button"><?php echo display('reset') ?></button>
+									<button type="reset" class="ui button"><?php echo 'Reset'; ?></button>
 									<div class="or"></div>
 									<button class="ui positive button"><?php echo display('save') ?></button>
 								</div>
@@ -226,7 +248,7 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 	var i;
 
 	for (i = 0; i < acc.length; i++) {
-		acc[i].addEventListener("click", function() {
+		acc[i].addEventListener("click", function () {
 			this.classList.toggle("active");
 			var panel = this.nextElementSibling;
 			if (panel.style.display === "block") {
@@ -240,7 +262,7 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 
 
 
-	$(document).ready(function() {
+	$(document).ready(function () {
 		// List of module IDs
 		var moduleIds = [
 			"staff_grievance_module",
@@ -268,14 +290,14 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_roles')->result();
 		}
 
 		// Check the state of each checkbox and set the visibility of sections on page load
-		moduleIds.forEach(function(moduleId) {
+		moduleIds.forEach(function (moduleId) {
 			var isChecked = $("#" + moduleId).is(':checked');
 			toggleSections(moduleId, isChecked);
 		});
 
 		// Attach change event listeners to checkboxes
-		moduleIds.forEach(function(moduleId) {
-			$("#" + moduleId).change(function() {
+		moduleIds.forEach(function (moduleId) {
+			$("#" + moduleId).change(function () {
 				toggleSections(moduleId, this.checked);
 			});
 		});

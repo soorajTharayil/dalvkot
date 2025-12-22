@@ -17,8 +17,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Hand hygiene audit - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Hand hygiene audit -
+                        <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -57,43 +59,50 @@ $param = json_decode($row->dataset, true);
                                 <b>Employee name</b>
                             </td>
                             <td>
-                            <input class="form-control" type="text" name="testname" value="<?php echo $param['testname']; ?>">
+                                <input class="form-control" type="text" name="testname"
+                                    value="<?php echo $param['testname']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Designation</b></td>
                             <td>
-                                <input class="form-control" type="text" name="designation" value="<?php echo $param['designation']; ?>">
+                                <input class="form-control" type="text" name="designation"
+                                    value="<?php echo $param['designation']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Department</b></td>
                             <td>
-                                <input class="form-control" type="text" name="department" value="<?php echo $param['department']; ?>">
+                                <input class="form-control" type="text" name="department"
+                                    value="<?php echo $param['department']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Indication</b></td>
                             <td>
-                                <input class="form-control" type="text" name="indication" value="<?php echo $param['indication']; ?>">
+                                <input class="form-control" type="text" name="indication"
+                                    value="<?php echo $param['indication']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Hand hygiene action</b></td>
-                            <td><input class="form-control" type="text" name="action" value="<?php echo $param['action']; ?>"></td>
+                            <td><input class="form-control" type="text" name="action"
+                                    value="<?php echo $param['action']; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Compliance</b></td>
-                            <td><input class="form-control" type="text" name="compliance" value="<?php echo $param['compliance']; ?>"></td>
+                            <td><input class="form-control" type="text" name="compliance"
+                                    value="<?php echo $param['compliance']; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
-                        
-                        
-                        
+
+
+
                         <tr>
                             <td><b>Uploaded Files</b></td>
                             <td>
@@ -200,14 +209,14 @@ $param = json_decode($row->dataset, true);
                                 });
                             });
                         </script>
-                        
-                        
+
+
                         <tr>
                             <td colspan="2">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">

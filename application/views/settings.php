@@ -106,7 +106,7 @@ $outpatient_qr_code_poster_tooltip = "These are printable QR poster designs that
                                         </select>
                                     </div>
                                     <div class="col-xs-3">
-                                        <button id="save_button" class="ui positive button"><?php echo display('save') ?></button>
+                                        <button id="save_button" class="ui positive button"><?php echo 'Save' ; ?></button>
                                     </div>
                                 </div>
 
@@ -426,11 +426,11 @@ $outpatient_qr_code_poster_tooltip = "These are printable QR poster designs that
 
                                         <div class="ui buttons">
 
-                                            <button type="reset" class="ui button"><?php echo display('reset') ?></button>
+                                            <button type="reset" class="ui button"><?php echo 'Reset' ; ?></button>
 
                                             <div class="or"></div>
 
-                                            <button class="ui positive button"><?php echo display('save') ?></button>
+                                            <button class="ui positive button"><?php echo 'Save' ; ?></button>
 
                                         </div>
 
@@ -504,7 +504,7 @@ $outpatient_qr_code_poster_tooltip = "These are printable QR poster designs that
                                                         <option value="9 & above" <?php echo isset($department->nps_score) && $department->nps_score == 9 ? 'selected' : ''; ?>>9 & above</option>
                                                     </select>
 
-                                                    <button id="save_button" class="ui positive button"><?php echo display('save') ?></button>
+                                                    <button id="save_button" class="ui positive button"><?php echo 'Save' ; ?></button>
 
                                                 </td>
 

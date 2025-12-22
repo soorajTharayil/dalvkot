@@ -309,11 +309,11 @@ foreach ($reasons as $row) {
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset' ; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">
-                                            <?php echo display('save') ?>
+                                            <?php echo 'Save' ; ?>
                                         </button>
                                     </div>
                                 </div>

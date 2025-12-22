@@ -39,7 +39,7 @@ foreach ($users as $user) {
             $query = $this->db->get('bf_feedback_asset_creation');
             $result = $query->row();
 
-            $unitprice = isset($result->unitprice) ? (float)$result->unitprice : 0;
+            $unitprice = isset($result->unitprice) ? (float) $result->unitprice : 0;
 
             $depart_transfer = $result->depart_transfer;
 
@@ -64,8 +64,8 @@ foreach ($users as $user) {
 
             if ($unitprice > 0 && !empty($grades)) {
                 foreach ($grades as $grade) {
-                    $min = isset($grade->bed_no) ? (float)$grade->bed_no : 0;
-                    $max = isset($grade->bed_nom) ? (float)$grade->bed_nom : 0;
+                    $min = isset($grade->bed_no) ? (float) $grade->bed_no : 0;
+                    $max = isset($grade->bed_nom) ? (float) $grade->bed_nom : 0;
 
                     if ($unitprice >= $min && $unitprice <= $max) {
                         $matchedGrade = $grade->title;
@@ -85,18 +85,18 @@ foreach ($users as $user) {
             ?>
 
             <?php $department = $departments[0];
-            $preventive_maintenance_date1  =   $result->preventive_maintenance_date;
-            $upcoming_preventive_maintenance_date1  =   $result->upcoming_preventive_maintenance_date;
-            $reminder_alert_11  =    $result->reminder_alert_1;
-            $reminder_alert_21  =    $result->reminder_alert_2;
-            $sr_open_time  =    $result->sr_open_time;
-            $sr_close_time  =    $result->sr_close_time;
+            $preventive_maintenance_date1 = $result->preventive_maintenance_date;
+            $upcoming_preventive_maintenance_date1 = $result->upcoming_preventive_maintenance_date;
+            $reminder_alert_11 = $result->reminder_alert_1;
+            $reminder_alert_21 = $result->reminder_alert_2;
+            $sr_open_time = $result->sr_open_time;
+            $sr_close_time = $result->sr_close_time;
 
 
-            $asset_calibration_date1  =   $result->asset_calibration_date;
-            $upcoming_calibration_date1  =   $result->upcoming_calibration_date;
-            $calibration_reminder_alert_11  =    $result->calibration_reminder_alert_1;
-            $calibration_reminder_alert_21  =    $result->calibration_reminder_alert_2;
+            $asset_calibration_date1 = $result->asset_calibration_date;
+            $upcoming_calibration_date1 = $result->upcoming_calibration_date;
+            $calibration_reminder_alert_11 = $result->calibration_reminder_alert_1;
+            $calibration_reminder_alert_21 = $result->calibration_reminder_alert_2;
 
             ?>
 
@@ -158,12 +158,14 @@ foreach ($users as $user) {
 
             if ($show_modal) { ?>
                 <!-- Transfer Modal -->
-                <div class="modal" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel" style="display: block; background-color: rgba(0,0,0,0.5);">
+                <div class="modal" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel"
+                    style="display: block; background-color: rgba(0,0,0,0.5);">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content" style="border-radius: 10px;">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="transferModalLabel"><?php echo $modal_title; ?></h5>
-                                <button type="button" class="close" id="closeModal" aria-label="Close" style="float:right; background: none; border: none; font-size: 1.5rem; font-weight: bold; color: #000;">
+                                <button type="button" class="close" id="closeModal" aria-label="Close"
+                                    style="float:right; background: none; border: none; font-size: 1.5rem; font-weight: bold; color: #000;">
                                     <span aria-hidden="true" style="margin-right: -270px;">&times;</span>
                                 </button>
                             </div>
@@ -234,7 +236,7 @@ foreach ($users as $user) {
                 </style>
 
                 <script>
-                    document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function () {
                         // Get elements
                         var modal = document.getElementById('transferModal');
                         var approveBtn = document.getElementById('approveBtn');
@@ -257,22 +259,22 @@ foreach ($users as $user) {
                             modal.style.display = 'none';
                         }
 
-                        approveBtn.onclick = function() {
+                        approveBtn.onclick = function () {
                             closeModal();
                             window.location.href = '<?php echo site_url("asset/approve_transfer/" . $resultasset->id); ?>';
                         };
 
-                        denyBtn.onclick = function() {
+                        denyBtn.onclick = function () {
                             closeModal();
                             window.location.href = '<?php echo site_url("asset/deny_transfer/" . $resultasset->id); ?>';
                         };
 
-                        closeBtn.onclick = function() {
+                        closeBtn.onclick = function () {
                             closeModal();
                         };
 
                         // Prevent closing when clicking backdrop
-                        modal.onclick = function(event) {
+                        modal.onclick = function (event) {
                             if (event.target === modal) {
                                 return false;
                             }
@@ -353,16 +355,16 @@ foreach ($users as $user) {
                             <td><strong>Asset Location</strong></td>
                             <td>
                                 Area: <?php if (!empty($pat['locationsite']) && $pat['locationsite'] != 'Select Floor/ Area') {
-                                            echo $pat['locationsite'];
-                                        } else {
-                                            echo '-';
-                                        } ?>
+                                    echo $pat['locationsite'];
+                                } else {
+                                    echo '-';
+                                } ?>
                                 <br>
                                 Site: <?php if (!empty($pat['bedno']) && $pat['bedno'] != 'Select Site') {
-                                            echo $pat['bedno'];
-                                        } else {
-                                            echo '-';
-                                        } ?>
+                                    echo $pat['bedno'];
+                                } else {
+                                    echo '-';
+                                } ?>
                             </td>
                         </tr>
                         <tr>
@@ -428,15 +430,21 @@ foreach ($users as $user) {
                         <tr>
                             <td><strong>Financial Information</strong></td>
                             <td>
-                                Asset Quantity: <span id="assetQuantity"><?php echo htmlspecialchars($pat['assetquantity'] ?? 'N/A'); ?></span><br>
-                                Unit Price: ₹<span id="unitPrice"><?php echo htmlspecialchars($pat['unitprice'] ?? '0'); ?></span><br>
-                                Total Price: ₹<span id="totalPrice"><?php echo htmlspecialchars($pat['totalprice'] ?? '0'); ?></span><br>
-                                Depreciation Rate: <span id="depreciationRate"><?php echo htmlspecialchars($pat['depreciation'] ?? '0'); ?></span>%<br>
+                                Asset Quantity: <span
+                                    id="assetQuantity"><?php echo htmlspecialchars($pat['assetquantity'] ?? 'N/A'); ?></span><br>
+                                Unit Price: ₹<span
+                                    id="unitPrice"><?php echo htmlspecialchars($pat['unitprice'] ?? '0'); ?></span><br>
+                                Total Price: ₹<span
+                                    id="totalPrice"><?php echo htmlspecialchars($pat['totalprice'] ?? '0'); ?></span><br>
+                                Depreciation Rate: <span
+                                    id="depreciationRate"><?php echo htmlspecialchars($pat['depreciation'] ?? '0'); ?></span>%<br>
 
                                 <!-- <button onclick="calculateAssetValue()" class="btn btn-primary btn-sm" style="margin-top: 5px;">Calculate Current Asset Value</button><br><br> -->
 
-                                <strong>Total Asset Value: ₹<span id="assetCurrentValue"><?php echo htmlspecialchars($pat['assetCurrentValue'] ?? ''); ?></span></strong>
-                                <span id="assignStatus" style="display: none;"><?php echo htmlspecialchars($result->assignstatus ?? ''); ?></span>
+                                <strong>Total Asset Value: ₹<span
+                                        id="assetCurrentValue"><?php echo htmlspecialchars($pat['assetCurrentValue'] ?? ''); ?></span></strong>
+                                <span id="assignStatus"
+                                    style="display: none;"><?php echo htmlspecialchars($result->assignstatus ?? ''); ?></span>
 
                             </td>
                         </tr>
@@ -530,28 +538,28 @@ foreach ($users as $user) {
                                 <!-- Last Preventive Maintenance Date -->
                                 <div style="display: flex; align-items: center;">
                                     <span>Last Preventive Maintenance Date:</span>
-                                    <span><strong><?php echo  $preventive_maintenance_date1; ?></strong></span>
+                                    <span><strong><?php echo $preventive_maintenance_date1; ?></strong></span>
                                 </div>
                                 <br>
 
                                 <!-- Upcoming Preventive Maintenance Due -->
                                 <div style="display: flex; align-items: center; margin-top: -15px;">
                                     <span>Upcoming Preventive Maintenance Due:</span>
-                                    <span><strong><?php echo  $upcoming_preventive_maintenance_date1; ?></strong></span>
+                                    <span><strong><?php echo $upcoming_preventive_maintenance_date1; ?></strong></span>
                                 </div>
                                 <br>
 
                                 <!-- Set Reminder Alert 1 (Default: 15 days before) -->
                                 <div style="display: flex; align-items: center; margin-top: -15px;">
                                     <span>Reminder Alert 1:</span>
-                                    <span><strong><?php echo  $reminder_alert_11; ?></strong></span>
+                                    <span><strong><?php echo $reminder_alert_11; ?></strong></span>
                                 </div>
                                 <br>
 
                                 <!-- Set Reminder Alert 2 (Default: 2 days before) -->
                                 <div style="display: flex; align-items: center; margin-top: -15px;">
                                     <span>Reminder Alert 2:</span>
-                                    <span><strong><?php echo  $reminder_alert_21; ?></strong></span>
+                                    <span><strong><?php echo $reminder_alert_21; ?></strong></span>
                                 </div>
                             </td>
                         </tr>
@@ -562,28 +570,28 @@ foreach ($users as $user) {
                                 <!-- Last Preventive Maintenance Date -->
                                 <div style="display: flex; align-items: center;">
                                     <span>Last Calibration Date:</span>
-                                    <span><strong><?php echo  $asset_calibration_date1; ?></strong></span>
+                                    <span><strong><?php echo $asset_calibration_date1; ?></strong></span>
                                 </div>
                                 <br>
 
                                 <!-- Upcoming Preventive Maintenance Due -->
                                 <div style="display: flex; align-items: center; margin-top: -15px;">
                                     <span>Upcoming Calibration Due:</span>
-                                    <span><strong><?php echo  $upcoming_calibration_date1; ?></strong></span>
+                                    <span><strong><?php echo $upcoming_calibration_date1; ?></strong></span>
                                 </div>
                                 <br>
 
                                 <!-- Set Reminder Alert 1 (Default: 15 days before) -->
                                 <div style="display: flex; align-items: center; margin-top: -15px;">
                                     <span>Reminder Alert 1:</span>
-                                    <span><strong><?php echo  $calibration_reminder_alert_11; ?></strong></span>
+                                    <span><strong><?php echo $calibration_reminder_alert_11; ?></strong></span>
                                 </div>
                                 <br>
 
                                 <!-- Set Reminder Alert 2 (Default: 2 days before) -->
                                 <div style="display: flex; align-items: center; margin-top: -15px;">
                                     <span>Reminder Alert 2:</span>
-                                    <span><strong><?php echo  $calibration_reminder_alert_21; ?></strong></span>
+                                    <span><strong><?php echo $calibration_reminder_alert_21; ?></strong></span>
                                 </div>
                             </td>
                         </tr>
@@ -613,9 +621,11 @@ HTML;
                         ?>
 
                         <!-- Image Preview Modal -->
-                        <div id="imagePreviewModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background-color:white; border:1px solid #ccc; padding:20px; z-index:10000;">
+                        <div id="imagePreviewModal"
+                            style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background-color:white; border:1px solid #ccc; padding:20px; z-index:10000;">
                             <div style="text-align:right;">
-                                <button onclick="document.getElementById('imagePreviewModal').style.display='none';">Close</button>
+                                <button
+                                    onclick="document.getElementById('imagePreviewModal').style.display='none';">Close</button>
                             </div>
                             <div>
                                 <img id="previewImg" src="" alt="Preview" style="max-width:600px; max-height:80vh;" />
@@ -683,7 +693,7 @@ HTML;
                         <tr>
                             <td><strong>Current Status</strong></td>
                             <td>
-                                <?php echo  $assignstatus; ?>
+                                <?php echo $assignstatus; ?>
                             </td>
                         </tr>
 
@@ -693,88 +703,94 @@ HTML;
                             <td><strong>Asset Status</strong> </td>
                             <td> <?php if ($this->session->userdata['isLogIn'] == false) { ?>
                                     <?php if ($department->status == 'Closed') { ?>
-                                        <span style="color:  #198754;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        <span style="color:  #198754;font-weight: bold; display: inline-block;"><i
+                                                class="fa fa-circle" aria-hidden="true"></i></span>
                                         <?php echo 'Closed'; ?>
                                     <?php } ?>
                                     <?php if ($department->status == 'Addressed' || $department->status == 'Reopen' || $department->status == 'Transfered') { ?>
-                                        <span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        <span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i
+                                                class="fa fa-circle" aria-hidden="true"></i></span>
                                         <?php echo 'Inprogress'; ?>
                                     <?php } ?>
                                     <?php if ($department->status == 'Asset in Use') { ?>
-                                        <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i
+                                                class="fa fa-circle" aria-hidden="true"></i></span>
                                         <?php echo 'Pending'; ?>
-                                    <?php }  ?>
+                                    <?php } ?>
                                     <?php if ($department->status == 'Asset in Use') { ?>
-                                        <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i
+                                                class="fa fa-circle" aria-hidden="true"></i></span>
                                         <?php echo 'Asset in Use'; ?>
-                                    <?php }  ?>
+                                    <?php } ?>
 
 
                                 <?php } ?>
                                 <?php if ($this->session->userdata['isLogIn'] == true) { ?>
                                     <?php //if (($this->session->userdata['user_role'] == 4 && $this->session->userdata['email'] == $department->department->email) || $this->session->userdata['user_role'] <= 3) { 
+                                    
+                                        ?>
 
-                                    ?>
-
-                                    <select class="form-control" onchange="ticket_options(this.value)" style="max-width: 300px;" required>
-                                        <option value="<?php echo $departments->status; ?>" selected><?php echo $departments->status; ?></option>
+                                    <select class="form-control" onchange="ticket_options(this.value)"
+                                        style="max-width: 300px;" required>
+                                        <option value="<?php echo $departments->status; ?>" selected>
+                                            <?php echo $departments->status; ?></option>
                                         <?php if ($departments->status != 'Closed') {
                                             $open = true; ?>
 
 
 
                                             <?php if ($department->addressed != 1) { ?>
-                                                <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                                <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                     <option value="asset_assign">Allocate Asset</option>
                                                 <?php } ?>
                                             <?php } ?>
 
-                                            <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                 <option value="asset_transfer">Transfer Asset Department</option>
                                             <?php } ?>
                                             <?php if ($assetWithPm == 'PM applicable') { ?>
-                                                <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                                <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                     <option value="asset_preventive">Update Preventive Maintenance</option>
                                                 <?php } ?>
                                             <?php } ?>
                                             <?php if ($assetWithCalibration == 'Calibration applicable') { ?>
-                                                <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                                <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                     <option value="asset_calibration">Update Asset Calibration</option>
                                                 <?php } ?>
                                             <?php } ?>
                                             <?php if ($assetWithWarranty == 'Warranty applicable') { ?>
-                                                <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                                <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                     <option value="asset_warranty">Update Asset Warranty</option>
                                                 <?php } ?>
                                             <?php } ?>
                                             <?php if ($assetWithAmc == 'AMC/ CMC applicable') { ?>
-                                                <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                                <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                     <option value="asset_amc_cmc">Update Asset AMC/ CMC</option>
                                                 <?php } ?>
                                             <?php } ?>
 
-                                            <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                 <option value="asset_repair">Asset Malfunction</option>
                                             <?php } ?>
                                             <?php if ($department->status == 'Asset Malfunction') { ?>
-                                                <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                                <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                     <option value="asset_restore">Asset Restore</option>
                                                 <?php } ?>
                                             <?php } ?>
-                                            <!-- <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <!-- <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                 <option value="asset_broken">Asset Broken</option>
                                             <?php } ?> -->
 
-                                            <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                 <option value="asset_revoke">Revoke/ Reassign Asset</option>
                                             <?php } ?>
-                                            <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                 <option value="asset_lost">Asset Lost</option>
                                             <?php } ?>
-                                            <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                 <option value="asset_sold">Asset Sold</option>
                                             <?php } ?>
-                                            <?php if (ismodule_active('ASSET') === true  && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                                 <option value="asset_dispose">Dispose Asset</option>
                                             <?php } ?>
 
@@ -782,7 +798,8 @@ HTML;
 
                                     </select>
 
-                                    <span> <i class="fa fa-hand-o-left" aria-hidden="true" style="font-size: 20px; padding-left: 10px;"></i></span>
+                                    <span> <i class="fa fa-hand-o-left" aria-hidden="true"
+                                            style="font-size: 20px; padding-left: 10px;"></i></span>
                                     <span style="padding-left: 10px;">Take action here</span>
                                 <?php } ?>
                                 <?php //} 
@@ -798,8 +815,8 @@ HTML;
 
         <?php if ($this->session->userdata['user_role'] != 4 && ($department->status == 'Closed')) { ?>
 
-        <?php } else {  ?>
-            <?php if ($open == true) {  ?>
+        <?php } else { ?>
+            <?php if ($open == true) { ?>
                 <?php if (($department->status != 'Closed')) { ?>
                     <div class="col-sm-12" id="asset_assign" style="overflow:auto;">
                         <div class="panel panel-default">
@@ -809,10 +826,12 @@ HTML;
                             <div class="col-lg-12 col-md-12">
                                 <br />
                                 <?php echo form_open('ticketsasset/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?> <div class="form-group row">
+                                <?php echo form_hidden('id', $department->id) ?>
+                                <div class="form-group row">
                                     <label for="name" class="col-xs-3 col-form-label">Select Department</label>
                                     <div class="col-xs-9">
-                                        <select class="form-control" id="sel1" name="deparment_name" required aria-required="true" style="width: 98%;">
+                                        <select class="form-control" id="sel1" name="deparment_name" required aria-required="true"
+                                            style="width: 98%;">
                                             <option value="">--Select Option--</option>
                                             <?php
                                             // Fetching data
@@ -835,15 +854,21 @@ HTML;
                                     <div class="col-xs-9" style="margin-top: 22px;margin-left:-13px;">
 
 
-                                        <input type="text" id="userSearch" class="form-control" placeholder="Search for user.." style="margin-left:10px; width: 98%;">
+                                        <input type="text" id="userSearch" class="form-control" placeholder="Search for user.."
+                                            style="margin-left:10px; width: 98%;">
 
                                         <div class="checkbox-container" id="userList" style="margin-top: 15px; margin-left: 12px;">
-                                            <?php foreach ($users as $user) : ?>
-                                                <?php if ($user->firstname !== 'developer') : // Check if the designation is not Developer 
-                                                ?>
+                                            <?php foreach ($users as $user): ?>
+                                                <?php if ($user->firstname !== 'developer'):  // Check if the designation is not Developer 
+                                                                        ?>
                                                     <div class="checkbox">
-                                                        <input type="checkbox" id="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" name="users[]" value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" checked>
-                                                        <label for="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <input type="checkbox"
+                                                            id="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                                            name="users[]"
+                                                            value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                                            checked>
+                                                        <label
+                                                            for="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
                                                         </label>
                                                     </div>
@@ -857,19 +882,25 @@ HTML;
 
                                 <br>
                                 <div class="form-group row" style="margin-top: -10px;">
-                                    <label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('pcf', 'pcf_comment'); ?></label>
+                                    <label for="name"
+                                        class="col-xs-3 col-form-label"><?php echo lang_loader('pcf', 'pcf_comment'); ?></label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" style="width:97%;" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply" style="width:97%;"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo  $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Assign">
                                     </div>
                                 </div>
                                 <!--Radio-->
                                 <div class="form-group row">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button> </div>
+                                        <div class="ui buttons"> <button
+                                                class="ui positive button"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        </div>
                                     </div>
                                 </div> <?php echo form_close() ?>
                             </div>
@@ -893,10 +924,13 @@ HTML;
 
                                 <div class="form-group row">
                                     <div class="col-xs-9" style="width: 90%;">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo  $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Broken">
                                     </div>
                                 </div>
@@ -905,10 +939,11 @@ HTML;
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <!-- <button type="reset" class="ui button">
-                                        <?php // echo display('reset') 
-                                        ?></button>
+                                        <?php // echo 'Reset' ; 
+                                                    ?></button>
                                     <div class="or"></div> -->
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -930,11 +965,12 @@ HTML;
 
 
                                 <div class="form-group row">
-                                    <label for="repairStartDateTime" class="col-xs-3 col-form-label">Malfunction Date & Time:</label>
+                                    <label for="repairStartDateTime" class="col-xs-3 col-form-label">Malfunction Date &
+                                        Time:</label>
                                     <div class="col-xs-9">
-                                        <input type="datetime-local" class="form-control" id="repairStartDateTime" name="repair_start_date_time"
-                                            value=""
-                                            <?= isset($sr_open_time) ? 'required' : '' ?> onclick="this.showPicker && this.showPicker();">
+                                        <input type="datetime-local" class="form-control" id="repairStartDateTime"
+                                            name="repair_start_date_time" value="" <?= isset($sr_open_time) ? 'required' : '' ?>
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
@@ -962,10 +998,13 @@ HTML;
                                 <div class="form-group row">
                                     <label for="comment" class="col-xs-3 col-form-label">Comment:</label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Malfunction">
                                     </div>
                                 </div>
@@ -974,7 +1013,8 @@ HTML;
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -998,9 +1038,9 @@ HTML;
                                 <div class="form-group row">
                                     <label for="restoreStartDateTime" class="col-xs-3 col-form-label">Restore Date & Time:</label>
                                     <div class="col-xs-9">
-                                        <input type="datetime-local" class="form-control" id="restoreStartDateTime" name="restore_start_date_time"
-                                            value=""
-                                            <?= isset($sr_open_time) ? 'required' : '' ?> onclick="this.showPicker && this.showPicker();">
+                                        <input type="datetime-local" class="form-control" id="restoreStartDateTime"
+                                            name="restore_start_date_time" value="" <?= isset($sr_open_time) ? 'required' : '' ?>
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
@@ -1020,7 +1060,8 @@ HTML;
                                 <div class="form-group row">
                                     <label for="expenseCost" class="col-xs-3 col-form-label">Relative Expense:</label>
                                     <div class="col-xs-9">
-                                        <input type="number" class="form-control" id="expense_cost" name="expense_cost" placeholder="Enter your input here" required>
+                                        <input type="number" class="form-control" id="expense_cost" name="expense_cost"
+                                            placeholder="Enter your input here" required>
                                     </div>
                                 </div>
 
@@ -1028,10 +1069,13 @@ HTML;
                                 <div class="form-group row">
                                     <label for="comment" class="col-xs-3 col-form-label">Comment:</label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Restore">
                                     </div>
                                 </div>
@@ -1040,7 +1084,8 @@ HTML;
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1066,7 +1111,8 @@ HTML;
                                 <div class="form-group row">
                                     <label for="repairStartDateTime" class="col-xs-3 col-form-label">Sale Date:</label>
                                     <div class="col-xs-9">
-                                        <input type="datetime-local" class="form-control" id="saleStartDateTime" name="sold_start_date_time" value="" onclick="this.showPicker && this.showPicker();">
+                                        <input type="datetime-local" class="form-control" id="saleStartDateTime"
+                                            name="sold_start_date_time" value="" onclick="this.showPicker && this.showPicker();">
 
                                     </div>
                                 </div>
@@ -1076,7 +1122,8 @@ HTML;
                                 <div class="form-group row">
                                     <label for="repairCompletionDateTime" class="col-xs-3 col-form-label">Sale Price:</label>
                                     <div class="col-xs-9">
-                                        <input type="number" class="form-control" id="salePrice" name="sale_price" placeholder="Enter your input here" required>
+                                        <input type="number" class="form-control" id="salePrice" name="sale_price"
+                                            placeholder="Enter your input here" required>
                                     </div>
                                 </div>
 
@@ -1086,10 +1133,14 @@ HTML;
                                 <div class="form-group row">
                                     <label for="comment" class="col-xs-3 col-form-label">Remarks:</label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Buyer details, Deprecition, Asset Condition, Loss, Terms etc" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Buyer details, Deprecition, Asset Condition, Loss, Terms etc"
+                                            required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Sold">
                                     </div>
                                 </div>
@@ -1098,7 +1149,8 @@ HTML;
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1123,19 +1175,20 @@ HTML;
                                 <div class="form-group row" style="margin-top: 15px;">
                                     <label for="preventive_maintenance_date" class="col-xs-3">Preventive Maintenance Date:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="preventive_maintenance_date" name="preventive_maintenance_date"
-                                            value="<?php echo date('Y-m-d'); ?>"
-                                            <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="preventive_maintenance_date"
+                                            name="preventive_maintenance_date" value="<?php echo date('Y-m-d'); ?>" <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
                                 <!-- Upcoming Preventive Maintenance Due -->
                                 <div class="form-group row" style="margin-top: 5px;">
-                                    <label for="upcoming_preventive_maintenance_date" class="col-xs-3">Upcoming Preventive Maintenance Due:</label>
+                                    <label for="upcoming_preventive_maintenance_date" class="col-xs-3">Upcoming Preventive
+                                        Maintenance Due:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="upcoming_preventive_maintenance_date" name="upcoming_preventive_maintenance_date"
-                                            value="<?php echo date('Y-m-d', strtotime('+6 months')); ?>"
-                                            <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required
+                                        <input type="date" class="form-control" id="upcoming_preventive_maintenance_date"
+                                            name="upcoming_preventive_maintenance_date"
+                                            value="<?php echo date('Y-m-d', strtotime('+6 months')); ?>" <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required
                                             onchange="initializeReminderDates()" onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
@@ -1145,8 +1198,8 @@ HTML;
                                 <div class="form-group row" style="margin-top: -15px;">
                                     <label for="reminder_alert_1" class="col-xs-3">Set Reminder Alert 1:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="reminder_alert_1" name="reminder_alert_1"
-                                            <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="reminder_alert_1" name="reminder_alert_1" <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
                                 <br>
@@ -1155,8 +1208,8 @@ HTML;
                                 <div class="form-group row" style="margin-top: -15px;">
                                     <label for="reminder_alert_2" class="col-xs-3">Set Reminder Alert 2:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="reminder_alert_2" name="reminder_alert_2"
-                                            <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="reminder_alert_2" name="reminder_alert_2" <?php echo isfeature_active('EDIT-PREVENTIVE-MAINTENANCE') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
@@ -1166,10 +1219,13 @@ HTML;
                                 <div class="form-group row">
                                     <label for="comment" class="col-xs-3">Additional Notes:</label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -1177,7 +1233,8 @@ HTML;
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1202,9 +1259,8 @@ HTML;
                                 <div class="form-group row" style="margin-top: 15px;">
                                     <label for="warrenty" class="col-xs-3">Warranty Start Date:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="warrenty" name="warrenty"
-                                            value=""
-                                            <?php echo isfeature_active('EDIT-ASSET-WARRANTY') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="warrenty" name="warrenty" value="" <?php echo isfeature_active('EDIT-ASSET-WARRANTY') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
@@ -1212,9 +1268,8 @@ HTML;
                                 <div class="form-group row" style="margin-top: 5px;">
                                     <label for="warrenty_end" class="col-xs-3">Warranty End Date:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="warrenty_end" name="warrenty_end"
-                                            value=""
-                                            <?php echo isfeature_active('EDIT-ASSET-WARRANTY') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="warrenty_end" name="warrenty_end" value="" <?php echo isfeature_active('EDIT-ASSET-WARRANTY') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
                                 <br>
@@ -1225,10 +1280,13 @@ HTML;
                                 <div class="form-group row">
                                     <label for="comment" class="col-xs-3">Additional Notes:</label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -1236,7 +1294,8 @@ HTML;
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1274,8 +1333,8 @@ HTML;
                                     <label for="contract_start_date" class="col-xs-3">Start Date:</label>
                                     <div class="col-xs-9">
                                         <input type="date" class="form-control" id="contract_start_date" name="contract_start_date"
-                                            value=""
-                                            <?php echo isfeature_active('EDIT-ASSET-AMC/CMC') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                            value="" <?php echo isfeature_active('EDIT-ASSET-AMC/CMC') ? '' : 'readonly'; ?>
+                                            required onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
@@ -1284,8 +1343,8 @@ HTML;
                                     <label for="contract_end_date" class="col-xs-3">End Date:</label>
                                     <div class="col-xs-9">
                                         <input type="date" class="form-control" id="contract_end_date" name="contract_end_date"
-                                            value=""
-                                            <?php echo isfeature_active('EDIT-ASSET-AMC/CMC') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                            value="" <?php echo isfeature_active('EDIT-ASSET-AMC/CMC') ? '' : 'readonly'; ?>
+                                            required onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
                                 <br>
@@ -1293,7 +1352,8 @@ HTML;
                                 <div class="form-group row" style="margin-top: -15px;">
                                     <label for="contract_service_charges" class="col-xs-3">Cost:</label>
                                     <div class="col-xs-9">
-                                        <input class="form-control" rows="5" type="number" id="contract_service_charges" name="contract_service_charges" placeholder="Enter your input here">
+                                        <input class="form-control" rows="5" type="number" id="contract_service_charges"
+                                            name="contract_service_charges" placeholder="Enter your input here">
 
                                     </div>
                                 </div>
@@ -1304,10 +1364,13 @@ HTML;
                                 <div class="form-group row">
                                     <label for="comment" class="col-xs-3">Additional Notes:</label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here"></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here"></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -1315,7 +1378,8 @@ HTML;
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1340,9 +1404,9 @@ HTML;
                                 <div class="form-group row" style="margin-top: 15px;">
                                     <label for="asset_calibration_date" class="col-xs-3">Last Calibration Date:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="asset_calibration_date" name="asset_calibration_date"
-                                            value=""
-                                            <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="asset_calibration_date"
+                                            name="asset_calibration_date" value="" <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
@@ -1350,9 +1414,8 @@ HTML;
                                 <div class="form-group row" style="margin-top: 5px;">
                                     <label for="upcoming_calibration_date" class="col-xs-3">Upcoming Calibration Due:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="upcoming_calibration_date" name="upcoming_calibration_date"
-                                            value=""
-                                            <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required
+                                        <input type="date" class="form-control" id="upcoming_calibration_date"
+                                            name="upcoming_calibration_date" value="" <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required
                                             onchange="initializeReminderDates()" onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
@@ -1362,8 +1425,9 @@ HTML;
                                 <div class="form-group row" style="margin-top: -15px;">
                                     <label for="calibration_reminder_alert_1" class="col-xs-3">Set Reminder Alert 1:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="calibration_reminder_alert_1" name="calibration_reminder_alert_1"
-                                            <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="calibration_reminder_alert_1"
+                                            name="calibration_reminder_alert_1" <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
                                 <br>
@@ -1372,8 +1436,9 @@ HTML;
                                 <div class="form-group row" style="margin-top: -15px;">
                                     <label for="calibration_reminder_alert_2" class="col-xs-3">Set Reminder Alert 2:</label>
                                     <div class="col-xs-9">
-                                        <input type="date" class="form-control" id="calibration_reminder_alert_2" name="calibration_reminder_alert_2"
-                                            <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required onclick="this.showPicker && this.showPicker();">
+                                        <input type="date" class="form-control" id="calibration_reminder_alert_2"
+                                            name="calibration_reminder_alert_2" <?php echo isfeature_active('EDIT-ASSET-CALIBRATION') ? '' : 'readonly'; ?> required
+                                            onclick="this.showPicker && this.showPicker();">
                                     </div>
                                 </div>
 
@@ -1383,10 +1448,13 @@ HTML;
                                 <div class="form-group row">
                                     <label for="comment" class="col-xs-3">Additional Notes:</label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -1394,7 +1462,8 @@ HTML;
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1414,10 +1483,12 @@ HTML;
                             <div class="col-lg-12 col-md-12">
                                 <br />
                                 <?php echo form_open('ticketsasset/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?> <div class="form-group row">
+                                <?php echo form_hidden('id', $department->id) ?>
+                                <div class="form-group row">
                                     <label for="name" class="col-xs-3 col-form-label">Select Department</label>
                                     <div class="col-xs-9">
-                                        <select class="form-control" id="sel1" name="deparment_name" style="width: 98%;" required aria-required="true">
+                                        <select class="form-control" id="sel1" name="deparment_name" style="width: 98%;" required
+                                            aria-required="true">
                                             <option value="">--Select Option--</option>
                                             <?php
                                             // Fetching data
@@ -1440,14 +1511,20 @@ HTML;
                                     <label for="name" class="col-xs-3 col-form-label" style="margin-top: 25px;">Select User</label>
                                     <div class="col-xs-9" style="margin-top: 22px;margin-left:-1px;">
 
-                                        <input type="text" id="userSearchReassign" class="form-control" placeholder="Search for user.." style="width: 98%;">
+                                        <input type="text" id="userSearchReassign" class="form-control"
+                                            placeholder="Search for user.." style="width: 98%;">
 
                                         <div class="checkbox-container" id="userList_reassign" style="margin-top: 15px;">
-                                            <?php foreach ($users as $user) : ?>
-                                                <?php if ($user->firstname !== 'developer') : ?>
+                                            <?php foreach ($users as $user): ?>
+                                                <?php if ($user->firstname !== 'developer'): ?>
                                                     <div class="checkbox">
-                                                        <input type="checkbox" id="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" name="users_reassign[]" value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" checked>
-                                                        <label for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <input type="checkbox"
+                                                            id="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                                            name="users_reassign[]"
+                                                            value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                                            checked>
+                                                        <label
+                                                            for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
                                                         </label>
                                                     </div>
@@ -1459,19 +1536,25 @@ HTML;
 
                                 <br>
                                 <div class="form-group row" style="margin-top: -10px;">
-                                    <label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('pcf', 'pcf_comment'); ?></label>
+                                    <label for="name"
+                                        class="col-xs-3 col-form-label"><?php echo lang_loader('pcf', 'pcf_comment'); ?></label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" style="width:97%;" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply" style="width:97%;"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo  $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Assign">
                                     </div>
                                 </div>
                                 <!--Radio-->
                                 <div class="form-group row">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button> </div>
+                                        <div class="ui buttons"> <button
+                                                class="ui positive button"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        </div>
                                     </div>
                                 </div> <?php echo form_close() ?>
                             </div>
@@ -1487,10 +1570,12 @@ HTML;
                             <div class="col-lg-12 col-md-12">
                                 <br />
                                 <?php echo form_open('ticketsasset/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?> <div class="form-group row">
+                                <?php echo form_hidden('id', $department->id) ?>
+                                <div class="form-group row">
                                     <label for="name" class="col-xs-3 col-form-label">Select Department</label>
                                     <div class="col-xs-9">
-                                        <select class="form-control" id="sel1" name="deparment_name" style="width: 98%;" required aria-required="true">
+                                        <select class="form-control" id="sel1" name="deparment_name" style="width: 98%;" required
+                                            aria-required="true">
                                             <option value="">--Select Option--</option>
                                             <?php
                                             // Fetching data
@@ -1514,14 +1599,20 @@ HTML;
                                     <label for="name" class="col-xs-3 col-form-label" style="margin-top: 25px;">Select User</label>
                                     <div class="col-xs-9" style="margin-top: 22px;margin-left:-1px;">
 
-                                        <input type="text" id="userSearchTransfer" class="form-control" placeholder="Search user..." style="margin-bottom: 10px;width: 98%;">
+                                        <input type="text" id="userSearchTransfer" class="form-control" placeholder="Search user..."
+                                            style="margin-bottom: 10px;width: 98%;">
 
                                         <div class="checkbox-container" id="userList_transfer" style="margin-top: 20px;">
-                                            <?php foreach ($users as $user) : ?>
-                                                <?php if ($user->firstname !== 'developer') : ?>
+                                            <?php foreach ($users as $user): ?>
+                                                <?php if ($user->firstname !== 'developer'): ?>
                                                     <div class="checkbox">
-                                                        <input type="checkbox" id="user_transfer_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" name="users_transfer[]" value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>" checked>
-                                                        <label for="user_transfer_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <input type="checkbox"
+                                                            id="user_transfer_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                                            name="users_transfer[]"
+                                                            value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                                            checked>
+                                                        <label
+                                                            for="user_transfer_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
                                                         </label>
                                                     </div>
@@ -1533,20 +1624,26 @@ HTML;
 
                                 <br>
                                 <div class="form-group row" style="margin-top: -10px;">
-                                    <label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('pcf', 'pcf_comment'); ?></label>
+                                    <label for="name"
+                                        class="col-xs-3 col-form-label"><?php echo lang_loader('pcf', 'pcf_comment'); ?></label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" style="width:97%;" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply" style="width:97%;"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo  $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Transfer">
-                                        <input type="hidden" name="id" value="<?php echo  $department->id; ?>">
+                                        <input type="hidden" name="id" value="<?php echo $department->id; ?>">
                                     </div>
                                 </div>
                                 <!--Radio-->
                                 <div class="form-group row">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button> </div>
+                                        <div class="ui buttons"> <button
+                                                class="ui positive button"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        </div>
                                     </div>
                                 </div> <?php echo form_close() ?>
                             </div>
@@ -1568,10 +1665,13 @@ HTML;
                                 <br>
                                 <div class="form-group row">
                                     <div class="col-xs-9" style="width: 90%;">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo  $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Lost">
                                     </div>
                                 </div>
@@ -1582,10 +1682,11 @@ HTML;
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <!-- <button type="reset" class="ui button">
-                                        <?php // echo display('reset') 
-                                        ?></button>
+                                        <?php // echo 'Reset' ; 
+                                                    ?></button>
                                     <div class="or"></div> -->
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1608,10 +1709,13 @@ HTML;
 
                                 <div class="form-group row">
                                     <div class="col-xs-9" style="width: 90%;">
-                                        <textarea class="form-control" rows="5" id="comment" name="reply" placeholder="Enter your input here" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="reply"
+                                            placeholder="Enter your input here" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo  $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                         <input type="hidden" name="status" value="Asset Dispose">
                                     </div>
                                 </div>
@@ -1620,10 +1724,11 @@ HTML;
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <!-- <button type="reset" class="ui button">
-                                        <?php // echo display('reset') 
-                                        ?></button>
+                                        <?php // echo 'Reset' ; 
+                                                    ?></button>
                                     <div class="or"></div> -->
-                                        <button class="ui positive button" id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
+                                        <button class="ui positive button"
+                                            id="submitButton"><?php echo lang_loader('pcf', 'pcf_submit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1634,7 +1739,7 @@ HTML;
 
                 <?php } ?>
 
-            <?php  } ?>
+            <?php } ?>
         <?php } ?>
 
 
@@ -1680,7 +1785,7 @@ HTML;
 </style>
 
 <script>
-    document.getElementById('userSearchTransfer').addEventListener('keyup', function() {
+    document.getElementById('userSearchTransfer').addEventListener('keyup', function () {
         var filter = this.value.toLowerCase();
         var checkboxes = document.getElementById('userList_transfer').getElementsByClassName('checkbox');
 
@@ -1698,7 +1803,7 @@ HTML;
 </script>
 
 <script>
-    document.getElementById('userSearch').addEventListener('keyup', function() {
+    document.getElementById('userSearch').addEventListener('keyup', function () {
         var filter = this.value.toLowerCase();
         var checkboxes = document.getElementById('userList').getElementsByClassName('checkbox');
 
@@ -1716,7 +1821,7 @@ HTML;
 </script>
 
 <script>
-    document.getElementById('userSearchReassign').addEventListener('keyup', function() {
+    document.getElementById('userSearchReassign').addEventListener('keyup', function () {
         var filter = this.value.toLowerCase();
         var checkboxes = document.getElementById('userList_reassign').getElementsByClassName('checkbox');
 
@@ -1761,11 +1866,11 @@ HTML;
 <script>
     const ticketId = "<?= $ticket_id ?>";
 
-    document.getElementById('approveBtn').addEventListener('click', function() {
+    document.getElementById('approveBtn').addEventListener('click', function () {
         window.location.href = "<?= base_url('asset/approve_transfer/') ?>" + ticketId;
     });
 
-    document.getElementById('denyBtn').addEventListener('click', function() {
+    document.getElementById('denyBtn').addEventListener('click', function () {
         window.location.href = "<?= base_url('asset/deny_transfer/') ?>" + ticketId;
     });
 </script>

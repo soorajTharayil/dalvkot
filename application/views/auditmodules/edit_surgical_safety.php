@@ -17,8 +17,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Operating Room Safety audit - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Operating Room Safety
+                        audit - <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -78,14 +80,14 @@ $param = json_decode($row->dataset, true);
                             <td>
                                 <select class="form-control" name="patient_gender">
                                     <option value="" <?php if (empty($param['patient_gender']))
-                                                            echo 'selected'; ?>>
+                                        echo 'selected'; ?>>
                                     </option>
                                     <option value="Male" <?php if ($param['patient_gender'] == 'Male')
-                                                                echo 'selected'; ?>>Male</option>
+                                        echo 'selected'; ?>>Male</option>
                                     <option value="Female" <?php if ($param['patient_gender'] == 'Female')
-                                                                echo 'selected'; ?>>Female</option>
+                                        echo 'selected'; ?>>Female</option>
                                     <option value="Other" <?php if ($param['patient_gender'] == 'Other')
-                                                                echo 'selected'; ?>>Other</option>
+                                        echo 'selected'; ?>>Other</option>
                                 </select>
                             </td>
                         </tr>
@@ -179,16 +181,16 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
                                 // Select all datetime pickers
                                 const pickers = document.querySelectorAll(".datetime-picker");
 
-                                pickers.forEach(function(input) {
+                                pickers.forEach(function (input) {
                                     // Dynamically restrict to current date/time as maximum
                                     input.max = new Date().toISOString().slice(0, 16);
 
                                     // Auto-open picker on click (modern browsers)
-                                    input.addEventListener("click", function() {
+                                    input.addEventListener("click", function () {
                                         if (this.showPicker) this.showPicker();
                                     });
                                 });
@@ -199,8 +201,8 @@ $param = json_decode($row->dataset, true);
 
                         <script>
                             // Force open calendar picker when clicking anywhere in the input box
-                            document.querySelectorAll('.datetime-picker').forEach(function(input) {
-                                input.addEventListener('click', function() {
+                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
+                                input.addEventListener('click', function () {
                                     this.showPicker(); // Opens the native calendar/clock popup
                                 });
                             });
@@ -213,52 +215,66 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Surgery name</b></td>
                             <td>
-                                <input class="form-control" type="text" name="surgeryname" value="<?php echo $param['surgeryname']; ?>">
+                                <input class="form-control" type="text" name="surgeryname"
+                                    value="<?php echo $param['surgeryname']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Surgery date</b></td>
                             <td>
-                                <input class="form-control" type="text" name="initial_assessment_hr1" value="<?php echo $param['initial_assessment_hr1']; ?>">
+                                <input class="form-control" type="text" name="initial_assessment_hr1"
+                                    value="<?php echo $param['initial_assessment_hr1']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Has the patient's identity been confirmed by verifying the ID band?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="antibiotic" value="<?php echo $param['antibiotic']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="antibiotic_text" placeholder="Remarks" value="<?php echo $param['antibiotic_text']; ?>">
+                                <input class="form-control" type="text" name="antibiotic"
+                                    value="<?php echo $param['antibiotic']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="antibiotic_text"
+                                    placeholder="Remarks" value="<?php echo $param['antibiotic_text']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Has the surgical site been marked?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="checklist" value="<?php echo $param['checklist']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="checklist_text" placeholder="Remarks" value="<?php echo $param['checklist_text']; ?>">
+                                <input class="form-control" type="text" name="checklist"
+                                    value="<?php echo $param['checklist']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="checklist_text"
+                                    placeholder="Remarks" value="<?php echo $param['checklist_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the informed consent been completed and documented?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="bundle_care" value="<?php echo $param['bundle_care']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="bundle_care_text" placeholder="Remarks" value="<?php echo $param['bundle_care_text']; ?>">
+                                <input class="form-control" type="text" name="bundle_care"
+                                    value="<?php echo $param['bundle_care']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="bundle_care_text"
+                                    placeholder="Remarks" value="<?php echo $param['bundle_care_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Has the availability of artificial dentures, eyes, or other appliances been checked?</b></td>
+                            <td><b>Has the availability of artificial dentures, eyes, or other appliances been
+                                    checked?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="time_out" value="<?php echo $param['time_out']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="time_out_text" placeholder="Remarks" value="<?php echo $param['time_out_text']; ?>">
+                                <input class="form-control" type="text" name="time_out"
+                                    value="<?php echo $param['time_out']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="time_out_text"
+                                    placeholder="Remarks" value="<?php echo $param['time_out_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Have HIV, HBsAg, and HCV tests been completed?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="unplanned_return" value="<?php echo $param['unplanned_return']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="unplanned_return_text" placeholder="Remarks" value="<?php echo $param['unplanned_return_text']; ?>">
+                                <input class="form-control" type="text" name="unplanned_return"
+                                    value="<?php echo $param['unplanned_return']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="unplanned_return_text" placeholder="Remarks"
+                                    value="<?php echo $param['unplanned_return_text']; ?>">
                             </td>
                         </tr>
 
@@ -266,32 +282,41 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Has the time of last oral intake (fluid/food) been mentioned?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="last_oral" value="<?php echo $param['last_oral']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="last_oral_text" placeholder="Remarks" value="<?php echo $param['last_oral_text']; ?>">
+                                <input class="form-control" type="text" name="last_oral"
+                                    value="<?php echo $param['last_oral']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="last_oral_text"
+                                    placeholder="Remarks" value="<?php echo $param['last_oral_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the patient's weight been documented?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patients_weight" value="<?php echo $param['patients_weight']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="patients_weight_text" placeholder="Remarks" value="<?php echo $param['patients_weight_text']; ?>">
+                                <input class="form-control" type="text" name="patients_weight"
+                                    value="<?php echo $param['patients_weight']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="patients_weight_text" placeholder="Remarks"
+                                    value="<?php echo $param['patients_weight_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the time of urine voiding been documented?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="urine_void" value="<?php echo $param['urine_void']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="urine_void_text" placeholder="Remarks" value="<?php echo $param['urine_void_text']; ?>">
+                                <input class="form-control" type="text" name="urine_void"
+                                    value="<?php echo $param['urine_void']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="urine_void_text"
+                                    placeholder="Remarks" value="<?php echo $param['urine_void_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the anaesthesia safety check been completed?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="anaesthesia" value="<?php echo $param['anaesthesia']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="anaesthesia_text" placeholder="Remarks" value="<?php echo $param['anaesthesia_text']; ?>">
+                                <input class="form-control" type="text" name="anaesthesia"
+                                    value="<?php echo $param['anaesthesia']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="anaesthesia_text"
+                                    placeholder="Remarks" value="<?php echo $param['anaesthesia_text']; ?>">
                             </td>
                         </tr>
 
@@ -299,121 +324,168 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Has the patient's drug allergy history been verified?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="drug_allergy" value="<?php echo $param['drug_allergy']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="drug_allergy_text" placeholder="Remarks" value="<?php echo $param['drug_allergy_text']; ?>">
+                                <input class="form-control" type="text" name="drug_allergy"
+                                    value="<?php echo $param['drug_allergy']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="drug_allergy_text" placeholder="Remarks"
+                                    value="<?php echo $param['drug_allergy_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has antibiotic prophylaxis been verified as given prior to surgery?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="prophylaxis" value="<?php echo $param['prophylaxis']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="prophylaxis_text" placeholder="Remarks" value="<?php echo $param['prophylaxis_text']; ?>">
+                                <input class="form-control" type="text" name="prophylaxis"
+                                    value="<?php echo $param['prophylaxis']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="prophylaxis_text"
+                                    placeholder="Remarks" value="<?php echo $param['prophylaxis_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Was the antibiotic given within the last 60 minutes before surgery?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="antibiotic_given" value="<?php echo $param['antibiotic_given']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="antibiotic_given_text" placeholder="Remarks" value="<?php echo $param['antibiotic_given_text']; ?>">
+                                <input class="form-control" type="text" name="antibiotic_given"
+                                    value="<?php echo $param['antibiotic_given']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="antibiotic_given_text" placeholder="Remarks"
+                                    value="<?php echo $param['antibiotic_given_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has it been checked whether thromboprophylaxis has been ordered?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="thromboprophylaxis" value="<?php echo $param['thromboprophylaxis']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="thromboprophylaxis_text" placeholder="Remarks" value="<?php echo $param['thromboprophylaxis_text']; ?>">
+                                <input class="form-control" type="text" name="thromboprophylaxis"
+                                    value="<?php echo $param['thromboprophylaxis']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="thromboprophylaxis_text" placeholder="Remarks"
+                                    value="<?php echo $param['thromboprophylaxis_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Have the surgeon, anaesthesia professionals, and nurse verbally confirmed the incision time, patient identity, surgical site, and procedure?</b></td>
+                            <td><b>Have the surgeon, anaesthesia professionals, and nurse verbally confirmed the
+                                    incision time, patient identity, surgical site, and procedure?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="anaesthesia_professionals" value="<?php echo $param['anaesthesia_professionals']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="anaesthesia_professionals_text" placeholder="Remarks" value="<?php echo $param['anaesthesia_professionals_text']; ?>">
+                                <input class="form-control" type="text" name="anaesthesia_professionals"
+                                    value="<?php echo $param['anaesthesia_professionals']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="anaesthesia_professionals_text" placeholder="Remarks"
+                                    value="<?php echo $param['anaesthesia_professionals_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Have the anticipated clinical events been reviewed by the surgeon, anaesthesia team, and nursing team?</b></td>
+                            <td><b>Have the anticipated clinical events been reviewed by the surgeon, anaesthesia team,
+                                    and nursing team?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="clinical_events" value="<?php echo $param['clinical_events']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="clinical_events_text" placeholder="Remarks" value="<?php echo $param['clinical_events_text']; ?>">
+                                <input class="form-control" type="text" name="clinical_events"
+                                    value="<?php echo $param['clinical_events']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="clinical_events_text" placeholder="Remarks"
+                                    value="<?php echo $param['clinical_events_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Have any anticipated equipment issues or concerns been reviewed?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="anticipated_equipment" value="<?php echo $param['anticipated_equipment']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="anticipated_equipment_text" placeholder="Remarks" value="<?php echo $param['anticipated_equipment_text']; ?>">
+                                <input class="form-control" type="text" name="anticipated_equipment"
+                                    value="<?php echo $param['anticipated_equipment']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="anticipated_equipment_text" placeholder="Remarks"
+                                    value="<?php echo $param['anticipated_equipment_text']; ?>">
                             </td>
                         </tr>
 
 
                         <tr>
-                            <td><b>Has it been confirmed whether any prosthesis or special equipment is required and available for the surgery?</b></td>
+                            <td><b>Has it been confirmed whether any prosthesis or special equipment is required and
+                                    available for the surgery?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="prosthesis" value="<?php echo $param['prosthesis']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="prosthesis_text" placeholder="Remarks" value="<?php echo $param['prosthesis_text']; ?>">
+                                <input class="form-control" type="text" name="prosthesis"
+                                    value="<?php echo $param['prosthesis']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="prosthesis_text"
+                                    placeholder="Remarks" value="<?php echo $param['prosthesis_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the display of essential imaging been checked and confirmed?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="imaging" value="<?php echo $param['imaging']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="imaging_text" placeholder="Remarks" value="<?php echo $param['imaging_text']; ?>">
+                                <input class="form-control" type="text" name="imaging"
+                                    value="<?php echo $param['imaging']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text" name="imaging_text"
+                                    placeholder="Remarks" value="<?php echo $param['imaging_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the name of the procedure been recorded?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="procedure_name" value="<?php echo $param['procedure_name']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="procedure_name_text" placeholder="Remarks" value="<?php echo $param['procedure_name_text']; ?>">
+                                <input class="form-control" type="text" name="procedure_name"
+                                    value="<?php echo $param['procedure_name']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="procedure_name_text" placeholder="Remarks"
+                                    value="<?php echo $param['procedure_name_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Have the counts of instruments, sponges, needles, and other items been checked and confirmed?</b></td>
+                            <td><b>Have the counts of instruments, sponges, needles, and other items been checked and
+                                    confirmed?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="instruments_counts" value="<?php echo $param['instruments_counts']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="instruments_counts_text" placeholder="Remarks" value="<?php echo $param['instruments_counts_text']; ?>">
+                                <input class="form-control" type="text" name="instruments_counts"
+                                    value="<?php echo $param['instruments_counts']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="instruments_counts_text" placeholder="Remarks"
+                                    value="<?php echo $param['instruments_counts_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the closure time been documented?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="closure_time" value="<?php echo $param['closure_time']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="closure_time_text" placeholder="Remarks" value="<?php echo $param['closure_time_text']; ?>">
+                                <input class="form-control" type="text" name="closure_time"
+                                    value="<?php echo $param['closure_time']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="closure_time_text" placeholder="Remarks"
+                                    value="<?php echo $param['closure_time_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Has the specimen labeling been completed with the correct patient name?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="specimen_labeling" value="<?php echo $param['specimen_labeling']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="specimen_labeling_text" placeholder="Remarks" value="<?php echo $param['specimen_labeling_text']; ?>">
+                                <input class="form-control" type="text" name="specimen_labeling"
+                                    value="<?php echo $param['specimen_labeling']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="specimen_labeling_text" placeholder="Remarks"
+                                    value="<?php echo $param['specimen_labeling_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Are there any equipment problems that need to be addressed or reported?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="equipment_report" value="<?php echo $param['equipment_report']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="equipment_report_text" placeholder="Remarks" value="<?php echo $param['equipment_report_text']; ?>">
+                                <input class="form-control" type="text" name="equipment_report"
+                                    value="<?php echo $param['equipment_report']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="equipment_report_text" placeholder="Remarks"
+                                    value="<?php echo $param['equipment_report_text']; ?>">
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Have the surgeon, anaesthesia professionals, and nurse reviewed the key concerns for the patient’s recovery and ongoing management?</b></td>
+                            <td><b>Have the surgeon, anaesthesia professionals, and nurse reviewed the key concerns for
+                                    the patient’s recovery and ongoing management?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patients_recovery" value="<?php echo $param['patients_recovery']; ?>">
-                                <input class="form-control" style="margin-top:10px;" type="text" name="patients_recovery_text" placeholder="Remarks" value="<?php echo $param['patients_recovery_text']; ?>">
+                                <input class="form-control" type="text" name="patients_recovery"
+                                    value="<?php echo $param['patients_recovery']; ?>">
+                                <input class="form-control" style="margin-top:10px;" type="text"
+                                    name="patients_recovery_text" placeholder="Remarks"
+                                    value="<?php echo $param['patients_recovery_text']; ?>">
                             </td>
                         </tr>
 
@@ -421,7 +493,8 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
                         <!-- 
                          -->
@@ -482,14 +555,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function() {
+                                    btn.addEventListener("click", function () {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -505,7 +578,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function() {
+                                addMoreBtn.addEventListener("click", function () {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -520,7 +593,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function() {
+                                    removeBtn.addEventListener("click", function () {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -537,7 +610,7 @@ $param = json_decode($row->dataset, true);
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">

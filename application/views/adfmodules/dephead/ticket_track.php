@@ -3,7 +3,7 @@ $this->db->select("*");
 $this->db->from('setup_adf');
 $this->db->where('parent', 0);
 $query = $this->db->get();
-$reasons  = $query->result();
+$reasons = $query->result();
 foreach ($reasons as $row) {
     $keys[$row->shortkey] = $row->shortkey;
     $res[$row->shortkey] = $row->shortname;
@@ -55,8 +55,11 @@ foreach ($reasons as $row) {
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="ADMISSION FEEDBACK TICKET- <TICKET ID> ">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;<?php echo lang_loader('adf', 'adf_adft'); ?><?php echo $department->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="ADMISSION FEEDBACK TICKET- <TICKET ID> ">
+                            <i class="fa fa-question-circle"
+                                aria-hidden="true"></i></a>&nbsp;<?php echo lang_loader('adf', 'adf_adft'); ?><?php echo $department->id; ?>
+                    </h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -106,8 +109,8 @@ foreach ($reasons as $row) {
                                         }
                                     } ?>
                                 <?php } else {
-                                    echo  $departments[0]->department->name;
-                                }  ?>
+                                    echo $departments[0]->department->name;
+                                } ?>
 
                                 <?php foreach ($param['comment'] as $key33 => $value) { ?>
                                     <?php if ($key33) { ?>
@@ -143,38 +146,43 @@ foreach ($reasons as $row) {
                             <td><strong><?php echo lang_loader('adf', 'adf_ticket_status'); ?></strong> </td>
                             <td> <?php if ($this->session->userdata['isLogIn'] == false) { ?>
                                     <?php if ($department->status == 'Closed') { ?>
-                                        <span style="color:  #198754;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        <span style="color:  #198754;font-weight: bold; display: inline-block;"><i
+                                                class="fa fa-circle" aria-hidden="true"></i></span>
                                         <?php echo 'Closed'; ?>
                                     <?php } ?>
                                     <?php if ($department->status == 'Addressed' || $department->status == 'Reopen' || $department->status == 'Transfered') { ?>
-                                        <span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        <span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i
+                                                class="fa fa-circle" aria-hidden="true"></i></span>
                                         <?php echo 'Inprogress'; ?>
                                     <?php } ?>
                                     <?php if ($department->status == 'Open') { ?>
-                                        <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        <span style="color: #d9534f;font-weight: bold; display: inline-block;"><i
+                                                class="fa fa-circle" aria-hidden="true"></i></span>
                                         <?php echo 'Pending'; ?>
-                                    <?php }  ?>
+                                    <?php } ?>
                                 <?php } ?>
                                 <?php if ($this->session->userdata['isLogIn'] == true) { ?>
                                     <?php //if (($this->session->userdata['user_role'] == 4 && $this->session->userdata['email'] == $department->department->email) || $this->session->userdata['user_role'] <= 3) { 
-                                    ?>
-                                    <select class="form-control" onchange="ticket_options(this.value)" style="max-width: 300px;" required>
-                                        <option value="<?php echo $department->status; ?>" selected><?php echo $department->status; ?></option>
+                                        ?>
+                                    <select class="form-control" onchange="ticket_options(this.value)"
+                                        style="max-width: 300px;" required>
+                                        <option value="<?php echo $department->status; ?>" selected>
+                                            <?php echo $department->status; ?></option>
                                         <?php if ($department->status != 'Closed') {
                                             $open = true; ?>
-                                          
 
 
-                                                <?php if ($department->addressed != 1) { ?>
-                                                    <?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-ADDRESSED-TICKETS') === true) { ?>
-                                                        <option value="address"><?php echo lang_loader('adf', 'adf_address'); ?></option>
-                                                    <?php } ?>
+
+                                            <?php if ($department->addressed != 1) { ?>
+                                                <?php if (ismodule_active('ADF') === true && isfeature_active('ADF-ADDRESSED-TICKETS') === true) { ?>
+                                                    <option value="address"><?php echo lang_loader('adf', 'adf_address'); ?></option>
                                                 <?php } ?>
-                                         
-                                            <?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-CLOSED-TICKETS') === true) { ?>
+                                            <?php } ?>
+
+                                            <?php if (ismodule_active('ADF') === true && isfeature_active('ADF-CLOSED-TICKETS') === true) { ?>
                                                 <option value="capa"><?php echo lang_loader('adf', 'adf_close'); ?></option>
                                             <?php } ?>
-                                            <?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TRANSFER-TICKETS') === true) { ?>
+                                            <?php if (ismodule_active('ADF') === true && isfeature_active('ADF-TRANSFER-TICKETS') === true) { ?>
                                                 <option value="movetick">Transfer</option>
                                             <?php } ?>
                                         <?php } ?>
@@ -184,7 +192,7 @@ foreach ($reasons as $row) {
 
                                             $closed = true; ?>
                                             <?php if ($department->status == 'Closed') { ?>
-                                                <?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-REOPEN-TICKETS') === true) { ?>
+                                                <?php if (ismodule_active('ADF') === true && isfeature_active('ADF-REOPEN-TICKETS') === true) { ?>
                                                     <option value="reopen">Reopen</option>
                                                 <?php } ?>
                                             <?php } ?>
@@ -203,21 +211,21 @@ foreach ($reasons as $row) {
                             <tr>
                                 <td><strong>Turn around time</strong> </td>
                                 <td><?php
-                                    $createdOn = strtotime($department->created_on);
-                                    $lastModified = strtotime($department->last_modified);
-                                    $timeDifferenceInSeconds = $lastModified - $createdOn;
-                                    $value = $this->admissionfeedback_model->convertSecondsToTime($timeDifferenceInSeconds);
+                                $createdOn = strtotime($department->created_on);
+                                $lastModified = strtotime($department->last_modified);
+                                $timeDifferenceInSeconds = $lastModified - $createdOn;
+                                $value = $this->admissionfeedback_model->convertSecondsToTime($timeDifferenceInSeconds);
 
-                                    if ($value['days'] != 0) {
-                                        echo $value['days'] . ' days, ';
-                                    }
-                                    if ($value['hours'] != 0) {
-                                        echo  $value['hours'] . ' hrs, ';
-                                    }
-                                    if ($value['minutes'] != 0) {
-                                        echo  $value['minutes'] . ' mins.';
-                                    }
-                                    ?></td>
+                                if ($value['days'] != 0) {
+                                    echo $value['days'] . ' days, ';
+                                }
+                                if ($value['hours'] != 0) {
+                                    echo $value['hours'] . ' hrs, ';
+                                }
+                                if ($value['minutes'] != 0) {
+                                    echo $value['minutes'] . ' mins.';
+                                }
+                                ?></td>
                             </tr>
                         <?php } ?>
                     </table>
@@ -228,7 +236,7 @@ foreach ($reasons as $row) {
 
         <?php if ($this->session->userdata['user_role'] != 4 && ($department->status == 'Closed')) {
 
-            if ($closed == true) {  ?>
+            if ($closed == true) { ?>
 
 
                 <?php if (($department->status != 'Open')) { ?>
@@ -250,7 +258,8 @@ foreach ($reasons as $row) {
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group row">
-                                        <textarea class="form-control" rows="5" id="comment" minlength="25" name="reply" placeholder="Reason to reopen ticket" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" minlength="25" name="reply"
+                                            placeholder="Reason to reopen ticket" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
                                         <input type="hidden" name="status" value="Reopen">
                                     </div>
@@ -260,7 +269,9 @@ foreach ($reasons as $row) {
                                 <!--Radio-->
                                 <div class="form-group row">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('adf', 'adf_submit'); ?></button> </div>
+                                        <div class="ui buttons"> <button
+                                                class="ui positive button"><?php echo lang_loader('adf', 'adf_submit'); ?></button>
+                                        </div>
                                     </div>
                                 </div> <?php echo form_close() ?>
                             </div>
@@ -272,8 +283,8 @@ foreach ($reasons as $row) {
             <?php } ?>
 
 
-        <?php } else {  ?>
-            <?php if ($open == true) {  ?>
+        <?php } else { ?>
+            <?php if ($open == true) { ?>
                 <?php if (($department->status != 'Closed')) { ?>
                     <div class="col-sm-12" id="address" style="overflow:auto;">
                         <div class="panel panel-default">
@@ -289,13 +300,14 @@ foreach ($reasons as $row) {
                                     <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
                                     <!-- <div class="col-xs-9"> -->
                                     <input type="hidden" name="addressed" <?php if ($department->addressed == 1) {
-                                                                                echo 'checked disabled';
-                                                                            } ?>>
+                                        echo 'checked disabled';
+                                    } ?>>
                                     <!-- </div> -->
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group row">
-                                        <textarea class="form-control" rows="5" id="comment" minlength="25" name="reply" placeholder="Please enter your initial response message" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" minlength="25" name="reply"
+                                            placeholder="Please enter your initial response message" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
                                         <input type="hidden" name="status" value="Addressed">
                                     </div>
@@ -305,7 +317,9 @@ foreach ($reasons as $row) {
                                 <!--Radio-->
                                 <div class="form-group row">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('adf', 'adf_submit'); ?></button> </div>
+                                        <div class="ui buttons"> <button
+                                                class="ui positive button"><?php echo lang_loader('adf', 'adf_submit'); ?></button>
+                                        </div>
                                     </div>
                                 </div> <?php echo form_close() ?>
                             </div>
@@ -340,38 +354,44 @@ foreach ($reasons as $row) {
                                     <label class="col-sm-3"><?php echo display('status') ?></label>
                                     <div class="col-xs-9">
                                         <div class="form-check">
-                                            <label class="radio-inline"><input type="radio" name="status" value="Open" onclick="hidebox()"><?php echo lang_loader('adf', 'adf_open'); ?></label>
-                                            <label class="radio-inline"><input type="radio" name="status" value="Closed" onclick="showbox()" checked="true"><?php echo lang_loader('adf', 'adf_close'); ?></label>
+                                            <label class="radio-inline"><input type="radio" name="status" value="Open"
+                                                    onclick="hidebox()"><?php echo lang_loader('adf', 'adf_open'); ?></label>
+                                            <label class="radio-inline"><input type="radio" name="status" value="Closed"
+                                                    onclick="showbox()"
+                                                    checked="true"><?php echo lang_loader('adf', 'adf_close'); ?></label>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
-                              
 
-                                    <!-- <h3>Writing CAPA to close this ticket:<i class="text-danger">*</i></h3> -->
-                                    <div class="col-sm-12">
-                                        <div class="form-group row">
-                                            <textarea class="form-control" rows="5" minlength="25" id="rootcause" name="rootcause" placeholder="Enter an RCA(Root Cause Analysis)" required></textarea>
-                                        </div>
+
+                                <!-- <h3>Writing CAPA to close this ticket:<i class="text-danger">*</i></h3> -->
+                                <div class="col-sm-12">
+                                    <div class="form-group row">
+                                        <textarea class="form-control" rows="5" minlength="25" id="rootcause" name="rootcause"
+                                            placeholder="Enter an RCA(Root Cause Analysis)" required></textarea>
                                     </div>
-                               
+                                </div>
+
                                 <div class="col-sm-12">
                                     <div class="form-group row" id="correctiveid">
-                                        <textarea class="form-control" rows="5" id="corrective" minlength="25" name="corrective" placeholder="Enter CAPA(Corrective Action and Preventive Action)" required></textarea>
+                                        <textarea class="form-control" rows="5" id="corrective" minlength="25" name="corrective"
+                                            placeholder="Enter CAPA(Corrective Action and Preventive Action)" required></textarea>
                                     </div>
                                 </div>
                                 <?php if (close_comment('adf_close_comment') === true) { ?>
                                     <div class="col-sm-12">
                                         <div class="form-group row" id="correctiveid">
-                                            <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Enter Comment" required></textarea>
+                                            <textarea class="form-control" rows="5" id="comment" name="comment"
+                                                placeholder="Enter Comment" required></textarea>
                                         </div>
                                     </div>
                                 <?php } ?>
                                 <div class="form-group row">
                                     <label for="picture" class="col-xs-3 col-form-label">Upload supporting file</label><br>
                                     <div class="col-sm-12">
-                                        <input type="file" name="picture" id="picture" >
-                                        <input type="hidden" name="old_picture" >
+                                        <input type="file" name="picture" id="picture">
+                                        <input type="hidden" name="old_picture">
                                     </div>
                                 </div>
                             </div>
@@ -379,8 +399,8 @@ foreach ($reasons as $row) {
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <!-- <button type="reset" class="ui button">
-                                        <?php // echo display('reset') 
-                                        ?></button>
+                                        <?php // echo 'Reset' ; 
+                                                    ?></button>
                                     <div class="or"></div> -->
                                         <button class="ui positive button"><?php echo lang_loader('adf', 'adf_submit'); ?></button>
                                     </div>
@@ -397,8 +417,10 @@ foreach ($reasons as $row) {
                             <div class="col-md-12 col-sm-12">
                                 <br />
                                 <?php echo form_open('ticketsadf/create', 'class="form-inner"') ?>
-                                <?php echo form_hidden('id', $department->id) ?> <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('adf', 'adf_department'); ?></label>
+                                <?php echo form_hidden('id', $department->id) ?>
+                                <div class="form-group row">
+                                    <label for="name"
+                                        class="col-xs-3 col-form-label"><?php echo lang_loader('adf', 'adf_department'); ?></label>
                                     <div class="col-xs-9">
                                         <select class="form-control" id="sel1" name="deparment" required aria-required="true">
                                             <?php echo '<option value="">--Change Department--</option>';
@@ -416,21 +438,27 @@ foreach ($reasons as $row) {
                                                 if ($department->department->description != $r->description) {
                                                     echo '<option value="' . $r->dprt_id . '">' . $r->description . '</option>';
                                                 }
-                                            }                                   ?> </select>
+                                            } ?> </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="name" class="col-xs-3 col-form-label"><?php echo lang_loader('adf', 'adf_comment'); ?></label>
+                                    <label for="name"
+                                        class="col-xs-3 col-form-label"><?php echo lang_loader('adf', 'adf_comment'); ?></label>
                                     <div class="col-xs-9">
-                                        <textarea class="form-control" rows="5" id="comment" minlength="25" name="reply" placeholder="Enter the reason for ticket transfer" required></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" minlength="25" name="reply"
+                                            placeholder="Enter the reason for ticket transfer" required></textarea>
                                         <input type="hidden" name="reply_by" value="Admin">
-                                        <input type="hidden" name="reply_departmen" value="<?php echo  $department->department->description; ?>">
-                                        <input type="hidden" name="reply_department_id" value="<?php echo  $department->departmentid; ?>">
+                                        <input type="hidden" name="reply_departmen"
+                                            value="<?php echo $department->department->description; ?>">
+                                        <input type="hidden" name="reply_department_id"
+                                            value="<?php echo $department->departmentid; ?>">
                                     </div>
                                 </div> <!--Radio-->
                                 <div class="form-group row">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <div class="ui buttons"> <button class="ui positive button"><?php echo lang_loader('adf', 'adf_submit'); ?></button> </div>
+                                        <div class="ui buttons"> <button
+                                                class="ui positive button"><?php echo lang_loader('adf', 'adf_submit'); ?></button>
+                                        </div>
                                     </div>
                                 </div> <?php echo form_close() ?>
                             </div>
@@ -440,7 +468,7 @@ foreach ($reasons as $row) {
                 <script>
                     // $(document).ready(function() {
                     // Hide all elements by default
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#capa').hide();
                         $('#address').hide();
                         $('#move').hide();
@@ -486,7 +514,7 @@ foreach ($reasons as $row) {
                     }
                 </script>
 
-            <?php  } ?>
+            <?php } ?>
         <?php } ?>
 
 

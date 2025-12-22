@@ -17,8 +17,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Canteen audit checklist - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Canteen audit checklist -
+                        <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -86,7 +88,8 @@ $param = json_decode($row->dataset, true);
                                     value="<?php echo $param['identification_details']; ?>">
                                 <div style="margin-top:5px;">
                                     Remarks: <input class="form-control" type="text" name="identification_details_text"
-                                        value="<?php echo $param['identification_details_text']; ?>" placeholder="Remarks">
+                                        value="<?php echo $param['identification_details_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -104,7 +107,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are gloves worn by food handlers during the preparation of raw and cooked food?</b></td>
+                            <td><b>Are gloves worn by food handlers during the preparation of raw and cooked food?</b>
+                            </td>
                             <td>
                                 <input class="form-control" type="text" name="surgery"
                                     value="<?php echo $param['surgery']; ?>">
@@ -116,13 +120,15 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are any open infections, cuts, or bandages on hands properly covered while handling food?</b></td>
+                            <td><b>Are any open infections, cuts, or bandages on hands properly covered while handling
+                                    food?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="complaints_communicated"
                                     value="<?php echo $param['complaints_communicated']; ?>">
                                 <div style="margin-top:5px;">
                                     Remarks: <input class="form-control" type="text" name="complaints_communicated_text"
-                                        value="<?php echo $param['complaints_communicated_text']; ?>" placeholder="Remarks">
+                                        value="<?php echo $param['complaints_communicated_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -182,11 +188,14 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are all small equipment and utensils, including cutting boards, thoroughly cleaned between uses?</b></td>
+                            <td><b>Are all small equipment and utensils, including cutting boards, thoroughly cleaned
+                                    between uses?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="diagnostic" value="<?php echo $param['diagnostic']; ?>">
+                                <input class="form-control" type="text" name="diagnostic"
+                                    value="<?php echo $param['diagnostic']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="diagnostic_text" value="<?php echo $param['diagnostic_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="diagnostic_text"
+                                        value="<?php echo $param['diagnostic_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -194,9 +203,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are all utensils clean and dry?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="lab_results" value="<?php echo $param['lab_results']; ?>">
+                                <input class="form-control" type="text" name="lab_results"
+                                    value="<?php echo $param['lab_results']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="lab_results_text" value="<?php echo $param['lab_results_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="lab_results_text"
+                                        value="<?php echo $param['lab_results_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -204,9 +215,12 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are work surfaces clean?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="pending_investigation" value="<?php echo $param['pending_investigation']; ?>">
+                                <input class="form-control" type="text" name="pending_investigation"
+                                    value="<?php echo $param['pending_investigation']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="pending_investigation_text" value="<?php echo $param['pending_investigation_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="pending_investigation_text"
+                                        value="<?php echo $param['pending_investigation_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -214,9 +228,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are drawers and racks clean?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="medicine_order" value="<?php echo $param['medicine_order']; ?>">
+                                <input class="form-control" type="text" name="medicine_order"
+                                    value="<?php echo $param['medicine_order']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="medicine_order_text" value="<?php echo $param['medicine_order_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="medicine_order_text"
+                                        value="<?php echo $param['medicine_order_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -227,11 +243,15 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is there periodic cleaning schedule in place for utensils, equipment, and canteen areas?</b></td>
+                            <td><b>Is there periodic cleaning schedule in place for utensils, equipment, and canteen
+                                    areas?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="facility_communicated" value="<?php echo $param['facility_communicated']; ?>">
+                                <input class="form-control" type="text" name="facility_communicated"
+                                    value="<?php echo $param['facility_communicated']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="facility_communicated_text" value="<?php echo $param['facility_communicated_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="facility_communicated_text"
+                                        value="<?php echo $param['facility_communicated_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -239,9 +259,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Is cleaning equipment stored appropriately?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="health_education" value="<?php echo $param['health_education']; ?>">
+                                <input class="form-control" type="text" name="health_education"
+                                    value="<?php echo $param['health_education']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="health_education_text" value="<?php echo $param['health_education_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="health_education_text"
+                                        value="<?php echo $param['health_education_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -249,9 +271,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Is the dining area clean and sanitized?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="risk_assessment" value="<?php echo $param['risk_assessment']; ?>">
+                                <input class="form-control" type="text" name="risk_assessment"
+                                    value="<?php echo $param['risk_assessment']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="risk_assessment_text" value="<?php echo $param['risk_assessment_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="risk_assessment_text"
+                                        value="<?php echo $param['risk_assessment_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -259,9 +283,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are cleaning solutions properly labelled and stored?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="urethral" value="<?php echo $param['urethral']; ?>">
+                                <input class="form-control" type="text" name="urethral"
+                                    value="<?php echo $param['urethral']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="urethral_text" value="<?php echo $param['urethral_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="urethral_text"
+                                        value="<?php echo $param['urethral_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -269,9 +295,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are Material Safety Data Sheets (MSDS) for chemicals available?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="urine_sample" value="<?php echo $param['urine_sample']; ?>">
+                                <input class="form-control" type="text" name="urine_sample"
+                                    value="<?php echo $param['urine_sample']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="urine_sample_text" value="<?php echo $param['urine_sample_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="urine_sample_text"
+                                        value="<?php echo $param['urine_sample_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -284,19 +312,24 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are garbage containers regularly washed and well maintained?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="bystander" value="<?php echo $param['bystander']; ?>">
+                                <input class="form-control" type="text" name="bystander"
+                                    value="<?php echo $param['bystander']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="bystander_text" value="<?php echo $param['bystander_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="bystander_text"
+                                        value="<?php echo $param['bystander_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
 
                         <tr>
-                            <td><b>Is the garbage/waste storage area protected from insects, pests, or rodent infestation?</b></td>
+                            <td><b>Is the garbage/waste storage area protected from insects, pests, or rodent
+                                    infestation?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="instruments" value="<?php echo $param['instruments']; ?>">
+                                <input class="form-control" type="text" name="instruments"
+                                    value="<?php echo $param['instruments']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="instruments_text" value="<?php echo $param['instruments_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="instruments_text"
+                                        value="<?php echo $param['instruments_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -304,9 +337,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Is garbage removed from the canteen in a timely manner?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="sterile" value="<?php echo $param['sterile']; ?>">
+                                <input class="form-control" type="text" name="sterile"
+                                    value="<?php echo $param['sterile']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="sterile_text" value="<?php echo $param['sterile_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="sterile_text"
+                                        value="<?php echo $param['sterile_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -314,9 +349,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are records of food waste disposal maintained?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="antibiotics" value="<?php echo $param['antibiotics']; ?>">
+                                <input class="form-control" type="text" name="antibiotics"
+                                    value="<?php echo $param['antibiotics']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="antibiotics_text" value="<?php echo $param['antibiotics_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="antibiotics_text"
+                                        value="<?php echo $param['antibiotics_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -324,9 +361,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are records of oil waste disposal maintained?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="surgical_site" value="<?php echo $param['surgical_site']; ?>">
+                                <input class="form-control" type="text" name="surgical_site"
+                                    value="<?php echo $param['surgical_site']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="surgical_site_text" value="<?php echo $param['surgical_site_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="surgical_site_text"
+                                        value="<?php echo $param['surgical_site_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -335,11 +374,14 @@ $param = json_decode($row->dataset, true);
                             <td colspan="2" style="background:#f2f2f2;"><b>PEST CONTROL</b></td>
                         </tr>
                         <tr>
-                            <td><b>Is a regular pest control program in place, and are records of the same available?</b></td>
+                            <td><b>Is a regular pest control program in place, and are records of the same
+                                    available?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="wound" value="<?php echo $param['wound']; ?>">
+                                <input class="form-control" type="text" name="wound"
+                                    value="<?php echo $param['wound']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="wound_text" value="<?php echo $param['wound_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="wound_text"
+                                        value="<?php echo $param['wound_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -351,45 +393,60 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are products supplied by approved suppliers?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="documented" value="<?php echo $param['documented']; ?>">
+                                <input class="form-control" type="text" name="documented"
+                                    value="<?php echo $param['documented']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="documented_text" value="<?php echo $param['documented_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="documented_text"
+                                        value="<?php echo $param['documented_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Are incoming food and supplies promptly inspected upon receipt?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="adequate_facilities" value="<?php echo $param['adequate_facilities']; ?>">
+                                <input class="form-control" type="text" name="adequate_facilities"
+                                    value="<?php echo $param['adequate_facilities']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="adequate_facilities_text" value="<?php echo $param['adequate_facilities_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="adequate_facilities_text"
+                                        value="<?php echo $param['adequate_facilities_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td><b>Are all food items, materials, and supplies immediately moved to appropriate storage areas?</b></td>
+                            <td><b>Are all food items, materials, and supplies immediately moved to appropriate storage
+                                    areas?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="sufficient_lighting" value="<?php echo $param['sufficient_lighting']; ?>">
+                                <input class="form-control" type="text" name="sufficient_lighting"
+                                    value="<?php echo $param['sufficient_lighting']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="sufficient_lighting_text" value="<?php echo $param['sufficient_lighting_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="sufficient_lighting_text"
+                                        value="<?php echo $param['sufficient_lighting_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Is all food labelled with the name and delivery/expiry date?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="storage_facility_for_food" value="<?php echo $param['storage_facility_for_food']; ?>">
+                                <input class="form-control" type="text" name="storage_facility_for_food"
+                                    value="<?php echo $param['storage_facility_for_food']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="storage_facility_for_food_text" value="<?php echo $param['storage_facility_for_food_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="storage_facility_for_food_text"
+                                        value="<?php echo $param['storage_facility_for_food_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Is food protected from contamination during the receiving process?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="personnel_hygiene_facilities" value="<?php echo $param['personnel_hygiene_facilities']; ?>">
+                                <input class="form-control" type="text" name="personnel_hygiene_facilities"
+                                    value="<?php echo $param['personnel_hygiene_facilities']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="personnel_hygiene_facilities_text" value="<?php echo $param['personnel_hygiene_facilities_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="personnel_hygiene_facilities_text"
+                                        value="<?php echo $param['personnel_hygiene_facilities_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -401,36 +458,48 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Is there proper separation between food and chemicals in storage areas?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="food_material_testing" value="<?php echo $param['food_material_testing']; ?>">
+                                <input class="form-control" type="text" name="food_material_testing"
+                                    value="<?php echo $param['food_material_testing']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="food_material_testing_text" value="<?php echo $param['food_material_testing_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="food_material_testing_text"
+                                        value="<?php echo $param['food_material_testing_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Is air-conditioned storage available where required?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="incoming_material" value="<?php echo $param['incoming_material']; ?>">
+                                <input class="form-control" type="text" name="incoming_material"
+                                    value="<?php echo $param['incoming_material']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="incoming_material_text" value="<?php echo $param['incoming_material_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="incoming_material_text"
+                                        value="<?php echo $param['incoming_material_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Is all food stored off the floor?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="raw_materials_inspection" value="<?php echo $param['raw_materials_inspection']; ?>">
+                                <input class="form-control" type="text" name="raw_materials_inspection"
+                                    value="<?php echo $param['raw_materials_inspection']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="raw_materials_inspection_text" value="<?php echo $param['raw_materials_inspection_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="raw_materials_inspection_text"
+                                        value="<?php echo $param['raw_materials_inspection_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Is the storage unit clean?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="storage_of_materials" value="<?php echo $param['storage_of_materials']; ?>">
+                                <input class="form-control" type="text" name="storage_of_materials"
+                                    value="<?php echo $param['storage_of_materials']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="storage_of_materials_text" value="<?php echo $param['storage_of_materials_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="storage_of_materials_text"
+                                        value="<?php echo $param['storage_of_materials_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -442,27 +511,35 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are transport containers and carts regularly cleaned?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="raw_materials_cleaning" value="<?php echo $param['raw_materials_cleaning']; ?>">
+                                <input class="form-control" type="text" name="raw_materials_cleaning"
+                                    value="<?php echo $param['raw_materials_cleaning']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="raw_materials_cleaning_text" value="<?php echo $param['raw_materials_cleaning_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="raw_materials_cleaning_text"
+                                        value="<?php echo $param['raw_materials_cleaning_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Are proper temperatures maintained during transport for hot foods?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="equipment_sanitization" value="<?php echo $param['equipment_sanitization']; ?>">
+                                <input class="form-control" type="text" name="equipment_sanitization"
+                                    value="<?php echo $param['equipment_sanitization']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="equipment_sanitization_text" value="<?php echo $param['equipment_sanitization_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="equipment_sanitization_text"
+                                        value="<?php echo $param['equipment_sanitization_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Are transport trolleys clean?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="frozen_food_thawing" value="<?php echo $param['frozen_food_thawing']; ?>">
+                                <input class="form-control" type="text" name="frozen_food_thawing"
+                                    value="<?php echo $param['frozen_food_thawing']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="frozen_food_thawing_text" value="<?php echo $param['frozen_food_thawing_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="frozen_food_thawing_text"
+                                        value="<?php echo $param['frozen_food_thawing_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -474,18 +551,24 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are food handlers' medical checkup records up to date?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="vegetarian_and_non_vegetarian" value="<?php echo $param['vegetarian_and_non_vegetarian']; ?>">
+                                <input class="form-control" type="text" name="vegetarian_and_non_vegetarian"
+                                    value="<?php echo $param['vegetarian_and_non_vegetarian']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="vegetarian_and_non_vegetarian_text" value="<?php echo $param['vegetarian_and_non_vegetarian_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text"
+                                        name="vegetarian_and_non_vegetarian_text"
+                                        value="<?php echo $param['vegetarian_and_non_vegetarian_text']; ?>"
+                                        placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Is Food Safety training regularly provided?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="cooked_food_cooling" value="<?php echo $param['cooked_food_cooling']; ?>">
+                                <input class="form-control" type="text" name="cooked_food_cooling"
+                                    value="<?php echo $param['cooked_food_cooling']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="cooked_food_cooling_text" value="<?php echo $param['cooked_food_cooling_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="cooked_food_cooling_text"
+                                        value="<?php echo $param['cooked_food_cooling_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -497,9 +580,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Are food samples preserved for 24 hours?</b></td>
                             <td>
-                                <input class="form-control" type="text" name="food_portioning" value="<?php echo $param['food_portioning']; ?>">
+                                <input class="form-control" type="text" name="food_portioning"
+                                    value="<?php echo $param['food_portioning']; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="food_portioning_text" value="<?php echo $param['food_portioning_text']; ?>" placeholder="Remarks">
+                                    Remarks: <input class="form-control" type="text" name="food_portioning_text"
+                                        value="<?php echo $param['food_portioning_text']; ?>" placeholder="Remarks">
                                 </div>
                             </td>
                         </tr>
@@ -510,7 +595,8 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
 
 
@@ -572,14 +658,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function() {
+                                    btn.addEventListener("click", function () {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -595,7 +681,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function() {
+                                addMoreBtn.addEventListener("click", function () {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -610,7 +696,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function() {
+                                    removeBtn.addEventListener("click", function () {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -628,7 +714,7 @@ $param = json_decode($row->dataset, true);
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">

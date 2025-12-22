@@ -20,8 +20,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Code Yellow - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Code Yellow -
+                        <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -60,164 +62,197 @@ $param = json_decode($row->dataset, true);
                                 <b>Location</b>
                             </td>
                             <td>
-                                <input class="form-control" type="text" name="location" value="<?php echo $row->location; ?>">
+                                <input class="form-control" type="text" name="location"
+                                    value="<?php echo $row->location; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Hospital Emergency Code</b></td>
                             <td>
-                                <input class="form-control" type="text" name="checklist" value="<?php echo $param['checklist']; ?>" disabled>
-                                <input class="form-control" type="text" style="display: none;" name="checklist" value="<?php echo $param['checklist']; ?>">
+                                <input class="form-control" type="text" name="checklist"
+                                    value="<?php echo $param['checklist']; ?>" disabled>
+                                <input class="form-control" type="text" style="display: none;" name="checklist"
+                                    value="<?php echo $param['checklist']; ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>Mock Drill start time</b></td>
-                            <td><input class="form-control" type="text" name="initial_assessment_hr1" value="<?php echo $param['initial_assessment_hr1']; ?>"></td>
+                            <td><input class="form-control" type="text" name="initial_assessment_hr1"
+                                    value="<?php echo $param['initial_assessment_hr1']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Team arrival time</b></td>
-                            <td><input class="form-control" type="text" name="initial_assessment_hr2" value="<?php echo $param['initial_assessment_hr2']; ?>"></td>
+                            <td><input class="form-control" type="text" name="initial_assessment_hr2"
+                                    value="<?php echo $param['initial_assessment_hr2']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Code Yellow Announced</b></td>
-                            <td><input class="form-control" type="text" name="yell2" value="<?php echo $param['yell2']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell2"
+                                    value="<?php echo $param['yell2']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Code Yellow team activated</b></td>
-                            <td><input class="form-control" type="text" name="yell3" value="<?php echo $param['yell3']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell3"
+                                    value="<?php echo $param['yell3']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Equipped ambulance sent to the site of disaster</b></td>
-                            <td><input class="form-control" type="text" name="yell4" value="<?php echo $param['yell4']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell4"
+                                    value="<?php echo $param['yell4']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Normal admissions are stopped immediately</b></td>
-                            <td><input class="form-control" type="text" name="yell5" value="<?php echo $param['yell5']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell5"
+                                    value="<?php echo $param['yell5']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Command nucleus activated</b></td>
-                            <td><input class="form-control" type="text" name="yell6" value="<?php echo $param['yell6']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell6"
+                                    value="<?php echo $param['yell6']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Team reported at command nucleus</b></td>
-                            <td><input class="form-control" type="text" name="yell7" value="<?php echo $param['yell7']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell7"
+                                    value="<?php echo $param['yell7']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Disaster card distributed</b></td>
-                            <td><input class="form-control" type="text" name="yell8" value="<?php echo $param['yell8']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell8"
+                                    value="<?php echo $param['yell8']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Pre defined area for creation of disaster ward evacuated</b></td>
-                            <td><input class="form-control" type="text" name="yell9" value="<?php echo $param['yell9']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell9"
+                                    value="<?php echo $param['yell9']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Disaster ward created</b></td>
-                            <td><input class="form-control" type="text" name="yell10" value="<?php echo $param['yell10']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell10"
+                                    value="<?php echo $param['yell10']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Medicines & other consumables reaches the disaster ward</b></td>
-                            <td><input class="form-control" type="text" name="yell11" value="<?php echo $param['yell11']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell11"
+                                    value="<?php echo $param['yell11']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Security controls the crowd</b></td>
-                            <td><input class="form-control" type="text" name="yell12" value="<?php echo $param['yell12']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell12"
+                                    value="<?php echo $param['yell12']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Reception desk positioned at the main entrance of the hospital</b></td>
-                            <td><input class="form-control" type="text" name="yell13" value="<?php echo $param['yell13']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell13"
+                                    value="<?php echo $param['yell13']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Patient identification by the designated team member done</b></td>
-                            <td><input class="form-control" type="text" name="yell14" value="<?php echo $param['yell14']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell14"
+                                    value="<?php echo $param['yell14']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>First patient reported</b></td>
-                            <td><input class="form-control" type="text" name="initial_assessment_hr3" value="<?php echo $param['initial_assessment_hr3']; ?>"></td>
+                            <td><input class="form-control" type="text" name="initial_assessment_hr3"
+                                    value="<?php echo $param['initial_assessment_hr3']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Triaging Done</b></td>
-                            <td><input class="form-control" type="text" name="yell16" value="<?php echo $param['yell16']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell16"
+                                    value="<?php echo $param['yell16']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Patient shifted to ICU/OT</b></td>
-                            <td><input class="form-control" type="text" name="yell17" value="<?php echo $param['yell17']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell17"
+                                    value="<?php echo $param['yell17']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Patient shifted to disaster ward</b></td>
-                            <td><input class="form-control" type="text" name="yell18" value="<?php echo $param['yell18']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell18"
+                                    value="<?php echo $param['yell18']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Patient discharged by</b></td>
-                            <td><input class="form-control" type="text" name="initial_assessment_hr4" value="<?php echo $param['initial_assessment_hr4']; ?>"></td>
+                            <td><input class="form-control" type="text" name="initial_assessment_hr4"
+                                    value="<?php echo $param['initial_assessment_hr4']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Media handling done by spokes person</b></td>
-                            <td><input class="form-control" type="text" name="yell19" value="<?php echo $param['yell19']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell19"
+                                    value="<?php echo $param['yell19']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Blood bank in charge reported at the command nucleus</b></td>
-                            <td><input class="form-control" type="text" name="yell20" value="<?php echo $param['yell20']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell20"
+                                    value="<?php echo $param['yell20']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Dietician Reports at the command nucleus</b></td>
-                            <td><input class="form-control" type="text" name="yell21" value="<?php echo $param['yell21']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell21"
+                                    value="<?php echo $param['yell21']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Store in charge reports at the command nucleus</b></td>
-                            <td><input class="form-control" type="text" name="yell22" value="<?php echo $param['yell22']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell22"
+                                    value="<?php echo $param['yell22']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Pharmacy in charge reports at the command nucleus</b></td>
-                            <td><input class="form-control" type="text" name="yell23" value="<?php echo $param['yell23']; ?>"></td>
+                            <td><input class="form-control" type="text" name="yell23"
+                                    value="<?php echo $param['yell23']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Code Yellow called off at</b></td>
-                            <td><input class="form-control" type="text" name="initial_assessment_hr5" value="<?php echo $param['initial_assessment_hr5']; ?>"></td>
+                            <td><input class="form-control" type="text" name="initial_assessment_hr5"
+                                    value="<?php echo $param['initial_assessment_hr5']; ?>"></td>
                         </tr>
 
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="comments" value="<?php echo $param['comments']; ?>"></td>
+                            <td><input class="form-control" type="text" name="comments"
+                                    value="<?php echo $param['comments']; ?>"></td>
                         </tr>
 
 
                         <tr>
                             <td><b>Data collected by</b></td>
-                            <td><input class="form-control" type="text" name="name" value="<?php echo $row->name; ?>"></td>
+                            <td><input class="form-control" type="text" name="name" value="<?php echo $row->name; ?>">
+                            </td>
                         </tr>
                         <tr>
                             <td><b>Data collected on</b></td>
-                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
+                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected"
+                                    value="<?php echo $row->datetime; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Data collected on</b></td>
-                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
+                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected"
+                                    value="<?php echo $row->datetime; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Uploaded Files</b></td>
@@ -276,14 +311,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function() {
+                                    btn.addEventListener("click", function () {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -299,7 +334,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function() {
+                                addMoreBtn.addEventListener("click", function () {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -314,7 +349,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function() {
+                                    removeBtn.addEventListener("click", function () {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -332,7 +367,7 @@ $param = json_decode($row->dataset, true);
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">

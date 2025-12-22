@@ -71,7 +71,8 @@ $rolename = $role->role_name;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo md5($module); ?>" class="d-flex justify-content-between align-items-center">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo md5($module); ?>"
+                            class="d-flex justify-content-between align-items-center">
                             <?php echo $module; ?>
                             <span>
                                 <i class="fa fa-chevron-down rotate-icon"></i> <!-- Arrow icon -->
@@ -101,12 +102,15 @@ $rolename = $role->role_name;
 
                             // Loop through each section type and create a nested accordion
                             foreach ($sectionTypes as $type => $label) {
-                                if (empty($groupedFeatures[$type])) continue;
-                            ?>
+                                if (empty($groupedFeatures[$type]))
+                                    continue;
+                                ?>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#nestedAccordion<?php echo md5($module); ?>" href="#nestedCollapse<?php echo md5($module . $type); ?>" class="d-flex justify-content-between align-items-center">
+                                            <a data-toggle="collapse" data-parent="#nestedAccordion<?php echo md5($module); ?>"
+                                                href="#nestedCollapse<?php echo md5($module . $type); ?>"
+                                                class="d-flex justify-content-between align-items-center">
                                                 <?php echo $label; ?>
                                                 <span>
                                                     <i class="fa fa-chevron-down rotate-icon"></i> <!-- Arrow icon -->
@@ -119,7 +123,8 @@ $rolename = $role->role_name;
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th style="font-size: 16px; text-align: center;">Feature/ Functionality</th>
+                                                        <th style="font-size: 16px; text-align: center;">Feature/ Functionality
+                                                        </th>
                                                         <th style="font-size: 16px; text-align: center;">Manage Access</th>
                                                     </tr>
                                                 </thead>
@@ -129,14 +134,19 @@ $rolename = $role->role_name;
                                                             <td>
                                                                 <?php echo $featureRow['feature_description']; ?>
                                                                 <?php if (!empty($featureRow['feature_tooltip'])) { ?>
-                                                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
+                                                                    <i class="fa fa-info-circle" data-toggle="tooltip"
+                                                                        data-placement="right"
+                                                                        title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex justify-content-center">
                                                                     <div class="material-switch pull-left">
-                                                                        <input id="feature<?php echo $featureRow['feature_id']; ?>" name="feature[<?php echo $featureRow['feature_id']; ?>]" type="checkbox" <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
-                                                                        <label for="feature<?php echo $featureRow['feature_id']; ?>" class="label-success"></label>
+                                                                        <input id="feature<?php echo $featureRow['feature_id']; ?>"
+                                                                            name="feature[<?php echo $featureRow['feature_id']; ?>]"
+                                                                            type="checkbox" <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
+                                                                        <label for="feature<?php echo $featureRow['feature_id']; ?>"
+                                                                            class="label-success"></label>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -163,7 +173,7 @@ $rolename = $role->role_name;
 
         <div class="ui buttons">
 
-            <button type="reset" class="ui button"><?php echo display('reset') ?></button>
+            <button type="reset" class="ui button"><?php echo 'Reset'; ?></button>
 
             <div class="or"></div>
 
@@ -363,11 +373,11 @@ $rolename = $role->role_name;
     }
 </style>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const tabLinks = document.querySelectorAll('.nav-item.nav-link');
-        tabLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                tabLinks.forEach(function(link) {
+        tabLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                tabLinks.forEach(function (link) {
                     link.classList.remove('active');
                     link.style.color = 'grey'; // Reset all tab link colors to grey
                 });
@@ -417,7 +427,7 @@ $rolename = $role->role_name;
     }
 </style>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var typed = new Typed(".typing-text1", {
             strings: ["<?php echo $welcometext1; ?>"],
             // delay: 10,
@@ -429,7 +439,7 @@ $rolename = $role->role_name;
     });
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var typed = new Typed(".typing-text2", {
             strings: ["<?php echo $welcometext2; ?>"],
             // delay: 10,
@@ -440,18 +450,18 @@ $rolename = $role->role_name;
         });
     });
 
-    $(document).ready(function() {
-        $('#accordion .panel-collapse').on('shown.bs.collapse', function() {
+    $(document).ready(function () {
+        $('#accordion .panel-collapse').on('shown.bs.collapse', function () {
             $(this).prev().find('.arrow').html('&#9652;'); // Change to up arrow
         });
 
-        $('#accordion .panel-collapse').on('hidden.bs.collapse', function() {
+        $('#accordion .panel-collapse').on('hidden.bs.collapse', function () {
             $(this).prev().find('.arrow').html('&#9662;'); // Change to down arrow
         });
     });
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var typed = new Typed(".typing-text3", {
             strings: ["<?php echo $welcometext3; ?>"],
             // delay: 10,

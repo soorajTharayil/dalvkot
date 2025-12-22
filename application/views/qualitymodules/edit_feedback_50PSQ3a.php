@@ -15,8 +15,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;PSQ3a - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'ip_discharge_feedback_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;PSQ3a -
+                        <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -48,14 +50,25 @@ $param = json_decode($row->dataset, true);
                             <td>
                                 <div style="display: flex; flex-direction: row; align-items: center;">
                                     <span class="has-float-label">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_hr']; ?>" oninput="restrictToNumerals(event); calculateAdverseDrugReactionRate();" type="number" id="formula_para1_hr" style="padding-top: 2px; padding-left: 6px; margin-top: 9px; width: 90%;" />
-                                        <input class="form-control" style="display:none" name="initial_assessment_hr" value="<?php echo $param['initial_assessment_hr']; ?>" />
-                                        <input class="form-control" style="display:none" name="initial_assessment_min" value="<?php echo $param['initial_assessment_min']; ?>" />
-                                        <input class="form-control" style="display:none" name="initial_assessment_sec" value="<?php echo $param['initial_assessment_sec']; ?>" />
-                                        <input class="form-control" style="display:none" name="name" value="<?php echo $param['name']; ?>" />
-                                        <input class="form-control" style="display:none" name="patientid" value="<?php echo $param['patientid']; ?>" />
-                                        <input class="form-control" style="display:none" name="contactnumber" value="<?php echo $param['contactnumber']; ?>" />
-                                        <input class="form-control" style="display:none" name="email" value="<?php echo $param['email']; ?>" />
+                                        <input class="form-control"
+                                            value="<?php echo $param['initial_assessment_hr']; ?>"
+                                            oninput="restrictToNumerals(event); calculateAdverseDrugReactionRate();"
+                                            type="number" id="formula_para1_hr"
+                                            style="padding-top: 2px; padding-left: 6px; margin-top: 9px; width: 90%;" />
+                                        <input class="form-control" style="display:none" name="initial_assessment_hr"
+                                            value="<?php echo $param['initial_assessment_hr']; ?>" />
+                                        <input class="form-control" style="display:none" name="initial_assessment_min"
+                                            value="<?php echo $param['initial_assessment_min']; ?>" />
+                                        <input class="form-control" style="display:none" name="initial_assessment_sec"
+                                            value="<?php echo $param['initial_assessment_sec']; ?>" />
+                                        <input class="form-control" style="display:none" name="name"
+                                            value="<?php echo $param['name']; ?>" />
+                                        <input class="form-control" style="display:none" name="patientid"
+                                            value="<?php echo $param['patientid']; ?>" />
+                                        <input class="form-control" style="display:none" name="contactnumber"
+                                            value="<?php echo $param['contactnumber']; ?>" />
+                                        <input class="form-control" style="display:none" name="email"
+                                            value="<?php echo $param['email']; ?>" />
                                         <span style="margin-left: 4px; margin-right: 9px;"></span>
                                         <label for="para1"></label>
                                     </span>
@@ -65,9 +78,11 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Total no. of patients undergoing dialysis</b></td>
                             <td>
-                                <input class="form-control" type="number" id="total_admission" name="total_admission" value="<?php echo $param['total_admission']; ?>">
+                                <input class="form-control" type="number" id="total_admission" name="total_admission"
+                                    value="<?php echo $param['total_admission']; ?>">
                                 <br>
-                                <button type="button" class="btn btn-primary" onclick="calculateAdverseDrugReactionRate()">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="calculateAdverseDrugReactionRate()">
                                     <input type="hidden" id="formattedTime" name="formattedTime" value="">
 
 
@@ -86,22 +101,26 @@ $param = json_decode($row->dataset, true);
                         </tr>
                         <tr>
                             <td><b>Data analysis</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>" required></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>" required></td>
                         </tr>
                         <tr>
                             <td><b>Corrective action</b></td>
-                            <td><input class="form-control" type="text" name="correctiveAction" value="<?php echo $param['correctiveAction']; ?>" required></td>
+                            <td><input class="form-control" type="text" name="correctiveAction"
+                                    value="<?php echo $param['correctiveAction']; ?>" required></td>
                         </tr>
                         <tr>
                             <td><b>Preventive action</b></td>
-                            <td><input class="form-control" type="text" name="preventiveAction" value="<?php echo $param['preventiveAction']; ?>" required></td>
+                            <td><input class="form-control" type="text" name="preventiveAction"
+                                    value="<?php echo $param['preventiveAction']; ?>" required></td>
                         </tr>
 
 
 
                         <tr>
                             <td><b>Data collected on</b></td>
-                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected" value="<?php echo $row->datetime;  ?>"></td>
+                            <td><input class="datepickernotfuter form-control" type="text" name="dataCollected"
+                                    value="<?php echo $row->datetime; ?>"></td>
                         </tr>
                         <tr>
                             <td><b>Uploaded Files</b></td>
@@ -160,14 +179,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function() {
+                                    btn.addEventListener("click", function () {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -183,7 +202,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function() {
+                                addMoreBtn.addEventListener("click", function () {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -198,7 +217,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function() {
+                                    removeBtn.addEventListener("click", function () {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -214,11 +233,12 @@ $param = json_decode($row->dataset, true);
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
-                                        <button type="submit" id="saveButton" class="ui positive button" style="text-align: left;">
-                                            <?php echo display('save') ?>
+                                        <button type="submit" id="saveButton" class="ui positive button"
+                                            style="text-align: left;">
+                                            <?php echo 'Save' ; ?>
                                         </button>
                                     </div>
                                 </div>
@@ -259,7 +279,7 @@ $param = json_decode($row->dataset, true);
     }
 
     // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function() {
+    document.getElementById('saveButton').addEventListener('click', function () {
 
         if (checkValuesBeforeSubmit()) {
             // Proceed with save action

@@ -17,8 +17,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Urinary Catheter maintenance checklist - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Urinary Catheter
+                        maintenance checklist - <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -79,14 +81,14 @@ $param = json_decode($row->dataset, true);
                             <td>
                                 <select class="form-control" name="patient_gender">
                                     <option value="" <?php if (empty($param['patient_gender']))
-                                                            echo 'selected'; ?>>
+                                        echo 'selected'; ?>>
                                     </option>
                                     <option value="Male" <?php if ($param['patient_gender'] == 'Male')
-                                                                echo 'selected'; ?>>Male</option>
+                                        echo 'selected'; ?>>Male</option>
                                     <option value="Female" <?php if ($param['patient_gender'] == 'Female')
-                                                                echo 'selected'; ?>>Female</option>
+                                        echo 'selected'; ?>>Female</option>
                                     <option value="Other" <?php if ($param['patient_gender'] == 'Other')
-                                                                echo 'selected'; ?>>Other</option>
+                                        echo 'selected'; ?>>Other</option>
                                 </select>
                             </td>
                         </tr>
@@ -180,16 +182,16 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
                                 // Select all datetime pickers
                                 const pickers = document.querySelectorAll(".datetime-picker");
 
-                                pickers.forEach(function(input) {
+                                pickers.forEach(function (input) {
                                     // Dynamically restrict to current date/time as maximum
                                     input.max = new Date().toISOString().slice(0, 16);
 
                                     // Auto-open picker on click (modern browsers)
-                                    input.addEventListener("click", function() {
+                                    input.addEventListener("click", function () {
                                         if (this.showPicker) this.showPicker();
                                     });
                                 });
@@ -200,8 +202,8 @@ $param = json_decode($row->dataset, true);
 
                         <script>
                             // Force open calendar picker when clicking anywhere in the input box
-                            document.querySelectorAll('.datetime-picker').forEach(function(input) {
-                                input.addEventListener('click', function() {
+                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
+                                input.addEventListener('click', function () {
                                     this.showPicker(); // Opens the native calendar/clock popup
                                 });
                             });
@@ -227,7 +229,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are appropriate hand hygiene and gloves used while handling the catheter or drainage bag?</b></td>
+                            <td><b>Are appropriate hand hygiene and gloves used while handling the catheter or drainage
+                                    bag?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="hand_hygiene_gloves"
                                     value="<?php echo isset($param['vital_signs']) ? htmlspecialchars($param['vital_signs'], ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -271,7 +274,8 @@ $param = json_decode($row->dataset, true);
                                 <input class="form-control" type="text" name="catheter_urethral_hygiene"
                                     value="<?php echo isset($param['intake']) ? htmlspecialchars($param['intake'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="catheter_urethral_hygiene_text"
+                                    Remarks: <input class="form-control" type="text"
+                                        name="catheter_urethral_hygiene_text"
                                         value="<?php echo isset($param['intake_text']) ? htmlspecialchars($param['intake_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
                                         placeholder="Remarks">
                                 </div>
@@ -297,7 +301,8 @@ $param = json_decode($row->dataset, true);
                                 <input class="form-control" type="text" name="drainage_bag_below_bladder"
                                     value="<?php echo isset($param['allergies']) ? htmlspecialchars($param['allergies'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="drainage_bag_below_bladder_text"
+                                    Remarks: <input class="form-control" type="text"
+                                        name="drainage_bag_below_bladder_text"
                                         value="<?php echo isset($param['allergies_text']) ? htmlspecialchars($param['allergies_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
                                         placeholder="Remarks">
                                 </div>
@@ -305,12 +310,14 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are indwelling catheters or drainage bags changed only when clinically indicated and not at arbitrary fixed intervals?</b></td>
+                            <td><b>Are indwelling catheters or drainage bags changed only when clinically indicated and
+                                    not at arbitrary fixed intervals?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="catheter_change_indicated"
                                     value="<?php echo isset($param['medication']) ? htmlspecialchars($param['medication'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="catheter_change_indicated_text"
+                                    Remarks: <input class="form-control" type="text"
+                                        name="catheter_change_indicated_text"
                                         value="<?php echo isset($param['medication_text']) ? htmlspecialchars($param['medication_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
                                         placeholder="Remarks">
                                 </div>
@@ -318,12 +325,14 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>If there are breaks in aseptic technique, disconnection, or leakage, is the catheter replaced using aseptic technique and sterile equipment?</b></td>
+                            <td><b>If there are breaks in aseptic technique, disconnection, or leakage, is the catheter
+                                    replaced using aseptic technique and sterile equipment?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="catheter_breaks_replacement"
                                     value="<?php echo isset($param['diagnostic']) ? htmlspecialchars($param['diagnostic'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="catheter_breaks_replacement_text"
+                                    Remarks: <input class="form-control" type="text"
+                                        name="catheter_breaks_replacement_text"
                                         value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
                                         placeholder="Remarks">
                                 </div>
@@ -362,7 +371,8 @@ $param = json_decode($row->dataset, true);
                                 <input class="form-control" type="text" name="pain_discomfort_assessed"
                                     value="<?php echo isset($param['medicine_order']) ? htmlspecialchars($param['medicine_order'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="pain_discomfort_assessed_text"
+                                    Remarks: <input class="form-control" type="text"
+                                        name="pain_discomfort_assessed_text"
                                         value="<?php echo isset($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
                                         placeholder="Remarks">
                                 </div>
@@ -383,12 +393,14 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is the catheter inspected where it enters the meatus for encrusted material and drainage?</b></td>
+                            <td><b>Is the catheter inspected where it enters the meatus for encrusted material and
+                                    drainage?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="catheter_meatus_inspected"
                                     value="<?php echo isset($param['health_education']) ? htmlspecialchars($param['health_education'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="catheter_meatus_inspected_text"
+                                    Remarks: <input class="form-control" type="text"
+                                        name="catheter_meatus_inspected_text"
                                         value="<?php echo isset($param['health_education_text']) ? htmlspecialchars($param['health_education_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
                                         placeholder="Remarks">
                                 </div>
@@ -401,7 +413,8 @@ $param = json_decode($row->dataset, true);
                                 <input class="form-control" type="text" name="encrusted_materials_removed"
                                     value="<?php echo isset($param['risk_assessment']) ? htmlspecialchars($param['risk_assessment'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                                 <div style="margin-top:5px;">
-                                    Remarks: <input class="form-control" type="text" name="encrusted_materials_removed_text"
+                                    Remarks: <input class="form-control" type="text"
+                                        name="encrusted_materials_removed_text"
                                         value="<?php echo isset($param['risk_assessment_text']) ? htmlspecialchars($param['risk_assessment_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
                                         placeholder="Remarks">
                                 </div>
@@ -422,7 +435,8 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is it ensured that the tubing does not go in and out of the urethra during cleaning?</b></td>
+                            <td><b>Is it ensured that the tubing does not go in and out of the urethra during
+                                    cleaning?</b></td>
                             <td>
                                 <input class="form-control" type="text" name="tubing_stable"
                                     value="<?php echo isset($param['urine_sample']) ? htmlspecialchars($param['urine_sample'], ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -449,7 +463,8 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td><b>Additional comments</b></td>
-                            <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>
+                            <td><input class="form-control" type="text" name="dataAnalysis"
+                                    value="<?php echo $param['dataAnalysis']; ?>"></td>
                         </tr>
 
                         <tr>
@@ -509,14 +524,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
+                            document.addEventListener("DOMContentLoaded", function () {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function() {
+                                    btn.addEventListener("click", function () {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -532,7 +547,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function() {
+                                addMoreBtn.addEventListener("click", function () {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -547,7 +562,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function() {
+                                    removeBtn.addEventListener("click", function () {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -565,7 +580,7 @@ $param = json_decode($row->dataset, true);
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">
                                         <button type="reset" class="ui button">
-                                            <?php echo display('reset') ?>
+                                            <?php echo 'Reset'; ?>
                                         </button>
                                         <div class="or"></div>
                                         <button type="submit" class="ui positive button" style="text-align: left;">
