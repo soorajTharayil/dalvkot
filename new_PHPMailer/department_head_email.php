@@ -32,7 +32,7 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
     $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
     $message1 .= 'Best regards, <br /><br />';
-    $message1 .=  $hospitalname;
+    $message1 .= $hospitalname;
 
     $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
     $conn_g->query($query);
@@ -67,7 +67,7 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
     $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
     $message1 .= 'Best regards, <br /><br />';
-    $message1 .=  $hospitalname;
+    $message1 .= $hospitalname;
 
     $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
     $conn_g->query($query);
@@ -101,7 +101,7 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
     $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
     $message1 .= 'Best regards, <br /><br />';
-    $message1 .=  $hospitalname;
+    $message1 .= $hospitalname;
 
     $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
     $conn_g->query($query);
@@ -119,7 +119,8 @@ $feedback_int_result = mysqli_query($con, $feedback_int_query);
 while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
 
     $param_int = json_decode($feedback_int_object->dataset);
-    $ward_floor = $param_int->ward;
+
+    $ward_floor = $param_int->ward ?? null;
 
     $tickets_int_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' GROUP BY  department.description';
     $tickets_int_result = mysqli_query($con, $tickets_int_query);
@@ -340,7 +341,7 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
             }
         }
         if (isset($param_ip->suggestionText) && !empty($param_ip->suggestionText)) {
-            $message1 .=  '<br /><strong>General Comment:</strong>' . $param_ip->suggestionText . ' <br />';
+            $message1 .= '<br /><strong>General Comment:</strong>' . $param_ip->suggestionText . ' <br />';
         }
 
 
@@ -452,7 +453,7 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
             }
         }
         if (isset($param_op->suggestionText) && !empty($param_op->suggestionText)) {
-            $message1 .=  '<br /><strong>General Comment:</strong>' . $param_op->suggestionText . ' <br />';
+            $message1 .= '<br /><strong>General Comment:</strong>' . $param_op->suggestionText . ' <br />';
         }
         $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
@@ -461,15 +462,15 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         foreach ($user_list as $row) {
             $floor_wards = json_decode($row->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
-                $users_dept = get_user_by_sms_activity('OP-EMAIL-DEPTHEAD', $con);
-                if (!empty($users_dept)) {
-                    $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    $conn_g->query($query1);
+            $users_dept = get_user_by_sms_activity('OP-EMAIL-DEPTHEAD', $con);
+            if (!empty($users_dept)) {
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                $conn_g->query($query1);
 
-                    // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($ticketsop_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    // $conn_g->query($query2);
-                }
-            
+                // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($ticketsop_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                // $conn_g->query($query2);
+            }
+
         }
     }
 
