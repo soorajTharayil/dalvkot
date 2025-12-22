@@ -1,11 +1,12 @@
 <?php
 include("../env.php");
+ini_set('display_errors', 'Off');
 header('content-type: application/json; charset=utf-8');
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
-error_reporting(0);
+
 $active_group = 'default';
 $active_record = TRUE;
 
