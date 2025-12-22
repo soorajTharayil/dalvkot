@@ -1,6 +1,6 @@
 <?php
 echo 'hi';
-exit;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -84,7 +84,8 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     mysqli_query($con, $query);
 }
 
-
+echo 'hiioo';
+exit;
 
 //email to  admins(ip) for all feedback
 
