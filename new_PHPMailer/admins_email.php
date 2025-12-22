@@ -555,12 +555,14 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
 echo 'hiioolllmmm';
 
 //email to  admins(interim) when ticket is OPEN 
+echo 'jjjjjjjjjj';
 
 $Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
 $feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE admins_emailstatus = 0';
 $feedback_int_result = mysqli_query($con, $feedback_int_query);
 
 while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
+echo 'zzzz';
 
     $param_int = json_decode($feedback_int_object->dataset);
     $ward_floor = $feedback_int_object->ward;
@@ -574,6 +576,7 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
     $department = '';
     $message = '';
     while ($tickets_int_object = mysqli_fetch_object($tickets_int_result)) {
+echo 'xxxx';
 
         $tickets_int_generate = true;
         $number = $tickets_int_object->mobile;
