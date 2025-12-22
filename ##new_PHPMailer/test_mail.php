@@ -8,7 +8,16 @@
 
 
 include('../api/db.php');
-include('/var/www/html/globalconfig.php');
+include('/home/efeedor/globalconfig.php');
+include('email_template_helper.php');
+
+// Ensure UTF-8 encoding for database connections
+if (method_exists($conn_g, 'set_charset')) {
+    $conn_g->set_charset('utf8mb4');
+} else {
+    //$conn_g->query("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci'");
+}
+
 
 
 //email to  admins(ip) when ticket is OPEN 
@@ -84,15 +93,13 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
                 }
             }
             if ($param_ip->comment && !empty($param_ip->comment)) {
-
-                foreach ($param_ip->comment as $key2 => $value) {
-                    $message1 .= "<br /><strong> Comment: </strong>" . $value . " ";
-                }
+                $commentsHtml = EmailTemplateHelper::buildCommentsHtml($param_ip->comment);
+                $message1 .= $commentsHtml;
             }
         }
-        if (isset($param_ip->suggestionText) && !empty($param_ip->suggestionText)) {
-            $message1 .= '<br /><strong>General Comment:</strong>' . $param_ip->suggestionText . ' <br />';
-        }
+        // Fix encoding issue for General Comment - use helper function
+        $generalCommentHtml = EmailTemplateHelper::buildGeneralCommentHtml($param_ip->suggestionText ?? '');
+        $message1 .= $generalCommentHtml;
         $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br />' . $admins_ip_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message1 .= '<br /><br /><strong>Best Regards,</strong><br /><br />' . $hospitalname . ' ';
@@ -117,9 +124,15 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
             $permission = json_decode($user_object->departmentpermission);
             if ($permission->ippermission == 1) {
                 if ($permission->email_ticket_ip == 1) {
-
-                    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-                    $conn_g->query($query);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message2,
+                        $user_object->email,
+                        $Subject,
+                        $HID
+                    );
                 }
             }
         }
@@ -201,15 +214,13 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
                 }
             }
             if ($param_op->comment && !empty($param_op->comment)) {
-
-                foreach ($param_op->comment as $key2 => $value) {
-                    $message1 .= "<br /><strong> Comment: </strong>" . $value . " ";
-                }
+                $commentsHtml = EmailTemplateHelper::buildCommentsHtml($param_op->comment);
+                $message1 .= $commentsHtml;
             }
         }
-        if (isset($param_op->suggestionText) && !empty($param_op->suggestionText)) {
-            $message1 .= '<br /><strong>General Comment:</strong>' . $param_op->suggestionText . ' <br />';
-        }
+        // Fix encoding issue for General Comment - use helper function
+        $generalCommentHtml = EmailTemplateHelper::buildGeneralCommentHtml($param_op->suggestionText ?? '');
+        $message1 .= $generalCommentHtml;
         $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br />' . $admins_op_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message1 .= '<br /><br /><strong>Best Regards,</strong><br /><br />' . $hospitalname . ' ';
@@ -234,9 +245,15 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
             $permission = json_decode($user_object->departmentpermission);
             if ($permission->oppermission == 1) {
                 if ($permission->email_ticket_op == 1) {
-
-                    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-                    $conn_g->query($query);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message2,
+                        $user_object->email,
+                        $Subject,
+                        $HID
+                    );
                 }
             }
         }
@@ -336,9 +353,15 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
             if ($permission->inpermission == 1) {
 
                 if ($permission->email_ticket_int == 1) {
-
-                    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-                    $conn_g->query($query);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message2,
+                        $user_object->email,
+                        $Subject,
+                        $HID
+                    );
                 }
             }
         }
@@ -439,9 +462,15 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
             $permission = json_decode($user_object->departmentpermission);
             if ($permission->esrpermission == 1) {
                 if ($permission->email_ticket_esr == 1) {
-
-                    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-                    $conn_g->query($query);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message2,
+                        $user_object->email,
+                        $Subject,
+                        $HID
+                    );
                 }
             }
         }
@@ -518,15 +547,15 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             <td width="20%">' . $param_incident->priority . '</td>
         </tr>';
 
-        if ($param_incident->other) {
-            $message1 .= '
+if ($param_incident->other) {
+    $message1 .= '
         <tr>
             <td width="80%">Description</td>
             <td width="20%">' . $param_incident->other . '</td>
         </tr>';
-        }
+}
 
-        $message1 .= '
+$message1 .= '
         <tr>
             <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
         </tr>
@@ -562,8 +591,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             <td width="20%">' . $param_incident->email . '</td>
         </tr>';
 
-        if ($param_incident->tag_name) {
-            $message1 .= '
+if ($param_incident->tag_name) {
+    $message1 .= '
         <tr>
             <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
         </tr>
@@ -583,11 +612,11 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             <td width="80%">Mobile number</td>
             <td width="20%">' . $param_incident->tag_consultant . '</td>
         </tr>';
-        }
+}
 
-        $message1 .= '</table>';
+$message1 .= '</table>';
 
-
+     
 
         $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br /><br />' . $admins_incident_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
@@ -608,9 +637,15 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             $permission = json_decode($user_object->departmentpermission);
             if ($permission->incidentpermission == 1) {
                 if ($permission->email_ticket_incident == 1) {
-
-                    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-                    $conn_g->query($query);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message2,
+                        $user_object->email,
+                        $Subject,
+                        $HID
+                    );
                 }
             }
         }
@@ -662,7 +697,7 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
         //message1 will insert when there is only ONE TIKECT
         $message1 = 'Dear Team, <br /><br />';
         $message1 .= 'We would like to bring to your attention a recent grievance reported by an employee at ' . $hospitalname . '. Below are the grievance details: <br /><br />';
-
+       
 
         $message1 .= '
         <table border="1" cellpadding="5">
@@ -678,17 +713,17 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
                 <td width="80%">Grievance</td>
                 <td width="20%">' . $department_object->name . '</td>
             </tr>';
-
-
-        if ($param_grievance->other) {
-            $message1 .= '
+           
+    
+    if ($param_grievance->other) {
+        $message1 .= '
             <tr>
                 <td width="80%">Description</td>
                 <td width="20%">' . $param_grievance->other . '</td>
             </tr>';
-        }
-
-        $message1 .= '
+    }
+    
+    $message1 .= '
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Grievance reported in</b></td>
             </tr>
@@ -723,12 +758,12 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
                 <td width="80%">Email ID</td>
                 <td width="20%">' . $param_grievance->email . '</td>
             </tr>';
+    
+    
+    
+    $message1 .= '</table>';
 
-
-
-        $message1 .= '</table>';
-
-
+       
 
         $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br /><br />' . $admins_grievance_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
@@ -749,9 +784,15 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
             $permission = json_decode($user_object->departmentpermission);
             if ($permission->grievancepermission == 1) {
                 if ($permission->email_ticket_grievance == 1) {
-
-                    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-                    $conn_g->query($query);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message2,
+                        $user_object->email,
+                        $Subject,
+                        $HID
+                    );
                 }
             }
         }
@@ -820,7 +861,7 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
         $department_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' AND department.description="' . $tickets_int_object->description . '"';
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
-        $department_object = mysqli_fetch_object($department_result);
+        $department_object  = mysqli_fetch_object($department_result);
         $TID = $department_object->id;
         if ($department_rowcount > 1) {
             $k = 1;
@@ -833,13 +874,13 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
         $escilate_level_two_time = date("Y/m/d H:i:s", strtotime("+" . $tickets_int_object->close_time_l2 . " seconds"));
         $sql1 = 'SELECT mobile,email FROM user where user_id IN (' . implode(",", json_decode($escalation_object->level1_escalate_to)) . ')';
         $sql2 = 'SELECT mobile,email FROM user where user_id IN (' . implode(",", json_decode($escalation_object->level2_escalate_to)) . ')';
-        $escilate_level_one_to = mysqli_query($con, $sql1);
+        $escilate_level_one_to =  mysqli_query($con, $sql1);
         $escilate_to_one = array();
         $escilate_to_two = array();
         while ($e1 = mysqli_fetch_object($escilate_level_one_to)) {
             $escilate_to_one[] = $e1;
         }
-        $escilate_level_tow_to = mysqli_query($con, $sql2);
+        $escilate_level_tow_to =  mysqli_query($con, $sql2);
         while ($e1 = mysqli_fetch_object($escilate_level_tow_to)) {
             $escilate_to_two[] = $e1;
         }

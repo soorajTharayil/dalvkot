@@ -1,7 +1,15 @@
 <?php
 
 include('../api/db.php');
-include('/var/www/html/globalconfig.php');
+include('/home/efeedor/globalconfig.php');
+include('email_template_helper.php');
+
+// Ensure UTF-8 encoding for database connections
+if (method_exists($conn_g, 'set_charset')) {
+    $conn_g->set_charset('utf8mb4');
+} else {
+    //$conn_g->query("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci'");
+}
 
 //welcome email to patient with interim link
 $welcome_message_query = 'SELECT * FROM patients_from_admission WHERE email_status = 0';
@@ -13,21 +21,27 @@ while ($welcome_message_object = mysqli_fetch_object($welcome_message_result)) {
 
     $interim_link = $config_set['BASE_URL'] . 'pcf/?patient_id=' . $guid;
 
-    $Subject = 'Welcome to ' . $hospitalname . ': Your Comfort and Feedback Matter';
-    $message1 = 'Dear <strong>' . $name . '</strong>, <br /><br />';
-    $message1 .= 'Thank you for choosing ' . $hospitalname . ' for your healthcare needs. Your well-being is our top priority, and we want to ensure your stay is comfortable and meets your expectations.<br /><br />';
-    $message1 .= 'Should you encounter any issues or have any concerns during your stay, we encourage you to use the following link to register them:<br /><br />';
-    $message1 .= '<a href="' . $interim_link . '">Click here</a><br /><br />';
-    $message1 .= 'Your feedback is invaluable, and by sharing your concerns with us, you contribute to our continuous efforts to enhance the quality of our services.<br /><br />';
-    $message1 .= 'We appreciate your trust in us, and our dedicated team is here to address any needs or questions you may have. Wishing you a swift recovery and a positive experience at ' . $hospitalname . '.<br /><br />';
-    $message1 .= '<strong>Best Regards,</strong><br /><br />' . $hospitalname . ' ';
+    // Use template
+    $emailData = EmailTemplateHelper::render('patient.welcome', [
+        'name' => $name,
+        'hospitalname' => $hospitalname,
+        'interim_link' => $interim_link
+    ]);
 
-    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($welcome_message_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-    $conn_g->query($query);
+    // Insert notification with proper encoding
+    EmailTemplateHelper::insertNotification(
+        $conn_g,
+        'email',
+        $emailData['body'],
+        $welcome_message_object->email,
+        $emailData['subject'],
+        $HID
+    );
 
     $update_query = 'UPDATE patients_from_admission SET email_status = 1 WHERE id=' . $welcome_message_object->id;
     mysqli_query($con, $update_query);
 }
+
 //discharge email to patient with ip link
 $discharge_message_query = 'SELECT * FROM `patient_discharge` WHERE  email_status = 0';
 $discharge_message_result = mysqli_query($con, $discharge_message_query);
@@ -37,17 +51,22 @@ while ($discharge_message_object = mysqli_fetch_object($discharge_message_result
     $guid = $discharge_message_object->guid;
     $ip_link = $config_set['BASE_URL'] . 'ip/?patient_id=' . $guid;
 
-    $Subject = 'Your Opinion Matters: Share Your Feedback at ' . $hospitalname . '';
-    $message1 = 'Dear <strong>' . $name . '</strong>, <br /><br />';
-    $message1 .= 'Thank you for entrusting ' . $hospitalname . ' with your healthcare needs. We are committed to providing you with the best possible care to our patients.<br /><br />';
-    $message1 .= 'As part of our continuous improvement efforts, we invite you to share your valuable feedback by taking a few minutes to complete our feedback form.<br /><br />';
-    $message1 .= '<a href="' . $ip_link . '">Click here</a><br /><br />';
-    $message1 .= 'Your insights will contribute significantly to our ongoing efforts to enhance our services and ensure that we meet and exceed your expectations.<br /><br />';
-    $message1 .= 'We appreciate your time and commitment to helping us serve our patients better.<br /><br />';
-    $message1 .= '<strong>Best Regards,</strong><br /><br />' . $hospitalname . ' ';
+    // Use template
+    $emailData = EmailTemplateHelper::render('patient.discharge', [
+        'name' => $name,
+        'hospitalname' => $hospitalname,
+        'ip_link' => $ip_link
+    ]);
 
-    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($discharge_message_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-    $conn_g->query($query);
+    // Insert notification with proper encoding
+    EmailTemplateHelper::insertNotification(
+        $conn_g,
+        'email',
+        $emailData['body'],
+        $discharge_message_object->email,
+        $emailData['subject'],
+        $HID
+    );
 
     $update_query = 'UPDATE patient_discharge SET `email_status` = 1 WHERE id=' . $discharge_message_object->id;
     mysqli_query($con, $update_query);
