@@ -1,6 +1,6 @@
 <?php
 include('env.php');
-include('/home/efeedor/globalconfig.php');
+include('/var/www/html/globalconfig.php');
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
@@ -111,7 +111,7 @@ echo "\n";
 echo "\n";
 echo "\n";
 
-echo "Total user creation messages pending: ". $pen_user_notification_count . "\n";
+echo "Total user creation messages pending: " . $pen_user_notification_count . "\n";
 echo "Total patient messages pending: " . $pen_patient_message . "\n";
 echo "Total alerts pending for department heads: " . $pen_department_message . "\n";
 echo "Total alerts pending for admins: " . $pen_admins_message . "\n";

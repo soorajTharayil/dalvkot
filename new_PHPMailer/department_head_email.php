@@ -1,16 +1,23 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 //email to department head(ip) when ticket is OPEN            
 //email to department head(op) when ticket is OPEN            
 //email to department head(interim) when ticket is OPEN       
 //email to  department head(isr) when ticket is OPEN          
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 include('../api/db.php');
 include('/var/www/html/globalconfig.php');
 include('get_user.php');
+include('email_template_helper.php');
+
+// Ensure UTF-8 encoding for database connections
+if (method_exists($conn_g, 'set_charset')) {
+    $conn_g->set_charset('utf8mb4');
+} else {
+    //$conn_g->query("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci'");
+}
+
 //email to department head  when they are created 
 
 $user_query = 'SELECT * FROM `user` WHERE `departmenthead_email` = 0  AND `user_role` = 4';
@@ -22,24 +29,24 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    $Subject = 'Welcome to Efeedor - Your Account is Now Active!';
-    $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
-    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at  <b>' . $hospitalname . '</b> . You can now access the dashboard to review concerns raised for your departments, take relevant actions, and receive alerts to ensure smooth service resolution. <br /><br />';
-    $message1 .= 'Getting Started: <br /><br />';
-    $message1 .= 'Access the Dashboard: ' . $link . ' <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Important: For security purposes, please update your default password in the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
-    $message1 .= 'To familiarize yourself with the application and understand how to address concerns efficiently, we recommend reviewing the guide below: <br />';
-    $message1 .= 'Ticket Closing Guide: https://rebrand.ly/Efeedor_Ticket_Closing_Guide  <br /><br />';
-    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
-    $message1 .= $hospitalname;
+    // Use template
+    $emailData = EmailTemplateHelper::render('department_head.welcome_role4', [
+        'name' => $name,
+        'hospitalname' => $hospitalname,
+        'link' => $link,
+        'email' => $email,
+        'password' => $password
+    ]);
 
-    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-    $conn_g->query($query);
+    // Insert notification with proper encoding
+    EmailTemplateHelper::insertNotification(
+        $conn_g,
+        'email',
+        $emailData['body'],
+        $user_object->email,
+        $emailData['subject'],
+        $HID
+    );
 
     $query = 'UPDATE user SET `departmenthead_email` = 1 WHERE user_id=' . $user_object->user_id;
     mysqli_query($con, $query);
@@ -54,31 +61,29 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    $Subject = 'Welcome to Efeedor - Your Account is Now Active!';
-    $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
-    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b>  You can now collect patient feedback using the Efeedor Mobile App with the credentials provided below: <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Alternatively, you can use the following link and the same credentials to log in and record data: <br /><br />';
-    $message1 .= 'Web Link: <a href="' . $link . '/form_login">' . $link . '/form_login</a> <br /><br />';
-    $message1 .= 'Learn How to Collect Patient Feedback <br /><br />';
-    $message1 .= 'To familiarize yourself with collecting patient feedback, complaints, and requests, we recommend reviewing the manuals below: <br />';
-    $message1 .= 'Patient Feedback System Manual:  <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Patient_Feedback_System_Manual <br />';
-    $message1 .= 'Patient Complaint System Manual:  <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Patient_Compliant_System_Manual<br />';
-    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
-    $message1 .= $hospitalname;
+    // Use template
+    $emailData = EmailTemplateHelper::render('department_head.welcome_role8', [
+        'name' => $name,
+        'hospitalname' => $hospitalname,
+        'link' => $link,
+        'email' => $email,
+        'password' => $password
+    ]);
 
-    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-    $conn_g->query($query);
+    // Insert notification with proper encoding
+    EmailTemplateHelper::insertNotification(
+        $conn_g,
+        'email',
+        $emailData['body'],
+        $user_object->email,
+        $emailData['subject'],
+        $HID
+    );
 
     $query = 'UPDATE user SET `departmenthead_email` = 1 WHERE user_id=' . $user_object->user_id;
     mysqli_query($con, $query);
 }
+
 
 $user_query = 'SELECT * FROM `user` WHERE `departmenthead_email` = 0  AND `user_role` = 10';
 $user_result = mysqli_query($con, $user_query);
@@ -89,182 +94,74 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    $Subject = ' Welcome to Efeedor - Your Account is Now Active!';
-    $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
-    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b> .You can now raise concerns such as internal service requests and incident reports using the link below: <br /><br />';
-    $message1 .= 'Web Link: <a href="' . $link . '/form_login">' . $link . '/form_login</a> <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Alternatively, you can also use the Efeedor Android mobile app with the same credentials to log in, record data, and monitor activity on the go. <br /><br />';
-    $message1 .= 'To familiarize yourself with submitting internal service requests, reporting incidents, and collecting feedback, we recommend reviewing the manuals below: <br />';
-    $message1 .= 'Internal Service Request Manual:  <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Internal_Service_Request_Manual <br />';
-    $message1 .= 'Incident Reporting System Manual: <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Incident_Reporting_System_Manual <br />';
-    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
-    $message1 .= $hospitalname;
+    // Use template
+    $emailData = EmailTemplateHelper::render('department_head.welcome_role10', [
+        'name' => $name,
+        'hospitalname' => $hospitalname,
+        'link' => $link,
+        'email' => $email,
+        'password' => $password
+    ]);
 
-    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-    $conn_g->query($query);
+    // Insert notification with proper encoding
+    EmailTemplateHelper::insertNotification(
+        $conn_g,
+        'email',
+        $emailData['body'],
+        $user_object->email,
+        $emailData['subject'],
+        $HID
+    );
 
     $query = 'UPDATE user SET `departmenthead_email` = 1 WHERE user_id=' . $user_object->user_id;
     mysqli_query($con, $query);
 }
 
-//email to department head(interim) when ticket is OPEN  
-echo 'hi';
-$Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
-$feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE departmenthead_emailstatus = 0';
-$feedback_int_result = mysqli_query($con, $feedback_int_query);
 
-while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
+$Subject = 'Appreciation Received for Your Department';
+$feedback_query = 'SELECT * FROM  bf_feedback  WHERE manual_department_emailstatus = 0';
+$feedback_result = mysqli_query($con, $feedback_query);
 
-    $param_int = json_decode($feedback_int_object->dataset);
+while ($feedback_object = mysqli_fetch_object($feedback_result)) {
+    $param_ip = json_decode($feedback_object->dataset);
+    // Fix encoding issue - use helper function for proper UTF-8 handling
+    $commentfeed = isset($param_ip->suggestionText) ? $param_ip->suggestionText : '';
 
-    $ward_floor = $param_int->ward ?? null;
+    // Use template
+    $emailData = EmailTemplateHelper::render('department_head.appreciation', [
+        'comment' => EmailTemplateHelper::escapeHtml($commentfeed),
+        'hospitalname' => $hospitalname
+    ]);
 
-    $tickets_int_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' GROUP BY  department.description';
-    $tickets_int_result = mysqli_query($con, $tickets_int_query);
-    $tickets_int_rowcount = mysqli_num_rows($tickets_int_result);
-    $tickets_int_generate = false;
-    $total_int_ticket = 0;
-    $department = '';
-    $message = '';
-    while ($tickets_int_object = mysqli_fetch_object($tickets_int_result)) {
+    // Get the list of assigned users
+    $assign_by_users = explode(',', $feedback_object->manual_department_email_to);
 
-        $tickets_int_generate = true;
-        $number = $tickets_int_object->mobile;
-        $department = $tickets_int_object->description;
-        echo 'nn';
-        echo 'mm';
-        $department_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' AND department.description="' . $tickets_int_object->description . '"';
-        $department_result = mysqli_query($con, $department_query);
-        $department_rowcount = mysqli_num_rows($department_result);
-        $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
-        if ($department_rowcount > 1) {
-            $k = 1;
-        } else {
-            $k = '';
+    foreach ($assign_by_users as $user_id) {
+        $user_query = "SELECT * FROM user WHERE user_id = $user_id";
+        $user_result = mysqli_query($con, $user_query);
+
+        if ($user_row = mysqli_fetch_object($user_result)) {
+            $email = $user_row->email;
+            // Use helper function for proper UTF-8 encoding
+            EmailTemplateHelper::insertNotification(
+                $conn_g,
+                'email',
+                $emailData['body'],
+                $email,
+                $emailData['subject'],
+                $HID
+            );
         }
-
-
-        $TID = $department_object->id;
-        $department_head_link = $config_set['BASE_URL'] . 'pc/track/' . $TID;   //pointing to public_html/ticket
-        $keys = array();
-        $res = array();
-        $titles = array();
-        $zz = array();
-        echo 'la';
-        $message1 = 'Dear Team, <br /><br />';
-        echo 'ba';
-
-        $message1 .= 'We would like to bring to your attention a recent complaint reported by an inpatient at ' . $hospitalname . '. Below are the ticket details: <br /><br />';
-
-        $message1 .= '
-        <table border="1" cellpadding="5">
-            <tr>
-              <td colspan="2" style="text-align:center;"><b>Complaint reported on</b></td>
-           </tr>
-            <tr>
-              <td width="80%">Time & Date</td>
-              <td width="20%">' . $created_on . '</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Complaint details</b></td>
-            </tr>
-           
-            <tr>
-                <td width="80%">Category</td>
-                <td width="20%">' . $department . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Complaint</td>
-                <td width="20%">' . $department_object->name . '</td>
-            </tr>';
-
-
-        if ($param_int->other) {
-            $message1 .= '
-            <tr>
-                <td width="80%">Description</td>
-                <td width="20%">' . $param_int->other . '</td>
-            </tr>';
-        }
-
-        $message1 .= '
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Complaint raised in </b></td>
-            </tr>
-            <tr>
-                <td width="80%">Floor/Ward</td>
-                <td width="20%">' . $feedback_int_object->ward . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Site</td>
-                <td width="20%">' . $feedback_int_object->bed_no . '</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center;"><b>Complaint raised by</b></td>
-            </tr>
-            <tr>
-                <td width="80%">Patient name</td>
-                <td width="20%">' . $param_int->name . '</td>
-            </tr>
-              <tr>
-                <td width="80%">Source</td>
-                <td width="20%">' . $feedback_int_object->source . '</td>
-            </tr>
-            <tr>
-                <td width="80%">Patient UHID</td>
-                <td width="20%">' . $param_int->patientid . '</td>
-            </tr>
-          
-            <tr>
-                <td width="80%">Mobile number</td>
-                <td width="20%">' . $param_int->contactnumber . '</td>
-            </tr>
-            
-            <tr>
-                <td width="80%">Assigned to</td>
-                <td width="20%">' . $department_object->pname . '</td>
-            </tr>';
-
-
-
-        $message1 .= '</table>';
-
-
-        $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
-        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
-        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
-        $user_list = get_user_by_question($tickets_int_object->slug, $con);
-        echo 'mooo';
-        foreach ($user_list as $row) {
-            $floor_wards = json_decode($row->floor_ward, true);
-            // Check if $patient_ward matches any value in $floor_wards
-            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
-                $users_dept = get_user_by_sms_activity('PCF-EMAIL-DEPTHEAD', $con);
-                if (!empty($users_dept)) {
-                    $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    $conn_g->query($query1);
-
-                    // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_int_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    // $conn_g->query($query2);
-                }
-            }
-        }
-        echo 'naa';
     }
 
-    echo 'bo';
-
-    $update_query = 'Update bf_feedback_int set departmenthead_emailstatus = 1 WHERE id=' . $feedback_int_object->id;
+    $update_query = 'Update bf_feedback set manual_department_emailstatus = 1 WHERE id=' . $feedback_object->id;
     mysqli_query($con, $update_query);
+
+
 }
+
+
+
 
 //email to department head(ip) when ticket is OPEN  
 
@@ -345,9 +242,9 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
                 }
             }
         }
-        if (isset($param_ip->suggestionText) && !empty($param_ip->suggestionText)) {
-            $message1 .= '<br /><strong>General Comment:</strong>' . $param_ip->suggestionText . ' <br />';
-        }
+        // Fix encoding issue for General Comment - use helper function
+        $generalCommentHtml = EmailTemplateHelper::buildGeneralCommentHtml($param_ip->suggestionText ?? '');
+        $message1 .= $generalCommentHtml;
 
 
         $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
@@ -363,8 +260,15 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
             if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
                 $users_dept = get_user_by_sms_activity('IP-EMAIL-DEPTHEAD', $con);
                 if (!empty($users_dept)) {
-                    $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_row->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-                    $conn_g->query($query1);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message1,
+                        $user_row->email,
+                        $Subject,
+                        $HID
+                    );
 
                     // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($tickets_object->alternate_email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
                     // $conn_g->query($query2);
@@ -385,7 +289,9 @@ $feedbackop_query = 'SELECT * FROM  bf_outfeedback  WHERE departmenthead_emailst
 $feedbackop_result = mysqli_query($con, $feedbackop_query);
 
 while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
-    $param_op = json_decode($feedbackop_object->dataset);
+    //$param_op = json_decode($feedbackop_object->dataset);
+    print_r($feedbackop_object);
+    $param_op = json_decode($feedbackop_object->dataset, false, 512, JSON_UNESCAPED_UNICODE);
     $ward_floor = $param_op->ward;
 
     $ticketsop_query = 'SELECT * FROM  ticketsop  inner JOIN department ON department.dprt_id = ticketsop.departmentid   WHERE  feedbackid = ' . $feedbackop_object->id . ' GROUP BY  department.description';
@@ -457,25 +363,37 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
                 }
             }
         }
-        if (isset($param_op->suggestionText) && !empty($param_op->suggestionText)) {
-            $message1 .= '<br /><strong>General Comment:</strong>' . $param_op->suggestionText . ' <br />';
-        }
+        // Fix encoding issue for General Comment - use helper function
+        $generalCommentHtml = EmailTemplateHelper::buildGeneralCommentHtml($param_op->suggestionText ?? '');
+        $message1 .= $generalCommentHtml;
         $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+
         $user_list = get_user_by_question($ticketsop_object->slug, $con);
         foreach ($user_list as $row) {
             $floor_wards = json_decode($row->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
-            $users_dept = get_user_by_sms_activity('OP-EMAIL-DEPTHEAD', $con);
-            if (!empty($users_dept)) {
-                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                $conn_g->query($query1);
+            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
+                $users_dept = get_user_by_sms_activity('OP-EMAIL-DEPTHEAD', $con);
+                if (!empty($users_dept)) {
+                    //$query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                    //$conn_g->query($query1);
+                    $query1 = sprintf(
+                        'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) 
+                             VALUES ("email", "%s", 0, "%s", "%s", "%s")',
+                        $conn_g->real_escape_string($message1),
+                        $conn_g->real_escape_string($row->email),
+                        $conn_g->real_escape_string($Subject),
+                        $conn_g->real_escape_string($HID)
+                    );
 
-                // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($ticketsop_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                // $conn_g->query($query2);
+                    $conn_g->query($query1);
+
+                    // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($ticketsop_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                    // $conn_g->query($query2);
+                }
             }
-
         }
     }
 
@@ -483,7 +401,150 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
     mysqli_query($con, $update_query);
 }
 
+//email to department head(interim) when ticket is OPEN  
 
+$Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
+$feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE departmenthead_emailstatus = 0';
+$feedback_int_result = mysqli_query($con, $feedback_int_query);
+
+while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
+    $param_int = json_decode($feedback_int_object->dataset);
+    $ward_floor = $param_int->ward;
+
+    $tickets_int_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' GROUP BY  department.description';
+    $tickets_int_result = mysqli_query($con, $tickets_int_query);
+    $tickets_int_rowcount = mysqli_num_rows($tickets_int_result);
+    $tickets_int_generate = false;
+    $total_int_ticket = 0;
+    $department = '';
+    $message = '';
+    while ($tickets_int_object = mysqli_fetch_object($tickets_int_result)) {
+
+        $tickets_int_generate = true;
+        $number = $tickets_int_object->mobile;
+        $department = $tickets_int_object->description;
+        $department_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' AND department.description="' . $tickets_int_object->description . '"';
+        $department_result = mysqli_query($con, $department_query);
+        $department_rowcount = mysqli_num_rows($department_result);
+        $department_object = mysqli_fetch_object($department_result);
+        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        if ($department_rowcount > 1) {
+            $k = 1;
+        } else {
+            $k = '';
+        }
+
+
+        $TID = $department_object->id;
+        $department_head_link = $config_set['BASE_URL'] . 'pc/track/' . $TID;   //pointing to public_html/ticket
+        $keys = array();
+        $res = array();
+        $titles = array();
+        $zz = array();
+        $message1 = 'Dear Team, <br /><br />';
+        $message1 .= 'We would like to bring to your attention a recent complaint reported by an inpatient at ' . $hospitalname . '. Below are the ticket details: <br /><br />';
+
+        $message1 .= '
+        <table border="1" cellpadding="5">
+            <tr>
+              <td colspan="2" style="text-align:center;"><b>Complaint reported on</b></td>
+           </tr>
+            <tr>
+              <td width="40%">Time & Date</td>
+              <td width="60%">' . $created_on . '</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Complaint details</b></td>
+            </tr>
+           
+            <tr>
+                <td width="40%">Category</td>
+                <td width="60%">' . $department . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Complaint</td>
+                <td width="60%">' . $department_object->name . '</td>
+            </tr>';
+
+
+        if ($param_int->other) {
+            $message1 .= '
+            <tr>
+                <td width="40%">Description</td>
+                <td width="60%">' . $param_int->other . '</td>
+            </tr>';
+        }
+
+        $message1 .= '
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Complaint raised in </b></td>
+            </tr>
+            <tr>
+                <td width="40%">Floor/Ward</td>
+                <td width="60%">' . $feedback_int_object->ward . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Site</td>
+                <td width="60%">' . $feedback_int_object->bed_no . '</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Complaint raised by</b></td>
+            </tr>
+            <tr>
+                <td width="40%">Patient name</td>
+                <td width="60%">' . $param_int->name . '</td>
+            </tr>
+              <tr>
+                <td width="40%">Source</td>
+                <td width="60%">' . $feedback_int_object->source . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Patient UHID</td>
+                <td width="60%">' . $param_int->patientid . '</td>
+            </tr>
+          
+            <tr>
+                <td width="40%">Mobile number</td>
+                <td width="60%">' . $param_int->contactnumber . '</td>
+            </tr>
+            
+            ';
+
+
+
+        $message1 .= '</table>';
+
+
+        $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+        $user_list = get_user_by_question($tickets_int_object->slug, $con);
+        foreach ($user_list as $row) {
+            $floor_wards = json_decode($row->floor_ward, true);
+            // Check if $patient_ward matches any value in $floor_wards
+            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
+                $users_dept = get_user_by_sms_activity('PCF-EMAIL-DEPTHEAD', $con);
+                if (!empty($users_dept)) {
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message1,
+                        $row->email,
+                        $Subject,
+                        $HID
+                    );
+
+                    // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_int_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                    // $conn_g->query($query2);
+                }
+            }
+        }
+    }
+
+    $update_query = 'Update bf_feedback_int set departmenthead_emailstatus = 1 WHERE id=' . $feedback_int_object->id;
+    mysqli_query($con, $update_query);
+}
 
 //email to department head(isr) when ticket is OPEN  
 
@@ -535,31 +596,31 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
                 <td colspan="2" style="text-align:center;"><b>Request reported on</b></td>
              </tr>
               <tr>
-                <td width="80%">Time & Date</td>
-                <td width="20%">' . $created_on . '</td>
+                <td width="40%">Time & Date</td>
+                <td width="60%">' . $created_on . '</td>
               </tr>
               <tr>
                   <td colspan="2" style="text-align:center;"><b>Service request details</b></td>
               </tr>
              
               <tr>
-                  <td width="80%">Category</td>
-                  <td width="20%">' . $department . '</td>
+                  <td width="40%">Category</td>
+                  <td width="60%">' . $department . '</td>
               </tr>
               <tr>
-                  <td width="80%">Service request</td>
-                  <td width="20%">' . $department_object->name . '</td>
+                  <td width="40%">Service request</td>
+                  <td width="60%">' . $department_object->name . '</td>
               </tr>
               <tr>
-                  <td width="80%">Priority</td>
-                  <td width="20%">' . $param_isr->priority . '</td>
+                  <td width="40%">Priority</td>
+                  <td width="60%">' . $param_isr->priority . '</td>
               </tr>';
 
         if ($param_isr->other) {
             $message1 .= '
               <tr>
-                  <td width="80%">Description</td>
-                  <td width="20%">' . $param_isr->other . '</td>
+                  <td width="40%">Description</td>
+                  <td width="60%">' . $param_isr->other . '</td>
               </tr>';
         }
 
@@ -568,40 +629,37 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
                   <td colspan="2" style="text-align:center;"><b>Request reported in</b></td>
               </tr>
               <tr>
-                  <td width="80%">Floor/Ward</td>
-                  <td width="20%">' . $feedback_isr_object->ward . '</td>
+                  <td width="40%">Floor/Ward</td>
+                  <td width="60%">' . $feedback_isr_object->ward . '</td>
               </tr>
               <tr>
-                  <td width="80%">Site</td>
-                  <td width="20%">' . $feedback_isr_object->bed_no . '</td>
+                  <td width="40%">Site</td>
+                  <td width="60%">' . $feedback_isr_object->bed_no . '</td>
               </tr>
               <tr>
                   <td colspan="2" style="text-align:center;"><b>Request reported by</b></td>
               </tr>
               <tr>
-                  <td width="80%">Employee name</td>
-                  <td width="20%">' . $param_isr->name . '</td>
+                  <td width="40%">Employee name</td>
+                  <td width="60%">' . $param_isr->name . '</td>
               </tr>
               <tr>
-                  <td width="80%">Employee ID</td>
-                  <td width="20%">' . $param_isr->patientid . '</td>
+                  <td width="40%">Employee ID</td>
+                  <td width="60%">' . $param_isr->patientid . '</td>
               </tr>
               <tr>
-                  <td width="80%">Employee role</td>
-                  <td width="20%">' . $param_isr->role . '</td>
+                  <td width="40%">Employee role</td>
+                  <td width="60%">' . $param_isr->role . '</td>
               </tr>
               <tr>
-                  <td width="80%">Mobile number</td>
-                  <td width="20%">' . $param_isr->contactnumber . '</td>
+                  <td width="40%">Mobile number</td>
+                  <td width="60%">' . $param_isr->contactnumber . '</td>
               </tr>
               <tr>
-                  <td width="80%">Email ID</td>
-                  <td width="20%">' . $param_isr->email . '</td>
+                  <td width="40%">Email ID</td>
+                  <td width="60%">' . $param_isr->email . '</td>
               </tr>
-              <tr>
-                  <td width="80%">Assigned to</td>
-                  <td width="20%">' . $department_object->pname . '</td>
-              </tr>';
+             ';
 
 
 
@@ -617,8 +675,15 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
             if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
                 $users_dept = get_user_by_sms_activity('ISR-EMAIL-DEPTHEAD', $con);
                 if (!empty($users_dept)) {
-                    $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    $conn_g->query($query1);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message1,
+                        $row->email,
+                        $Subject,
+                        $HID
+                    );
 
                     // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_isr_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
                     // $conn_g->query($query2);
@@ -683,34 +748,45 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
              </tr>
               <tr>
-                <td width="80%">Time & Date</td>
-                <td width="20%">' . $created_on . '</td>
+                <td width="40%">Time & Date</td>
+                <td width="60%">' . $created_on . '</td>
               </tr>
               <tr>
-                  <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
-              </tr>
+                 <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+             </tr>
               <tr>
-                  <td width="80%">Incident type</td>
-                  <td width="20%">' . $param_incident->incident_type . '</td>
-              </tr>
+                 <td width="40%">Incident</td>
+                 <td width="60%">' . $department_object->name . '</td>
+             </tr>
               <tr>
-                  <td width="80%">Category</td>
-                  <td width="20%">' . $department . '</td>
-              </tr>
+                 <td width="40%">Category</td>
+                 <td width="60%">' . $department . '</td>
+             </tr>
               <tr>
-                  <td width="80%">Incident</td>
-                  <td width="20%">' . $department_object->name . '</td>
-              </tr>
+                 <td width="40%">Incident Occured On</td>
+                 <td width="60%">' . $department_object->incident_occured_in . '</td>
+             </tr>
+            
               <tr>
-                  <td width="80%">Priority</td>
-                  <td width="20%">' . $param_incident->priority . '</td>
-              </tr>';
+                 <td width="40%">Assigned Risk</td>
+                 <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Assigned Priority</td>
+                 <td width="60%">' . $param_incident->priority . '</td>
+             </tr>
+             <tr>
+                 <td width="40%">Assigned Severity</td>
+                 <td width="60%">' . $param_incident->incident_type . '</td>
+             </tr>
+            
+            ';
 
         if ($param_incident->other) {
             $message1 .= '
               <tr>
-                  <td width="80%">Description</td>
-                  <td width="20%">' . $param_incident->other . '</td>
+                  <td width="40%">Description</td>
+                  <td width="60%">' . $param_incident->other . '</td>
               </tr>';
         }
 
@@ -719,40 +795,37 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                   <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
               </tr>
               <tr>
-                  <td width="80%">Floor/Ward</td>
-                  <td width="20%">' . $feedback_incident_object->ward . '</td>
+                  <td width="40%">Floor/Ward</td>
+                  <td width="60%">' . $feedback_incident_object->ward . '</td>
               </tr>
               <tr>
-                  <td width="80%">Site</td>
-                  <td width="20%">' . $feedback_incident_object->bed_no . '</td>
+                  <td width="40%">Site</td>
+                  <td width="60%">' . $feedback_incident_object->bed_no . '</td>
               </tr>
               <tr>
                   <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
               </tr>
               <tr>
-                  <td width="80%">Employee name</td>
-                  <td width="20%">' . $param_incident->name . '</td>
+                  <td width="40%">Employee name</td>
+                  <td width="60%">' . $param_incident->name . '</td>
               </tr>
               <tr>
-                  <td width="80%">Employee ID</td>
-                  <td width="20%">' . $param_incident->patientid . '</td>
+                  <td width="40%">Employee ID</td>
+                  <td width="60%">' . $param_incident->patientid . '</td>
               </tr>
               <tr>
-                  <td width="80%">Employee role</td>
-                  <td width="20%">' . $param_incident->role . '</td>
+                  <td width="40%">Employee role</td>
+                  <td width="60%">' . $param_incident->role . '</td>
               </tr>
               <tr>
-                  <td width="80%">Mobile number</td>
-                  <td width="20%">' . $param_incident->contactnumber . '</td>
+                  <td width="40%">Mobile number</td>
+                  <td width="60%">' . $param_incident->contactnumber . '</td>
               </tr>
               <tr>
-                  <td width="80%">Email ID</td>
-                  <td width="20%">' . $param_incident->email . '</td>
+                  <td width="40%">Email ID</td>
+                  <td width="60%">' . $param_incident->email . '</td>
               </tr>
-              <tr>
-                  <td width="80%">Assigned to</td>
-                  <td width="20%">' . $department_object->pname . '</td>
-              </tr>';
+             ';
 
         if ($param_incident->tag_name) {
             $message1 .= '
@@ -760,21 +833,14 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                   <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
               </tr>
               <tr>
-                  <td width="80%">Patient name</td>
-                  <td width="20%">' . $param_incident->tag_name . '</td>
+                  <td width="40%">Patient name</td>
+                  <td width="60%">' . $param_incident->tag_name . '</td>
               </tr>
               <tr>
-                  <td width="80%">Patient ID</td>
-                  <td width="20%">' . $param_incident->tag_patientid . '</td>
+                  <td width="40%">Patient ID</td>
+                  <td width="60%">' . $param_incident->tag_patientid . '</td>
               </tr>
-              <tr>
-                  <td width="80%">Patient type</td>
-                  <td width="20%">' . $param_incident->tag_patient_type . '</td>
-              </tr>
-              <tr>
-                  <td width="80%">Mobile number</td>
-                  <td width="20%">' . $param_incident->tag_consultant . '</td>
-              </tr>';
+            ';
         }
 
         $message1 .= '</table>';
@@ -789,8 +855,15 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
                 $users_dept = get_user_by_sms_activity('INC-EMAIL-DEPTHEAD', $con);
                 if (!empty($users_dept)) {
-                    $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
-                    $conn_g->query($query1);
+                    // Use helper function for proper UTF-8 encoding
+                    EmailTemplateHelper::insertNotification(
+                        $conn_g,
+                        'email',
+                        $message1,
+                        $row->email,
+                        $Subject,
+                        $HID
+                    );
 
                     // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_incident_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
                     // $conn_g->query($query2);
@@ -803,23 +876,179 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
     mysqli_query($con, $update_query);
 }
 
+//email to department head(grievance) when ticket is OPEN  
+
+$Subject = 'Urgent: Grievance reported by an Employee at ' . $hospitalname . ' - Action Required';
+$feedback_grievance_query = 'SELECT * FROM  bf_feedback_grievance  WHERE departmenthead_emailstatus = 0';
+$feedback_grievance_result = mysqli_query($con, $feedback_grievance_query);
+
+while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_result)) {
+
+    $param_grievance = json_decode($feedback_grievance_object->dataset);
+    $ward_floor = $param_grievance->ward;
+
+    $tickets_grievance_query = 'SELECT * FROM  tickets_grievance  inner JOIN department ON department.dprt_id = tickets_grievance.departmentid   WHERE  feedbackid = ' . $feedback_grievance_object->id . ' GROUP BY  department.description';
+    $tickets_grievance_result = mysqli_query($con, $tickets_grievance_query);
+    $tickets_grievance_rowcount = mysqli_num_rows($tickets_grievance_result);
+    $tickets_grievance_generate = false;
+    $total_grievance_ticket = 0;
+    $department = '';
+    $message = '';
+    while ($tickets_grievance_object = mysqli_fetch_object($tickets_grievance_result)) {
+
+        $tickets_grievance_generate = true;
+        $number = $tickets_grievance_object->mobile;
+        $department = $tickets_grievance_object->description;
+        $department_query = 'SELECT * FROM  tickets_grievance  inner JOIN department ON department.dprt_id = tickets_grievance.departmentid   WHERE  feedbackid = ' . $feedback_grievance_object->id . ' AND department.description="' . $tickets_grievance_object->description . '"';
+        $department_result = mysqli_query($con, $department_query);
+        $department_rowcount = mysqli_num_rows($department_result);
+        $department_object = mysqli_fetch_object($department_result);
+        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        if ($department_rowcount > 1) {
+            $k = 1;
+        } else {
+            $k = '';
+        }
+
+
+        $TID = $department_object->id;
+        $department_head_link = $config_set['BASE_URL'] . 'grievance/track/' . $TID;   //pointing to public_html/ticket
+        $keys = array();
+        $res = array();
+        $titles = array();
+        $zz = array();
+        $message1 = 'Dear Team, <br /><br />';
+        $message1 .= 'We would like to bring to your attention a recent grievance reported by an employee at ' . $hospitalname . '. Below are the grievance details: <br /><br />';
+
+
+        $message1 .= '
+        <table border="1" cellpadding="5">
+            <tr>
+              <td colspan="2" style="text-align:center;"><b>Grievance reported on</b></td>
+           </tr>
+           <tr>
+               <td width="40%">Time & Date</td>
+               <td width="60%">' . $created_on . '</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Grievance details</b></td>
+            </tr>
+        
+            <tr>
+                <td width="40%">Category</td>
+                <td width="60%">' . $department . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Grievance</td>
+                <td width="60%">' . $department_object->name . '</td>
+            </tr>';
+
+
+        if ($param_grievance->other) {
+            $message1 .= '
+            <tr>
+                <td width="40%">Description</td>
+                <td width="60%">' . $param_grievance->other . '</td>
+            </tr>';
+        }
+
+        $message1 .= '
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Grievance reported in</b></td>
+            </tr>
+            <tr>
+                <td width="40%">Floor/Ward</td>
+                <td width="60%">' . $feedback_grievance_object->ward . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Site</td>
+                <td width="60%">' . $feedback_grievance_object->bed_no . '</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><b>Grievance reported by</b></td>
+            </tr>
+            <tr>
+                <td width="40%">Employee name</td>
+                <td width="60%">' . $param_grievance->name . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Employee ID</td>
+                <td width="60%">' . $param_grievance->patientid . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Employee role</td>
+                <td width="60%">' . $param_grievance->role . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Mobile number</td>
+                <td width="60%">' . $param_grievance->contactnumber . '</td>
+            </tr>
+            <tr>
+                <td width="40%">Email ID</td>
+                <td width="60%">' . $param_grievance->email . '</td>
+            </tr>
+           ';
+
+
+
+        $message1 .= '</table>';
+
+        $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+        $user_list = get_user_by_question($tickets_grievance_object->slug, $con);
+        foreach ($user_list as $row) {
+            $floor_wards = json_decode($row->floor_ward_esr, true);
+            // Check if $patient_ward matches any value in $floor_wards
+            if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($row->email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                $conn_g->query($query1);
+
+                // $query2 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $conn_g->real_escape_string($tickets_grievance_object->alternate_email) . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                // $conn_g->query($query2);
+            }
+        }
+    }
+
+    $update_query = 'Update bf_feedback_grievance set departmenthead_emailstatus = 1 WHERE id=' . $feedback_grievance_object->id;
+    mysqli_query($con, $update_query);
+}
 
 //Email for assigned user for incident
 $feedback_incident_query = "SELECT * FROM tickets_incident WHERE status = 'Assigned' AND assigned_email = 0";
 $feedback_incident_result = mysqli_query($con, $feedback_incident_query);
 
 while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result)) {
-    $Subject = 'Urgent: Incident assigned to an Employee at ' . $hospitalname . ' - Action Required';
-    $param_incident = json_decode($feedback_incident_object->dataset);
+    $Subject1 = 'Action Required: Incident Assigned to You as Team Leader at ' . $hospitalname . '';
+    $Subject2 = 'Action Required: Incident Assigned to You as Process Monitor at ' . $hospitalname . '';
+    $Subject3 = 'Action Required: Incident Assigned to You as Team Member at ' . $hospitalname . '';
 
-    $tickets_incident_query = 'SELECT * FROM  tickets_incident  inner JOIN department ON department.dprt_id = tickets_incident.departmentid   WHERE  feedbackid = ' . $feedback_incident_object->id . ' GROUP BY  department.description';
+    $tickets_incident_query = "SELECT * FROM tickets_incident INNER JOIN department ON department.dprt_id = tickets_incident.departmentid INNER JOIN bf_feedback_incident ON bf_feedback_incident.id = tickets_incident.feedbackid WHERE tickets_incident.feedbackid = " . $feedback_incident_object->id . " GROUP BY department.description";
+
+
+
     $tickets_incident_result = mysqli_query($con, $tickets_incident_query);
     $tickets_incident_rowcount = mysqli_num_rows($tickets_incident_result);
     $tickets_incident_generate = false;
     $total_incident_ticket = 0;
     $department = '';
     $message = '';
+    // Step 1: Build user_id → firstname map
+    $user_query = "SELECT user_id, firstname FROM user WHERE user_id != 1";
+    $user_result = mysqli_query($con, $user_query);
+
+    $userMap = [];
+    while ($row = mysqli_fetch_assoc($user_result)) {
+        $userMap[$row['user_id']] = $row['firstname'];
+    }
     while ($tickets_incident_object = mysqli_fetch_object($tickets_incident_result)) {
+
+        $param_incident = json_decode($tickets_incident_object->dataset);
+        // print_r($param_incident);exit;
+        $ward_floor = $param_incident->ward;
+        $bednumb = $param_incident->bedno;
+        $priority = $param_incident->priority;
+        $incident_type = $param_incident->incident_type;
 
         $tickets_incident_generate = true;
         $number = $tickets_incident_object->mobile;
@@ -835,6 +1064,40 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             $k = '';
         }
 
+        // Step 2: Convert comma-separated IDs into arrays
+        $assign_for_process_monitor_ids = !empty($department_object->assign_for_process_monitor)
+            ? explode(',', $department_object->assign_for_process_monitor)
+            : [];
+
+        $assign_to_ids = !empty($department_object->assign_to)
+            ? explode(',', $department_object->assign_to)
+            : [];
+
+        $assign_for_team_member_ids = !empty($department_object->assign_for_team_member)
+            ? explode(',', $department_object->assign_for_team_member)
+            : []; // 🆕
+
+        // Step 3: Map IDs → names
+        $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id); // normalize
+            return isset($userMap[$id]) ? $userMap[$id] : $id; // fallback to ID if not found
+        }, $assign_for_process_monitor_ids);
+
+        $assign_to_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id);
+            return isset($userMap[$id]) ? $userMap[$id] : $id;
+        }, $assign_to_ids);
+
+        $assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id);
+            return isset($userMap[$id]) ? $userMap[$id] : $id;
+        }, $assign_for_team_member_ids); // 🆕
+
+        // Step 4: Join into comma-separated strings (for email content)
+        $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+        $names = implode(', ', $assign_to_names);
+        $actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+
 
         $TID = $department_object->id;
         $department_head_link = $config_set['BASE_URL'] . 'incident/track/' . $TID;   //pointing to public_html/ticket
@@ -843,13 +1106,400 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $titles = array();
         $zz = array();
         $message1 = 'Dear Team, <br /><br />';
-        $message1 .= 'We would like to bring to your attention a recent incident assigned to an employee at ' . $hospitalname . '. <br />';
+        $message1 .= 'We would like to inform you that a new incident has been assigned to you as Team Leader at ' . $hospitalname . '. <br />';
 
+
+        //message1 will insert when there is only ONE TIKECT
+        $message1 .= '
+          <table border="1" cellpadding="5">
+              <tr>
+                <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
+             </tr>
+              <tr>
+                <td width="40%">Time & Date</td>
+                <td width="60%">' . $created_on . '</td>
+              </tr>
+              <tr>
+                 <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+             </tr>
+              <tr>
+                 <td width="40%">Incident</td>
+                 <td width="60%">' . $department_object->name . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Category</td>
+                 <td width="60%">' . $department . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Incident Occured On</td>
+                 <td width="60%">' . $department_object->incident_occured_in . '</td>
+             </tr>
+            
+              <tr>
+                 <td width="40%">Assigned Risk</td>
+                 <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Assigned Priority</td>
+                 <td width="60%">' . $param_incident->priority . '</td>
+             </tr>
+             <tr>
+                 <td width="40%">Assigned Severity</td>
+                 <td width="60%">' . $param_incident->incident_type . '</td>
+             </tr>
+            
+            ';
+
+        if ($param_incident->other) {
+            $message1 .= '
+              <tr>
+                  <td width="40%">Description</td>
+                  <td width="60%">' . $param_incident->other . '</td>
+              </tr>';
+        }
+
+        $message1 .= '
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Floor/Ward</td>
+                  <td width="60%">' . $feedback_incident_object->ward . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Site</td>
+                  <td width="60%">' . $param_incident->bedno . '</td>
+              </tr>
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee name</td>
+                  <td width="60%">' . $param_incident->name . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee ID</td>
+                  <td width="60%">' . $param_incident->patientid . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee role</td>
+                  <td width="60%">' . $param_incident->role . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Mobile number</td>
+                  <td width="60%">' . $param_incident->contactnumber . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Email ID</td>
+                  <td width="60%">' . $param_incident->email . '</td>
+              </tr>
+             ';
+
+        if ($param_incident->tag_name) {
+            $message1 .= '
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Patient name</td>
+                  <td width="60%">' . $param_incident->tag_name . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Patient ID</td>
+                  <td width="60%">' . $param_incident->tag_patientid . '</td>
+              </tr>
+            ';
+        }
+
+        $message1 .= '
+               <tr>
+        <td colspan="2" style="text-align:center;"><b>Assigned Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Team Leader</td>
+        <td width="60%">' . $names . '</td>
+    </tr>
+  
+    <tr>
+        <td width="40%">Process Monitor</td>
+        <td width="60%">' . $actionText_process_monitor . '</td>
+    </tr>
+';
+
+        $message1 .= '</table>';
 
 
         $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+        // echo $message1;
+        // exit;
+
+
+
+        $message2 = 'Dear Team, <br /><br />';
+        $message2 .= 'We would like to inform you that a new incident has been assigned to you as Process Monitor at ' . $hospitalname . '. <br />';
+
+        //message2 will insert when there is only ONE TICKET
+        $message2 .= '
+  <table border="1" cellpadding="5">
+      <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
+     </tr>
+      <tr>
+        <td width="40%">Time & Date</td>
+        <td width="60%">' . $created_on . '</td>
+      </tr>
+      <tr>
+         <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+     </tr>
+      <tr>
+         <td width="40%">Incident</td>
+         <td width="60%">' . $department_object->name . '</td>
+     </tr>
+      <tr>
+         <td width="40%">Category</td>
+         <td width="60%">' . $department . '</td>
+     </tr>
+      <tr>
+         <td width="40%">Incident Occured On</td>
+         <td width="60%">' . $department_object->incident_occured_in . '</td>
+     </tr>
+    
+      <tr>
+         <td width="40%">Assigned Risk</td>
+         <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+     </tr>
+      <tr>
+         <td width="40%">Assigned Priority</td>
+         <td width="60%">' . $param_incident->priority . '</td>
+     </tr>
+     <tr>
+         <td width="40%">Assigned Severity</td>
+         <td width="60%">' . $param_incident->incident_type . '</td>
+     </tr>
+    
+    ';
+
+        if ($param_incident->other) {
+            $message2 .= '
+      <tr>
+          <td width="40%">Description</td>
+          <td width="60%">' . $param_incident->other . '</td>
+      </tr>';
+        }
+
+        $message2 .= '
+      <tr>
+          <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
+      </tr>
+      <tr>
+          <td width="40%">Floor/Ward</td>
+          <td width="60%">' . $feedback_incident_object->ward . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Site</td>
+          <td width="60%">' . $param_incident->bedno . '</td>
+      </tr>
+     
+      <tr>
+          <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
+      </tr>
+      <tr>
+          <td width="40%">Employee name</td>
+          <td width="60%">' . $param_incident->name . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Employee ID</td>
+          <td width="60%">' . $param_incident->patientid . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Employee role</td>
+          <td width="60%">' . $param_incident->role . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Mobile number</td>
+          <td width="60%">' . $param_incident->contactnumber . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Email ID</td>
+          <td width="60%">' . $param_incident->email . '</td>
+      </tr>
+     ';
+
+        if ($param_incident->tag_name) {
+            $message2 .= '
+      <tr>
+          <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
+      </tr>
+      <tr>
+          <td width="40%">Patient name</td>
+          <td width="60%">' . $param_incident->tag_name . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Patient ID</td>
+          <td width="60%">' . $param_incident->tag_patientid . '</td>
+      </tr>
+    ';
+        }
+
+        $message2 .= '
+        <tr>
+        <td colspan="2" style="text-align:center;"><b>Assigned Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Team Leader</td>
+        <td width="60%">' . $names . '</td>
+    </tr>
+ 
+    <tr>
+        <td width="40%">Process Monitor</td>
+        <td width="60%">' . $actionText_process_monitor . '</td>
+    </tr>
+';
+
+        $message2 .= '</table>';
+
+        $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message2 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message2 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+
+
+
+        $message3 = 'Dear Team, <br /><br />';
+        $message3 .= 'We would like to inform you that a new incident has been assigned to you as Team Member at ' . $hospitalname . '. <br />';
+
+        // message3 will insert when there is only ONE TICKET
+        $message3 .= '
+<table border="1" cellpadding="5">
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Time & Date</td>
+        <td width="60%">' . $created_on . '</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Incident</td>
+        <td width="60%">' . $department_object->name . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Category</td>
+        <td width="60%">' . $department . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Incident Occured On</td>
+        <td width="60%">' . $department_object->incident_occured_in . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Assigned Risk</td>
+        <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Assigned Priority</td>
+        <td width="60%">' . $param_incident->priority . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Assigned Severity</td>
+        <td width="60%">' . $param_incident->incident_type . '</td>
+    </tr>
+';
+
+        if ($param_incident->other) {
+            $message3 .= '
+    <tr>
+        <td width="40%">Description</td>
+        <td width="60%">' . $param_incident->other . '</td>
+    </tr>';
+        }
+
+        $message3 .= '
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Floor/Ward</td>
+        <td width="60%">' . $feedback_incident_object->ward . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Site</td>
+        <td width="60%">' . $param_incident->bedno . '</td>
+    </tr>
+    
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Employee name</td>
+        <td width="60%">' . $param_incident->name . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Employee ID</td>
+        <td width="60%">' . $param_incident->patientid . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Employee role</td>
+        <td width="60%">' . $param_incident->role . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Mobile number</td>
+        <td width="60%">' . $param_incident->contactnumber . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Email ID</td>
+        <td width="60%">' . $param_incident->email . '</td>
+    </tr>
+   ';
+
+        if ($param_incident->tag_name) {
+            $message3 .= '
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Patient name</td>
+        <td width="60%">' . $param_incident->tag_name . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Patient ID</td>
+        <td width="60%">' . $param_incident->tag_patientid . '</td>
+    </tr>
+    ';
+        }
+
+        $message3 .= '
+     <tr>
+        <td colspan="2" style="text-align:center;"><b>Assigned Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Team Leader</td>
+        <td width="60%">' . $names . '</td>
+    </tr>
+  
+    <tr>
+        <td width="40%">Process Monitor</td>
+        <td width="60%">' . $actionText_process_monitor . '</td>
+    </tr>
+';
+        $message3 .= '</table>';
+
+
+        $message3 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message3 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message3 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+
+
+
+
+
+
+
+
+
+
 
         // Get the list of assigned users
         $assign_to_users = explode(',', $feedback_incident_object->assign_to);
@@ -861,10 +1511,36 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
 
             if ($user_row = mysqli_fetch_object($user_result)) {
                 $email = $user_row->email;
-                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject1) . '", "' . $HID . '")';
                 $conn_g->query($query1);
             }
         }
+
+        $assign_to_users_assign_for_process_monitor = explode(',', $tickets_incident_object->assign_for_process_monitor);
+        foreach ($assign_to_users_assign_for_process_monitor as $user_id) {
+            $user_query = "SELECT * FROM user WHERE user_id = $user_id";
+            $user_result = mysqli_query($con, $user_query);
+
+            if ($user_row = mysqli_fetch_object($user_result)) {
+                $email = $user_row->email;
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message2) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject2) . '", "' . $HID . '")';
+                $conn_g->query($query1);
+            }
+        }
+
+        $assign_to_users_assign_for_team_member = explode(',', $tickets_incident_object->assign_for_team_member);
+        foreach ($assign_to_users_assign_for_team_member as $user_id) {
+            $user_query = "SELECT * FROM user WHERE user_id = $user_id";
+            $user_result = mysqli_query($con, $user_query);
+
+            if ($user_row = mysqli_fetch_object($user_result)) {
+                $email = $user_row->email;
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message3) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject3) . '", "' . $HID . '")';
+                $conn_g->query($query1);
+            }
+        }
+
+
         $update_query = 'UPDATE tickets_incident SET assigned_email = 1 WHERE id=' . $feedback_incident_object->id;
         mysqli_query($con, $update_query);
     }
@@ -875,17 +1551,33 @@ $feedback_incident_query = "SELECT * FROM tickets_incident WHERE status = 'Re-as
 $feedback_incident_result = mysqli_query($con, $feedback_incident_query);
 
 while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result)) {
-    $Subject = 'Urgent: Incident re-assigned to an Employee at ' . $hospitalname . ' - Action Required';
-    $param_incident = json_decode($feedback_incident_object->dataset);
+    $Subject1 = 'Action Required: Incident Re-Assigned to You as Team Leader at ' . $hospitalname . '';
+    $Subject2 = 'Action Required: Incident Re-Assigned to You as Process Monitor at ' . $hospitalname . '';
+    $Subject3 = 'Action Required: Incident Re-Assigned to You as Team Member at ' . $hospitalname . '';
 
-    $tickets_incident_query = 'SELECT * FROM  tickets_incident  inner JOIN department ON department.dprt_id = tickets_incident.departmentid   WHERE  feedbackid = ' . $feedback_incident_object->id . ' GROUP BY  department.description';
+    $tickets_incident_query = "SELECT * FROM tickets_incident INNER JOIN department ON department.dprt_id = tickets_incident.departmentid INNER JOIN bf_feedback_incident ON bf_feedback_incident.id = tickets_incident.feedbackid WHERE tickets_incident.feedbackid = " . $feedback_incident_object->id . " GROUP BY department.description";
     $tickets_incident_result = mysqli_query($con, $tickets_incident_query);
     $tickets_incident_rowcount = mysqli_num_rows($tickets_incident_result);
     $tickets_incident_generate = false;
     $total_incident_ticket = 0;
     $department = '';
     $message = '';
+    // Step 1: Build user_id → firstname map
+    $user_query = "SELECT user_id, firstname FROM user WHERE user_id != 1";
+    $user_result = mysqli_query($con, $user_query);
+
+    $userMap = [];
+    while ($row = mysqli_fetch_assoc($user_result)) {
+        $userMap[$row['user_id']] = $row['firstname'];
+    }
     while ($tickets_incident_object = mysqli_fetch_object($tickets_incident_result)) {
+
+        $param_incident = json_decode($tickets_incident_object->dataset);
+        // print_r($param_incident);exit;
+        $ward_floor = $param_incident->ward;
+        $bednumb = $param_incident->bedno;
+        $priority = $param_incident->priority;
+        $incident_type = $param_incident->incident_type;
 
         $tickets_incident_generate = true;
         $number = $tickets_incident_object->mobile;
@@ -902,6 +1594,41 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         }
 
 
+        // Step 2: Convert comma-separated IDs into arrays
+        $assign_for_process_monitor_ids = !empty($department_object->assign_for_process_monitor)
+            ? explode(',', $department_object->assign_for_process_monitor)
+            : [];
+
+        $assign_to_ids = !empty($department_object->assign_to)
+            ? explode(',', $department_object->assign_to)
+            : [];
+
+        $assign_for_team_member_ids = !empty($department_object->assign_for_team_member)
+            ? explode(',', $department_object->assign_for_team_member)
+            : []; // 🆕
+
+        // Step 3: Map IDs → names
+        $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id); // normalize
+            return isset($userMap[$id]) ? $userMap[$id] : $id; // fallback to ID if not found
+        }, $assign_for_process_monitor_ids);
+
+        $assign_to_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id);
+            return isset($userMap[$id]) ? $userMap[$id] : $id;
+        }, $assign_to_ids);
+
+        $assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id);
+            return isset($userMap[$id]) ? $userMap[$id] : $id;
+        }, $assign_for_team_member_ids); // 🆕
+
+        // Step 4: Join into comma-separated strings (for email content)
+        $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+        $names = implode(', ', $assign_to_names);
+        $actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+
+
         $TID = $department_object->id;
         $department_head_link = $config_set['BASE_URL'] . 'incident/track/' . $TID;   //pointing to public_html/ticket
         $keys = array();
@@ -909,13 +1636,396 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $titles = array();
         $zz = array();
         $message1 = 'Dear Team, <br /><br />';
-        $message1 .= 'We would like to bring to your attention a recent incident re-assigned to an employee at ' . $hospitalname . '. <br />';
+        $message1 .= 'We would like to inform you that a new incident has been Re-assigned to you as Team Leader at ' . $hospitalname . '. <br />';
 
+
+        //message1 will insert when there is only ONE TIKECT
+        $message1 .= '
+          <table border="1" cellpadding="5">
+              <tr>
+                <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
+             </tr>
+              <tr>
+                <td width="40%">Time & Date</td>
+                <td width="60%">' . $created_on . '</td>
+              </tr>
+              <tr>
+                 <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+             </tr>
+              <tr>
+                 <td width="40%">Incident</td>
+                 <td width="60%">' . $department_object->name . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Category</td>
+                 <td width="60%">' . $department . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Incident Occured On</td>
+                 <td width="60%">' . $department_object->incident_occured_in . '</td>
+             </tr>
+            
+              <tr>
+                 <td width="40%">Assigned Risk</td>
+                 <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Assigned Priority</td>
+                 <td width="60%">' . $param_incident->priority . '</td>
+             </tr>
+             <tr>
+                 <td width="40%">Assigned Severity</td>
+                 <td width="60%">' . $param_incident->incident_type . '</td>
+             </tr>
+            
+            ';
+
+        if ($param_incident->other) {
+            $message1 .= '
+              <tr>
+                  <td width="40%">Description</td>
+                  <td width="60%">' . $param_incident->other . '</td>
+              </tr>';
+        }
+
+        $message1 .= '
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Floor/Ward</td>
+                  <td width="60%">' . $feedback_incident_object->ward . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Site</td>
+                  <td width="60%">' . $param_incident->bedno . '</td>
+              </tr>
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee name</td>
+                  <td width="60%">' . $param_incident->name . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee ID</td>
+                  <td width="60%">' . $param_incident->patientid . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee role</td>
+                  <td width="60%">' . $param_incident->role . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Mobile number</td>
+                  <td width="60%">' . $param_incident->contactnumber . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Email ID</td>
+                  <td width="60%">' . $param_incident->email . '</td>
+              </tr>
+             ';
+
+        if ($param_incident->tag_name) {
+            $message1 .= '
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Patient name</td>
+                  <td width="60%">' . $param_incident->tag_name . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Patient ID</td>
+                  <td width="60%">' . $param_incident->tag_patientid . '</td>
+              </tr>
+            ';
+        }
+
+        $message1 .= '
+               <tr>
+        <td colspan="2" style="text-align:center;"><b>Assigned Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Team Leader</td>
+        <td width="60%">' . $names . '</td>
+    </tr>
+  
+    <tr>
+        <td width="40%">Process Monitor</td>
+        <td width="60%">' . $actionText_process_monitor . '</td>
+    </tr>
+';
+
+        $message1 .= '</table>';
 
 
         $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+        // echo $message1;
+        // exit;
+
+
+
+        $message2 = 'Dear Team, <br /><br />';
+        $message2 .= 'We would like to inform you that a new incident has been Re-assigned to you as Process Monitor at ' . $hospitalname . '. <br />';
+
+        //message2 will insert when there is only ONE TICKET
+        $message2 .= '
+  <table border="1" cellpadding="5">
+      <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
+     </tr>
+      <tr>
+        <td width="40%">Time & Date</td>
+        <td width="60%">' . $created_on . '</td>
+      </tr>
+      <tr>
+         <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+     </tr>
+      <tr>
+         <td width="40%">Incident</td>
+         <td width="60%">' . $department_object->name . '</td>
+     </tr>
+      <tr>
+         <td width="40%">Category</td>
+         <td width="60%">' . $department . '</td>
+     </tr>
+      <tr>
+         <td width="40%">Incident Occured On</td>
+         <td width="60%">' . $department_object->incident_occured_in . '</td>
+     </tr>
+    
+      <tr>
+         <td width="40%">Assigned Risk</td>
+         <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+     </tr>
+      <tr>
+         <td width="40%">Assigned Priority</td>
+         <td width="60%">' . $param_incident->priority . '</td>
+     </tr>
+     <tr>
+         <td width="40%">Assigned Severity</td>
+         <td width="60%">' . $param_incident->incident_type . '</td>
+     </tr>
+    
+    ';
+
+        if ($param_incident->other) {
+            $message2 .= '
+      <tr>
+          <td width="40%">Description</td>
+          <td width="60%">' . $param_incident->other . '</td>
+      </tr>';
+        }
+
+        $message2 .= '
+      <tr>
+          <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
+      </tr>
+      <tr>
+          <td width="40%">Floor/Ward</td>
+          <td width="60%">' . $feedback_incident_object->ward . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Site</td>
+          <td width="60%">' . $param_incident->bedno . '</td>
+      </tr>
+      <tr>
+          <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
+      </tr>
+      <tr>
+          <td width="40%">Employee name</td>
+          <td width="60%">' . $param_incident->name . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Employee ID</td>
+          <td width="60%">' . $param_incident->patientid . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Employee role</td>
+          <td width="60%">' . $param_incident->role . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Mobile number</td>
+          <td width="60%">' . $param_incident->contactnumber . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Email ID</td>
+          <td width="60%">' . $param_incident->email . '</td>
+      </tr>
+    ';
+
+        if ($param_incident->tag_name) {
+            $message2 .= '
+      <tr>
+          <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
+      </tr>
+      <tr>
+          <td width="40%">Patient name</td>
+          <td width="60%">' . $param_incident->tag_name . '</td>
+      </tr>
+      <tr>
+          <td width="40%">Patient ID</td>
+          <td width="60%">' . $param_incident->tag_patientid . '</td>
+      </tr>
+    ';
+        }
+
+        $message2 .= '
+        <tr>
+        <td colspan="2" style="text-align:center;"><b>Assigned Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Team Leader</td>
+        <td width="60%">' . $names . '</td>
+    </tr>
+  
+    <tr>
+        <td width="40%">Process Monitor</td>
+        <td width="60%">' . $actionText_process_monitor . '</td>
+    </tr>
+';
+
+        $message2 .= '</table>';
+
+        $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message2 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message2 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+
+
+
+        $message3 = 'Dear Team, <br /><br />';
+        $message3 .= 'We would like to inform you that a new incident has been Re-assigned to you as Team Member at ' . $hospitalname . '. <br />';
+
+        // message3 will insert when there is only ONE TICKET
+        $message3 .= '
+<table border="1" cellpadding="5">
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Time & Date</td>
+        <td width="60%">' . $created_on . '</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Incident</td>
+        <td width="60%">' . $department_object->name . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Category</td>
+        <td width="60%">' . $department . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Incident Occured On</td>
+        <td width="60%">' . $department_object->incident_occured_in . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Assigned Risk</td>
+        <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Assigned Priority</td>
+        <td width="60%">' . $param_incident->priority . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Assigned Severity</td>
+        <td width="60%">' . $param_incident->incident_type . '</td>
+    </tr>
+';
+
+        if ($param_incident->other) {
+            $message3 .= '
+    <tr>
+        <td width="40%">Description</td>
+        <td width="60%">' . $param_incident->other . '</td>
+    </tr>';
+        }
+
+        $message3 .= '
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Floor/Ward</td>
+        <td width="60%">' . $feedback_incident_object->ward . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Site</td>
+        <td width="60%">' . $param_incident->bedno . '</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Employee name</td>
+        <td width="60%">' . $param_incident->name . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Employee ID</td>
+        <td width="60%">' . $param_incident->patientid . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Employee role</td>
+        <td width="60%">' . $param_incident->role . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Mobile number</td>
+        <td width="60%">' . $param_incident->contactnumber . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Email ID</td>
+        <td width="60%">' . $param_incident->email . '</td>
+    </tr>
+   ';
+
+        if ($param_incident->tag_name) {
+            $message3 .= '
+    <tr>
+        <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Patient name</td>
+        <td width="60%">' . $param_incident->tag_name . '</td>
+    </tr>
+    <tr>
+        <td width="40%">Patient ID</td>
+        <td width="60%">' . $param_incident->tag_patientid . '</td>
+    </tr>
+    ';
+        }
+
+        $message3 .= '
+     <tr>
+        <td colspan="2" style="text-align:center;"><b>Assigned Details</b></td>
+    </tr>
+    <tr>
+        <td width="40%">Team Leader</td>
+        <td width="60%">' . $names . '</td>
+    </tr>
+   
+    <tr>
+        <td width="40%">Process Monitor</td>
+        <td width="60%">' . $actionText_process_monitor . '</td>
+    </tr>
+';
+
+        $message3 .= '</table>';
+
+        $message3 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message3 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message3 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+
+
+
+
+
+
+
+
 
         // Get the list of assigned users
         $assign_to_users = explode(',', $feedback_incident_object->reassign_to);
@@ -927,10 +2037,34 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
 
             if ($user_row = mysqli_fetch_object($user_result)) {
                 $email = $user_row->email;
-                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject1) . '", "' . $HID . '")';
                 $conn_g->query($query1);
             }
         }
+        $assign_to_users_assign_for_process_monitor = explode(',', $tickets_incident_object->reassign_for_process_monitor);
+        foreach ($assign_to_users_assign_for_process_monitor as $user_id) {
+            $user_query = "SELECT * FROM user WHERE user_id = $user_id";
+            $user_result = mysqli_query($con, $user_query);
+
+            if ($user_row = mysqli_fetch_object($user_result)) {
+                $email = $user_row->email;
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message2) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject2) . '", "' . $HID . '")';
+                $conn_g->query($query1);
+            }
+        }
+
+        $assign_to_users_assign_for_team_member = explode(',', $tickets_incident_object->reassign_for_team_member);
+        foreach ($assign_to_users_assign_for_team_member as $user_id) {
+            $user_query = "SELECT * FROM user WHERE user_id = $user_id";
+            $user_result = mysqli_query($con, $user_query);
+
+            if ($user_row = mysqli_fetch_object($user_result)) {
+                $email = $user_row->email;
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message3) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject3) . '", "' . $HID . '")';
+                $conn_g->query($query1);
+            }
+        }
+
         $update_query = 'UPDATE tickets_incident SET reassigned_email = 1 WHERE id=' . $feedback_incident_object->id;
         mysqli_query($con, $update_query);
     }
@@ -1010,17 +2144,41 @@ $feedback_incident_query = "SELECT * FROM tickets_incident WHERE status = 'Descr
 $feedback_incident_result = mysqli_query($con, $feedback_incident_query);
 
 while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result)) {
-    $Subject = 'Urgent: Incident Described by an Employee at ' . $hospitalname . ' - Action Required';
-    $param_incident = json_decode($feedback_incident_object->dataset);
+    $Subject = 'Incident Described by Staff at ' . $hospitalname . ' - Action Required';
 
-    $tickets_incident_query = 'SELECT * FROM  tickets_incident  inner JOIN department ON department.dprt_id = tickets_incident.departmentid   WHERE  feedbackid = ' . $feedback_incident_object->id . ' GROUP BY  department.description';
+    $tickets_incident_query = "SELECT * FROM tickets_incident INNER JOIN department ON department.dprt_id = tickets_incident.departmentid INNER JOIN bf_feedback_incident ON bf_feedback_incident.id = tickets_incident.feedbackid WHERE tickets_incident.feedbackid = " . $feedback_incident_object->id . " GROUP BY department.description";
     $tickets_incident_result = mysqli_query($con, $tickets_incident_query);
     $tickets_incident_rowcount = mysqli_num_rows($tickets_incident_result);
     $tickets_incident_generate = false;
     $total_incident_ticket = 0;
     $department = '';
     $message = '';
+
+    // Step 1: Build user_id → firstname map
+    $user_query = "SELECT user_id, firstname FROM user WHERE user_id != 1";
+    $user_result = mysqli_query($con, $user_query);
+
+    $userMap = [];
+    while ($row = mysqli_fetch_assoc($user_result)) {
+        $userMap[$row['user_id']] = $row['firstname'];
+    }
+
+
+
+
+
+
     while ($tickets_incident_object = mysqli_fetch_object($tickets_incident_result)) {
+
+        $param_incident = json_decode($tickets_incident_object->dataset);
+        // print_r($param_incident);exit;
+        $ward_floor = $param_incident->ward;
+        $bednumb = $param_incident->bedno;
+        $priority = $param_incident->priority;
+        $incident_type = $param_incident->incident_type;
+
+        $param_incident = json_decode($tickets_incident_object->dataset);
+        $ward_floor = $param_incident->ward;
 
         $tickets_incident_generate = true;
         $number = $tickets_incident_object->mobile;
@@ -1036,6 +2194,32 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             $k = '';
         }
 
+        // Step 2: Convert comma-separated IDs into arrays
+        $assign_for_process_monitor_ids = !empty($department_object->assign_for_process_monitor)
+            ? explode(',', $department_object->assign_for_process_monitor)
+            : [];
+
+        $assign_to_ids = !empty($department_object->assign_to)
+            ? explode(',', $department_object->assign_to)
+            : [];
+
+        $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id); // normalize
+            return $userMap[$id] ?? $id; // fallback to ID if not found
+        }, $assign_for_process_monitor_ids);
+
+        $assign_to_names = array_map(function ($id) use ($userMap) {
+            $id = (int) trim($id);
+            return $userMap[$id] ?? $id;
+        }, $assign_to_ids);
+        // Step 4: Join into comma-separated strings (for email content)
+        $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+        $names = implode(', ', $assign_to_names);
+
+
+
+
+
 
         $TID = $department_object->id;
         $department_head_link = $config_set['BASE_URL'] . 'incident/track/' . $TID;   //pointing to public_html/ticket
@@ -1044,12 +2228,128 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $titles = array();
         $zz = array();
         $message1 = 'Dear Team, <br /><br />';
-        $message1 .= 'We would like to bring to your attention a recent incident has been described by an employee at ' . $hospitalname . '. <br />';
+        $message1 .= 'We would like to bring to your attention that a recent incident has been described by an employee at ' . $hospitalname . '. <br />';
+
+        //message1 will insert when there is only ONE TIKECT
+        $message1 .= '
+          <table border="1" cellpadding="5">
+              <tr>
+                <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
+             </tr>
+              <tr>
+                <td width="40%">Time & Date</td>
+                <td width="60%">' . $created_on . '</td>
+              </tr>
+              <tr>
+                 <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
+             </tr>
+              <tr>
+                 <td width="40%">Incident</td>
+                 <td width="60%">' . $department_object->name . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Category</td>
+                 <td width="60%">' . $department . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Incident Occured On</td>
+                 <td width="60%">' . $department_object->incident_occured_in . '</td>
+             </tr>
+            
+              <tr>
+                 <td width="40%">Assigned Risk</td>
+                 <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Assigned Priority</td>
+                 <td width="60%">' . $param_incident->priority . '</td>
+             </tr>
+             <tr>
+                 <td width="40%">Assigned Severity</td>
+                 <td width="60%">' . $param_incident->incident_type . '</td>
+             </tr>
+            
+            ';
+
+        if ($param_incident->other) {
+            $message1 .= '
+              <tr>
+                  <td width="40%">Description</td>
+                  <td width="60%">' . $param_incident->other . '</td>
+              </tr>';
+        }
+
+        $message1 .= '
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Floor/Ward</td>
+                  <td width="60%">' . $feedback_incident_object->ward . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Site</td>
+                  <td width="60%">' . $param_incident->bedno . '</td>
+              </tr>
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee name</td>
+                  <td width="60%">' . $param_incident->name . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee ID</td>
+                  <td width="60%">' . $param_incident->patientid . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Employee role</td>
+                  <td width="60%">' . $param_incident->role . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Mobile number</td>
+                  <td width="60%">' . $param_incident->contactnumber . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Email ID</td>
+                  <td width="60%">' . $param_incident->email . '</td>
+              </tr>
+              ';
+
+        if ($param_incident->tag_name) {
+            $message1 .= '
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Patient name</td>
+                  <td width="60%">' . $param_incident->tag_name . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Patient ID</td>
+                  <td width="60%">' . $param_incident->tag_patientid . '</td>
+              </tr>
+            ';
+        }
+
+        $message1 .= '
+              <tr>
+                  <td colspan="2" style="text-align:center;"><b>Assigned Details</b></td>
+              </tr>
+              <tr>
+                  <td width="40%">Team Leader</td>
+                  <td width="60%">' . $names . '</td>
+              </tr>
+              <tr>
+                  <td width="40%">Process Monitor</td>
+                  <td width="60%">' . $actionText_process_monitor . '</td>
+              </tr>
+            ';
+
+        $message1 .= '</table>';
 
 
-
-
-        $message1 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $department_head_link . '<br /><br />';
+        $message1 .= '<br /><br />To view more details and take necessary action, please follow the link below: <br />' . $department_head_link . '<br /><br />';
         $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
 
@@ -1067,6 +2367,20 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 $conn_g->query($query1);
             }
         }
+
+        $users = get_user_by_sms_activity('IN-EMAIL-RCA-INCIDENTS', $con);
+        if (!empty($users)) {
+
+            foreach ($users as $user_object) {
+                // Check if $patient_ward matches any value in $floor_wards
+                $email = $user_object->email;
+
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                $conn_g->query($query1);
+
+            }
+        }
+
         $update_query = 'UPDATE tickets_incident SET describe_email = 1 WHERE id=' . $feedback_incident_object->id;
         mysqli_query($con, $update_query);
     }
@@ -1143,7 +2457,7 @@ while ($feedback_asset_object = mysqli_fetch_object($feedback_asset_result)) {
 
 
 // Email for accepting transferring asset request
-$feedback_asset_query = "SELECT * FROM tickets_asset WHERE status = 'Approved by Admin' AND transfer_approval_status = 'approved_by_admin'";
+$feedback_asset_query = "SELECT * FROM tickets_asset WHERE status = 'Asset Transfer' AND transfer_approval_status = 'approved'";
 $feedback_asset_result = mysqli_query($con, $feedback_asset_query);
 
 while ($feedback_asset_object = mysqli_fetch_object($feedback_asset_result)) {

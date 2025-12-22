@@ -692,7 +692,7 @@ class Message extends CI_Controller
 		foreach ($scoresets as $k => $val) {
 			$scoreseto[$k] = round(($val / ($scoresetcount[$k] * 5)) * 100);
 
-			$positives[$k] = round(($positive[$k] / $scoresetcount[$k])   * 100);
+			$positives[$k] = round(($positive[$k] / $scoresetcount[$k]) * 100);
 
 			$positive[$k] = $positive[$k];
 
@@ -806,7 +806,7 @@ class Message extends CI_Controller
 		foreach ($scoresets as $k => $val) {
 			$scoreseto[$k] = round(($val / ($scoresetcount[$k] * 5)) * 100);
 
-			$positives[$k] = round(($positive[$k] / $scoresetcount[$k])   * 100);
+			$positives[$k] = round(($positive[$k] / $scoresetcount[$k]) * 100);
 
 			$positive[$k] = $positive[$k];
 
@@ -1003,16 +1003,16 @@ class Message extends CI_Controller
 		$setting = $this->db->get('setting')->result();
 		$HID = $setting[0]->description;
 		$COMPANYNAME = '-%20ITATONE';
-		
+
 		$number = $mobile;
 		//$number = 7349519468;
 		$sms = str_replace('&','and',$sms);
 		$sms = str_replace('NAN','0',$sms);
 		$message = 'HID:'.$HID.'%0a'.str_replace(' ','%20',$sms).'%0a'.$COMPANYNAME;;
-		
+
 		echo $url = 'http://sms.digimiles.in/bulksms/bulksms?username='.$username.'&password='.$password.'&type=0&dlr=1&entityid=1201159118005685119&tempid='.$TEMPID.'&destination='.$number.'&source='.$senderid.'&message='.$message;
 		//exit;
-		
+
 		$curl_handle=curl_init();
 		curl_setopt($curl_handle,CURLOPT_URL,$url);
 		curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
@@ -1038,7 +1038,7 @@ class Message extends CI_Controller
 		$sms = str_replace(' ', '%20', $sms);
 		$sms = str_replace('&', 'and', $sms);
 		$sms = str_replace('NAN', '0', $sms);
-		include('/home/efeedor/globalconfig.php');
+		include('/var/www/html/globalconfig.php');
 		$query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`template_id` ,`HID`) VALUES ("message","' . $sms . '",0,"' . $mobile . '","' . $TEMPID . '","' . $HID . '")';
 		$conn_g->query($query);
 
@@ -1087,7 +1087,7 @@ class Message extends CI_Controller
 	}
 
 	/*public function send_message_now(){
-		
+
 		$messages = $this->db->where('status',0)->where('type','message')->get('notification',1)->result();
 		foreach($messages as $row){
 			$TEMPID = $row->template_id;
