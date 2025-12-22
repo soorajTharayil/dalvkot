@@ -351,7 +351,7 @@ class Email_ip_notification_op extends CI_Controller
 		}
 		foreach ($scoresets as $k => $val) {
 			$scoreseto[$k] = round(($val / ($scoresetcount[$k] * 5)) * 100);
-			$positives[$k] = round(($positive[$k] / $scoresetcount[$k])   * 100);
+			$positives[$k] = round(($positive[$k] / $scoresetcount[$k]) * 100);
 			$positive[$k] = $positive[$k];
 			$negative[$k] = $negative[$k];
 			$scoreset[$k] = $positive[$k] + $negative[$k];
@@ -718,7 +718,7 @@ class Email_ip_notification_op extends CI_Controller
 		}
 		foreach ($scoresets as $k => $val) {
 			$scoreseto[$k] = round(($val / ($scoresetcount[$k] * 5)) * 100);
-			$positives[$k] = round(($positive[$k] / $scoresetcount[$k])   * 100);
+			$positives[$k] = round(($positive[$k] / $scoresetcount[$k]) * 100);
 			$positive[$k] = $positive[$k];
 			$negative[$k] = $negative[$k];
 			$scoreset[$k] = $positive[$k] + $negative[$k];
@@ -1166,7 +1166,7 @@ class Email_ip_notification_op extends CI_Controller
 		$this->email->message($email_body);
 		$this->email->send();
 		$error =  $this->email->print_debugger();*/
-		include('/home/efeedor/globalconfig.php');
+		include('/var/www/html/globalconfig.php');
 
 		$query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($html) . '",0,"' . $conn_g->real_escape_string($emails) . '","' . $conn_g->real_escape_string($subject) . '","' . $HID . '")';
 

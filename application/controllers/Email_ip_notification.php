@@ -1430,8 +1430,8 @@ class Email_ip_notification extends CI_Controller
 				// exit;
 
 				$patient_details = $ticket->patinet->name . " (" . $ticket->patinet->patient_id . ")<br>" .
-				$ticket->patinet->ward . " in " . $ticket->patinet->bed_no . "<br>" .
-				$ticket->patinet->mobile;
+					$ticket->patinet->ward . " in " . $ticket->patinet->bed_no . "<br>" .
+					$ticket->patinet->mobile;
 
 				$created_on = date('d M Y, h:i A', strtotime($ticket->created_on));
 				$modified_on = date('d M Y, h:i A', strtotime($ticket->last_modified));
@@ -1610,8 +1610,8 @@ class Email_ip_notification extends CI_Controller
 				// exit;
 
 				$patient_details = $ticket->patinet->name . " (" . $ticket->patinet->patient_id . ")<br>" .
-				$ticket->patinet->ward . " in " . $ticket->patinet->bed_no . "<br>" .
-				$ticket->patinet->mobile;
+					$ticket->patinet->ward . " in " . $ticket->patinet->bed_no . "<br>" .
+					$ticket->patinet->mobile;
 
 				$created_on = date('d M Y, h:i A', strtotime($ticket->created_on));
 				$modified_on = date('d M Y, h:i A', strtotime($ticket->last_modified));
@@ -1790,8 +1790,8 @@ class Email_ip_notification extends CI_Controller
 				// exit;
 
 				$patient_details = $ticket->patinet->name . " (" . $ticket->patinet->patient_id . ")<br>" .
-				$ticket->patinet->ward . " in " . $ticket->patinet->bed_no . "<br>" .
-				$ticket->patinet->mobile;
+					$ticket->patinet->ward . " in " . $ticket->patinet->bed_no . "<br>" .
+					$ticket->patinet->mobile;
 
 				$created_on = date('d M Y, h:i A', strtotime($ticket->created_on));
 				$modified_on = date('d M Y, h:i A', strtotime($ticket->last_modified));
@@ -2118,7 +2118,7 @@ class Email_ip_notification extends CI_Controller
 			  $this->email->from('app@efeedor.com', 'EFEEDOR FEEDBACK SYSTEM');
 
 			  $list = array($emails);
-			  
+
 			  $this->email->to($list);
 			  $this->email->subject($subject);
 			  $this->email->message($email_body);
@@ -2126,7 +2126,7 @@ class Email_ip_notification extends CI_Controller
 			  $this->email->send();
 			  $error =  $this->email->print_debugger();
 			  var_dump($error);*/
-		include('/home/efeedor/globalconfig.php');
+		include('/var/www/html/globalconfig.php');
 		$query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($html) . '",0,"' . $conn_g->real_escape_string($emails) . '","' . $conn_g->real_escape_string($subject) . '","' . $HID . '")';
 		$conn_g->query($query);
 

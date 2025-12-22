@@ -8,16 +8,8 @@
 
 
 include('../api/db.php');
-include('/home/efeedor/globalconfig.php');
+include('/var/www/html/globalconfig.php');
 include('get_user.php');
-include('email_template_helper.php');
-
-// Ensure UTF-8 encoding for database connections
-if (method_exists($conn_g, 'set_charset')) {
-    $conn_g->set_charset('utf8mb4');
-} else {
-    //$conn_g->query("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci'");
-}
 
 //email to admin  when they are created 
 
@@ -30,24 +22,23 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    // Use template
-    $emailData = EmailTemplateHelper::render('admin.welcome_role2', [
-        'name' => $name,
-        'hospitalname' => $hospitalname,
-        'link' => $link,
-        'email' => $email,
-        'password' => $password
-    ]);
+    $Subject = 'Welcome to Efeedor - Your Account is Now Active!';
+    $message1 = 'Dear ' . $name . ', <br /><br />';
+    $message1 .= 'Welcome aboard! <br /><br />';
+    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b>. You can now access the dashboard to explore insights and receive alerts to enhance service delivery. <br /><br />';
+    $message1 .= 'Get Started: <br /><br />';
+    $message1 .= 'Web Link: ' . $link . ' <br /><br />';
+    $message1 .= 'Username: ' . $email . ' <br />';
+    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
+    $message1 .= 'Important: Please update your default password in the "Edit Profile" section (top-right of your dashboard) for security purposes. <br /><br />';
+    $message1 .= 'If you need any assistance, feel free to reach out to your Software Admin. <br /><br />';
+    $message1 .= 'We are excited to have you on board—happy exploring! <br /><br />';
+    $message1 .= 'Best regards, <br /><br />';
+    $message1 .= $hospitalname;
 
-    // Insert notification with proper encoding
-    EmailTemplateHelper::insertNotification(
-        $conn_g,
-        'email',
-        $emailData['body'],
-        $user_object->email,
-        $emailData['subject'],
-        $HID
-    );
+
+    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
+    $conn_g->query($query);
 
     $query = 'UPDATE user SET `admin_email` = 1 WHERE user_id=' . $user_object->user_id;
     mysqli_query($con, $query);
@@ -63,24 +54,25 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    // Use template
-    $emailData = EmailTemplateHelper::render('admin.welcome_role3', [
-        'name' => $name,
-        'hospitalname' => $hospitalname,
-        'link' => $link,
-        'email' => $email,
-        'password' => $password
-    ]);
+    $Subject = 'Welcome to Efeedor - Your Admin Account is Now Active!';
+    $message1 = 'Dear ' . $name . ', <br /><br />';
+    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
+    $message1 .= 'Your account is now active on the Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b> with Admin privileges. You can now access the dashboard to explore insights and receive alerts to enhance service delivery. <br /><br />';
+    $message1 .= 'Explore Your Admin Privileges: <br /><br />';
+    $message1 .= 'Access the Dashboard: ' . $link . ' <br /><br />';
+    $message1 .= 'Username: ' . $email . ' <br />';
+    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
+    $message1 .= 'Important: For security purposes, please update your default password in the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'To familiarize yourself with the application and understand your admin functionalities, we recommend reviewing the Admin Manual here: <br />';
+    $message1 .= 'https://rebrand.ly/Efeedor-AdminDashboard-Manual <br /><br />';
+    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
+    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
+    $message1 .= 'Best regards, <br /><br />';
+    $message1 .= $hospitalname;
 
-    // Insert notification with proper encoding
-    EmailTemplateHelper::insertNotification(
-        $conn_g,
-        'email',
-        $emailData['body'],
-        $user_object->email,
-        $emailData['subject'],
-        $HID
-    );
+
+    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
+    $conn_g->query($query);
 
     $query = 'UPDATE user SET `admin_email` = 1 WHERE user_id=' . $user_object->user_id;
     mysqli_query($con, $query);
@@ -193,15 +185,8 @@ $message1 .= '</body></html>';
     foreach ($users as $user_object) {
         $floor_wards = json_decode($user_object->floor_ward, true);
         // Check if $patient_ward matches any value in $floor_wards
-        // Use helper function for proper UTF-8 encoding
-        EmailTemplateHelper::insertNotification(
-            $conn_g,
-            'email',
-            $message1,
-            $user_object->email,
-            $Subject,
-            $HID
-        );
+        $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
+        $conn_g->query($query);
     }
 
     $update_query = 'Update bf_feedback set allfeedback_email_alert = 1 WHERE id=' . $feedback_object->id;
@@ -304,15 +289,10 @@ $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname 
     foreach ($users as $user_object) {
         $floor_wards = json_decode($user_object->floor_ward, true);
         // Check if $patient_ward matches any value in $floor_wards
-        // Use helper function for proper UTF-8 encoding
-        EmailTemplateHelper::insertNotification(
-            $conn_g,
-            'email',
-            $message1,
-            $user_object->email,
-            $Subject,
-            $HID
-        );
+
+        $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
+        $conn_g->query($query);
+
     }
 
     $update_query = 'Update bf_outfeedback set allfeedback_email_alert = 1 WHERE id=' . $feedback_object->id;
@@ -325,8 +305,7 @@ $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname 
 
 //email to  admins(ip) when ticket is OPEN 
 
-// Subject will be set from template based on ticket count
-$Subject = '';
+$Subject = 'Alert: Negative feedback Report from Discharged Inpatient at ' . $hospitalname . ' - Action Required';
 $feedback_query = 'SELECT * FROM  bf_feedback  WHERE admins_emailstatus = 0';
 $feedback_result = mysqli_query($con, $feedback_query);
 
@@ -366,86 +345,67 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
         $zz = array();
 
         //message1 will insert when there is only ONE TIKECT
-        // Build reasons and comments HTML
-        $reasonsHtml = '';
-        $commentsHtml = '';
-        
+        $message1 = 'Dear Team, <br /><br />';
+        $message1 .= 'We would like to bring to your attention a recent negative feedback reported by a Discharged Inpatient at ' . $hospitalname . '. Below are the ticket details: <br /><br />';
+        $message1 .= '<strong>Ticket ID:</strong> IPDT-' . $department_object->id . ' <br />';
+        $message1 .= '<strong>Patient Name: </strong>' . $param_ip->name . ' <br />';
+        $message1 .= '<strong>UHID: </strong>' . $param_ip->patientid . '<br />';
+        $message1 .= '<strong>Floor/Ward:</strong> ' . $feedback_object->ward . ' <br />';
+        $message1 .= '<strong>Room/Bed No:</strong> ' . $feedback_object->bed_no . '<br />';
+        $message1 .= '<strong>Source:</strong> ' . $feedback_object->source . '<br />';
+        $message1 .= '<strong>Assigned To:</strong> ' . $department_object->pname . ' <br />';
+        $message1 .= '<strong>Department:</strong> ' . $department . ' <br />';
+        $message1 .= '<strong>Parameter: </strong>' . $department_object->name . '';
         if ($department_rowcount == 1) {
+
+
             $setup_query = "SELECT * FROM setup WHERE parent = 0 ";
             $setup_result = mysqli_query($con, $setup_query);
 
             while ($setup_object = mysqli_fetch_object($setup_result)) {
+
                 $keys[$setup_object->shortkey] = $setup_object->title;
                 $res[$setup_object->shortkey] = $setup_object->question;
                 $titles[$setup_object->title] = $setup_object->title;
                 $zz[$setup_object->type] = $setup_object->title;
             }
-            
             if ($param_ip->reason) {
-                $reasonsHtml = EmailTemplateHelper::buildReasonsHtml($param_ip->reason, $res);
+
+                foreach ($param_ip->reason as $key1 => $value) {
+                    if ($value) {
+                        $message1 .= "<br /><strong> Reason: </strong>" . $res[$key1] . " ";
+                    }
+                }
             }
             if ($param_ip->comment && !empty($param_ip->comment)) {
-                $commentsHtml = EmailTemplateHelper::buildCommentsHtml($param_ip->comment);
+
+                foreach ($param_ip->comment as $key2 => $value) {
+                    $message1 .= "<br /><strong> Comment: </strong>" . $value . " ";
+                }
             }
         }
-        
-        // Fix encoding issue for General Comment - use helper function
-        $generalCommentHtml = EmailTemplateHelper::buildGeneralCommentHtml($param_ip->suggestionText ?? '');
-        
-        // Use template instead of building manually
-        $emailData = EmailTemplateHelper::render('admin.ip_ticket_single', [
-            'hospitalname' => $hospitalname,
-            'ticket_id' => $department_object->id,
-            'patient_name' => EmailTemplateHelper::escapeHtml($param_ip->name),
-            'uhid' => EmailTemplateHelper::escapeHtml($param_ip->patientid),
-            'ward' => EmailTemplateHelper::escapeHtml($feedback_object->ward),
-            'bed_no' => EmailTemplateHelper::escapeHtml($feedback_object->bed_no),
-            'source' => EmailTemplateHelper::escapeHtml($feedback_object->source),
-            'assigned_to' => EmailTemplateHelper::escapeHtml($department_object->pname),
-            'department' => EmailTemplateHelper::escapeHtml($department),
-            'parameter' => EmailTemplateHelper::escapeHtml($department_object->name),
-            'reasons' => $reasonsHtml,
-            'comments' => $commentsHtml,
-            'general_comment' => $generalCommentHtml,
-            'link' => $admins_ip_link
-        ]);
-        
-        $message1 = $emailData['body'];
+        if (isset($param_ip->suggestionText) && !empty($param_ip->suggestionText)) {
+            $message1 .= '<br /><strong>General Comment:</strong>' . $param_ip->suggestionText . ' <br />';
+        }
+        $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br />' . $admins_ip_link . '<br /><br />';
+        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
     }
 
     if ($tickets_rowcount > 1) {
         //message2 will insert when there is  MULTIPLE TIKECT
-        // Use template for multiple tickets
-        $emailData = EmailTemplateHelper::render('admin.ip_ticket_multiple', [
-            'hospitalname' => $hospitalname,
-            'patient_name' => EmailTemplateHelper::escapeHtml($param_ip->name),
-            'uhid' => EmailTemplateHelper::escapeHtml($param_ip->patientid),
-            'ward' => EmailTemplateHelper::escapeHtml($feedback_object->ward),
-            'bed_no' => EmailTemplateHelper::escapeHtml($feedback_object->bed_no),
-            'source' => EmailTemplateHelper::escapeHtml($feedback_object->source),
-            'link' => $admins_ip_link
-        ]);
-        $message2 = $emailData['body'];
+        $message2 = 'Dear Team, <br /><br />';
+        $message2 .= 'We would like to bring to your attention a recent negative feedback reported by an Discharged Inpatient at ' . $hospitalname . '. Below are the patient details : <br /><br />';
+        $message2 .= '<strong>Patient Name: </strong>' . $param_ip->name . 
+        ' <br /><strong>UHID: </strong>' . $param_ip->patientid . 
+        ' <br /><strong>Floor/Ward: </strong>' . $feedback_object->ward . 
+        ' <br /><strong>Room/Bed No: </strong>' . $feedback_object->bed_no.
+        ' <br /><strong>Source: </strong>' . $feedback_object->source;
+            $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $admins_ip_link . '<br /><br />';
+        $message2 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message2 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
     } else {
         $message2 = $message1;
-    }
-    
-    // Set subject based on template
-    if ($tickets_rowcount > 1) {
-        $Subject = EmailTemplateHelper::render('admin.ip_ticket_multiple', [
-            'hospitalname' => $hospitalname,
-            'patient_name' => '',
-            'uhid' => '',
-            'ward' => '',
-            'bed_no' => '',
-            'source' => '',
-            'link' => ''
-        ])['subject'];
-    } else {
-        // Subject already set from emailData in the loop
-        if (isset($emailData)) {
-            $Subject = $emailData['subject'];
-        }
     }
 
     if ($tickets_rowcount > 0) {
@@ -455,15 +415,9 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
             $floor_wards = json_decode($user_object->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
             if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
-                // Use helper function for proper UTF-8 encoding
-                EmailTemplateHelper::insertNotification(
-                    $conn_g,
-                    'email',
-                    $message2,
-                    $user_object->email,
-                    $Subject,
-                    $HID
-                );
+
+                $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
+                $conn_g->query($query);
             }
         }
     }
@@ -474,8 +428,7 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
 
 //email to  admins(op) when ticket is OPEN 
 
-// Subject will be set from template based on ticket count
-$Subject = '';
+$Subject = 'Alert: Negative feedback Report from Outpatient at ' . $hospitalname . ' - Action Required';
 $feedbackop_query = 'SELECT * FROM  bf_outfeedback  WHERE admins_emailstatus = 0';
 $feedbackop_result = mysqli_query($con, $feedbackop_query);
 
@@ -514,66 +467,63 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         $zz = array();
 
         //message1 will insert when there is only ONE TIKECT
-        // Build reasons and comments HTML
-        $reasonsHtml = '';
-        $commentsHtml = '';
-        
+        $message1 = 'Dear Team, <br /><br />';
+        $message1 .= 'We would like to bring to your attention a recent negative feedback reported by a  Outpatient at ' . $hospitalname . '. Below are the ticket details: <br /><br />';
+        $message1 .= '<strong>Ticket ID:</strong> OPT-' . $department_object->id . ' <br />';
+        $message1 .= '<strong>Patient Name: </strong>' . $param_op->name . ' <br />';
+        $message1 .= '<strong>UHID: </strong>' . $param_op->patientid . ' <br />';
+        $message1 .= '<strong>Speciality:</strong> ' . $feedbackop_object->ward . ' <br />';
+        $message1 .= '<strong>Source:</strong> ' . $feedbackop_object->source . ' <br />';
+        $message1 .= '<strong>Assigned To:</strong> ' . $department_object->pname . ' <br />';
+        $message1 .= '<strong>Department:</strong> ' . $department . ' <br />';
+        $message1 .= '<strong>Parameter: </strong>' . $department_object->name . '';
         if ($department_rowcount == 1) {
+
+
             $setupop_query = "SELECT * FROM setupop WHERE parent = 0 ";
             $setupop_result = mysqli_query($con, $setupop_query);
 
             while ($setupop_object = mysqli_fetch_object($setupop_result)) {
+
                 $keys[$setupop_object->shortkey] = $setupop_object->title;
                 $res[$setupop_object->shortkey] = $setupop_object->question;
                 $titles[$setupop_object->title] = $setupop_object->title;
                 $zz[$setupop_object->type] = $setupop_object->title;
             }
-            
             if ($param_op->reason) {
-                $reasonsHtml = EmailTemplateHelper::buildReasonsHtml($param_op->reason, $res);
+
+                foreach ($param_op->reason as $key1 => $value) {
+                    if ($value) {
+                        $message1 .= "<br /><strong> Reason: </strong>" . $res[$key1] . " ";
+                    }
+                }
             }
             if ($param_op->comment && !empty($param_op->comment)) {
-                $commentsHtml = EmailTemplateHelper::buildCommentsHtml($param_op->comment);
+
+                foreach ($param_op->comment as $key2 => $value) {
+                    $message1 .= "<br /><strong> Comment: </strong>" . $value . " ";
+                }
             }
         }
-        
-        // Fix encoding issue for General Comment - use helper function
-        $generalCommentHtml = EmailTemplateHelper::buildGeneralCommentHtml($param_op->suggestionText ?? '');
-        
-        // Use template instead of building manually
-        $emailData = EmailTemplateHelper::render('admin.op_ticket_single', [
-            'hospitalname' => $hospitalname,
-            'ticket_id' => $department_object->id,
-            'patient_name' => EmailTemplateHelper::escapeHtml($param_op->name),
-            'uhid' => EmailTemplateHelper::escapeHtml($param_op->patientid),
-            'speciality' => EmailTemplateHelper::escapeHtml($feedbackop_object->ward),
-            'source' => EmailTemplateHelper::escapeHtml($feedbackop_object->source),
-            'assigned_to' => EmailTemplateHelper::escapeHtml($department_object->pname),
-            'department' => EmailTemplateHelper::escapeHtml($department),
-            'parameter' => EmailTemplateHelper::escapeHtml($department_object->name),
-            'reasons' => $reasonsHtml,
-            'comments' => $commentsHtml,
-            'general_comment' => $generalCommentHtml,
-            'link' => $admins_op_link
-        ]);
-        
-        $message1 = $emailData['body'];
-        $Subject = $emailData['subject']; // Set subject for single ticket
+        if (isset($param_op->suggestionText) && !empty($param_op->suggestionText)) {
+            $message1 .= '<br /><strong>General Comment:</strong>' . $param_op->suggestionText . ' <br />';
+        }
+        $message1 .= '<br />To view more details and take necessary action, please follow the below link:<br />' . $admins_op_link . '<br /><br />';
+        $message1 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
     }
 
     if ($ticketsop_rowcount > 1) {
         //message2 will insert when there is  MULTIPLE TIKECT
-        // Use template for multiple tickets
-        $emailDataMultiple = EmailTemplateHelper::render('admin.op_ticket_multiple', [
-            'hospitalname' => $hospitalname,
-            'patient_name' => EmailTemplateHelper::escapeHtml($param_op->name),
-            'uhid' => EmailTemplateHelper::escapeHtml($param_op->patientid),
-            'speciality' => EmailTemplateHelper::escapeHtml($feedbackop_object->ward),
-            'source' => EmailTemplateHelper::escapeHtml($feedbackop_object->source),
-            'link' => $admins_op_link
-        ]);
-        $message2 = $emailDataMultiple['body'];
-        $Subject = $emailDataMultiple['subject'];
+        $message2 = 'Dear Team, <br /><br />';
+        $message2 .= 'We would like to bring to your attention a recent negative feedback reported by an  Outpatient at ' . $hospitalname . '. Below are the patient details : <br /><br />';
+        $message2 .= '<strong>Patient Name: </strong>' . $param_op->name . 
+        ' <br /><strong>UHID: </strong>' . $param_op->patientid . 
+        ' <br /><strong>Speciality: </strong>' . $feedbackop_object->ward.
+        ' <br /><strong>Source: </strong>' . $feedbackop_object->source;
+   $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $admins_op_link . '<br /><br />';
+        $message2 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
+        $message2 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
     } else {
         $message2 = $message1;
     }
@@ -597,8 +547,7 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
 
 //email to  admins(interim) when ticket is OPEN 
 
-// Subject will be set from template
-$Subject = '';
+$Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
 $feedback_int_query = 'SELECT * FROM  bf_feedback_int  WHERE admins_emailstatus = 0';
 $feedback_int_result = mysqli_query($con, $feedback_int_query);
 
@@ -648,28 +597,28 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
               <td colspan="2" style="text-align:center;"><b>Complaint reported on</b></td>
            </tr>
             <tr>
-              <td width="40%">Time & Date</td>
-              <td width="60%">' . $created_on . '</td>
+              <td width="80%">Time & Date</td>
+              <td width="20%">' . $created_on . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Complaint details</b></td>
             </tr>
            
             <tr>
-                <td width="40%">Category</td>
-                <td width="60%">' . $department . '</td>
+                <td width="80%">Category</td>
+                <td width="20%">' . $department . '</td>
             </tr>
             <tr>
-                <td width="40%">Complaint</td>
-                <td width="60%">' . $department_object->name . '</td>
+                <td width="80%">Complaint</td>
+                <td width="20%">' . $department_object->name . '</td>
             </tr>';
 
 
         if ($param_int->other) {
             $message1 .= '
             <tr>
-                <td width="40%">Description</td>
-                <td width="60%">' . $param_int->other . '</td>
+                <td width="80%">Description</td>
+                <td width="20%">' . $param_int->other . '</td>
             </tr>';
         }
 
@@ -678,34 +627,37 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
                 <td colspan="2" style="text-align:center;"><b>Complaint raised in </b></td>
             </tr>
             <tr>
-                <td width="40%">Floor/Ward</td>
-                <td width="60%">' . $feedback_int_object->ward . '</td>
+                <td width="80%">Floor/Ward</td>
+                <td width="20%">' . $feedback_int_object->ward . '</td>
             </tr>
             <tr>
-                <td width="40%">Site</td>
-                <td width="60%">' . $feedback_int_object->bed_no . '</td>
+                <td width="80%">Site</td>
+                <td width="20%">' . $feedback_int_object->bed_no . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Complaint raised by</b></td>
             </tr>
             <tr>
-                <td width="40%">Patient name</td>
-                <td width="60%">' . $param_int->name . '</td>
+                <td width="80%">Patient name</td>
+                <td width="20%">' . $param_int->name . '</td>
             </tr>
             <tr>
-                <td width="40%">Patient UHID</td>
-                <td width="60%">' . $param_int->patientid . '</td>
+                <td width="80%">Patient UHID</td>
+                <td width="20%">' . $param_int->patientid . '</td>
             </tr>
           
             <tr>
-                <td width="40%">Mobile number</td>
-                <td width="60%">' . $param_int->contactnumber . '</td>
+                <td width="80%">Mobile number</td>
+                <td width="20%">' . $param_int->contactnumber . '</td>
             </tr>
             <tr>
-                <td width="40%">Source</td>
-                <td width="60%">' . $feedback_int_object->source . '</td>
+                <td width="80%">Source</td>
+                <td width="20%">' . $feedback_int_object->source . '</td>
             </tr>
-           ';
+            <tr>
+                <td width="80%">Assigned to</td>
+                <td width="20%">' . $department_object->pname . '</td>
+            </tr>';
 
 
 
@@ -733,15 +685,8 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
             $floor_wards = json_decode($user_object->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
             if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
-                // Use helper function for proper UTF-8 encoding
-                EmailTemplateHelper::insertNotification(
-                    $conn_g,
-                    'email',
-                    $message2,
-                    $user_object->email,
-                    $Subject,
-                    $HID
-                );
+                $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
+                $conn_g->query($query);
             }
         }
     }
@@ -751,8 +696,7 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
 
 //email to  admins(isr) when ticket is OPEN 
 
-// Subject will be set from template
-$Subject = '';
+$Subject = 'Urgent: Service Request reported by an Employee at ' . $hospitalname . ' - Action Required';
 $feedback_isr_query = 'SELECT * FROM  bf_feedback_esr  WHERE admins_emailstatus = 0';
 $feedback_isr_result = mysqli_query($con, $feedback_isr_query);
 
@@ -802,31 +746,31 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
               <td colspan="2" style="text-align:center;"><b>Request reported on</b></td>
            </tr>
             <tr>
-              <td width="40%">Time & Date</td>
-              <td width="60%">' . $created_on . '</td>
+              <td width="80%">Time & Date</td>
+              <td width="20%">' . $created_on . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Service request details</b></td>
             </tr>
            
             <tr>
-                <td width="40%">Category</td>
-                <td width="60%">' . $department . '</td>
+                <td width="80%">Category</td>
+                <td width="20%">' . $department . '</td>
             </tr>
             <tr>
-                <td width="40%">Service request</td>
-                <td width="60%">' . $department_object->name . '</td>
+                <td width="80%">Service request</td>
+                <td width="20%">' . $department_object->name . '</td>
             </tr>
             <tr>
-                <td width="40%">Priority</td>
-                <td width="60%">' . $param_isr->priority . '</td>
+                <td width="80%">Priority</td>
+                <td width="20%">' . $param_isr->priority . '</td>
             </tr>';
 
         if ($param_isr->other) {
             $message1 .= '
             <tr>
-                <td width="40%">Description</td>
-                <td width="60%">' . $param_isr->other . '</td>
+                <td width="80%">Description</td>
+                <td width="20%">' . $param_isr->other . '</td>
             </tr>';
         }
 
@@ -835,41 +779,44 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
                 <td colspan="2" style="text-align:center;"><b>Request reported in</b></td>
             </tr>
             <tr>
-                <td width="40%">Floor/Ward</td>
-                <td width="60%">' . $feedback_isr_object->ward . '</td>
+                <td width="80%">Floor/Ward</td>
+                <td width="20%">' . $feedback_isr_object->ward . '</td>
             </tr>
             <tr>
-                <td width="40%">Site</td>
-                <td width="60%">' . $feedback_isr_object->bed_no . '</td>
+                <td width="80%">Site</td>
+                <td width="20%">' . $feedback_isr_object->bed_no . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Request reported by</b></td>
             </tr>
             <tr>
-                <td width="40%">Employee name</td>
-                <td width="60%">' . $param_isr->name . '</td>
+                <td width="80%">Employee name</td>
+                <td width="20%">' . $param_isr->name . '</td>
             </tr>
             <tr>
-                <td width="40%">Employee ID</td>
-                <td width="60%">' . $param_isr->patientid . '</td>
+                <td width="80%">Employee ID</td>
+                <td width="20%">' . $param_isr->patientid . '</td>
             </tr>
             <tr>
-                <td width="40%">Employee role</td>
-                <td width="60%">' . $param_isr->role . '</td>
+                <td width="80%">Employee role</td>
+                <td width="20%">' . $param_isr->role . '</td>
             </tr>
             <tr>
-                <td width="40%">Mobile number</td>
-                <td width="60%">' . $param_isr->contactnumber . '</td>
+                <td width="80%">Mobile number</td>
+                <td width="20%">' . $param_isr->contactnumber . '</td>
             </tr>
              <tr>
-                <td width="40%">Source</td>
-                <td width="60%">' . $feedback_isr_object->source . '</td>
+                <td width="80%">Source</td>
+                <td width="20%">' . $feedback_isr_object->source . '</td>
             </tr>
             <tr>
-                <td width="40%">Email ID</td>
-                <td width="60%">' . $param_isr->email . '</td>
+                <td width="80%">Email ID</td>
+                <td width="20%">' . $param_isr->email . '</td>
             </tr>
-           ';
+            <tr>
+                <td width="80%">Assigned to</td>
+                <td width="20%">' . $department_object->pname . '</td>
+            </tr>';
 
 
 
@@ -894,15 +841,8 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
             $floor_wards = json_decode($user_object->floor_ward_esr, true);
             // Check if $patient_ward matches any value in $floor_wards
             if (is_null($floor_wards) || empty($floor_wards) || in_array($ward_floor, $floor_wards)) {
-                // Use helper function for proper UTF-8 encoding
-                EmailTemplateHelper::insertNotification(
-                    $conn_g,
-                    'email',
-                    $message2,
-                    $user_object->email,
-                    $Subject,
-                    $HID
-                );
+                $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message2) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
+                $conn_g->query($query);
             }
         }
     }
@@ -963,89 +903,80 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
             </tr>
              <tr>
-               <td width="40%">Time & Date</td>
-               <td width="60%">' . $created_on . '</td>
+               <td width="80%">Time & Date</td>
+               <td width="20%">' . $created_on . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
              </tr>
-              <tr>
-                 <td width="40%">Incident</td>
-                 <td width="60%">' . $department_object->name . '</td>
-             </tr>
-              <tr>
-                 <td width="40%">Category</td>
-                 <td width="60%">' . $department . '</td>
-             </tr>
-              <tr>
-                 <td width="40%">Incident Occured On</td>
-                 <td width="60%">' . $param_incident->incident_occured_in . '</td>
-             </tr>
-            
-              <tr>
-                 <td width="40%">Assigned Risk</td>
-                 <td width="60%">' . $param_incident->risk_matrix->level . '</td>
-             </tr>
-              <tr>
-                 <td width="40%">Assigned Priority</td>
-                 <td width="60%">' . $param_incident->priority . '</td>
+             <tr>
+                 <td width="80%">Incident type</td>
+                 <td width="20%">' . $param_incident->incident_type . '</td>
              </tr>
              <tr>
-                 <td width="40%">Assigned Severity</td>
-                 <td width="60%">' . $param_incident->incident_type . '</td>
+                 <td width="80%">Category</td>
+                 <td width="20%">' . $department . '</td>
              </tr>
-            
-            ';
+             <tr>
+                 <td width="80%">Incident</td>
+                 <td width="20%">' . $department_object->name . '</td>
+             </tr>
+             <tr>
+                 <td width="80%">Priority</td>
+                 <td width="20%">' . $param_incident->priority . '</td>
+             </tr>';
 
         if ($param_incident->other) {
             $message1 .= '
              <tr>
-                 <td width="40%">Description</td>
-                 <td width="60%">' . $param_incident->other . '</td>
+                 <td width="80%">Description</td>
+                 <td width="20%">' . $param_incident->other . '</td>
              </tr>';
         }
-       
 
         $message1 .= '
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
              </tr>
              <tr>
-                 <td width="40%">Floor/Ward</td>
-                 <td width="60%">' . $feedback_incident_object->ward . '</td>
+                 <td width="80%">Floor/Ward</td>
+                 <td width="20%">' . $feedback_incident_object->ward . '</td>
              </tr>
              <tr>
-                 <td width="40%">Site</td>
-                 <td width="60%">' . $feedback_incident_object->bed_no . '</td>
+                 <td width="80%">Site</td>
+                 <td width="20%">' . $feedback_incident_object->bed_no . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
              </tr>
              <tr>
-                 <td width="40%">Employee name</td>
-                 <td width="60%">' . $param_incident->name . '</td>
+                 <td width="80%">Employee name</td>
+                 <td width="20%">' . $param_incident->name . '</td>
              </tr>
              <tr>
-                 <td width="40%">Employee ID</td>
-                 <td width="60%">' . $param_incident->patientid . '</td>
+                 <td width="80%">Employee ID</td>
+                 <td width="20%">' . $param_incident->patientid . '</td>
              </tr>
              <tr>
-                 <td width="40%">Employee role</td>
-                 <td width="60%">' . $param_incident->role . '</td>
+                 <td width="80%">Employee role</td>
+                 <td width="20%">' . $param_incident->role . '</td>
              </tr>
              <tr>
-                 <td width="40%">Mobile number</td>
-                 <td width="60%">' . $param_incident->contactnumber . '</td>
+                 <td width="80%">Mobile number</td>
+                 <td width="20%">' . $param_incident->contactnumber . '</td>
              </tr>
                <tr>
-                <td width="40%">Source</td>
-                <td width="60%">' . $feedback_incident_object->source . '</td>
+                <td width="80%">Source</td>
+                <td width="20%">' . $feedback_incident_object->source . '</td>
             </tr>
              <tr>
-                 <td width="40%">Email ID</td>
-                 <td width="60%">' . $param_incident->email . '</td>
+                 <td width="80%">Email ID</td>
+                 <td width="20%">' . $param_incident->email . '</td>
              </tr>
-            ';
+             <tr>
+                 <td width="80%">Assigned to</td>
+                 <td width="20%">' . $department_object->pname . '</td>
+             </tr>';
 
         if ($param_incident->tag_name) {
             $message1 .= '
@@ -1053,15 +984,21 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                  <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
              </tr>
              <tr>
-                 <td width="40%">Patient name</td>
-                 <td width="60%">' . $param_incident->tag_name . '</td>
+                 <td width="80%">Patient name</td>
+                 <td width="20%">' . $param_incident->tag_name . '</td>
              </tr>
              <tr>
-                 <td width="40%">Patient ID</td>
-                 <td width="60%">' . $param_incident->tag_patientid . '</td>
+                 <td width="80%">Patient ID</td>
+                 <td width="20%">' . $param_incident->tag_patientid . '</td>
              </tr>
-            
-             ';
+             <tr>
+                 <td width="80%">Patient type</td>
+                 <td width="20%">' . $param_incident->tag_patient_type . '</td>
+             </tr>
+             <tr>
+                 <td width="80%">Mobile number</td>
+                 <td width="20%">' . $param_incident->tag_consultant . '</td>
+             </tr>';
         }
 
         $message1 .= '</table>';
@@ -1147,28 +1084,28 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
                <td colspan="2" style="text-align:center;"><b>Grievance reported on</b></td>
             </tr>
             <tr>
-                <td width="40%">Time & Date</td>
-                <td width="60%">' . $created_on . '</td>
+                <td width="80%">Time & Date</td>
+                <td width="20%">' . $created_on . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Grievance details</b></td>
              </tr>
          
              <tr>
-                 <td width="40%">Category</td>
-                 <td width="60%">' . $department . '</td>
+                 <td width="80%">Category</td>
+                 <td width="20%">' . $department . '</td>
              </tr>
              <tr>
-                 <td width="40%">Grievance</td>
-                 <td width="60%">' . $department_object->name . '</td>
+                 <td width="80%">Grievance</td>
+                 <td width="20%">' . $department_object->name . '</td>
              </tr>';
 
 
         if ($param_grievance->other) {
             $message1 .= '
              <tr>
-                 <td width="40%">Description</td>
-                 <td width="60%">' . $param_grievance->other . '</td>
+                 <td width="80%">Description</td>
+                 <td width="20%">' . $param_grievance->other . '</td>
              </tr>';
         }
 
@@ -1177,38 +1114,41 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
                  <td colspan="2" style="text-align:center;"><b>Grievance reported in</b></td>
              </tr>
              <tr>
-                 <td width="40%">Floor/Ward</td>
-                 <td width="60%">' . $feedback_grievance_object->ward . '</td>
+                 <td width="80%">Floor/Ward</td>
+                 <td width="20%">' . $feedback_grievance_object->ward . '</td>
              </tr>
              <tr>
-                 <td width="40%">Site</td>
-                 <td width="60%">' . $feedback_grievance_object->bed_no . '</td>
+                 <td width="80%">Site</td>
+                 <td width="20%">' . $feedback_grievance_object->bed_no . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Grievance reported by</b></td>
              </tr>
              <tr>
-                 <td width="40%">Employee name</td>
-                 <td width="60%">' . $param_grievance->name . '</td>
+                 <td width="80%">Employee name</td>
+                 <td width="20%">' . $param_grievance->name . '</td>
              </tr>
              <tr>
-                 <td width="40%">Employee ID</td>
-                 <td width="60%">' . $param_grievance->patientid . '</td>
+                 <td width="80%">Employee ID</td>
+                 <td width="20%">' . $param_grievance->patientid . '</td>
              </tr>
              <tr>
-                 <td width="40%">Employee role</td>
-                 <td width="60%">' . $param_grievance->role . '</td>
+                 <td width="80%">Employee role</td>
+                 <td width="20%">' . $param_grievance->role . '</td>
              </tr>
              <tr>
-                 <td width="40%">Mobile number</td>
-                 <td width="60%">' . $param_grievance->contactnumber . '</td>
+                 <td width="80%">Mobile number</td>
+                 <td width="20%">' . $param_grievance->contactnumber . '</td>
              </tr>
              
              <tr>
-                 <td width="40%">Email ID</td>
-                 <td width="60%">' . $param_grievance->email . '</td>
+                 <td width="80%">Email ID</td>
+                 <td width="20%">' . $param_grievance->email . '</td>
              </tr>
-            ';
+             <tr>
+                 <td width="80%">Assigned to</td>
+                 <td width="20%">' . $department_object->pname . '</td>
+             </tr>';
 
 
 

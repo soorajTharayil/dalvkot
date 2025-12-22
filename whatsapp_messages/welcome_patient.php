@@ -1,6 +1,6 @@
 <?
 include('../api/db.php');
-include('/home/efeedor/globalconfig.php');
+include('/var/www/html/globalconfig.php');
 function generateUniqueId()
 {
     $prefix = ''; // You can add a prefix if desired
@@ -28,11 +28,11 @@ while ($r = mysqli_fetch_object($flore)) {
     // $message = 'Hi, %0aThank you for choosing ' . $hospitalname . ' for your healthcare needs. If you have any concern or request during your stay, please click on the link below and register. ' . $slink;
     // $message .= '%0a' . $COMPANYNAME;
 
-$message = 'Dear ' .$name. ',
-Thank you for choosing ' .$hospitalname. '. If you have any concern or request during your stay, please click on the link below and register. 
-'.$slink. '
+    $message = 'Dear ' . $name . ',
+Thank you for choosing ' . $hospitalname . '. If you have any concern or request during your stay, please click on the link below and register. 
+' . $slink . '
 -ITATONE';
-    
+
     $TEMPID = '1607100000000271239';
 
     $meta_data['config_set_url'] = $config_set['BASE_URL'];
