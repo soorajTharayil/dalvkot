@@ -142,19 +142,23 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
         echo 'mm';
         $department_query = 'SELECT * FROM  tickets_int  inner JOIN department ON department.dprt_id = tickets_int.departmentid   WHERE  feedbackid = ' . $feedback_int_object->id . ' AND department.description="' . $tickets_int_object->description . '"';
         echo 'oo';
-       
+
         $department_result = mysqli_query($con, $department_query);
         echo 'pp';
-       
+
         $department_rowcount = mysqli_num_rows($department_result);
         echo 'qq';
-        
+
         $department_object = mysqli_fetch_object($department_result);
         echo 'rr';
-       
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+
+        if (!empty($department_object->created_on) && strtotime($department_object->created_on) !== false) {
+            $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        } else {
+            $created_on = '-';
+        }
         echo 'vv';
-       
+
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
