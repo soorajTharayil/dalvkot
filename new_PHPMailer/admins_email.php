@@ -553,7 +553,7 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
 
 
 echo 'hiioolllmmm';
-exit;
+
 //email to  admins(interim) when ticket is OPEN 
 
 $Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
@@ -1191,6 +1191,8 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
     $update_query = 'Update bf_feedback_grievance set admins_emailstatus = 1 WHERE id=' . $feedback_grievance_object->id;
     mysqli_query($con, $update_query);
 }
+echo 'jjjjjjjjjj';
+exit;
 
 
 //escalation level 1 and level 2 email to  admins(interim) when ticket is OPEN  
