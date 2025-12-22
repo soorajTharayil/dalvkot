@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 //email to  admins(ip) when ticket is OPEN                                              
 //email to  admins(op) when ticket is OPEN                                              
 //email to  admins(interim) when ticket is OPEN                                         
