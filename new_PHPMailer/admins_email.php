@@ -84,8 +84,7 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     mysqli_query($con, $query);
 }
 
-echo 'hiioo';
-exit;
+
 
 //email to  admins(ip) for all feedback
 
@@ -275,6 +274,7 @@ if (!empty($feedback_details)) {
     $message1 .= '<tr><td colspan="2" style="border-bottom: 1px solid #ddd; color: #999; text-align: center;">No detailed feedback provided.</td></tr>';
 }
 
+
 // Additional Feedback Info
 $message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Feedback Link</strong></td><td><a href="' . htmlspecialchars($admins_ip_link) . '" style="color: #0073e6;">View Feedback</a></td></tr>';
 $message1 .= '<tr><td style="background-color: #f9f9f9;">Satisfaction Status</td><td>' . htmlspecialchars($nps_s) . '</td></tr>';
@@ -308,7 +308,8 @@ $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname 
 }
 
 
-
+echo 'hiioolll';
+exit;
 
 //email to  admins(ip) when ticket is OPEN 
 
