@@ -524,7 +524,7 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        // $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
@@ -671,7 +671,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        // $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
@@ -824,7 +824,6 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
     mysqli_query($con, $update_query);
 }
 
-
 //Email for assigned user for incident
 $feedback_incident_query = "SELECT * FROM tickets_incident WHERE status = 'Assigned' AND assigned_email = 0";
 $feedback_incident_result = mysqli_query($con, $feedback_incident_query);
@@ -868,7 +867,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        // $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
@@ -1397,7 +1396,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        // $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
@@ -1906,7 +1905,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        // $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
@@ -1998,7 +1997,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        // $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
