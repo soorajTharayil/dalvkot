@@ -62,7 +62,7 @@ $ticket = $this->incident_model->tickets_recived_by_department_interim($type, $t
 $incalltickets = $this->ticketsincidents_model->alltickets();
 $incopentickets = $this->ticketsincidents_model->read();
 $incclosedtickets = $this->ticketsincidents_model->read_close();
-$incaddressed = $this->ticketsincidents_model->describetickets();
+$incaddressed = $this->ticketsincidents_model->addressedtickets();
 
 
 $incident_department['alltickets'] = count($incalltickets);
@@ -129,7 +129,7 @@ $incident_link_passives_list = base_url('incident/nps_passive_list');
 // tickets
 $incident_link_ticket_dashboard = base_url('incident/ticket_dashboard');
 $incident_link_opentickets = base_url('incident/opentickets');
-$incident_link_addressedtickets = base_url('incident/describetickets');
+$incident_link_addressedtickets = base_url('incident/addressedtickets');
 $incident_link_closedtickets = base_url('incident/closedtickets');
 $incident_link_alltickets = base_url('incident/alltickets');
 
