@@ -16,9 +16,6 @@ class Incident_model extends CI_Model
 
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 
 		$this->db->where($table_feedback . '.datet <=', $fdate);
@@ -106,9 +103,6 @@ class Incident_model extends CI_Model
 		$this->db->join($table_patient, $table_patient . '.id = ' . $table_feedback . '.pid', 'inner');
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
@@ -338,9 +332,6 @@ class Incident_model extends CI_Model
 		$this->db->join($table_feedback, $table_feedback . '.id=' . $table_tickets . '.feedbackid');
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_tickets . '.created_on <=', $fdate . ' 23:59:59');
 		$this->db->where($table_tickets . '.created_on >=', $tdate);
@@ -496,9 +487,6 @@ class Incident_model extends CI_Model
 		$this->db->where($table_feedback . '.datet >=', $tdate);
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$query = $this->db->get();
 		$all_feedback = $query->result();
@@ -536,9 +524,6 @@ class Incident_model extends CI_Model
 		$this->db->where($table_feedback . '.datet >=', $tdate);
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->join($table_tickets, $table_tickets . '.feedbackid = ' . $table_feedback . '.id');
 		$query = $this->db->get();
@@ -590,9 +575,6 @@ class Incident_model extends CI_Model
 		$this->db->join($table_tickets, $table_tickets . '.feedbackid = ' . $table_feedback . '.id');
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_tickets . '.status=', $status);
 		$this->db->where($table_feedback . '.datet <=', $fdate);
@@ -613,9 +595,6 @@ class Incident_model extends CI_Model
 		$this->db->join($table_patient, $table_patient . '.id = ' . $table_feedback . '.pid', 'inner');
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
@@ -634,9 +613,6 @@ class Incident_model extends CI_Model
 		$this->db->join($table_tickets, $table_tickets . '.feedbackid = ' . $table_feedback . '.id');
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
@@ -655,8 +631,8 @@ class Incident_model extends CI_Model
 		$this->db->join($table_tickets, $table_tickets . '.feedbackid = ' . $table_feedback . '.id');
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
+		}elseif (count($this->session->userdata['floor_ward']) > 0) {
+			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_feedback . '.datet <=', $fdate);
@@ -675,9 +651,6 @@ class Incident_model extends CI_Model
 		$this->db->join($table_tickets, $table_tickets . '.feedbackid = ' . $table_feedback . '.id');
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
@@ -693,9 +666,6 @@ class Incident_model extends CI_Model
 		$this->db->from($table_feedback);
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
@@ -813,9 +783,6 @@ class Incident_model extends CI_Model
 		$this->db->from($table_feedback);
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
@@ -867,9 +834,6 @@ class Incident_model extends CI_Model
 		// floor/ ward condition
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		// date condition for querry
 		$this->db->where($table_feedback . '.datet <=', $fdate);
@@ -933,9 +897,6 @@ class Incident_model extends CI_Model
 		// floor/ ward condition
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		}elseif (count($this->session->userdata['floor_ward_esr']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward_esr'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 		// date condition for querry
 		$this->db->where($table_feedback . '.datet <=', $fdate);
@@ -1102,8 +1063,6 @@ class Incident_model extends CI_Model
 			$open_tickets = $data['open_tickets'];
 			$closed_tickets = $data['closed_tickets'];
 			$addressed_tickets = $data['addressed_tickets'];
-			$assigned_tickets = $data['assigned_tickets'];
-			$reopened_tickets = $data['reopened_tickets'];
 			$tr_rate = $data['tr_rate'];
 			$res_time = $data['res_time'];
 			// $total_tickets = $data['total_tickets'];
@@ -1113,8 +1072,6 @@ class Incident_model extends CI_Model
 			$set[$i]['closed_tickets'] = $closed_tickets;
 			$set[$i]['open_tickets'] = $open_tickets;
 			$set[$i]['addressed_tickets'] = $addressed_tickets;
-			$set[$i]['assigned_tickets'] = $assigned_tickets;
-			$set[$i]['reopened_tickets'] = $reopened_tickets;
 			$set[$i]['tr_rate'] = $tr_rate;
 			$set[$i]['res_time'] = $res_time;
 			$i++;
@@ -1130,8 +1087,6 @@ class Incident_model extends CI_Model
 		$open_tickets = 0;
 		$closed_tickets = 0;
 		$addressed_tickets = 0;
-		$assigned_tickets = 0;
-		$reopened_tickets = 0;
 		$time = 0;
 		foreach ($tickes as $row) {
 			if (in_array($row->departmentid, $department_set_row['department_id_set'])) {
@@ -1148,12 +1103,6 @@ class Incident_model extends CI_Model
 			}
 			if (in_array($row->departmentid, $department_set_row['department_id_set']) && $row->status == 'Addressed') {
 				$addressed_tickets++;
-			}
-			if (in_array($row->departmentid, $department_set_row['department_id_set']) && $row->status == 'Assigned') {
-				$assigned_tickets++;
-			}
-			if (in_array($row->departmentid, $department_set_row['department_id_set']) && $row->status == 'Reopen') {
-				$reopened_tickets++;
 			}
 		}
 		if ($total_count > 0 && count($tickes) > 0) {
@@ -1172,8 +1121,6 @@ class Incident_model extends CI_Model
 		$data['open_tickets'] = $open_tickets;
 		$data['closed_tickets'] = $closed_tickets;
 		$data['addressed_tickets'] = $addressed_tickets;
-		$data['assigned_tickets'] = $assigned_tickets;
-		$data['reopened_tickets'] = $reopened_tickets;
 		$data['tr_rate'] = $tr_rate;
 		$data['res_time'] = $seconds;
 		// $data['total_tickets'] = count($tickes);

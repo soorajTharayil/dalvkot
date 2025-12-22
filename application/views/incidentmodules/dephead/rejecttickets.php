@@ -110,14 +110,13 @@
 									?>
 										<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC" ?>" data-placement="bottom" data-toggle="tooltip" title="<?php echo $rowmessage; ?>">
 											<td><?php echo $sl; ?></td>
-											<td><a href="<?php echo $ip_link_patient_feedback . $department->id; ?>"><?php echo lang_loader('inc','inc_inc'); ?><?php echo $department->id; ?></a></td>
+											<td><?php echo lang_loader('inc','inc_inc'); ?><?php echo $department->id; ?></td>
+											<td style="overflow: clip; word-break: break-all;">
+                                              
 
-                                            <td style="overflow: clip; word-break: break-all;">
-
-
-                                                <?php if (!empty($department->feed->patientid)) : ?>
-                                                    <?php echo $department->feed->name; ?>
-                                                    &nbsp;(
+											  <?php if (!empty($department->feed->patientid)) : ?>
+												  <?php echo $department->feed->name; ?>
+												  &nbsp;(<a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>">
 													  <?php echo $department->feed->patientid; ?>
 												  </a>)
 											  <?php else : ?>

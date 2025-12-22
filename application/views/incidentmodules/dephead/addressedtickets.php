@@ -23,7 +23,7 @@
 				<div class="panel panel-default">
 				<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="<?php echo lang_loader('inc','inc_download_addressed_incident_report_tooltip'); ?>" href="<?php echo base_url($this->uri->segment(1)) . '/download_opentickets' ;?>">
+							<a class="btn btn-success"  target="_blank" data-placement="bottom" data-toggle="tooltip" title="<?php echo lang_loader('inc','inc_download_addressed_incident_report_tooltip'); ?>" href="<?php echo base_url($this->uri->segment(1)) . '/download_opentickets' ;?>">
 								<i class="fa fa-file-text"></i>
 							</a>
 						</div>
@@ -110,8 +110,9 @@
 									?>
 										<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC" ?>" data-placement="bottom" data-toggle="tooltip" title="<?php echo $rowmessage; ?>">
 											<td><?php echo $sl; ?></td>
-											<td><a href="<?php echo $ip_link_patient_feedback . $department->id; ?>"><?php echo lang_loader('inc','inc_inc'); ?><?php echo $department->id; ?></a></td>
-											<!-- <br>
+											<td><?php echo lang_loader('inc','inc_inc'); ?><?php echo $department->id; ?></td>
+											<td style="overflow: clip; word-break: break-all;"><?php echo $department->feed->name; ?>&nbsp;(<a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>"><?php echo $department->feed->patientid; ?></a>)
+												<!-- <br>
 												<?php echo $department->feed->role; ?> -->
 												<br>
 												<?php echo $department->feed->ward; ?>

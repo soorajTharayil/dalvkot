@@ -136,11 +136,11 @@
 					<!-- <th>Percentage</th> -->
 					<th><?php echo lang_loader('inc','inc_s_total_incidents'); ?></th>
 					<th><?php echo lang_loader('inc','inc_s_open_incidents'); ?></th>
-					<th>Assigned incidents</th>
 					<!-- change here according to helper -->
-					
+					<?php if (ticket_addressal('incident_addressal') === true) { ?>
+						<th><?php echo lang_loader('inc','inc_s_addressed_incidents'); ?></th>
+					<?php } ?>
 					<th><?php echo lang_loader('inc','inc_s_closed_incidents'); ?></th>
-					<th>Reopened incidents</th>
 					<?php if ($this->uri->segment(2) == "ticket_resolution_rate") { ?>
 						<th><?php echo lang_loader('inc','inc_resolution_rate'); ?></th>
 					<?php } ?>
@@ -169,17 +169,15 @@
 							<td>
 								<?php echo $dep_wise['open_tickets']; ?>
 							</td>
-							<td>
-								<?php echo $dep_wise['assigned_tickets']; ?>
-							</td>
-							
+							<?php if (ticket_addressal('incident_addressal') === true) { ?>
+
+								<td>
+									<?php echo $dep_wise['addressed_tickets']; ?>
+								</td>
+							<?php } ?>
 
 							<td>
 								<?php echo $dep_wise['closed_tickets']; ?>
-							</td>
-							
-							<td>
-								<?php echo $dep_wise['reopened_tickets']; ?>
 							</td>
 							<?php if ($this->uri->segment(2) == "ticket_resolution_rate") { ?>
 								<td>

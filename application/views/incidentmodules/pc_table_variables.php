@@ -54,7 +54,7 @@ $ticket_analisys = $this->incident_model->tickets_recived_by_department_interim(
 $alltickets = $this->ticketsincidents_model->alltickets();
 $opentickets = $this->ticketsincidents_model->read();
 $closedtickets = $this->ticketsincidents_model->read_close();
-$addressed = $this->ticketsincidents_model->addressedtickets();
+$addressed = $this->ticketsincidents_model->describetickets();
 $reject = $this->ticketsincidents_model->rejecttickets();
 
 $inc_department['alltickets'] = count($alltickets);
@@ -135,7 +135,7 @@ $int_link_passives_list = base_url($this->uri->segment(1) . '/nps_passive_list')
 // tickets
 $int_link_ticket_dashboard = base_url($this->uri->segment(1) . '/ticket_dashboard');
 $int_link_opentickets = base_url($this->uri->segment(1) . '/opentickets');
-$int_link_addressedtickets = base_url($this->uri->segment(1) . '/addressedtickets');
+$int_link_addressedtickets = base_url($this->uri->segment(1) . '/describetickets');
 $int_link_closedtickets = base_url($this->uri->segment(1) . '/closedtickets');
 $int_link_alltickets = base_url($this->uri->segment(1) . '/alltickets');
 $ip_link_ticket_resolution_rate = base_url($this->uri->segment(1) . '/ticket_resolution_rate');

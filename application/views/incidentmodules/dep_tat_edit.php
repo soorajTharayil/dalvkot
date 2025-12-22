@@ -25,7 +25,80 @@
 
                 <div class="panel-body">
                     <?php echo form_open(); ?>
+                    <tr>
+                            <td colspan="6">
+                                <div class="global-time-setter">
+                                    <label for="global-day-dept">Set Level 1 - Dept. Escalation TAT</label>
+                                    <select id="global-day-dept" onchange="setGlobalTimedep('day-dept')" style="margin-left: 32px;">
+                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-hour-dept" onchange="setGlobalTimedep('hour-dept')">
+                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-minute-dept" onchange="setGlobalTimedep('minute-dept')">
+                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="button" onclick="applyGlobalTimedep()">Apply to All</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="global-time-setter">
+                                <label for="global-day-dept">Set Level 2 - Admin Escalation TAT</label>
+                                    <select id="global-l1-day" onchange="setGlobalTime('l1', 'day')" style="margin-left: 24px;">
+                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l1-hour" onchange="setGlobalTime('l1', 'hour')">
+                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l1-minute" onchange="setGlobalTime('l1', 'minute')">
+                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="button" onclick="applyGlobalTime('l1')">Apply to All</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="global-time-setter">
+                                <label for="global-day-dept">Set Level 3 - Sr. Admin Escalation TAT</label>
+                                    <select id="global-l2-day" onchange="setGlobalTime('l2', 'day')" >
+                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l2-hour" onchange="setGlobalTime('l2', 'hour')">
+                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l2-minute" onchange="setGlobalTime('l2', 'minute')">
+                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="button" onclick="applyGlobalTime('l2')">Apply to All</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <br>
+                        </tr>
                     <table class=" table table-striped table-bordered" cellspacing="0" width="100%">
+                        
                         <!-- table head start -->
                         <thead>
                             <tr>
@@ -34,12 +107,15 @@
                                 </th>
                                 <th><?php echo lang_loader('inc', 'inc_department'); ?></th>
                                 <th><?php echo lang_loader('inc', 'inc_parameter'); ?></th>
-                                <th><?php echo lang_loader('inc', 'dept_level_escalation'); ?></th>
-                                <th><?php echo lang_loader('inc', 'inc_tat_l1_escalation'); ?></th>
-                                <th><?php echo lang_loader('inc', 'inc_tat_l2_escalation'); ?></th>
+                                <th>Level 1 - Dept. Escalation TAT</th>
+                                <th>Level 2 - Admin Escalation TAT</th>
+                                <th>Level 3 - Sr. Admin Escalation TAT</th>
                             </tr>
                         </thead>
                         <!-- table head end -->
+                        <!-- Add a global time setter -->
+                       
+
 
                         <!-- table body start -->
                         <tbody>
@@ -270,6 +346,48 @@
         margin: 0 5px;
         color: #888;
     }
+    .global-time-setter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px; /* Space between elements */
+    padding: 10px 0; /* Add some padding for better spacing */
+}
+
+.global-label {
+    flex: 2; /* Allocate more space for the label */
+    text-align: left;
+    font-weight: bold;
+}
+
+.global-dropdown {
+    flex: 1; /* Equal space for each dropdown */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.global-button {
+    flex: 1; /* Equal space for the button */
+    padding: 7px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.global-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+td {
+    padding: 5px;
+}
+
+tr {
+    border-bottom: 1px solid #ddd; /* Optional: Add a border between rows */
+}
 </style>
 <script>
     function modifyRowColor(id) {
@@ -305,5 +423,67 @@
         }
         $('#submitform').click();
         return true; // This will allow the form to submit
+    }
+
+    function setGlobalTime(level, type) {
+        const globalDay = document.getElementById(`global-${level}-day`).value;
+        const globalHour = document.getElementById(`global-${level}-hour`).value;
+        const globalMinute = document.getElementById(`global-${level}-minute`).value;
+
+        document.getElementById(`global-${level}-day`).setAttribute('data-selected', globalDay);
+        document.getElementById(`global-${level}-hour`).setAttribute('data-selected', globalHour);
+        document.getElementById(`global-${level}-minute`).setAttribute('data-selected', globalMinute);
+    }
+
+    function applyGlobalTime(level) {
+        const globalDay = document.getElementById(`global-${level}-day`).getAttribute('data-selected') || 0;
+        const globalHour = document.getElementById(`global-${level}-hour`).getAttribute('data-selected') || 0;
+        const globalMinute = document.getElementById(`global-${level}-minute`).getAttribute('data-selected') || 0;
+
+        const allRows = document.querySelectorAll('tr[id^="dep_row"]');
+        allRows.forEach((row) => {
+            const departmentId = row.id.replace('dep_row', '');
+
+            document.getElementById(`day${level}${departmentId}`).value = globalDay;
+            document.getElementById(`hour${level}${departmentId}`).value = globalHour;
+            document.getElementById(`minute${level}${departmentId}`).value = globalMinute;
+
+            setValueField(departmentId, level);
+        });
+
+        alert(`Global time applied to all parameters for ${level} escalation!`);
+    }
+
+    function setGlobalTimedep(type) {
+        const globalDay = document.getElementById('global-day-dept').value;
+        const globalHour = document.getElementById('global-hour-dept').value;
+        const globalMinute = document.getElementById('global-minute-dept').value;
+
+        // Save global values in hidden fields for future reference
+        document.getElementById('global-day-dept').setAttribute('data-selected', globalDay);
+        document.getElementById('global-hour-dept').setAttribute('data-selected', globalHour);
+        document.getElementById('global-minute-dept').setAttribute('data-selected', globalMinute);
+    }
+
+    function applyGlobalTimedep() {
+        // Retrieve global values
+        const globalDay = document.getElementById('global-day-dept').getAttribute('data-selected') || 0;
+        const globalHour = document.getElementById('global-hour-dept').getAttribute('data-selected') || 0;
+        const globalMinute = document.getElementById('global-minute-dept').getAttribute('data-selected') || 0;
+
+        // Apply the time to all parameters
+        const allRows = document.querySelectorAll('tr[id^="dep_row"]');
+        allRows.forEach((row) => {
+            const departmentId = row.id.replace('dep_row', '');
+
+            document.getElementById(`daydept_level${departmentId}`).value = globalDay;
+            document.getElementById(`hourdept_level${departmentId}`).value = globalHour;
+            document.getElementById(`minutedept_level${departmentId}`).value = globalMinute;
+
+            // Call onchange handlers to update hidden fields
+            setValueField(departmentId, 'dept_level');
+        });
+
+        alert('Global time applied to all parameters for department level escalation!');
     }
 </script>
