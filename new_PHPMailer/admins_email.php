@@ -870,6 +870,7 @@ $feedback_incident_query = 'SELECT * FROM  bf_feedback_incident  WHERE admins_em
 $feedback_incident_result = mysqli_query($con, $feedback_incident_query);
 
 while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result)) {
+    echo 'fffff';
 
     $param_incident = json_decode($feedback_incident_object->dataset);
     $ward_floor = $param_incident->ward;
@@ -882,6 +883,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
     $department = '';
     $message2 = '';
     while ($tickets_incident_object = mysqli_fetch_object($tickets_incident_result)) {
+        echo 'lllll';
 
         $tickets_incident_generate = true;
         $number = $tickets_incident_object->mobile;
@@ -890,7 +892,16 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
-        $created_on = date('g:i A, d-m-y', strtotime($department_object->created_on));
+        try {
+            if (!empty($department_object->created_on)) {
+                $dt = new DateTime($department_object->created_on);
+                $created_on = $dt->format('g:i A, d-m-y');
+            } else {
+                $created_on = '-';
+            }
+        } catch (Exception $e) {
+            $created_on = '-';
+        }
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
