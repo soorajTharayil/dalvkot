@@ -704,7 +704,7 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
 }
 
 //email to  admins(isr) when ticket is OPEN 
-
+echo 'jjjjjjjjjj';
 $Subject = 'Urgent: Service Request reported by an Employee at ' . $hospitalname . ' - Action Required';
 $feedback_isr_query = 'SELECT * FROM  bf_feedback_esr  WHERE admins_emailstatus = 0';
 $feedback_isr_result = mysqli_query($con, $feedback_isr_query);
@@ -859,7 +859,7 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
     mysqli_query($con, $update_query);
 }
 
-
+echo 'job varified';
 //email to  admins(incident) when ticket is OPEN 
 
 $Subject = 'Urgent: Incident reported by an Employee at ' . $hospitalname . ' - Action Required';
@@ -1040,7 +1040,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
     $update_query = 'Update bf_feedback_incident set admins_emailstatus = 1 WHERE id=' . $feedback_incident_object->id;
     mysqli_query($con, $update_query);
 }
-
+echo 'job done';
 //email to  admins(grievance) when ticket is OPEN 
 
 $Subject = 'Urgent: Grievance reported by an Employee at ' . $hospitalname . ' - Action Required';
