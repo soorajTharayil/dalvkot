@@ -308,8 +308,6 @@ $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname 
 }
 
 
-echo 'hiioolll';
-exit;
 
 //email to  admins(ip) when ticket is OPEN 
 
@@ -553,6 +551,9 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
     mysqli_query($con, $update_query);
 }
 
+
+echo 'hiioolllmmm';
+exit;
 //email to  admins(interim) when ticket is OPEN 
 
 $Subject = 'Urgent: Complaint reported by InPatient at ' . $hospitalname . ' - Action Required';
