@@ -695,6 +695,8 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
 
 //message to  admins(incident) when ticket is OPEN 
 
+//message to  admins(incident) when ticket is OPEN 
+
 function incident_admins_tracking_link_UniqueId()
 {
     $prefix = ''; // You can add a prefix if desired
@@ -713,11 +715,15 @@ $feedback_incident_result = mysqli_query($con, $feedback_incident_query);
 while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result)) {
     $parameter = json_decode($feedback_incident_object->dataset);
 
-    $emp_ward = $parameter->ward;
-    $emp_bed_no = $parameter->bedno;
-    $emp_name = $parameter->name;
-    $incident_type = $parameter->incident_type;
-    $emp_contactnumber = $parameter->contactnumber;
+    $emp_ward = !empty($parameter->ward) ? $parameter->ward : 'NIL';
+    $emp_bed_no = !empty($parameter->bedno) ? $parameter->bedno : 'NIL';
+    $emp_name = !empty($parameter->name) ? $parameter->name : 'NIL';
+    $emp_contactnumber = !empty($parameter->contactnumber) ? $parameter->contactnumber : 'NIL';
+    $incident_type = !empty($parameter->incident_type) ? $parameter->incident_type : 'Unassigned';
+    $priority = !empty($parameter->priority) ? $parameter->priority : 'Unassigned';
+    $risk_matrix = !empty($parameter->risk_matrix->level) ? $parameter->risk_matrix->level : 'Unassigned';
+
+
 
     $tickets_incident_query = 'SELECT * FROM  tickets_incident  inner JOIN department ON department.dprt_id = tickets_incident.departmentid   WHERE  feedbackid = ' . $feedback_incident_object->id . ' GROUP BY  department.description';
     $tickets_incident_result = mysqli_query($con, $tickets_incident_query);
@@ -751,8 +757,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'incident/track/' . $TID;
         $uuid = incident_admins_tracking_link_UniqueId();
-        $admins_link = '10.10.10.103/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $admins_link_whatsapp = '10.10.10.103/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
+        $admins_link = 'h.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link_whatsapp = 'h.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
     }
 
     if ($department_rowcount > 1) {
@@ -791,7 +797,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             if (is_null($floor_wards) || empty($floor_wards) || in_array($emp_ward, $floor_wards)) {
                 $number = $users_whatsapp_object->mobile;
                 $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalertsms_for_receivingincident', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp, $hospitalname]) . "', 
+             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'issue_update_staff', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp]) . "', 
              'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                 // Execute the second query

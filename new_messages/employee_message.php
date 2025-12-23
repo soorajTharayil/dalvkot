@@ -452,7 +452,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 $conn_g->query($query);
             }
             $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-        VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalertsms_on_incidentassigning', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $incident_type, $priority, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $employee_tracking_link_whatsapp, $hospitalname]) . "', 
+        VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalertsms_for_incidentreassigning', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $incident_type, $priority, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $employee_tracking_link_whatsapp, $hospitalname]) . "', 
         'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
             // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
