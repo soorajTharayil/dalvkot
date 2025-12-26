@@ -1,6 +1,5 @@
 <?php
 // Force JSON output
-<?php
 // Force JSON output
 header('Content-Type: application/json');
 
