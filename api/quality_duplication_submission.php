@@ -1,11 +1,62 @@
 <?php
 // Force JSON output
+<?php
+// Force JSON output
 header('Content-Type: application/json');
 
 // Disable PHP default error output (prevents HTML)
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
+
+/**
+ * Convert PHP errors to JSON responses
+ */
+set_error_handler(function ($severity, $message, $file, $line) {
+    http_response_code(500);
+    echo json_encode([
+        'status' => 'error',
+        'type'   => 'php_error',
+        'message'=> $message,
+        'file'   => basename($file),
+        'line'   => $line
+    ]);
+    exit;
+});
+
+/**
+ * Handle uncaught exceptions
+ */
+set_exception_handler(function ($exception) {
+    http_response_code(500);
+    echo json_encode([
+        'status'  => 'error',
+        'type'    => 'exception',
+        'message' => $exception->getMessage(),
+        'file'    => basename($exception->getFile()),
+        'line'    => $exception->getLine()
+    ]);
+    exit;
+});
+
+/**
+ * Catch fatal errors (parse error, fatal error, etc.)
+ */
+register_shutdown_function(function () {
+    $error = error_get_last();
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        http_response_code(500);
+        echo json_encode([
+            'status'  => 'error',
+            'type'    => 'fatal_error',
+            'message' => $error['message'],
+            'file'    => basename($error['file']),
+            'line'    => $error['line']
+        ]);
+        exit;
+    }
+});
+
 include('db.php');
 
 $patient_id = $_GET['patient_id'];
