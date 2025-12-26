@@ -64,7 +64,24 @@ $month = $_GET['month'];  // e.g., "January"
 $year = $_GET['year'];    // e.g., "2024"
 $table = $_GET['table'];
 
-$monthNumber = (int)date('m', strtotime($month)); // Convert month into integer
+$monthMap = [
+    'January' => 1, 'February' => 2, 'March' => 3,
+    'April' => 4, 'May' => 5, 'June' => 6,
+    'July' => 7, 'August' => 8, 'September' => 9,
+    'October' => 10, 'November' => 11, 'December' => 12
+];
+
+if (!isset($monthMap[$month])) {
+    echo json_encode([
+        'status' => 'error',
+        'stage'  => 'month_validation',
+        'message'=> 'Invalid month value',
+        'month'  => $month
+    ]);
+    exit;
+}
+
+$monthNumber = $monthMap[$month];
 
 
 $allowedTables = [
