@@ -1,4 +1,11 @@
 <?php
+// Force JSON output
+header('Content-Type: application/json');
+
+// Disable PHP default error output (prevents HTML)
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
 include('db.php');
 
 $patient_id = $_GET['patient_id'];
