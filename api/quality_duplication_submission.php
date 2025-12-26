@@ -152,9 +152,21 @@ $query = " SELECT * FROM `$table` WHERE MONTH(`datetime`) = '$monthNumber' AND Y
 
 $result = mysqli_query($con, $query);
 
-if (mysqli_num_rows($result) > 0) {
-	echo json_encode(["status" => "exists"]);
-} else {
-	echo json_encode(["status" => "not_exists"]);
+if ($result === false) {
+    echo json_encode([
+        'status' => 'error',
+        'stage'  => 'db_query',
+        'message'=> 'Query failed',
+        'db_error' => mysqli_error($con),
+        'query' => $query
+    ]);
+    exit;
 }
+
+if (mysqli_num_rows($result) > 0) {
+    echo json_encode(['status' => 'exists']);
+} else {
+    echo json_encode(['status' => 'not_exists']);
+}
+
 ?>
